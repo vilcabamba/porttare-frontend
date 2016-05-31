@@ -292,16 +292,7 @@ module.exports = function (grunt) {
           dest: '.temp/concat/<%= yeoman.scripts %>'
         }]
       }
-    },
-
-    // grunt-protractor-runner
-    protractor: {
-      options: {
-        configFile: '<%= yeoman.test %>/e2e-tests.conf.js'
-      },
-      all: {}
     }
-
   });
 
   // Register tasks for all Cordova commands
@@ -360,46 +351,13 @@ module.exports = function (grunt) {
     return grunt.task.run(['watch']);
   });
 
-  grunt.registerTask('protractor:ci', [
-    'protractor:ci:standalone'
-  ]);
-
-  grunt.registerTask('protractor:ci:standalone', function (){
-    var done = this.async(),
-        gruntLog = function (data) { grunt.log.writeln(data); },
-        gruntErr = function (data) { grunt.log.error(data); };
-
-    var express = spawn(
-      'node',
-      ['server.js']
-    );
-    express.stdout.on('data', gruntLog);
-    express.stderr.on('data', gruntErr);
-
-    var protractor = spawn(
-      path.resolve('./node_modules/protractor/bin/', 'protractor'),
-      ['test/e2e-tests.conf.js']
-    );
-    protractor.stdout.on('data', gruntLog);
-    protractor.stderr.on('data', gruntErr);
-    protractor.on('close', function (code) {
-      express.kill();
-      code = code ? false : true;
-      done(code);
-    });
-  });
-
   grunt.registerTask('watch:specs', function () {
     var karma = {
       files: ['<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js', '<%= yeoman.test %>/unit/**/*.js'],
       tasks: ['newer:jshint:test', 'karma:unit:run']
     };
-    var protractor = {
-      files: ['<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js', '<%= yeoman.test %>/e2e/**/*.js'],
-      tasks: ['newer:jshint:test', 'protractor:ci']
-    };
 
-    grunt.config.set('watch', [karma, protractor]);
+    grunt.config.set('watch', [karma]);
 
     return grunt.task.run(['watch']);
   });
@@ -432,8 +390,7 @@ module.exports = function (grunt) {
     'concurrent:test',
     'ngconstant:test',
     'autoprefixer',
-    'karma:continuous',
-    'protractor:ci'
+    'karma:continuous'
   ]);
 
 
