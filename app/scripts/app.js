@@ -1,6 +1,11 @@
 (function(){
   'use strict';
-  angular.module('starter', ['ionic', 'starter.controllers'])
+  angular.module('porttare', [
+    'ionic',
+    'ng-token-auth',
+    'porttare.config',
+    'porttare.controllers'
+  ])
 
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -20,6 +25,13 @@
 
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
+
+    .state('login', {
+      url: '/login',
+      controller: 'LoginController',
+      controllerAs: 'loginVm',
+      templateUrl: 'templates/login/login.html'
+    })
 
       .state('app', {
       url: '/app',

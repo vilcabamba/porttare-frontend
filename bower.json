@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "ionic": "v1.2.1",
-    "ngCordova": "~0.1.26-alpha"
+    "ngCordova": "~0.1.26-alpha",
+    "ng-token-auth": "^0.0.29"
   },
   "devDependencies": {
     "angular-mocks": "1.4.3",

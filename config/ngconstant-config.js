@@ -5,7 +5,7 @@
     options: {
       space: '  ',
       wrap: '"use strict";\n\n {%= __ngModule %}',
-      name: 'config',
+      name: 'porttare.config',
       dest: '<%= yeoman.app %>/<%= yeoman.scripts %>/configuration.js'
     },
     development: {
