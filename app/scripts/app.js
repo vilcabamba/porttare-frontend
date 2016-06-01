@@ -1,6 +1,11 @@
 (function(){
   'use strict';
-  angular.module('starter', ['ionic', 'starter.controllers'])
+  angular.module('porttare', [
+    'ionic',
+    'ng-token-auth',
+    'porttare.config',
+    'porttare.controllers'
+  ])
 
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -20,6 +25,13 @@
 
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
+
+    .state('login', {
+      url: '/login',
+      controller: 'LoginController',
+      controllerAs: 'loginVm',
+      templateUrl: 'templates/login/login.html'
+    })
 
       .state('app', {
       url: '/app',
@@ -65,6 +77,9 @@
       }
     });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/playlists');
+    $urlRouterProvider.otherwise('/login');
   });
+
+  angular.module('porttare.config', []);
+  angular.module('porttare.controllers', []);
 })();

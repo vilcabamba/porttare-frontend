@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  angular.module('starter.controllers', [])
+  angular.module('porttare.controllers')
 
   .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
