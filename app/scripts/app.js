@@ -79,4 +79,7 @@
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/playlists');
   });
+
+  angular.module('porttare.config', []);
+  angular.module('porttare.controllers', []);
 })();

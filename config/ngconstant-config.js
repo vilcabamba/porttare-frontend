@@ -4,9 +4,10 @@
   var ngconstantConfig = {
     options: {
       space: '  ',
-      wrap: '"use strict";\n\n {%= __ngModule %}',
+      wrap: '(function() {\n\n \'use strict\';\n\n {%= __ngModule %} \n\n })();',
       name: 'porttare.config',
-      dest: '<%= yeoman.app %>/<%= yeoman.scripts %>/configuration.js'
+      deps: false,
+      dest: '<%= yeoman.app %>/<%= yeoman.scripts %>/config/constants-config.js'
     },
     development: {
       constants: {
