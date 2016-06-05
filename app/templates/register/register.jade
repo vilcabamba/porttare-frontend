@@ -1,32 +1,37 @@
 ion-view(
-  view-title="Login",
+  view-title="Registro",
   hide-nav-bar="true"
 )
   ion-content(scroll="false")
     .row.form-container
-      form(ng-submit='loginVm.login()')
-        .login-title Iniciar Sesión
+      form(ng-submit='registerVm.register()')
+        .register-title Regístrate
         .list.list-inset
           label.item.item-input
             input(
               type='email',
-              ng-model='loginVm.loginForm.email',
+              ng-model='registerVm.registerForm.email',
               required='required',
               placeholder="email"
             )
           label.item.item-input
             input(
               type='password',
-              ng-model='loginVm.loginForm.password',
+              ng-model='registerVm.registerForm.password',
               required='required',
               placeholder="password"
+            )
+          label.item.item-input
+            input(
+              type='password',
+              ng-model='registerVm.registerForm.password_confirmation',
+              required='required',
+              placeholder="password confirmation"
             )
 
         .row.button-actions
           .col
-            a.button(ui-sref="register") Registrarse
-          .col
             input(
               type='submit',
-              value="login"
+              value="register"
             ).button
