@@ -39,12 +39,17 @@
       controllerAs: 'registerVm',
       templateUrl: 'templates/register/register.html'
     })
-
     .state('reset', {
       url: '/reset',
       controller: 'ResetController',
       controllerAs: 'resetVm',
       templateUrl: 'templates/reset/reset.html'
+    })
+    .state('intro', {
+      url: '/intro',
+      templateUrl: 'templates/intro/intro.html',
+      controller: 'IntroController',
+      controllerAs: 'introVm'
     })
 
     .state('app', {

@@ -10,6 +10,7 @@
         $state,
         $scope,
         $ionicPopup,
+        $window,
         $ionicLoading;
 
     beforeEach(module('porttare.controllers'));
@@ -17,7 +18,7 @@
     beforeEach(inject(
       function ($q,
                 $rootScope,
-                $controller) {
+                _$window_) {
 
       deferredLogin     = $q.defer();
       deferPasswordReset= $q.defer();
@@ -33,20 +34,42 @@
         requestPasswordReset: sinon.stub()
                           .returns(deferPasswordReset.promise)
       };
-
-      controller = $controller('LoginController', {
-        '$ionicPopup': $ionicPopup,
-        '$ionicLoading': $ionicLoading,
-        '$state': $state,
-        '$auth': $auth,
-        '$scope': $scope
-      });
+      $window           = _$window_;
     }));
+
+    describe('#onload', function() {
+
+      beforeEach(inject(function(_$rootScope_, $controller) {
+        $window.localStorage.clear();
+        controller = $controller('LoginController', {
+          '$ionicPopup': $ionicPopup,
+          '$ionicLoading': $ionicLoading,
+          '$state': $state,
+          '$auth': $auth,
+          '$window': $window,
+          '$scope': $scope
+        });
+        $rootScope = _$rootScope_;
+      }));
+
+      it('should call submitLogin on authService', function() {
+        sinon.assert.alwaysCalledWithExactly($state.go, 'intro');
+      });
+    });
 
     describe('#login', function() {
 
-      beforeEach(inject(function(_$rootScope_) {
+      beforeEach(inject(function(_$rootScope_, $controller) {
+        controller = $controller('LoginController', {
+          '$ionicPopup': $ionicPopup,
+          '$ionicLoading': $ionicLoading,
+          '$state': $state,
+          '$auth': $auth,
+          '$window': $window,
+          '$scope': $scope
+        });
         $rootScope = _$rootScope_;
+        $window.localStorage.setItem('hasViewedTutorial','true');
         controller.loginForm.email = 'test1';
         controller.loginForm.password = 'password1';
         controller.login();
@@ -81,6 +104,7 @@
 
           sinon.assert.alwaysCalledWithExactly($state.go, successState);
         });
+
       });
 
     });
@@ -88,6 +112,20 @@
     describe('#resetPassword', function () {
       beforeEach(inject(function (_$rootScope_) {
         $rootScope = _$rootScope_;
+        controller.resetPassword();
+      }));
+
+      beforeEach(inject(function(_$rootScope_, $controller) {
+        controller = $controller('LoginController', {
+          '$ionicPopup': $ionicPopup,
+          '$ionicLoading': $ionicLoading,
+          '$state': $state,
+          '$auth': $auth,
+          '$window': $window,
+          '$scope': $scope
+        });
+        $rootScope = _$rootScope_;
+        $window.localStorage.setItem('hasViewedTutorial','true');
         controller.resetPassword();
       }));
 
