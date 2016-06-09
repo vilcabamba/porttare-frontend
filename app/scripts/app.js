@@ -33,11 +33,28 @@
       templateUrl: 'templates/login/login.html'
     })
 
-      .state('app', {
+    .state('register', {
+      url: '/register',
+      controller: 'RegisterController',
+      controllerAs: 'registerVm',
+      templateUrl: 'templates/register/register.html'
+    })
+
+    .state('app', {
       url: '/app',
       abstract: true,
       templateUrl: 'templates/menu.html',
-      controller: 'AppCtrl'
+      controller: 'AppCtrl',
+      //only logged users will allow to go to /app/*
+      resolve: {
+          currentUser: function($auth, $state) {
+            $auth.validateUser().then(function(user){
+              return user;
+            }, function(){
+              $state.go('login');
+            });
+          }
+        }
     })
 
     .state('app.search', {
