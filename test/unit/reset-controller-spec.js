@@ -67,6 +67,7 @@
         it('if unsuccessful, should show a popup', function() {
           deferredReset.reject({ errors: [] });
           $rootScope.$digest();
+          /*jshint camelcase: false */
           var errors = { errors: {full_messages:['message']} };
           $rootScope.$emit('auth:password-change-error', errors);
           sinon.assert.calledOnce($ionicPopup.alert);

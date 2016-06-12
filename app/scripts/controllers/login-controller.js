@@ -5,7 +5,7 @@
     .module('porttare.controllers')
     .controller('LoginController', LoginController);
 
-  function LoginController($rootScope, $scope, $state, $ionicLoading, $ionicPopup, $auth) {
+  function LoginController($rootScope, $scope, $state, $ionicLoading, $ionicPopup, $auth, $window) {
     var loginVm = this;
     loginVm.login = login;
     loginVm.resetPassword = resetPassword;
@@ -15,6 +15,14 @@
     $rootScope.$on('auth:validation-success', function () {
       $state.go(successState);
     });
+
+    function load(){
+      if ($window.localStorage && !$window.localStorage.getItem('hasViewedTutorial')) {
+        $state.go('intro');
+      }
+    }
+
+    load();
 
     function login() {
       $ionicLoading.show({

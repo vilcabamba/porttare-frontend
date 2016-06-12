@@ -1,0 +1,18 @@
+ion-view(view-title="Intro")
+  ion-nav-buttons(side="left")
+    button.button.button-positive.button-clear.no-animation(ng-click="introVm.startApp()" ng-show="!introVm.slideIndex")
+      | Skip Intro
+    button.button.button-positive.button-clear.no-animation(ng-click="introVm.previous()" ng-show="introVm.slideIndex > 0")
+      | Previous Slide
+  ion-nav-buttons(side="right")
+    button.button.button-positive.button-clear.no-animation(ng-click="introVm.next()" ng-show="introVm.slideIndex != 2")
+      | Next
+    button.button.button-positive.button-clearno-animation(ng-click="introVm.startApp()" ng-show="introVm.slideIndex == 2")
+      | Start using MyApp
+  ion-slide-box(on-slide-changed="introVm.slideChanged(index)")
+    ion-slide
+      h3 Thank you for choosing the Awesome App!
+    ion-slide
+      h3 Using Awesome
+    ion-slide
+      h3 Any questions?
