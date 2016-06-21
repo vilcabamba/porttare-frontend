@@ -5,12 +5,21 @@
     .module('porttare.controllers')
     .controller('LoginController', LoginController);
 
-  function LoginController($rootScope, $scope, $state, $ionicLoading, $ionicPopup, $auth, $window) {
+  function LoginController( $rootScope,
+                            $scope,
+                            $state,
+                            $ionicLoading,
+                            $ionicPopup,
+                            $auth,
+                            $window,
+                            $ionicHistory) {
     var loginVm = this;
     loginVm.login = login;
     loginVm.resetPassword = resetPassword;
+    loginVm.logout = logout;
     loginVm.loginForm = {};
     var successState = 'app.playlists';
+    var loginState = 'login';
 
     $rootScope.$on('auth:validation-success', function () {
       $state.go(successState);
@@ -85,8 +94,28 @@
             });
           });
       });
-
-
     }
+
+    function logout() {
+      $ionicLoading.show({
+        template: 'Cerrando sesión...'
+      });
+      $auth.signOut()
+        .then(function () {
+          $ionicHistory.clearCache().then(function () {
+            $state.go(loginState, {}, { location: 'replace' });
+          });
+        })
+        .catch(function () {
+          $ionicPopup.alert({
+            title: 'Error',
+            template: 'Hubo un error, intentalo nuevamente.'
+          });
+        })
+        .finally(function () {
+          $ionicLoading.hide();
+        });
+    }
+
   }
 })();
