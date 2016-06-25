@@ -37,7 +37,24 @@
               return {};
             },
             Map: function () {
-              return {};
+              return {
+                controls: {
+                  TOP_CENTER: []
+                }
+              };
+            },
+            ControlPosition: {
+              TOP_CENTER: 'TOP_CENTER',
+            },
+            MapTypeControlStyle: {
+              VERTICAL_BAR: 'VERTICAL_BAR'
+            },
+            places: {
+              SearchBox: function () {
+                return {
+                  addListener: function () {return true;}
+                };
+              }
             }
           }
         };
@@ -62,6 +79,8 @@
       describe('when MapController is loaded', function () {
 
         it('if successful, should create map', function () {
+          var spyMap = sinon.spy(window.google.maps, 'Map');
+          var spySB = sinon.spy(window.google.maps.places, 'SearchBox');
           deferredGeolocation.resolve({
             coords:
             {
@@ -71,7 +90,8 @@
           });
           $rootScope.$digest();
           sinon.assert.calledOnce(GeolocationService.getCurrentPosition);
-          expect(controller.map).to.be.exists;
+          expect(spyMap.calledOnce).to.be.true;
+          expect(spySB.calledOnce).to.be.true;
         });
 
         it('if unsuccessful, should show a popup', function () {

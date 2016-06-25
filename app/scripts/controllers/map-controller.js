@@ -6,7 +6,6 @@
     .controller('MapController', MapController);
 
   function MapController($ionicLoading, $ionicPopup, GeolocationService) {
-    var mapVm = this;
 
     $ionicLoading.show({
       template: 'cargando...'
@@ -15,30 +14,13 @@
     GeolocationService
       .getCurrentPosition()
       .then(function success(position) {
-        var lat = position.coords.latitude;
-        var long = position.coords.longitude;
 
-        var latLng = new google.maps.LatLng(lat, long);
-
-        var mapOptions = {
-          center: latLng,
-          zoom: 17,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        mapVm.map = map;
-
-        new google.maps.Marker({
-          position: latLng,
-          map: map
-        });
-
+        var map = loadMap(position);
         loadPlacesSearchBox(map);
-
         $ionicLoading.hide();
 
-      }, function error() {
+      },
+      function error() {
         $ionicLoading.hide();
         $ionicPopup.alert({
           title: 'Error',
@@ -46,10 +28,38 @@
         });
       });
 
+    function loadMap(position) {
+      var lat = position.coords.latitude;
+      var long = position.coords.longitude;
+
+      var latLng = new google.maps.LatLng(lat, long);
+
+      var mapOptions = {
+        center: latLng,
+        zoom: 17,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+          style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
+          position: google.maps.ControlPosition.LEFT_BOTTOM
+        }
+      };
+
+      var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+      new google.maps.Marker({
+        position: latLng,
+        map: map
+      });
+
+
+      return map;
+    }
+
     function loadPlacesSearchBox(map) {
       var input = document.getElementById('input-places');
       var placesSearchBox = new google.maps.places.SearchBox(input);
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+      map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
       var markers = [];
 

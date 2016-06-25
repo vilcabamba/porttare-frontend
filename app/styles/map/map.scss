@@ -1,33 +1,22 @@
+$focus-color: #9ecaed;
+
 #map {
   height: 100%;
   width: 100%;
 }
 
-.input-places-container {
-  margin-top: 10px;
-  border: 1px solid transparent;
-  border-radius: 2px 0 0 2px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  height: 32px;
-  outline: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
 #input-places {
-  background-color: #fff;
+  background-color: $white;
   font-family: Roboto;
   font-size: 15px;
   font-weight: 300;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
-  width: 70%;
-  position: absolute;
-  z-index: 1;
-  margin-left: 150px;
-  margin-top: 12px;
+  width: 100%;
 }
 
 #input-places:focus {
-  border-color: #4d90fe;
+  outline: none;
+  border-color: $focus-color;
+  box-shadow: 0 0 10px $focus-color;
 }
