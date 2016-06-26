@@ -10,14 +10,15 @@
                             $ionicPopup,
                             $state,
                             $rootScope,
-                            $window,
-                            $scope) {
+                            $window) {
 
     var resetVm = this;
     resetVm.updatePassword = updatePassword;
     resetVm.resetPassword = resetPassword;
     resetVm.updatePasswordForm = {};
+    resetVm.resetPasswordForm = {};
     var successState = 'app.playlists';
+    var loginState = 'login';
 
     $rootScope.$on('auth:password-change-error', function (event, data) {
       $ionicPopup.alert({
@@ -31,47 +32,31 @@
     });
 
     function resetPassword() {
-      resetVm.resetPasswordForm = {};
-      var resetPasswordPopup = $ionicPopup.show({
-        template: '<input type="email" ng-model="loginVm.resetPasswordForm.email"' +
-        'placeholder="Correo electronico">',
-        title: 'Recuperar contraseña',
-        scope: $scope,
-        buttons: [
-          { text: 'Cancel' },
-          {
-            text: '<b>Enviar</b>',
-            type: 'button-positive',
-            onTap: function (e) {
-              if (!resetVm.resetPasswordForm.email) {
-                e.preventDefault();
-                $ionicPopup.alert({
-                  title: 'El correo electrónico ingresado es inválido.'
-                });
-              } else {
-                return resetVm.resetPasswordForm;
-              }
-            }
-          }
-        ]
+      $ionicLoading.show({
+        template: 'enviando...'
       });
 
-      resetPasswordPopup.then(function (resetPasswordForm) {
-        $auth.requestPasswordReset(resetPasswordForm)
-          .then(function () {
+      $auth.requestPasswordReset(resetVm.resetPasswordForm)
+        .then(function () {
+          $state.go(loginState).then(function () {
             $ionicLoading.show({
               template: 'Se enviaron las intrucciones al correo.',
               noBackdrop: true,
               duration: 2000
             });
-          })
-          .catch(function () {
-            $ionicPopup.alert({
-              title: 'Error',
-              template: 'Hubo un error enviando la información.'
-            });
           });
-      });
+        })
+        .catch(function (err) {
+          var messsage = err.data ? err.data.errors[0] :
+            'Hubo un error enviando la información.';
+          $ionicPopup.alert({
+            title: 'Error',
+            template: messsage
+          });
+        })
+        .finally(function () {
+          $ionicLoading.hide();
+        });
     }
 
     function updatePassword() {
@@ -83,8 +68,6 @@
           $ionicLoading.hide();
         });
     }
-
-
 
   }
 })();

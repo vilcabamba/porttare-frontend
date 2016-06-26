@@ -3,6 +3,7 @@ ion-view(
     hide-nav-bar="true"
   )
   ion-content(scroll="false")
+    back-button
     .email-password-view
       .row
         .col.header-text
@@ -14,12 +15,14 @@ ion-view(
 
       .row
         .col.form-container
-          form(ng-submit='loginVm.login()')
+          form(ng-submit='resetVm.resetPassword()')
             .list
               label.item.item-input.item-send-email
                 span.icon-send-email
                 input(
-                    type='text',
+                    type='email',
+                    ng-model='resetVm.resetPasswordForm.email'
+                    required='required'
                     placeholder='Correo electrónico'
                     class='input-send-email'
                   )
@@ -28,3 +31,4 @@ ion-view(
                 ).button.button-full.button-positive.button-send-email
                 | Restablecer contraseña
 
+      .bar.bar-footer.bar-footer-send-email

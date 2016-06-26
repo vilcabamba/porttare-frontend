@@ -6,6 +6,7 @@
     'porttare.config',
     'porttare.controllers',
     'porttare.services',
+    'porttare.directives',
     'ngCordova'
   ])
 
