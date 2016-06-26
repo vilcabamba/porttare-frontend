@@ -1,5 +1,8 @@
-// Your application styles go here
+@import "fonts/fonts";
 @import "colors/colors";
+@import "common/variables";
+@import "common/styles";
 
 @import "intro";
 @import "map/map";
+@import "reset/send";

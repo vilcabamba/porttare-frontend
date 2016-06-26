@@ -1,0 +1,40 @@
+.email-password-view {
+
+  .common-text {
+    font-family: Montserrat-Light;
+    text-align: center;
+    color: $text-base-color;
+  }
+
+  .header-text {
+    @extend .common-text;
+    margin-top: 40px;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+  }
+  .description {
+    @extend .common-text;
+    padding-left: 3em;
+    padding-right: 3em;
+  }
+  .form-container {
+    .input-send-email {
+      font-family: Montserrat-Light;
+      padding-left: 40px;
+    }
+    .icon-send-email {
+      @extend .icon-input-placeholder;
+      background-image: url('../../images/envelope.png');
+    }
+    .item-send-email {
+      @extend .hide-input-border;
+      padding: 6px 0 5px 5px;
+    }
+    .button-send-email {
+      @extend .common-button;
+      font-family: Montserrat-Light;
+      background-color: $background-base-yellow;
+      margin-top: 20px;
+    }
+  }
+}

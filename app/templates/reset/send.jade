@@ -1,0 +1,30 @@
+ion-view(
+    view-title="Login",
+    hide-nav-bar="true"
+  )
+  ion-content(scroll="false")
+    .email-password-view
+      .row
+        .col.header-text
+          |Recuperar contraseña
+      .row
+        .col.description
+          p Escribe tu correo electrónico y te
+            | enviaremos una clave temporal que luego podrás cambiar
+
+      .row
+        .col.form-container
+          form(ng-submit='loginVm.login()')
+            .list
+              label.item.item-input.item-send-email
+                span.icon-send-email
+                input(
+                    type='text',
+                    placeholder='Correo electrónico'
+                    class='input-send-email'
+                  )
+              button(
+                  type='submit'
+                ).button.button-full.button-positive.button-send-email
+                | Restablecer contraseña
+

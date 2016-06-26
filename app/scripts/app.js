@@ -47,6 +47,12 @@
       controllerAs: 'resetVm',
       templateUrl: 'templates/reset/reset.html'
     })
+    .state('send', {
+      url: '/send',
+      controller: 'ResetController',
+      controllerAs: 'resetVm',
+      templateUrl: 'templates/reset/send.html'
+    })
     .state('intro', {
       url: '/intro',
       templateUrl: 'templates/intro/intro.html',
