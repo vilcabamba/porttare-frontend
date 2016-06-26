@@ -18,3 +18,8 @@
   width: 30px;
   height: 20px;
 }
+
+.icon-input-placeholder-email {
+  @extend .icon-input-placeholder;
+  background-image: url('../../images/envelope.png');
+}

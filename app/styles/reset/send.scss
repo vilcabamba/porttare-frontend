@@ -22,10 +22,6 @@
       font-family: Montserrat-Light;
       padding-left: 40px;
     }
-    .icon-send-email {
-      @extend .icon-input-placeholder;
-      background-image: url('../../images/envelope.png');
-    }
     .item-send-email {
       @extend .hide-input-border;
       padding: 6px 0 5px 5px;
