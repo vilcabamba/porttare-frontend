@@ -9,6 +9,9 @@
     var registerVm = this;
     registerVm.register = register;
     registerVm.registerForm = {};
+    registerVm.loginWithFB = loginWithFB;
+
+    var successState = 'app.playlists';
 
     function register() {
       $ionicLoading.show({
@@ -31,6 +34,19 @@
         })
         .finally(function(){
           $ionicLoading.hide();
+        });
+    }
+
+    function loginWithFB() {
+      $auth.authenticate('facebook')
+        .then(function () {
+          $state.go(successState);
+        })
+        .catch(function () {
+          $ionicPopup.alert({
+            title: 'Error',
+            template: 'Hubo un error, intentalo nuevamente.'
+          });
         });
     }
   }

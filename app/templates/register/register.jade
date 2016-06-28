@@ -3,35 +3,44 @@ ion-view(
   hide-nav-bar="true"
 )
   ion-content(scroll="false")
-    .row.form-container
-      form(ng-submit='registerVm.register()')
-        .register-title Regístrate
-        .list.list-inset
-          label.item.item-input
+    .row
+      form.form-container(ng-submit='registerVm.register()')
+        .register-title Crear mi cuenta
+        .register-subtitle Una cuenta, muchos perfiles
+        .list
+          label.item.item-input.item-send-email
+            span.icon-input-placeholder-email
             input(
-              type='email',
-              ng-model='registerVm.registerForm.email',
-              required='required',
-              placeholder="email"
-            )
-          label.item.item-input
+                type='email',
+                ng-model='registerVm.registerForm.email'
+                required='required'
+                placeholder='Correo electrónico'
+                class='input-send-email'
+              )
+          label.item.item-input.item-send-password
+            span.icon-input-placeholder-password
             input(
               type='password',
               ng-model='registerVm.registerForm.password',
               required='required',
-              placeholder="password"
+              placeholder="Contraseña"
+              class="input-send-password"
             )
-          label.item.item-input
+          label.item.item-input.item-send-password
+            span.icon-input-placeholder-password
             input(
               type='password',
               ng-model='registerVm.registerForm.password_confirmation',
               required='required',
-              placeholder="password confirmation"
+              placeholder="Confirmar contraseña"
+              class="input-send-password"
             )
-
-        .row.button-actions
-          .col
+        .button-actions
             input(
               type='submit',
-              value="register"
-            ).button
+              value="¡Regístrame!"
+            ).button.button-login.button-block
+    .row.form-container
+      .button.facebook-login(ng-click="registerVm.loginWithFB()") 
+        span.icon-placeholder-facebook
+        span.input-facebook-login Continuar con facebook
