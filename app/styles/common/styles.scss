@@ -1,0 +1,25 @@
+.common-button {
+  -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+}
+
+.hide-input-border {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+
+.icon-input-placeholder {
+  position: absolute;
+  background-repeat: no-repeat;
+  margin-top: 10px;
+  width: 30px;
+  height: 20px;
+}
+
+.icon-input-placeholder-email {
+  @extend .icon-input-placeholder;
+  background-image: url('../../images/envelope.png');
+}

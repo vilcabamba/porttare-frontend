@@ -5,7 +5,6 @@
     var $rootScope,
         controller,
         deferredLogin,
-        deferPasswordReset,
         $auth,
         $state,
         $scope,
@@ -24,7 +23,6 @@
                 _$window_) {
 
       deferredLogin     = $q.defer();
-      deferPasswordReset= $q.defer();
       deferredLogout    = $q.defer();
       deferIonicHistory = $q.defer();
       $ionicPopup       = {
@@ -39,8 +37,6 @@
       $auth             = {
         submitLogin: sinon.stub()
                           .returns(deferredLogin.promise),
-        requestPasswordReset: sinon.stub()
-                          .returns(deferPasswordReset.promise),
         signOut: sinon.stub()
                           .returns(deferredLogout.promise)
       };
@@ -119,63 +115,6 @@
 
       });
 
-    });
-
-    describe('#resetPassword', function () {
-      beforeEach(inject(function (_$rootScope_) {
-        $rootScope = _$rootScope_;
-        controller.resetPassword();
-      }));
-
-      beforeEach(inject(function(_$rootScope_, $controller) {
-        controller = $controller('LoginController', {
-          '$ionicPopup': $ionicPopup,
-          '$ionicLoading': $ionicLoading,
-          '$ionicHistory': $ionicHistory,
-          '$state': $state,
-          '$auth': $auth,
-          '$window': $window,
-          '$scope': $scope
-        });
-        $rootScope = _$rootScope_;
-        $window.localStorage.setItem('hasViewedTutorial','true');
-        controller.resetPassword();
-      }));
-
-      it('should call resetPassword on authService', function () {
-        deferredLogin.resolve({ email: 'test1@test.com' });
-        $rootScope.$digest();
-        sinon.assert.alwaysCalledWithExactly($auth.requestPasswordReset, {
-          email: 'test1@test.com'
-        });
-      });
-
-      describe('when restore password is selected,', function () {
-        var successMessage = 'Se enviaron las intrucciones al correo.';
-
-        it('if successful, should show a message', function () {
-          deferredLogin.promise.then(function () {
-            deferPasswordReset.resolve();
-          });
-          deferredLogin.resolve();
-          $rootScope.$digest();
-          sinon.assert.calledWithMatch($ionicLoading.show, {
-            template: successMessage
-          });
-
-
-        });
-
-        it('if unsuccessful, should show an alert', function () {
-          deferredLogin.promise.then(function () {
-            deferPasswordReset.reject();
-          });
-          deferredLogin.resolve();
-          $rootScope.$digest();
-          sinon.assert.calledOnce($ionicPopup.alert);
-        });
-
-      });
     });
 
     describe('#logout', function () {
