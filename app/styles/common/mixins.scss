@@ -1,0 +1,7 @@
+@mixin background-centered($url, $width, $height) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  width: $width;
+  height: $height;
+  margin: 0 auto;
+}

@@ -3,34 +3,37 @@ ion-view(
   hide-nav-bar="true"
 )
   ion-content(scroll="false")
-    .row.form-container
-      form(ng-submit='loginVm.login()')
-        .login-title Iniciar Sesión
-        .list.list-inset
-          label.item.item-input
+    .row
+      .logo
+    .row
+      form.form-container(ng-submit='loginVm.login()')
+        .list
+          label.item.item-input.item-send-email
+            span.icon-input-placeholder-email
             input(
-              type='email',
-              ng-model='loginVm.loginForm.email',
-              required='required',
-              placeholder="email"
-            )
-          label.item.item-input
+                type='email',
+                ng-model='loginVm.loginForm.email'
+                required='required'
+                placeholder='Correo electrónico'
+                class='input-send-email'
+              )
+          label.item.item-input.item-send-password
+            span.icon-input-placeholder-password
             input(
               type='password',
               ng-model='loginVm.loginForm.password',
               required='required',
-              placeholder="password"
+              placeholder="Contraseña"
+              class="input-send-password"
             )
-
-        .row.button-actions
-          .col
-            a.button(ui-sref="register") Registrarse
-          .col
+        .button-actions
             input(
               type='submit',
-              value="login"
-            ).button
-    .row
-      .col
-        a(ui-sref='send') ¿Olvidaste tu contraseña?
-        .button(ng-click="loginVm.loginWithFB()") Autorizar Facebook
+              value="Iniciar Sesión"
+            ).button.button-login.button-block
+    .row.form-container
+      a.forgot-password.button.button-clear.button-dark(ui-sref='send') ¿Olvidaste tu contraseña?
+    .row.form-container
+      .button.facebook-login(ng-click="loginVm.loginWithFB()") 
+        span.icon-placeholder-facebook
+        span.input-facebook-login Continuar con facebook
