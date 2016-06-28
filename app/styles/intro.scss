@@ -49,6 +49,23 @@
       margin-top: 30px;
     }
   }
+  .slide3 {
+    .logo-vende {
+      background-image: url('../images/logo_vende.png');
+      background-repeat: no-repeat;
+      width: 170px;
+      height: 114px;
+      margin: 0 auto;
+    }
+    .logo-precio {
+      background-image: url('../images/price_tag.png');
+      background-repeat: no-repeat;
+      width: 102px;
+      height: 150px;
+      margin: 0 auto;
+      margin-top: 30px;
+    }
+  }
 }
 
 .slider-pager {
