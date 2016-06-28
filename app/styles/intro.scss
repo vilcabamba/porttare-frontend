@@ -1,9 +1,67 @@
+@mixin background-centered($url, $width, $height) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  width: $width;
+  height: $height;
+  margin: 0 auto;
+}
+
 .slider {
   height: 100%;
 
   .slider-slide {
     padding-top: 80px;
-    background-color: $white;
+    background-image: url('../images/bg.png');
     text-align: center;
   }
+}
+
+.intro-slides {
+
+  .logo-compra {
+    @include background-centered('../images/logo_compra.png', 193px, 118px);
+  }
+  .logo-bolsa {
+    @include background-centered('../images/bag.png', 102px, 131px);
+  }
+  .logo-envia {
+    @include background-centered('../images/logo_envia.png', 154px, 114px);
+  }
+  .logo-cohete {
+    @include background-centered('../images/rocket.png', 102px, 131px);
+  }
+  .logo-vende {
+    @include background-centered('../images/logo_vende.png', 170px, 114px);
+  }
+  .logo-precio {
+    @include background-centered('../images/price_tag.png', 102px, 150px);
+  }
+  .text {
+    color: $white;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .text, .logo-bolsa, .logo-cohete, .logo-precio {
+    margin-top: 30px;
+  }
+}
+
+.slider-pager {
+  bottom: 70px;
+
+  .slider-pager-page {
+    color: $yellow;
+  }
+}
+
+.intro-button {
+  position: absolute;
+  bottom: 0;
+  width: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: $yellow;
+  color: $white;
+  border-radius: 10px;
 }
