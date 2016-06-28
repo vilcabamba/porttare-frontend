@@ -9,7 +9,30 @@
 }
 
 .intro-slides {
+  .text {
+    color: $white;
+    margin-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
   .slide1 {
+    .logo-compra {
+      background-image: url('../images/logo_compra.png');
+      background-repeat: no-repeat;
+      width: 193px;
+      height: 118px;
+      margin: 0 auto;
+    }
+    .logo-bolsa {
+      background-image: url('../images/bag.png');
+      background-repeat: no-repeat;
+      width: 102px;
+      height: 131px;
+      margin: 0 auto;
+      margin-top: 30px;
+    }
+  }
+  .slide2 {
     .logo-envia {
       background-image: url('../images/logo_envia.png');
       background-repeat: no-repeat;
@@ -24,12 +47,6 @@
       height: 131px;
       margin: 0 auto;
       margin-top: 30px;
-    }
-    .text {
-      color: $white;
-      margin-top: 30px;
-      padding-left: 10px;
-      padding-right: 10px;
     }
   }
 }

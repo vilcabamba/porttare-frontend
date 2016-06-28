@@ -3,6 +3,15 @@
 //- button.button.button-positive.button-clearno-animation(ng-click="introVm.startApp()" ng-show="introVm.slideIndex == 2")
 ion-slide-box.intro-slides(on-slide-changed="introVm.slideChanged(index)")
   ion-slide.slide1
+    .logo-compra
+    .logo-bolsa
+    .text
+      | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
+      | tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+      | quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+      | Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
+      | dolore eu fugiat nulla pariatur.
+  ion-slide.slide2
     .logo-envia
     .logo-cohete
     .text
@@ -12,8 +21,8 @@ ion-slide-box.intro-slides(on-slide-changed="introVm.slideChanged(index)")
       | Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
       | dolore eu fugiat nulla pariatur.
   ion-slide
-    h3 Using Awesome
-  ion-slide
     h3 Any questions?
-button.intro-button.button.no-animation(ng-click="introVm.next()")
+button.intro-button.button.no-animation(ng-click="introVm.next()" ng-show="introVm.slideIndex != 2")
   |Continuar
+button.intro-button.button.no-animation(ng-click="introVm.startApp()" ng-show="introVm.slideIndex == 2")
+  |Empezar
