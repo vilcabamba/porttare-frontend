@@ -12,9 +12,17 @@
     introVm.previous = previous;
     introVm.slideChanged = slideChanged;
 
+    function load(){
+      if ($window.localStorage && !$window.localStorage.getItem('hasViewedTutorial')) {
+        $state.go('intro');
+      }
+    }
+
+    load();
+
     function startApp() {
       $window.localStorage.setItem('hasViewedTutorial','true');
-      $state.go('login');
+      $state.go('prelogin');
     }
 
     function next() {

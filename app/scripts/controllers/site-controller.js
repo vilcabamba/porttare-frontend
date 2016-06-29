@@ -8,7 +8,7 @@
   function SiteController($rootScope, $ionicLoading, $auth) {
 
     $rootScope.$on('$stateChangeStart', function(event, toState){
-      if (toState.name === 'login' && $auth.user.id) {
+      if ((toState.name === 'login' || toState.name === 'prelogin') && $auth.user.id) {
         event.preventDefault();
       }else{
         $ionicLoading.show({

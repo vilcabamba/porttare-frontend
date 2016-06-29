@@ -11,7 +11,6 @@
                             $ionicLoading,
                             $ionicPopup,
                             $auth,
-                            $window,
                             $ionicHistory) {
     var loginVm = this;
     loginVm.login = login;
@@ -24,14 +23,6 @@
     $rootScope.$on('auth:validation-success', function () {
       $state.go(successState);
     });
-
-    function load(){
-      if ($window.localStorage && !$window.localStorage.getItem('hasViewedTutorial')) {
-        $state.go('intro');
-      }
-    }
-
-    load();
 
     function login() {
       $ionicLoading.show({

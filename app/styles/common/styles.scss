@@ -21,15 +21,15 @@
 
 .icon-input-placeholder-email {
   @extend .icon-input-placeholder;
-  background-image: url('../../images/envelope.png');
+  background-image: url('../images/envelope.png');
 }
 
 .icon-input-placeholder-password {
   @extend .icon-input-placeholder;
-  background-image: url('../../images/lock.png');
+  background-image: url('../images/lock.png');
 }
 
 .icon-placeholder-facebook {
   @extend .icon-input-placeholder;
-  background-image: url('../../images/fb.png');
+  background-image: url('../images/fb.png');
 }

@@ -2,7 +2,8 @@ ion-view(
   view-title="Registro",
   hide-nav-bar="true"
 )
-  ion-content(scroll="false")
+  ion-content
+    back-button
     .row
       form.form-container(ng-submit='registerVm.register()')
         .register-title Crear mi cuenta

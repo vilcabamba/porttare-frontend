@@ -43,27 +43,6 @@
       $window           = _$window_;
     }));
 
-    describe('#onload', function() {
-
-      beforeEach(inject(function(_$rootScope_, $controller) {
-        $window.localStorage.clear();
-        controller = $controller('LoginController', {
-          '$ionicPopup': $ionicPopup,
-          '$ionicLoading': $ionicLoading,
-          '$ionicHistory': $ionicHistory,
-          '$state': $state,
-          '$auth': $auth,
-          '$window': $window,
-          '$scope': $scope
-        });
-        $rootScope = _$rootScope_;
-      }));
-
-      it('should call submitLogin on authService', function() {
-        sinon.assert.alwaysCalledWithExactly($state.go, 'intro');
-      });
-    });
-
     describe('#login', function() {
 
       beforeEach(inject(function(_$rootScope_, $controller) {

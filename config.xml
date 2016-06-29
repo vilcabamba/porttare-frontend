@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.example.Hola" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Hola</name>
+<widget id="com.noggalito.porttare" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Porttare</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Marketplace capaz de ofrecer y gestionar la logística necesaria
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="hola@noggalito.com" href="http://noggalito.com">
+        Noggalito
     </author>
     <content src="index.html" />
     <access origin="*" />

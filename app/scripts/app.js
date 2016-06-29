@@ -60,6 +60,12 @@
       controller: 'IntroController',
       controllerAs: 'introVm'
     })
+    .state('prelogin', {
+      url: '/prelogin',
+      templateUrl: 'templates/prelogin/prelogin.html',
+      controller: 'PreController',
+      controllerAs: 'preVm'
+    })
 
     .state('app', {
       url: '/app',
@@ -72,7 +78,7 @@
             $auth.validateUser().then(function(user){
               return user;
             }, function(){
-              $state.go('login');
+              $state.go('prelogin');
             });
           }
         }
@@ -129,7 +135,7 @@
       if (isResetPassword($location.absUrl())) {
         return '/reset';
       } else {
-        return '/login';
+        return '/prelogin';
       }
     });
 
