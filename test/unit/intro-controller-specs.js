@@ -36,7 +36,7 @@
       it('should call $window.localstorage and $state.go on startApp()', function(){
         ctrl.startApp();
         sinon.assert.calledOnce($window.localStorage.setItem);
-        sinon.assert.calledTwice($state.go);
+        sinon.assert.calledOnce($state.go);
       });
 
       it('should call $ionicSlideBoxDelegate.next on next()', function(){

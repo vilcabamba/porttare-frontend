@@ -21,6 +21,7 @@
 }
 
 .button-login, .facebook-login {
+  @extend .common-button;
   font-family: Montserrat-Light;
   background-color: $background-base-yellow;
   margin-top: 20px;
