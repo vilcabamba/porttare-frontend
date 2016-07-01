@@ -21,7 +21,7 @@
       constants: {
         ENV: {
           name: 'staging',
-          apiHost: 'http://porttare-backend.herokuapp.com'
+          apiHost: 'https://porttare-backend.herokuapp.com'
         }
       }
     },
