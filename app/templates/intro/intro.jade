@@ -1,26 +1,36 @@
 ion-slide-box.intro-slides(on-slide-changed="introVm.slideChanged(index)")
   ion-slide
-    .logo-compra
-    .logo-bolsa
-    .text
-      | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-      | tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-      | quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    .list
+      .item.item-image.logo-compra
+        img
+      .item.item-image.logo-bolsa
+        img
+    .row
+      .text
+          | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          | tempor incididunt ut labore et dolore magna.
   ion-slide
-    .logo-envia
-    .logo-cohete
-    .text
-      | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-      | tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-      | quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    .list
+      .item.item-image.logo-vende
+        img
+      .item.item-image.logo-precio
+        img
+    .row
+      .text
+        | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        | tempor incididunt ut labore et dolore magna.
   ion-slide
-    .logo-vende
-    .logo-precio
-    .text
-      | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-      | tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-      | quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-button.intro-button.button.no-animation(ng-click="introVm.next()" ng-show="introVm.slideIndex != 2")
-  |Continuar
-button.intro-button.button.no-animation(ng-click="introVm.startApp()" ng-show="introVm.slideIndex == 2")
-  |Empezar
+    .list
+      .item.item-image.logo-envia
+        img
+      .item.item-image.logo-cohete
+        img
+    .row
+      .text
+        | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        | tempor incididunt ut labore et dolore magna.
+.bar.bar-footer.bar-intro-button
+  button.intro-button.button.no-animation(ng-click="introVm.next()" ng-if="introVm.slideIndex != 2")
+    |Continuar
+  button.intro-button.button.no-animation(ng-click="introVm.startApp()" ng-if="introVm.slideIndex == 2")
+    |Empezar
