@@ -2,7 +2,7 @@
   height: 100%;
 
   .slider-slide {
-    padding-top: 80px;
+    padding-top: 3%;
     background-image: url('../images/bg.png');
     text-align: center;
   }
@@ -11,49 +11,96 @@
 .intro-slides {
 
   .logo-compra {
-    @include background-centered('../images/logo_compra.png', 193px, 118px);
+    @include image-centered('../images/logo_compra.png', 193px, 118px);
   }
   .logo-bolsa {
-    @include background-centered('../images/bag.png', 102px, 131px);
+    @include image-centered('../images/bag.png', 102px, 131px);
   }
   .logo-envia {
-    @include background-centered('../images/logo_envia.png', 154px, 114px);
+    @include image-centered('../images/logo_envia.png', 154px, 114px);
   }
   .logo-cohete {
-    @include background-centered('../images/rocket.png', 102px, 131px);
+    @include image-centered('../images/rocket.png', 102px, 131px);
   }
   .logo-vende {
-    @include background-centered('../images/logo_vende.png', 170px, 114px);
+    @include image-centered('../images/logo_vende.png', 170px, 114px);
   }
   .logo-precio {
-    @include background-centered('../images/price_tag.png', 102px, 150px);
+    @include image-centered('../images/price_tag.png', 82px, 140px);
   }
   .text {
+    width: 100%;
     color: $white;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5%;
+    padding-right: 5%;
+    border: none;
+    background-color: transparent;
+    margin-top: 5%;
   }
-  .text, .logo-bolsa, .logo-cohete, .logo-precio {
-    margin-top: 30px;
+  .logo-bolsa, .logo-cohete, .logo-precio {
+    margin-top: 20px;
   }
 }
 
 .slider-pager {
-  bottom: 70px;
+  bottom: 15%;
 
   .slider-pager-page {
     color: $yellow;
   }
 }
 
-.intro-button {
-  position: absolute;
-  bottom: 0;
-  width: 100px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  background-color: $yellow;
-  color: $white;
-  border-radius: 10px;
+.bar-intro-button {
+  background-color: transparent;
+  background-image: none;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  .intro-button {
+    width: 70%;
+    margin: auto;
+    background-color: $yellow;
+    color: $white;
+    border-radius: 10px;
+  }
 }
+
+@media all and (orientation: landscape) {
+  .slider {
+    .slider-slide {
+      padding-top: 1%;
+    }
+  }
+
+  .intro-slides {
+
+    .logo-compra {
+      @include image-centered('../images/logo_compra.png', 143px, 68px);
+    }
+    .logo-bolsa {
+      padding-top: 2%;
+      @include image-centered('../images/bag.png', 52px, 81px);
+    }
+    .logo-envia {
+      @include image-centered('../images/logo_envia.png', 104px, 64px);
+    }
+    .logo-cohete {
+      padding-top: 2%;
+      @include image-centered('../images/rocket.png', 52px, 81px);
+    }
+    .logo-vende {
+      @include image-centered('../images/logo_vende.png', 120px, 64px);
+    }
+    .logo-precio {
+      padding-top: 2%;
+      @include image-centered('../images/price_tag.png', 42px, 90px);
+    }
+    .text {
+      margin-top: 0px;
+    }
+  }
+
+  .slider-pager {
+    bottom: 25%;
+  }
+}
+
