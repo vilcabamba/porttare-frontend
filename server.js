@@ -1,7 +1,14 @@
 (function () {
+  'use strict';
   var express = require('express'),
       app = express();
 
+  // Force use SSL
+  var FORCE_HTTPS = process.env.FORCE_HTTPS === 'true' ? true : false;
+  if (FORCE_HTTPS) {
+    var enforce = require('express-sslify');
+    app.use(enforce.HTTPS({ trustProtoHeader: true }));
+  }
   app.use(express.static('app'));
   app.set('port', process.env.PORT || 5001);
   app.listen(app.get('port'), function () {
