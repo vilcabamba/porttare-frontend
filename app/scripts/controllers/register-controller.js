@@ -33,8 +33,8 @@
 
     $scope.$on('auth:registration-email-error', function(event, response){
       var errors;
-      if (responses.errors.full_messages) {
-        errors = response.errors.full_messages.join(', ') //jshint ignore:line
+      if (response.errors.full_messages) { // jshint ignore:line
+        errors = response.errors.full_messages.join(', '); // jshint ignore:line
       }else{
         errors = response.errors.join(', ');
       }
