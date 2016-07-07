@@ -9,13 +9,14 @@
         $state,
         $ionicPopup,
         deferredStateGo,
+        $scope,
         $ionicLoading;
 
     beforeEach(module('porttare.controllers'));
 
     beforeEach(inject(
       function ($q,
-                $rootScope,
+                _$rootScope_,
                 $controller) {
 
       deferredRegister  = $q.defer();
@@ -27,19 +28,21 @@
         submitRegistration: sinon.stub()
                           .returns(deferredRegister.promise)
       };
+      $rootScope = _$rootScope_;
+      $scope            = $rootScope.$new();
 
       controller = $controller('RegisterController', {
         '$ionicPopup': $ionicPopup,
         '$ionicLoading': $ionicLoading,
         '$state': $state,
-        '$auth': $auth
+        '$auth': $auth,
+        '$scope': $scope
       });
     }));
 
     describe('#register', function() {
 
-      beforeEach(inject(function(_$rootScope_) {
-        $rootScope = _$rootScope_;
+      beforeEach(inject(function() {
         controller.register();
       }));
 
@@ -58,13 +61,6 @@
 
           deferredStateGo.resolve();
           $rootScope.$digest();
-          sinon.assert.calledOnce($ionicPopup.alert);
-        });
-
-        it('if unsuccessful, should show a popup', function() {
-          deferredRegister.reject({ errors: [] });
-          $rootScope.$digest();
-
           sinon.assert.calledOnce($ionicPopup.alert);
         });
       });
