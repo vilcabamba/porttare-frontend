@@ -5,7 +5,7 @@
     .module('porttare.controllers')
     .controller('RegisterController', RegisterController);
 
-  function RegisterController($ionicLoading, $auth, $ionicPopup, $state) {
+  function RegisterController($ionicLoading, $auth, $ionicPopup, $state, $scope) {
     var registerVm = this;
     registerVm.register = register;
     registerVm.registerForm = {};
@@ -26,16 +26,23 @@
             });
           });
         })
-        .catch(function (resp) {
-          $ionicPopup.alert({
-            title: 'Error',
-            template: resp.errors.join(', ')
-          });
-        })
         .finally(function(){
           $ionicLoading.hide();
         });
     }
+
+    $scope.$on('auth:registration-email-error', function(event, response){
+      var errors;
+      if (response.errors.full_messages) { // jshint ignore:line
+        errors = response.errors.full_messages.join(', '); // jshint ignore:line
+      }else{
+        errors = response.errors.join(', ');
+      }
+      $ionicPopup.alert({
+        title: 'Error',
+        template: errors
+      });
+    });
 
     function loginWithFB() {
       $auth.authenticate('facebook')
