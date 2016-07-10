@@ -1,5 +1,6 @@
 .slider {
   height: 100%;
+  font-family: "Montserrat-Regular";
 
   .slider-slide {
     padding-top: 3%;
@@ -11,21 +12,27 @@
 .intro-slides {
 
   .logo-compra {
+    height: 118px;
     @include image-centered('../images/logo_compra.png', 193px, 118px);
   }
   .logo-bolsa {
+    height: 140px;
     @include image-centered('../images/bag.png', 102px, 131px);
   }
   .logo-envia {
+    height: 118px;
     @include image-centered('../images/logo_envia.png', 154px, 114px);
   }
   .logo-cohete {
+    height: 140px;
     @include image-centered('../images/rocket.png', 102px, 131px);
   }
   .logo-vende {
+    height: 118px;
     @include image-centered('../images/logo_vende.png', 170px, 114px);
   }
   .logo-precio {
+    height: 140px;
     @include image-centered('../images/price_tag.png', 82px, 140px);
   }
   .text {
@@ -38,7 +45,7 @@
     margin-top: 5%;
   }
   .logo-bolsa, .logo-cohete, .logo-precio {
-    margin-top: 20px;
+    margin-top: 30px;
   }
 }
 
@@ -61,6 +68,8 @@
     background-color: $yellow;
     color: $white;
     border-radius: 10px;
+    font-family: "Montserrat-Regular";
+    font-size: 12pt;
   }
 }
 
@@ -103,4 +112,3 @@
     bottom: 25%;
   }
 }
-
