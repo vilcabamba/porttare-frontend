@@ -90,8 +90,8 @@
           });
           $rootScope.$digest();
           sinon.assert.calledOnce(GeolocationService.getCurrentPosition);
-          expect(spyMap.calledOnce).to.be.true;
-          expect(spySB.calledOnce).to.be.true;
+          sinon.assert.calledOnce(spyMap);
+          sinon.assert.calledOnce(spySB);
         });
 
         it('if unsuccessful, should show a popup', function () {

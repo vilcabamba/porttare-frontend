@@ -37,6 +37,8 @@
       $auth             = {
         submitLogin: sinon.stub()
                           .returns(deferredLogin.promise),
+        validateUser: sinon.stub()
+                          .returns(deferredLogin.promise),
         signOut: sinon.stub()
                           .returns(deferredLogout.promise)
       };

@@ -13,6 +13,9 @@ function PreController($auth, $state, $ionicPopup, $window) {
     if ($window.localStorage && !$window.localStorage.getItem('hasViewedTutorial')) {
       $state.go('intro');
     }
+    $auth.validateUser().then(function(){
+      $state.go(successState);
+    });
   }
 
   load();
