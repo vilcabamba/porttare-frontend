@@ -5,16 +5,12 @@
     .module('porttare.controllers')
     .controller('SiteController', SiteController);
 
-  function SiteController($rootScope, $ionicLoading, $auth) {
+  function SiteController($rootScope, $ionicLoading) {
 
-    $rootScope.$on('$stateChangeStart', function(event, toState){
-      if ((toState.name === 'login' || toState.name === 'prelogin') && $auth.user.id) {
-        event.preventDefault();
-      }else{
-        $ionicLoading.show({
-          template: 'cargando...'
-        });
-      }
+    $rootScope.$on('$stateChangeStart', function(){
+      $ionicLoading.show({
+        template: 'cargando...'
+      });
     });
 
     $rootScope.$on('$stateChangeSuccess', function(){

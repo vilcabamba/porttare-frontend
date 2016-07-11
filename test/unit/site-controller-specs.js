@@ -34,12 +34,6 @@
         sinon.assert.calledOnce($ionicLoading.show);
       });
 
-      it('should not call $ionicLoading.show in stateChangeStart to login and user', function(){
-        $rootScope.$broadcast('$stateChangeStart', {name: 'login'});
-        $rootScope.$digest();
-        sinon.assert.notCalled($ionicLoading.show);
-      });
-
       it('should call $ionicLoading.hode in stateChangeSuccess', function(){
         $rootScope.$broadcast('$stateChangeSuccess');
         $rootScope.$digest();

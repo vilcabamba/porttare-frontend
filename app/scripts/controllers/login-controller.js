@@ -24,6 +24,14 @@
       $state.go(successState);
     });
 
+    function load(){
+      $auth.validateUser().then(function(){
+        $state.go(successState);
+      });
+    }
+
+    load();
+
     function login() {
       $ionicLoading.show({
         template: 'cargando...'
