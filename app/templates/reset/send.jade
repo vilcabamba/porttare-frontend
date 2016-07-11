@@ -14,21 +14,21 @@ ion-view(
             | enviaremos una clave temporal que luego podrás cambiar
 
       .row
-        .col.form-container
-          form(ng-submit='resetVm.resetPassword()')
-            .list
-              label.item.item-input.item-send-email
-                span.icon-input-placeholder-email
-                input(
-                    type='email',
-                    ng-model='resetVm.resetPasswordForm.email'
-                    required='required'
-                    placeholder='Correo electrónico'
-                    class='input-send-email'
-                  )
-              button(
-                  type='submit'
-                ).button.button-full.button-positive.button-send-email
-                | Restablecer contraseña
+        form.form-container(ng-submit='resetVm.resetPassword()')
+          .list
+            label.item.item-input.item-send-email
+              span.icon-input-placeholder-email
+              input(
+                  type='email',
+                  ng-model='resetVm.resetPasswordForm.email'
+                  required='required'
+                  placeholder='Correo electrónico'
+                  class='input-send-email'
+                )
+          .button-actions
+            button(
+                type='submit'
+              ).button.button-full.button-positive.button-send-email
+              | Restablecer contraseña
 
-      .bar.bar-footer.bar-footer-send-email
+  .bar.bar-footer.bar-footer-send-email
