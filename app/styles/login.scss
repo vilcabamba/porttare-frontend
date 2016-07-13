@@ -1,6 +1,8 @@
 .logo {
-  @include background-centered('../images/logo_color.png', 232px, 123px);
+  @include background-centered('../images/logo_color.png', 100%, 125px);
+  background-position: 50%;
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .form-container {
@@ -38,5 +40,5 @@
 }
 
 .input-facebook-login {
-  padding-left: 40px;
+  padding-left: 30px;
 }
