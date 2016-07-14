@@ -3,7 +3,7 @@
   .common-text {
     font-family: Montserrat-Light;
     text-align: center;
-    color: $text-base-color;
+    color: $base-grey;
   }
 
   .header-text {
@@ -29,7 +29,7 @@
     .button-send-email {
       @extend .common-button;
       font-family: Montserrat-Light;
-      background-color: $background-base-yellow;
+      background-color: $base-yellow;
       margin-top: 20px;
     }
   }

@@ -14,5 +14,7 @@
   background-repeat: no-repeat;
   width: $width;
   height: $height;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  background-position: 50%;
 }

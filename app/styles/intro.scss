@@ -10,14 +10,20 @@
 }
 
 .intro-slides {
+  .list-logo {
+    background-size: contain;
+
+    @media (min-height: $grid-responsive-sm-break) {
+      // add some spacing for tall devices
+      margin-bottom: 20px;
+    }
+  }
 
   .logo-compra {
-    height: 118px;
-    @include image-centered('../images/logo_compra.png', 193px, 118px);
+    @include background-centered('../images/logo_compra.png', 100%, 118px);
   }
   .logo-bolsa {
-    height: 140px;
-    @include image-centered('../images/bag.png', 102px, 131px);
+    @include background-centered('../images/bag.png', 100%, 132px);
   }
   .logo-envia {
     height: 118px;
@@ -53,7 +59,7 @@
   bottom: 15%;
 
   .slider-pager-page {
-    color: $yellow;
+    color: $base-yellow;
   }
 }
 
@@ -65,7 +71,7 @@
   .intro-button {
     width: 70%;
     margin: auto;
-    background-color: $yellow;
+    background-color: $base-yellow;
     color: $white;
     border-radius: 10px;
     font-family: "Montserrat-Regular";
