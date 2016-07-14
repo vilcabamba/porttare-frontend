@@ -13,6 +13,14 @@
   .list-logo {
     background-size: contain;
 
+    &.above {
+      height: 110px;
+    }
+
+    &.below {
+      height: 120px;
+    }
+
     @media (min-height: $grid-responsive-sm-break) {
       // add some spacing for tall devices
       margin-bottom: 20px;
@@ -20,26 +28,22 @@
   }
 
   .logo-compra {
-    @include background-centered('../images/logo_compra.png', 100%, 118px);
+    @include background-centered('../images/logo_compra.png');
   }
   .logo-bolsa {
-    @include background-centered('../images/bag.png', 100%, 132px);
+    @include background-centered('../images/bag.png');
   }
   .logo-envia {
-    height: 118px;
-    @include image-centered('../images/logo_envia.png', 154px, 114px);
+    @include background-centered('../images/logo_envia.png');
   }
   .logo-cohete {
-    height: 140px;
-    @include image-centered('../images/rocket.png', 102px, 131px);
+    @include background-centered('../images/rocket.png');
   }
   .logo-vende {
-    height: 118px;
-    @include image-centered('../images/logo_vende.png', 170px, 114px);
+    @include background-centered('../images/logo_vende.png');
   }
   .logo-precio {
-    height: 140px;
-    @include image-centered('../images/price_tag.png', 82px, 140px);
+    @include background-centered('../images/price_tag.png');
   }
   .text {
     width: 100%;

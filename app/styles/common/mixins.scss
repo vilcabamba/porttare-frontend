@@ -9,11 +9,10 @@
   }
 }
 
-@mixin background-centered($url, $width, $height) {
+@mixin background-centered($url) {
   background-image: url($url);
   background-repeat: no-repeat;
-  width: $width;
-  height: $height;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   background-position: 50%;
