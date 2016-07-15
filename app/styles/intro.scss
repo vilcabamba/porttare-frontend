@@ -19,6 +19,7 @@
 
     &.below {
       height: 120px;
+      margin-top: 30px;
     }
 
     @media (min-height: $grid-responsive-sm-break) {
@@ -45,6 +46,7 @@
   .logo-precio {
     @include background-centered('../images/price_tag.png');
   }
+
   .text {
     width: 100%;
     color: $white;
@@ -54,9 +56,7 @@
     background-color: transparent;
     margin-top: 5%;
   }
-  .logo-bolsa, .logo-cohete, .logo-precio {
-    margin-top: 30px;
-  }
+
 }
 
 .slider-pager {
