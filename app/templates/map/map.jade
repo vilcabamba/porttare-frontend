@@ -5,8 +5,10 @@ ion-view(
     input(
       id="input-places"
       class="controls"
-      type="text",
+      type="text"
       placeholder="Introduzca una ubicación"
+      ng-autocomplete
+      ng-focus="mapVm.disableTap()"
     )
     div(
       id="map"
