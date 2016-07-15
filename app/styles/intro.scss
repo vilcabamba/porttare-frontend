@@ -83,7 +83,8 @@
   }
 }
 
-@media all and (orientation: landscape) {
+@media (orientation: landscape) and
+       (max-width: $grid-responsive-lg-break) {
   .slider {
     .slider-slide {
       padding-top: 1%;
@@ -91,30 +92,14 @@
   }
 
   .intro-slides {
+    .list-logo {
+      &.above {
+        height: 70px;
+      }
 
-    .logo-compra {
-      @include image-centered('../images/logo_compra.png', 143px, 68px);
-    }
-    .logo-bolsa {
-      padding-top: 2%;
-      @include image-centered('../images/bag.png', 52px, 81px);
-    }
-    .logo-envia {
-      @include image-centered('../images/logo_envia.png', 104px, 64px);
-    }
-    .logo-cohete {
-      padding-top: 2%;
-      @include image-centered('../images/rocket.png', 52px, 81px);
-    }
-    .logo-vende {
-      @include image-centered('../images/logo_vende.png', 120px, 64px);
-    }
-    .logo-precio {
-      padding-top: 2%;
-      @include image-centered('../images/price_tag.png', 42px, 90px);
-    }
-    .text {
-      margin-top: 0px;
+      &.below {
+        height: 80px;
+      }
     }
   }
 
