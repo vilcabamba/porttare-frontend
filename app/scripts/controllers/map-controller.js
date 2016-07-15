@@ -7,6 +7,9 @@
 
   function MapController($ionicLoading, $ionicPopup, GeolocationService) {
 
+    var mapVm = this;
+    mapVm.disableTap = disableTap;
+
     $ionicLoading.show({
       template: 'cargando...'
     });
@@ -102,6 +105,14 @@
           }
         });
         map.fitBounds(bounds);
+      });
+    }
+
+    function disableTap() {
+      var container = document.getElementsByClassName('pac-container');
+      angular.element(container).attr('data-tap-disabled', 'true');
+      angular.element(container).on('click', function(){
+          document.getElementById('input-places').blur();
       });
     }
 
