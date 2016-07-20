@@ -2,12 +2,17 @@ ion-view(
   view-title="Registro",
   hide-nav-bar="true"
 )
-  ion-content
+  ion-content.manual-register-view
     back-button
     .row
-      form.form-container(ng-submit='registerVm.register()')
-        .register-title Crear mi cuenta
-        .register-subtitle Una cuenta, muchos perfiles
+      .col.header-text Crear mi cuenta
+    .row
+      .col.description Una cuenta, muchos perfiles
+
+    .row
+      form.form-container(
+        ng-submit='registerVm.register()'
+      )
         .list
           label.item.item-input.item-send-email
             span.icon-input-placeholder-email

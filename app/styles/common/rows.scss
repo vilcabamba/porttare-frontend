@@ -1,0 +1,19 @@
+.row {
+  .common-text {
+    font-family: Montserrat-Light;
+    text-align: center;
+    color: $base-grey;
+  }
+
+  .header-text {
+    @extend .common-text;
+    margin-top: 40px;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+  }
+  .description {
+    @extend .common-text;
+    padding-left: 3em;
+    padding-right: 3em;
+  }
+}
