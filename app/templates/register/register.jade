@@ -2,7 +2,7 @@ ion-view(
   view-title="Registro",
   hide-nav-bar="true"
 )
-  ion-content(padding="false")
+  ion-content
     back-button
     .row
       form.form-container(ng-submit='registerVm.register()')
@@ -45,4 +45,4 @@ ion-view(
       .button.facebook-login(ng-click="registerVm.loginWithFB()")
         span.icon-placeholder-facebook
         span.input-facebook-login Continuar con facebook
-    .bar.bar-footer.bar-footer-send-email
+.bar.bar-footer.bar-footer-send-email
