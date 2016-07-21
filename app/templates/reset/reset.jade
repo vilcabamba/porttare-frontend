@@ -6,7 +6,7 @@ ion-view(
     .update-password-view
       .row
         .col.header-text
-          |Actualiza tu contraseña
+          | Actualiza tu contraseña
       .row
         form.form-container(ng-submit='resetVm.updatePassword()')
           .list
@@ -16,8 +16,7 @@ ion-view(
                 type='password',
                 ng-model='resetVm.updatePasswordForm.password',
                 required='required',
-                placeholder="Contraseña",
-                class="input-send-password"
+                placeholder="Contraseña"
               )
             label.item.item-input.item-send-password
               span.icon-input-placeholder-password
@@ -25,8 +24,7 @@ ion-view(
                 type='password',
                 ng-model='resetVm.updatePasswordForm.password_confirmation',
                 required='required',
-                placeholder="Confirmar contraseña",
-                class="input-send-password"
+                placeholder="Confirmar contraseña"
               )
           .button-actions
             button(
