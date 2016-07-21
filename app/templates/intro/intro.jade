@@ -22,7 +22,7 @@ ion-slide-box.intro-slides(on-slide-changed="introVm.slideChanged(index)")
       .text
         |No te preocupes, el trabajo difícil lo hacemos por ti, ¡Simple!
 .bar.bar-footer.bar-intro-button
-  button.intro-button.button.no-animation(ng-click="introVm.next()" ng-if="introVm.slideIndex != 2")
-    |Continuar
-  button.intro-button.button.no-animation(ng-click="introVm.startApp()" ng-if="introVm.slideIndex == 2")
-    |¡Genial!
+  button.intro-button.common-button.button.no-animation(ng-click="introVm.next()" ng-if="introVm.slideIndex != 2")
+    | Continuar
+  button.intro-button.common-button.button.no-animation(ng-click="introVm.startApp()" ng-if="introVm.slideIndex == 2")
+    | ¡Genial!

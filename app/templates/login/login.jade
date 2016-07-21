@@ -10,7 +10,7 @@ ion-view(
       form.form-container(ng-submit='loginVm.login()')
         .list
           label.item.item-input
-            span.icon-input-placeholder-email
+            span.email-left-icon
             input(
                 type='email',
                 ng-model='loginVm.loginForm.email'
@@ -18,7 +18,7 @@ ion-view(
                 placeholder='Correo electrónico'
               )
           label.item.item-input
-            span.icon-input-placeholder-password
+            span.lock-left-icon
             input(
               type='password',
               ng-model='loginVm.loginForm.password',
@@ -34,6 +34,6 @@ ion-view(
       a.forgot-password.button.button-clear.button-dark(ui-sref='send') ¿Olvidaste tu contraseña?
     .row.form-container
       .button.facebook-login(ng-click="loginVm.loginWithFB()")
-        span.icon-placeholder-facebook
-        span.input-facebook-login Continuar con facebook
+        span.fb-left-icon
+        span.fb-copytext Continuar con facebook
   .bar.bar-footer.bar-footer-send-email

@@ -11,7 +11,7 @@
   width: 90%;
 }
 
-.button-login, .facebook-login {
+.button-login {
   @extend .common-button;
   font-family: Montserrat-Light;
   background-color: $base-yellow;
@@ -22,12 +22,4 @@
 
 .forgot-password {
   margin: auto;
-}
-
-.facebook-login {
-  background-color: $facebook-blue;
-}
-
-.input-facebook-login {
-  padding-left: 30px;
 }

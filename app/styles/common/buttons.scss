@@ -1,0 +1,25 @@
+.common-button {
+  border-radius: 8px;
+  font-family: Montserrat-Light;
+  color: $white;
+  background-color: $base-yellow;
+  -moz-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.button-primary,
+.button-primary.button-full {
+  @extend .common-button;
+  margin-top: 30px;
+}
+
+.facebook-login {
+  @extend .common-button;
+  background-color: $facebook-blue;
+  width: 100%;
+
+  .fb-copytext {
+    padding-left: 30px;
+  }
+}

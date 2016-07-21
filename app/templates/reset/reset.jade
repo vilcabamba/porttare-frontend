@@ -11,7 +11,7 @@ ion-view(
         form.form-container(ng-submit='resetVm.updatePassword()')
           .list
             label.item.item-input
-              span.icon-input-placeholder-password
+              span.lock-left-icon
               input(
                 type='password',
                 ng-model='resetVm.updatePasswordForm.password',
@@ -19,7 +19,7 @@ ion-view(
                 placeholder="Contraseña"
               )
             label.item.item-input
-              span.icon-input-placeholder-password
+              span.lock-left-icon
               input(
                 type='password',
                 ng-model='resetVm.updatePasswordForm.password_confirmation',
@@ -29,6 +29,6 @@ ion-view(
           .button-actions
             button(
               type='submit'
-            ).button.button-full.button-positive.button-update-password
-              |Actualizar contraseña
+            ).button.button-full.button-primary
+              | Actualizar contraseña
   .bar.bar-footer.bar-footer-send-email

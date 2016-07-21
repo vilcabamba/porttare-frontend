@@ -6,13 +6,13 @@
 @import "common/styles";
 @import "common/mixins";
 @import "common/inputs";
+@import "common/input_icons";
+@import "common/buttons";
 
 @import "intro";
 @import "login";
 @import "register";
 @import "map/map";
-@import "reset/send";
-@import "reset/reset";
 @import "overrides/scroll";
 @import "overrides/bar-header";
 @import "directives/back-button"
