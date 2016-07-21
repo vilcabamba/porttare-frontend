@@ -1,8 +1,5 @@
 .update-password-view {
   .form-container {
-    .item-send-password {
-      @extend .hide-input-border;
-    }
     .button-update-password {
       @extend .common-button;
       font-family: Montserrat-Light;
