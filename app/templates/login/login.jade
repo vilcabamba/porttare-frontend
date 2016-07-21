@@ -29,9 +29,9 @@ ion-view(
             input(
               type='submit',
               value="Iniciar Sesión"
-            ).button.button-login.button-block
+            ).button.button-primary.button-block
     .row.form-container
-      a.forgot-password.button.button-clear.button-dark(ui-sref='send') ¿Olvidaste tu contraseña?
+      a.button.button-clear.button-dark(ui-sref='send') ¿Olvidaste tu contraseña?
     .row.form-container
       .button.facebook-login(ng-click="loginVm.loginWithFB()")
         span.fb-left-icon

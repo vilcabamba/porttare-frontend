@@ -10,16 +10,3 @@
   margin-top: 50px;
   width: 90%;
 }
-
-.button-login {
-  @extend .common-button;
-  font-family: Montserrat-Light;
-  background-color: $base-yellow;
-  margin-top: 20px;
-  color: $white;
-  width: 100%;
-}
-
-.forgot-password {
-  margin: auto;
-}
