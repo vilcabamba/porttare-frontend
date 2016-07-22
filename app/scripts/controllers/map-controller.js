@@ -14,24 +14,72 @@
       template: 'cargando...'
     });
 
-    GeolocationService
-      .getCurrentPosition()
-      .then(function success(position) {
+    init();
 
-        var map = loadMap(position);
-        loadPlacesSearchBox(map);
-        $ionicLoading.hide();
+    function init() {
+      GeolocationService
+        .getCurrentPosition()
+        .then(
+        function onSuccess(position) {
+          var map = loadMap(position, true);
+          loadPlacesSearchBox(map);
+          $ionicLoading.hide();
+        },
+        function onError(err) {
+          $ionicLoading.hide();
+          var message = null;
+          // Use default coordinate (Loja)
+          var defaultPosition = {
+            coords: {
+              latitude: -4.0078909,
+              longitude: -79.21127690000003
+            }
+          };
 
-      },
-      function error() {
-        $ionicLoading.hide();
-        $ionicPopup.alert({
-          title: 'Error',
-          template: 'Hubo un error al cargar el mapa.'
-        });
+          if (!err && !err.code) {
+            // Unknown error
+            showUnknownError();
+            return;
+          }
+
+          switch (err.code) {
+            case 1:
+              message = 'Denegada la peticion de Geolocalización.';
+              break;
+            case 2:
+              message = 'No se ha encontrado la ubicación especificada.';
+              break;
+            case 3:
+              message = 'El tiempo de petición ha expirado.';
+              break;
+          }
+
+          if (!message) {
+            // Unknown error
+            showUnknownError();
+          } else {
+            handleLocationError(message, defaultPosition, false);
+          }
+        }
+      );
+    }
+
+    function showUnknownError() {
+      $ionicPopup.alert({
+        title: 'Error',
+        template: 'Hubo un error desconocido al cargar el mapa.'
       });
+    }
+    function handleLocationError(message, position, useMarker) {
+      var map = loadMap(position, useMarker);
+      loadPlacesSearchBox(map);
+      $ionicPopup.alert({
+        title: 'Error',
+        template: message
+      });
+    }
 
-    function loadMap(position) {
+    function loadMap(position, useMarker) {
       var lat = position.coords.latitude;
       var long = position.coords.longitude;
 
@@ -50,12 +98,13 @@
 
       var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-      new google.maps.Marker({
-        position: latLng,
-        map: map
-      });
-
-
+      // Only when the Geolocation is active
+      if (useMarker) {
+        new google.maps.Marker({
+          position: latLng,
+          map: map
+        });
+      }
       return map;
     }
 
