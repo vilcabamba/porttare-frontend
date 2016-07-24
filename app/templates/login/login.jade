@@ -9,33 +9,31 @@ ion-view(
     .row
       form.form-container(ng-submit='loginVm.login()')
         .list
-          label.item.item-input.item-send-email
-            span.icon-input-placeholder-email
+          label.item.item-input
+            span.email-left-icon
             input(
                 type='email',
                 ng-model='loginVm.loginForm.email'
                 required='required'
                 placeholder='Correo electrónico'
-                class='input-send-email'
               )
-          label.item.item-input.item-send-password
-            span.icon-input-placeholder-password
+          label.item.item-input
+            span.lock-left-icon
             input(
               type='password',
               ng-model='loginVm.loginForm.password',
               required='required',
               placeholder="Contraseña"
-              class="input-send-password"
             )
         .button-actions
             input(
               type='submit',
               value="Iniciar Sesión"
-            ).button.button-login.button-block
+            ).button.button-primary.button-block
     .row.form-container
-      a.forgot-password.button.button-clear.button-dark(ui-sref='send') ¿Olvidaste tu contraseña?
+      a.button.button-clear.button-dark(ui-sref='send') ¿Olvidaste tu contraseña?
     .row.form-container
       .button.facebook-login(ng-click="loginVm.loginWithFB()")
-        span.icon-placeholder-facebook
-        span.input-facebook-login Continuar con facebook
+        span.fb-left-icon
+        span.fb-copytext Continuar con facebook
   .bar.bar-footer.bar-footer-send-email

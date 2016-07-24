@@ -1,0 +1,18 @@
+input {
+  font-family: Montserrat-Light;
+
+  &[type=text],
+  &[type=password],
+  &[type=email] {
+    padding-left: 40px;
+  }
+}
+
+.item-input {
+  padding: 6px 0 5px 5px;
+  margin-bottom: 2px;
+  // hide borders
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}

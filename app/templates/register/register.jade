@@ -14,41 +14,38 @@ ion-view(
         ng-submit='registerVm.register()'
       )
         .list
-          label.item.item-input.item-send-email
-            span.icon-input-placeholder-email
+          label.item.item-input
+            span.email-left-icon
             input(
                 type='email',
                 ng-model='registerVm.registerForm.email'
                 required='required'
                 placeholder='Correo electrónico'
-                class='input-send-email'
                 autosize-input
               )
-          label.item.item-input.item-send-password
-            span.icon-input-placeholder-password
+          label.item.item-input
+            span.lock-left-icon
             input(
               type='password',
               ng-model='registerVm.registerForm.password',
               required='required',
               placeholder="Contraseña"
-              class="input-send-password"
             )
-          label.item.item-input.item-send-password
-            span.icon-input-placeholder-password
+          label.item.item-input
+            span.lock-left-icon
             input(
               type='password',
               ng-model='registerVm.registerForm.password_confirmation',
               required='required',
               placeholder="Confirmar contraseña"
-              class="input-send-password"
             )
         .button-actions
             input(
               type='submit',
               value="¡Regístrame!"
-            ).button.button-login.button-block
+            ).button.button-primary.button-block
     .row.form-container
       .button.facebook-login(ng-click="registerVm.loginWithFB()")
-        span.icon-placeholder-facebook
-        span.input-facebook-login Continuar con facebook
+        span.fb-left-icon
+        span.fb-copytext Continuar con facebook
 .bar.bar-footer.bar-footer-send-email

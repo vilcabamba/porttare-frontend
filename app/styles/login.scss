@@ -10,35 +10,3 @@
   margin-top: 50px;
   width: 90%;
 }
-
-.item-send-email, .item-send-password {
-  @extend .hide-input-border;
-  padding: 6px 0 5px 5px;
-  margin-bottom: 2px;
-
-  .input-send-email,  .input-send-password{
-    font-family: Montserrat-Light;
-    padding-left: 40px;
-  }
-}
-
-.button-login, .facebook-login {
-  @extend .common-button;
-  font-family: Montserrat-Light;
-  background-color: $base-yellow;
-  margin-top: 20px;
-  color: $white;
-  width: 100%;
-}
-
-.forgot-password {
-  margin: auto;
-}
-
-.facebook-login {
-  background-color: $facebook-blue;
-}
-
-.input-facebook-login {
-  padding-left: 30px;
-}
