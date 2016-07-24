@@ -4,15 +4,30 @@
   describe('SiteController', function () {
     var ctrl, $controller, dependencies, $rootScope, $ionicLoading, $auth;
 
+    var LoginService,
+        deferLoginWithFB,
+        $state;
+
     beforeEach(module('porttare.controllers'));
 
     beforeEach(inject(
-      function (_$controller_,
+      function ($q,
+                _$controller_,
                 _$rootScope_) {
+
+        deferLoginWithFB  = $q.defer();
         $controller = _$controller_;
         $rootScope = _$rootScope_;
         $ionicLoading = { show: sinon.stub(), hide: sinon.stub()};
-
+        $state        = {
+          go: sinon.stub(),
+          includes: function(){
+            return true;
+          }
+        };
+        LoginService  = {
+          loginWithFB: sinon.stub().returns(deferLoginWithFB.promise)
+        };
       })
     );
 
@@ -22,7 +37,9 @@
 
         dependencies = {
           $ionicLoading: $ionicLoading,
-          $auth: $auth
+          $auth: $auth,
+          LoginService: LoginService,
+          $state: $state
         };
 
         ctrl = $controller('SiteController', dependencies);
@@ -53,7 +70,9 @@
 
         dependencies = {
           $ionicLoading: $ionicLoading,
-          $auth: $auth
+          $auth: $auth,
+          LoginService: LoginService,
+          $state: $state
         };
         ctrl = $controller('SiteController', dependencies);
       });
