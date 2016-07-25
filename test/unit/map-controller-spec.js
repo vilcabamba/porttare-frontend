@@ -52,7 +52,7 @@
             places: {
               SearchBox: function () {
                 return {
-                  addListener: function () {return true;}
+                  addListener: function () { return true; }
                 };
               }
             }
@@ -94,11 +94,28 @@
           sinon.assert.calledOnce(spySB);
         });
 
-        it('if unsuccessful, should show a popup', function () {
-          deferredGeolocation.reject();
+        it('if exist an error, should show a popup', function () {
+          //Error code 1 - 3
+          var errorCode = Math.floor(Math.random() * 3) + 1;
+          deferredGeolocation.reject({ code: errorCode });
           $rootScope.$digest();
           sinon.assert.calledOnce(GeolocationService.getCurrentPosition);
           sinon.assert.calledOnce($ionicPopup.alert);
+        });
+
+        it('if exist an error, should load a default location', function () {
+          var defaultPosition = {
+            coords: {
+              latitude: -4.0078909,
+              longitude: -79.21127690000003
+            }
+          };
+          var LatLng = sinon.spy(window.google.maps, 'LatLng');
+          var errorCode = Math.floor(Math.random() * 3) + 1;
+          deferredGeolocation.reject({ code: errorCode });
+          $rootScope.$digest();
+          var status = LatLng.calledWith(defaultPosition.coords.latitude, defaultPosition.coords.longitude);
+          expect(status).to.be.true;
         });
       });
     });
