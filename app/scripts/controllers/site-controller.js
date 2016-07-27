@@ -5,7 +5,9 @@
     .module('porttare.controllers')
     .controller('SiteController', SiteController);
 
-  function SiteController($rootScope, $ionicLoading) {
+  function SiteController($rootScope, $ionicLoading, $auth, $state) {
+
+    var successState = 'app.playlists';
 
     $rootScope.$on('$stateChangeStart', function(){
       $ionicLoading.show({
@@ -14,7 +16,19 @@
     });
 
     $rootScope.$on('$stateChangeSuccess', function(){
-      $ionicLoading.hide();
+      // Check if user is authenticated
+      if (!$state.includes('app')) {
+        $auth.validateUser()
+          .then(function(){
+            $ionicLoading.hide();
+            $state.go(successState);
+          })
+          .catch(function () {
+            $ionicLoading.hide();
+          });
+      } else {
+        $ionicLoading.hide();
+      }
     });
 
     $rootScope.$on('$stateChangeError', function(){

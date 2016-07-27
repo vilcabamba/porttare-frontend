@@ -13,7 +13,9 @@
         $window,
         $ionicLoading,
         deferredLogout,
-        deferIonicHistory;
+        deferIonicHistory,
+        LoginService,
+        deferLoginWithFB;
 
     beforeEach(module('porttare.controllers'));
 
@@ -25,6 +27,7 @@
       deferredLogin     = $q.defer();
       deferredLogout    = $q.defer();
       deferIonicHistory = $q.defer();
+      deferLoginWithFB  = $q.defer();
       $ionicPopup       = {
         alert: sinon.stub().returns(deferredLogin.promise),
         show: sinon.stub().returns(deferredLogin.promise)
@@ -43,6 +46,9 @@
                           .returns(deferredLogout.promise)
       };
       $window           = _$window_;
+      LoginService = {
+        loginWithFB: sinon.stub().returns(deferLoginWithFB.promise)
+      };
     }));
 
     describe('#login', function() {
@@ -55,7 +61,8 @@
           '$state': $state,
           '$auth': $auth,
           '$window': $window,
-          '$scope': $scope
+          '$scope': $scope,
+          'LoginService': LoginService
         });
         $rootScope = _$rootScope_;
         $window.localStorage.setItem('hasViewedTutorial','true');
@@ -106,7 +113,8 @@
           '$state': $state,
           '$auth': $auth,
           '$ionicHistory': $ionicHistory,
-          '$scope': $scope
+          '$scope': $scope,
+          'LoginService': LoginService
         });
         $rootScope = _$rootScope_;
         controller.logout();

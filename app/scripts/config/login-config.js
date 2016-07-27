@@ -12,6 +12,7 @@
       emailRegistrationPath: '/auth/user',
       passwordResetPath: '/auth/user/password',
       passwordUpdatePath: '/auth/user/password',
+      omniauthWindowType: 'newWindow',
       authProviderPaths: {
         facebook: '/auth/user/facebook'
       },

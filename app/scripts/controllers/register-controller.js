@@ -5,13 +5,16 @@
     .module('porttare.controllers')
     .controller('RegisterController', RegisterController);
 
-  function RegisterController($ionicLoading, $auth, $ionicPopup, $state, $scope) {
+  function RegisterController($ionicLoading,
+                              $auth,
+                              $ionicPopup,
+                              $state,
+                              $scope,
+                              LoginService) {
     var registerVm = this;
     registerVm.register = register;
     registerVm.registerForm = {};
-    registerVm.loginWithFB = loginWithFB;
-
-    var successState = 'app.playlists';
+    registerVm.loginWithFB = LoginService.loginWithFB;
 
     function register() {
       $ionicLoading.show({
@@ -44,17 +47,5 @@
       });
     });
 
-    function loginWithFB() {
-      $auth.authenticate('facebook')
-        .then(function () {
-          $state.go(successState);
-        })
-        .catch(function () {
-          $ionicPopup.alert({
-            title: 'Error',
-            template: 'Hubo un error, intentalo nuevamente.'
-          });
-        });
-    }
   }
 })();

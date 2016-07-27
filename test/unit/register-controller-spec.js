@@ -10,7 +10,9 @@
         $ionicPopup,
         deferredStateGo,
         $scope,
-        $ionicLoading;
+        $ionicLoading,
+        LoginService,
+        deferLoginWithFB;
 
     beforeEach(module('porttare.controllers'));
 
@@ -21,12 +23,16 @@
 
       deferredRegister  = $q.defer();
       deferredStateGo   = $q.defer();
+      deferLoginWithFB  = $q.defer();
       $ionicPopup       = { alert: sinon.stub() };
       $ionicLoading     = { show: sinon.stub(), hide: sinon.stub()};
       $state            = { go: sinon.stub().returns(deferredStateGo.promise) };
       $auth             = {
         submitRegistration: sinon.stub()
                           .returns(deferredRegister.promise)
+      };
+      LoginService = {
+        loginWithFB: sinon.stub().returns(deferLoginWithFB.promise)
       };
       $rootScope = _$rootScope_;
       $scope            = $rootScope.$new();
@@ -36,7 +42,8 @@
         '$ionicLoading': $ionicLoading,
         '$state': $state,
         '$auth': $auth,
-        '$scope': $scope
+        '$scope': $scope,
+        'LoginService': LoginService
       });
     }));
 
