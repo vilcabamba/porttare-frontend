@@ -7,6 +7,8 @@
 
   function SiteController($rootScope, $ionicLoading, $auth, $state) {
 
+    var successState = 'app.playlists';
+
     $rootScope.$on('$stateChangeStart', function(){
       $ionicLoading.show({
         template: 'cargando...'
@@ -19,7 +21,7 @@
         $auth.validateUser()
           .then(function(){
             $ionicLoading.hide();
-            $state.go('app.playlists');
+            $state.go(successState);
           })
           .catch(function () {
             $ionicLoading.hide();
