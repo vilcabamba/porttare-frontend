@@ -15,7 +15,7 @@ ion-view(
                 type='email',
                 ng-model='loginVm.loginForm.email'
                 required='required'
-                placeholder='Correo electrónico'
+                placeholder='{{::("login.email"|translate)}}'
               )
           label.item.item-input
             span.lock-left-icon
@@ -23,17 +23,17 @@ ion-view(
               type='password',
               ng-model='loginVm.loginForm.password',
               required='required',
-              placeholder="Contraseña"
+              placeholder='{{::("login.password"|translate)}}'
             )
         .button-actions
             input(
               type='submit',
-              value="Iniciar Sesión"
+              value='{{::("login.login"|translate)}}'
             ).button.button-primary.button-block
     .row.form-container
-      a.button.button-clear.button-dark(ui-sref='send') ¿Olvidaste tu contraseña?
+      a.button.button-clear.button-dark(ui-sref='send') {{::("login.forgotPassword"|translate)}}
     .row.form-container
       .button.facebook-login(ng-click="loginVm.loginWithFB()")
         span.fb-left-icon
-        span.fb-copytext Continuar con facebook
+        span.fb-copytext {{::("login.continueWithFacebook"|translate)}}
   .bar.bar-footer.bar-footer-send-email

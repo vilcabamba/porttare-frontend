@@ -7,6 +7,7 @@
     'porttare.controllers',
     'porttare.services',
     'porttare.directives',
+    'porttare.translations',
     'ngCordova'
   ])
 

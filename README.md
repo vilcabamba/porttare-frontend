@@ -19,3 +19,9 @@
 - Start Server `grunt serve`
 - Run tests `grunt test`
 - Run tests and create coverage report `grunt karma`
+
+### angular translate
+
+For translations, we're using [angular-translate](https://angular-translate.github.io/).
+You need to add translations in app/scripts/config/translations-config.js, then you can use them in templates.
+templates/login/login.jade has an usage example.
