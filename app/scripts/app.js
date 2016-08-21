@@ -103,6 +103,30 @@
           controllerAs: 'mapVm',
         }
       }
+    })
+    .state('app.provider', {
+      url: '/provider',
+      abstract: true
+    })
+    .state('app.provider.welcome', {
+      url: '/welcome',
+      views: {
+        'menuContent@app': {
+          templateUrl: 'templates/provider/welcome.html',
+          controller: 'ProviderController',
+          controllerAs: 'providerVm1',
+        }
+      }
+    })
+    .state('app.provider.new', {
+      url: '/new',
+      views: {
+        'menuContent@app': {
+          templateUrl: 'templates/provider/new.html',
+          controller: 'ProviderController',
+          controllerAs: 'providerVm',
+        }
+      }
     });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise(function ($injector, $location) {
