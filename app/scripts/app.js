@@ -108,6 +108,20 @@
         }
       }
     })
+    .state('app.items', {
+      url: '/items',
+      abstract: true
+    })
+    .state('app.items.index', {
+      url: '/',
+      views: {
+        'menuContent@app': {
+          templateUrl: 'templates/item/items.html',
+          controller: 'ItemsController',
+          controllerAs: 'itemsVm'
+        }
+      }
+    })
     .state('app.map', {
       url: '/map',
       views: {

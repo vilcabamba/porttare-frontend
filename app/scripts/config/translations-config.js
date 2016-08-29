@@ -42,7 +42,35 @@
           cash: 'Efectivo',
           creditCard: 'Tarjeta de crédito'
         }
-      }
+      },
+      globals: {
+        new: 'Nuevo',
+        save: 'Guardar',
+        list: 'Listar',
+        edit: 'Editar',
+        options: 'Opciones',
+        success: 'Éxito',
+        saving: 'Guardando',
+        updating: 'Actualizando',
+        pleaseTryAgain: 'Intentalo nuevamente',
+        leftData: 'Faltan datos',
+        error: 'Error'
+      },
+      item: {
+        item: 'Artículo',
+        items: 'Artículos',
+        offerItem: 'Ofertar artículos',
+        successItemSave: 'Artículo guardado éxitosamente',
+        successUpdateItem: 'Artículo actualizado éxitosamente',
+        titulo: 'Título',
+        descripcion: 'Descripción',
+        precio: 'Precio',
+        volumen: 'Volumen',
+        peso: 'Peso',
+        imagen: 'Imagen',
+        observaciones: 'Observaciones',
+        unidadMedida: 'Unidad de medida'
+      },
     });
 
     $translateProvider.preferredLanguage('es');
