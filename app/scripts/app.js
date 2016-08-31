@@ -8,7 +8,8 @@
     'porttare.services',
     'porttare.directives',
     'porttare.translations',
-    'ngCordova'
+    'ngCordova',
+    'slickCarousel'
   ])
 
   .run(function($ionicPlatform) {
@@ -92,8 +93,8 @@
       url: '/',
       views: {
         'menuContent@app': {
-          templateUrl: 'templates/category/category.html',
-          controller: 'CategoryController',
+          templateUrl: 'templates/category/index.html',
+          controller: 'CategoriesController',
           controllerAs: 'categoryVm',
         }
       }
@@ -102,7 +103,7 @@
       url: '/:id',
       views: {
         'menuContent@app': {
-          templateUrl: 'templates/category/category.html',
+          templateUrl: 'templates/category/show.html',
           controller: 'CategoryController',
           controllerAs: 'categoryVm',
         }

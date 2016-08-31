@@ -1,0 +1,12 @@
+ion-view(
+  view-title='<div class="alt-logo"></div>'
+)
+  ion-content(class="category-page")
+    slick(settings="categoryVm.slickConfig")
+      .slick-container(ng-repeat="category in categoryVm.categories")
+        .slick-content
+          .img(style="background-image: url('{{category.imagen}}')")
+          .nombre {{category.name}}
+          .horario {{category.horario}}
+          
+          
