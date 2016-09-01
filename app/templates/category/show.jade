@@ -1,6 +1,8 @@
 ion-view(
-  view-title='<div class="alt-logo"></div>'
+  view-title='{{::("menu.category"|translate)}}'
 )
+  ion-nav-title
+    .alt-logo
   ion-content(class="category-page")
     slick(settings="categoryVm.slickConfig")
       .slick-container(ng-repeat="category in categoryVm.categories")
