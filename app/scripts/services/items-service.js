@@ -65,7 +65,7 @@
           } else {
             $ionicPopup.alert({
               title: 'Error',
-              template: resp.data.error ? resp.data :
+              template: resp.data ? resp.data.error :
                 '{{::("globals.pleaseTryAgain"|translate)}}'
             });
           }
@@ -87,7 +87,7 @@
         function error(resp) {
           $ionicPopup.alert({
             title: 'Error',
-            template: resp.data.error ? resp.data :
+            template: resp.data ? resp.data.error :
               '{{::("globals.pleaseTryAgain"|translate)}}'
           });
         });
@@ -120,7 +120,7 @@
           } else {
             $ionicPopup.alert({
               title: 'Error',
-              template: resp.data.error ? resp.data :
+              template: resp.data ? resp.data.error :
                 '{{::("globals.pleaseTryAgain"|translate)}}'
             });
           }
