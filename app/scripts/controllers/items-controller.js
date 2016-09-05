@@ -7,7 +7,9 @@
 
   function ItemsController(ItemsService,
                            $scope,
-                           $ionicActionSheet) {
+                           $ionicActionSheet,
+                           $ionicLoading,
+                           $ionicPopup) {
     var itemsVm = this;
     itemsVm.submitProcess = submitProcess;
     var modalInstance = null;
@@ -62,16 +64,34 @@
     }
 
     function newItem() {
-      ItemsService.newItem(itemsVm.item)
-        .then(function success(resp){
-          /*jshint camelcase:false */
-          if(resp.provider_item){
-            itemsVm.items.push(resp.provider_item);
-            itemsVm.closeModal();
-          }else{
-            itemsVm.messages = resp.errors;
-          }
+      $ionicLoading.show({
+        template: '{{::("globals.saving"|translate)}}'
+      });
+      ItemsService.newItem(itemsVm.item).then(function success(response){
+        $ionicLoading.hide();
+        $ionicPopup.alert({
+          title: 'Éxito',
+          template: '{{::("item.successItemSave"|translate)}}'
         });
+        itemsVm.items.push(response.provider_item); //jshint ignore:line
+        itemsVm.closeModal();
+      }, function error(response){
+        if (response.data.errors){
+          $ionicPopup.alert({
+            title: 'Faltan datos',
+            template: '{{::("globals.pleaseTryAgain"|translate)}}'
+          });
+          itemsVm.messages = response.data.errors;
+        } else {
+          $ionicPopup.alert({
+            title: 'Error',
+            template: response.data ? response.data.error :
+              '{{::("globals.pleaseTryAgain"|translate)}}'
+          });
+        }
+      }).finally(function () {
+          $ionicLoading.hide();
+      });
     }
 
     function getItems() {

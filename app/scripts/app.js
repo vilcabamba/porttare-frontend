@@ -9,7 +9,8 @@
     'porttare.directives',
     'porttare.translations',
     'ngCordova',
-    'slickCarousel'
+    'slickCarousel',
+    'ngFileUpload'
   ])
 
   .run(function($ionicPlatform) {

@@ -22,6 +22,8 @@ form.item-form-container(name='form', ng-submit='itemsVm.submitProcess(itemsVm.i
     label.item.item-input.item-stacked-label
       span.input-label {{::("item.precio"|translate|uppercase)}}*
       input(
+        min='0',
+        step='any',
         type='number',
         ng-model='itemsVm.item.precio',
         required='required'
@@ -48,7 +50,10 @@ form.item-form-container(name='form', ng-submit='itemsVm.submitProcess(itemsVm.i
       span.input-label {{::("item.imagen"|translate|uppercase)}}
       input(
         name='imagen',
-        type='file'
+        type='file',
+        ngf-select 
+        ng-model="itemsVm.item.imagen"  
+        accept="image/*"
       )
     show-error(array-messages='itemsVm.messages.imagen')
 
@@ -57,9 +62,9 @@ form.item-form-container(name='form', ng-submit='itemsVm.submitProcess(itemsVm.i
       input(
         type='text',
         name='ob',
-        ng-model='itemsVm.item.observacion'
+        ng-model='itemsVm.item.observaciones'
       )
-    show-error(array-messages='itemsVm.messages.observacion')
+    show-error(array-messages='itemsVm.messages.observaciones')
 
     label.item.item-input.item-select
           .input-label {{::("item.unidadMedida"|translate|uppercase)}}
