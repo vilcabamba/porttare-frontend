@@ -52,7 +52,7 @@
         success: 'Éxito',
         saving: 'Guardando',
         updating: 'Actualizando',
-        pleaseTryAgain: 'Intentalo nuevamente',
+        pleaseTryAgain: 'Inténtalo nuevamente',
         leftData: 'Faltan datos',
         error: 'Error'
       },

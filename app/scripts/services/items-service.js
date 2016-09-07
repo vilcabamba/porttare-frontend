@@ -9,6 +9,8 @@
                         $ionicPopup,
                         $ionicLoading,
                         $ionicModal,
+                        $auth,
+                        Upload,
                         ENV) {
 
     var service = {
@@ -39,40 +41,31 @@
     }
 
     function newItem(data) {
-      $ionicLoading.show({
-        template: '{{::("globals.saving"|translate)}}'
-      });
-      return $http({
-        method: 'POST',
-        url: ENV.apiHost + '/api/provider/items',
-        data: data
-      })
-        .then(function (resp) {
-          $ionicLoading.hide();
-          $ionicPopup.alert({
-            title: 'Éxito',
-            template: '{{::("item.successItemSave"|translate)}}'
-          });
-          return resp.data;
-        },
-        function error(resp) {
-          if (resp.data.errors){
-            $ionicPopup.alert({
-              title: 'Faltan datos',
-              template: '{{::("globals.pleaseTryAgain"|translate)}}'
-            });
-            return resp.data;
-          } else {
-            $ionicPopup.alert({
-              title: 'Error',
-              template: resp.data ? resp.data.error :
-                '{{::("globals.pleaseTryAgain"|translate)}}'
-            });
-          }
-        })
-        .finally(function () {
-          $ionicLoading.hide();
+      var promise;
+      // load headers into request
+      var headers = $auth.retrieveData('auth_headers');
+      headers['Accept'] = 'application/json'; //jshint ignore:line
+
+      if (data.imagen) {
+        //adding nested attributes
+        data.imagenes_attributes = []; //jshint ignore:line
+        data.imagenes_attributes.push({imagen: data.imagen}); //jshint ignore:line
+        promise = Upload.upload({
+          url: ENV.apiHost + '/api/provider/items',
+          data: data,
+          headers: headers
         });
+      } else {
+        promise = $http({
+          method: 'POST',
+          url: ENV.apiHost + '/api/provider/items',
+          data: data
+        });
+      }
+
+      return promise.then(function (resp) {
+        return resp.data;
+      });
     }
 
     function getItems() {
