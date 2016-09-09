@@ -110,6 +110,16 @@
         }
       }
     })
+    .state('app.categories.provider', {
+      url: '/:category_id/provider/:id',
+      views: {
+        'menuContent@app': {
+          templateUrl: 'templates/provider/show.html',
+          controller: 'ProviderDetailController',
+          controllerAs: 'providerDetVm',
+        }
+      }
+    })
     .state('app.items', {
       url: '/items',
       abstract: true
