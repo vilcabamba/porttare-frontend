@@ -1,18 +1,23 @@
+// https://github.com/driftyco/ionic/blob/v1.3.1/scss/_variables.scss
 @import "../bower_components/ionic/scss/_variables";
 
 @import "fonts/fonts";
 @import "colors/colors";
 @import "common/rows";
 @import "common/mixins";
-@import "common/inputs";
 @import "common/buttons";
 @import "common/bar-footer";
 @import "common/input_icons";
 @import "common/grid";
+@import "forms/general";
+@import "forms/inputs";
+@import "forms/resource-form";
 
 @import "intro";
-@import "login";
-@import "register";
+@import "branding-logos";
+@import "login/general";
+@import "login/register";
+@import "applications/form";
 @import "map/map";
 @import "provider/new";
 @import "overrides/scroll";
