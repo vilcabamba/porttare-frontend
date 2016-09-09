@@ -5,26 +5,26 @@ ion-view(
   ion-content.login-form
     .row
       .col.header-text Actualiza tu contraseña
-    .row.width-constraint
+    .row
       form(ng-submit='resetVm.updatePassword()')
-        .list
-          label.item.item-input.with-icon
-            span.lock-left-icon
+        .list.list-inset
+          label.item.item-input
+            i.icon.ion.ion-android-lock.placeholder-icon
             input(
               type='password',
               ng-model='resetVm.updatePasswordForm.password',
               required='required',
               placeholder="Contraseña"
             )
-          label.item.item-input.with-icon
-            span.lock-left-icon
+          label.item.item-input
+            i.icon.ion.ion-android-lock.placeholder-icon
             input(
               type='password',
               ng-model='resetVm.updatePasswordForm.password_confirmation',
               required='required',
               placeholder="Confirmar contraseña"
             )
-        .button-actions
+        .list.list-inset.button-actions
           button(
             type='submit'
           ).button.button-full.button-primary.spaced

@@ -10,11 +10,11 @@ ion-view(
       .col.intro-description
         p Una cuenta, muchos perfiles
 
-    .row.width-constraint
+    .row
       form(ng-submit='registerVm.register()')
-        .list
+        .list.list-inset
           label.item.item-input
-            span.email-left-icon
+            i.icon.ion-email.placeholder-icon
             input(
               type='email',
               ng-model='registerVm.registerForm.email'
@@ -23,7 +23,7 @@ ion-view(
               autosize-input
             )
           label.item.item-input
-            span.lock-left-icon
+            i.icon.ion.ion-android-lock.placeholder-icon
             input(
               type='password',
               ng-model='registerVm.registerForm.password',
@@ -31,7 +31,7 @@ ion-view(
               placeholder="Contraseña"
             )
           label.item.item-input
-            span.lock-left-icon
+            i.icon.ion.ion-android-lock.placeholder-icon
             input(
               type='password',
               ng-model='registerVm.registerForm.password_confirmation',
@@ -39,16 +39,17 @@ ion-view(
               placeholder="Confirmar contraseña"
             )
 
-        .button-actions
+        .button-actions.list.list-inset
           input(
             type='submit',
             value="¡Regístrame!"
           ).button.button-primary.button-block
       
-    .row.or-option
-      span {{::("globals.or"|translate)}}
+    .list.list-inset
+      .or-option
+        span {{::("globals.or"|translate)}}
     
-    .row.width-constraint
+    .list.list-inset
       .button.facebook-login(ng-click="registerVm.loginWithFB()")
         span.fb-left-icon
         span.fb-copytext Continuar con facebook
