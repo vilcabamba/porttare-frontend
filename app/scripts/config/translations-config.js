@@ -25,7 +25,8 @@
         logout: 'Cerrar sesión',
         courier: 'Mensajero',
         buyer: 'Comprador',
-        changeTo: 'Cambiar a'
+        changeTo: 'Cambiar a',
+        product: 'Producto'
       },
       provider: {
         itemsProvider: 'Productos de Proveedor',
