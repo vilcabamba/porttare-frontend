@@ -76,6 +76,20 @@
         showCategory: 'Lista de Categorías',
         newProvider: 'Nuevo Proveedor'
 
+      },
+      client: {
+        formLegend: 'Datos cliente',
+        client: 'Cliente',
+        clients: 'Clientes',
+        listOfClients: 'Lista de clientes',
+        successClientSave: 'Cliente guardado éxitosamente',
+        successUpdateClient: 'Cliente actualizado éxitosamente',
+        notas: 'Notas',
+        ruc: 'Ruc',
+        nombres: 'Nombres',
+        direccion: 'Dirección',
+        telefono: 'Teléfono',
+        email: 'email'
       }
     });
 
