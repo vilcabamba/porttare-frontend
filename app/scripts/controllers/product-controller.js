@@ -5,19 +5,16 @@
     .module('porttare.controllers')
     .controller('ProductController', ProductController);
 
-  function ProductController() {
+  function ProductController(ProductsService) {
     var productVm = this;
     productVm.more = false;
+    init();
 
-    productVm.product = {
-      id: 1,
-      name: 'provider1',
-      description: 'restaurant',
-      image: '../images/bg.png',
-      more: 'more information',
-      amount: 0,
-      unitPrice: 2.5,
-      totalPrice: 0
+    productVm.slickConfig = {
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: false
     };
 
     productVm.showMore = function () {
@@ -36,5 +33,11 @@
       }
       productVm.product.totalPrice = (productVm.product.amount * productVm.product.unitPrice);
     };
+
+    function init() {
+      ProductsService.getProduct().then(function(results){
+        productVm.product = results;
+      });
+    }
   }
 })();

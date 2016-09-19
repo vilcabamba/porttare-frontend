@@ -163,6 +163,13 @@
         successUpdateProfile: 'Perfil actualizado éxitosamente',
         password: 'Contraseña',
         birthdate:  'Fecha de Nacimiento'
+      },
+      product: {
+        more: 'mostrar más',
+        less: 'mostrar menos',
+        buyNow: 'Comprar Ahora',
+        addCar: 'Añadir al carrito',
+        addWishlist: 'Añadir a mi whishlist'
       }
     });
 

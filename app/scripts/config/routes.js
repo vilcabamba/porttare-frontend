@@ -170,7 +170,7 @@ function routes($stateProvider, $urlRouterProvider) {
       'menuContent@app': {
         templateUrl: 'templates/product/show.html',
         controller: 'ProductController',
-        controllerAs: 'productVm',
+        controllerAs: 'productVm'
       }
     }
   })
