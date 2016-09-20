@@ -18,14 +18,12 @@
     resetVm.resetPassword = resetPassword;
     resetVm.updatePasswordForm = {};
     resetVm.resetPasswordForm = {};
+    resetVm.messages = {};
     var successState = APP.successState;
     var loginState = 'login';
 
     $rootScope.$on('auth:password-change-error', function (event, data) {
-      $ionicPopup.alert({
-        title: 'Error',
-        template: data.errors.full_messages[0]//jshint ignore:line
-      });
+      resetVm.messages = data.errors;
     });
 
     $rootScope.$on('auth:password-change-success', function () {
