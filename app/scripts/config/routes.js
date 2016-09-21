@@ -150,7 +150,7 @@ function routes($stateProvider, $urlRouterProvider) {
       'menuContent@app': {
         templateUrl: 'templates/provider/show.html',
         controller: 'ProviderDetailController',
-        controllerAs: 'providerDetVm',
+        controllerAs: 'providerDetVm'
       }
     }
   })
@@ -188,7 +188,7 @@ function routes($stateProvider, $urlRouterProvider) {
       'menuContent': {
         templateUrl: 'templates/map/map.html',
         controller: 'MapController',
-        controllerAs: 'mapVm',
+        controllerAs: 'mapVm'
       }
     }
   })
@@ -202,7 +202,7 @@ function routes($stateProvider, $urlRouterProvider) {
       'menuContent@app': {
         templateUrl: 'templates/provider/welcome.html',
         controller: 'ProviderController',
-        controllerAs: 'providerVm1',
+        controllerAs: 'providerVm1'
       }
     }
   })
@@ -212,7 +212,7 @@ function routes($stateProvider, $urlRouterProvider) {
       'menuContent@app': {
         templateUrl: 'templates/provider/new.html',
         controller: 'ProviderController',
-        controllerAs: 'providerVm',
+        controllerAs: 'providerVm'
       }
     }
   })
@@ -226,7 +226,7 @@ function routes($stateProvider, $urlRouterProvider) {
       'menuContent@app': {
         templateUrl: 'templates/products/index.html',
         controller: 'ProductsController',
-        controllerAs: 'productsVm',
+        controllerAs: 'productsVm'
       }
     }
   });
