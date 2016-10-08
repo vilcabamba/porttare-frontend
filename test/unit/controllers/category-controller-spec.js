@@ -11,8 +11,8 @@
     beforeEach(module('porttare.controllers'));
     beforeEach(angular.mock.module(function ($provide) {
       $provide.value('data', {
-        category: {
-          providers: []
+        provider_category: {
+          provider_profiles: []
         }
       });
     }));
