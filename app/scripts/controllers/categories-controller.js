@@ -8,6 +8,6 @@
   function CategoriesController(data) {
 
     var categoryVm = this;
-    categoryVm.categories = data.categories;
+    categoryVm.categories = data.provider_categories;//jshint ignore:line
   }
 })();

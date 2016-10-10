@@ -8,8 +8,8 @@
   function CategoryController(data) {
     var categoryVm = this;
 
-    categoryVm.category = data.category;
-    categoryVm.providers = data.category.providers;
+    categoryVm.category = data.provider_category;//jshint ignore:line
+    categoryVm.providers = data.provider_category.provider_profiles;//jshint ignore:line
     categoryVm.slickConfig = {
       infinite: true,
       slidesToShow: 4,
