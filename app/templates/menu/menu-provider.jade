@@ -1,0 +1,18 @@
+ion-side-menus(enable-menu-with-back-views='false')
+  ion-side-menu-content
+    ion-nav-bar.bar-stable
+      ion-nav-back-button
+      ion-nav-buttons(side='left')
+        button.button.button-icon.button-clear.ion-navicon(menu-toggle='left')
+    ion-nav-view(name='menuContent')
+  ion-side-menu(side='left')
+    ion-header-bar.bar-stable
+    ion-content
+      ion-list
+        ion-item  {{::("provider.orders"|translate)}}
+        ion-item  {{::("provider.products"|translate)}}
+        ion-item  {{::("provider.account"|translate)}}
+        ion-item  {{::("provider.dispatchers"|translate)}}
+        ion-item  {{::("provider.establishments"|translate)}}
+        ion-item  {{::("provider.promotionsAndDiscounts"|translate)}}
+        ion-item  {{::("provider.moviggoAdvertising"|translate)}}

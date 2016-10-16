@@ -229,6 +229,17 @@ function routes($stateProvider, $urlRouterProvider) {
         controllerAs: 'productsVm'
       }
     }
+  })
+  .state('provider', {
+    url: '/provider',
+    abstract: true,
+    templateUrl: 'templates/menu/menu-provider.html'
+  })
+  .state('provider.items', {
+    url: '/items',
+    views: {
+      'menuContent@provider': {}
+    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise(function ($injector, $location) {

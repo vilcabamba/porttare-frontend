@@ -25,6 +25,7 @@
         logout: 'Cerrar sesión'
       },
       provider: {
+        itemsProvider: 'Productos de Proveedor',
         formLegend: 'Datos nuevo proveedor',
         businessName: 'Razón social',
         economicActivity: 'Actividad económica',
@@ -42,7 +43,14 @@
         methods: {
           cash: 'Efectivo',
           creditCard: 'Tarjeta de crédito'
-        }
+        },
+        orders: 'pedidos',
+        products:  'productos',
+        account:  'cuenta',
+        dispatchers:  'despachadores',
+        establishments: 'establecimientos',
+        promotionsAndDiscounts: 'promociones y descuentos',
+        moviggoAdvertising: 'publicidad moviggo'
       },
       globals: {
         new: 'Nuevo',
