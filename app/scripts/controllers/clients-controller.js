@@ -9,20 +9,19 @@
                              ModalService,
                              $ionicLoading,
                              $ionicPopup,
-                             $scope
-                            ) {
+                             $scope) {
     var clientsVm = this;
     clientsVm.showNewModal = showNewModal;
     clientsVm.showEditModal = showEditModal;
     clientsVm.closeModal = closeModal;
     clientsVm.submitProcess = submitProcess;
-    clientsVm.disableClient = disableClient;
+    clientsVm.deleteClient = deleteClient;
     clientsVm.listOptions = [
-      {option: 'Nombres', filterField: 'nombres'},
-      {option: 'Antigüedad', filterField: 'created_at'}
+      {name: 'Nombres', filterField: 'nombres'},
+      {name: 'Antigüedad', filterField: 'created_at'}
     ];
     clientsVm.query = '';
-
+    var selectedClient;
     getClients();
 
     function getClients() {
@@ -67,9 +66,7 @@
             title: 'Éxito',
             template: '{{::("client.successUpdateClient"|translate)}}'
           });
-          var indexArray = clientsVm.clients.map(function(o){return o.id;});
-          var index = indexArray.indexOf(clientsVm.client.id);
-          clientsVm.clients[index] = resp;
+          clientsVm.clients[selectedClient] = resp;
           closeModal();
         },
         function error(resp){
@@ -78,25 +75,26 @@
         });
     }
 
-    function disableClient(clientId) {
+    function deleteClient(clientId) {
       $ionicLoading.show({
-        template: '{{::("globals.disabling"|translate)}}'
+        template: '{{::("globals.deleting"|translate)}}'
       });
-      ClientsService.disableClient(clientsVm.client)
+      ClientsService.deleteClient(clientId)
         .then(function success(){
           $ionicLoading.hide();
           $ionicPopup.alert({
             title: 'Éxito',
-            template: '{{::("client.successDisableClient"|translate)}}'
+            template: '{{::("client.successDeleteClient"|translate)}}'
           });
-          var indexArray = clientsVm.clients.map(function(o){return o.id;});
-          var index = indexArray.indexOf(clientId);
-          clientsVm.clients.splice(index, 1);
+          clientsVm.clients.splice(selectedClient, 1);
           closeModal();
         },
-        function error(resp){
-          clientsVm.messages = resp.status===422 ? resp.data.errors:undefined;
+        function error(){
           $ionicLoading.hide();
+          $ionicPopup.alert({
+            title: 'Error',
+            template: '{{::("globals.pleaseTryAgain"|translate)}}'
+          });
         });
     }
 
@@ -107,13 +105,15 @@
       });
     }
 
-    function showEditModal(client) {
-      clientsVm.client = JSON.parse(JSON.stringify(client));
+    function showEditModal(index) {
+      selectedClient = index;
+      clientsVm.client = angular.copy(clientsVm.clients[index]);
       clientsVm.showNewModal();
     }
 
     function closeModal() {
       ModalService.closeModal();
+      selectedClient = null;
       clientsVm.client = null;
       clientsVm.messages = {};
       clientsVm.query = '';
