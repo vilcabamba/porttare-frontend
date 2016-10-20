@@ -17,12 +17,14 @@
       'provider.methods.cash',
       'provider.methods.creditCard'
     ];
-    providerVm.createProvider = createProvider;
     providerVm.toggleCheck = toggleCheck;
+    providerVm.submit = submit;
     providerVm.providerForm = {};
-    providerVm.messages={};
+    providerVm.step = 1;
     providerVm.selections = [];
     providerVm.methodsPayment = [];
+    providerVm.matrizProvider = {};
+    providerVm.matrizProvider.horario = new Date();
     $translate(transKeys).then(function (trans) {
       providerVm.methodsPayment = [
         {
@@ -51,6 +53,9 @@
       if(providerVm.selections.length > 0){
         providerVm.providerForm.forma_de_pago = providerVm.selections.join(',');
       }
+
+      providerVm.providerForm.offices = [providerVm.matrizProvider];
+
       ProviderService.createNewProvider(providerVm.providerForm)
         .then(function success() {
           $ionicLoading.hide();
@@ -61,18 +66,17 @@
             });
           });
         },
-        function error(resp) {
-          if (resp.data.errors) {
-            providerVm.messages = resp.data.errors;
-          } else {
-            $ionicPopup.alert({
-              title: 'Error',
-              template: resp.data.error ? resp.data.error :
-                'Hubo un error, intentalo nuevamente.'
-            });
-          }
+        function error() {
           $ionicLoading.hide();
+          providerVm.step = 1;
         });
+    }
+
+    function submit() {
+      if(providerVm.step === 2){
+        createProvider();
+      }
+      providerVm.step += 1;
     }
 
   }

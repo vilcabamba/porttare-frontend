@@ -1,0 +1,111 @@
+.list.list-inset
+  legend {{::("provider.formLegendFirts"|translate)}}
+  span.item-input-label-lg (*) Campo requerido
+  label.item.item-input.item-stacked-label(
+    ng-class="{'item-error': newProviderForm.ruc.$touched && newProviderForm.ruc.$error.required}"
+  )
+    span.input-label RUC *
+    input(
+      type='text',
+      name='ruc',
+      ng-model='providerVm.providerForm.ruc',
+      ng-class='input-error',
+      required
+    )
+  show-error(element='newProviderForm.ruc' message='("provider.isRequired"|translate)')
+  
+  label.item.item-input.item-stacked-label(
+    ng-class="{'item-error': newProviderForm.razon_social.$touched && newProviderForm.razon_social.$error.required}"
+  )
+    span.input-label {{::("provider.businessName"|translate)}}*
+    input(
+      type='text',
+      name='razon_social',
+      ng-model='providerVm.providerForm.razon_social',
+      required
+    )
+  show-error(element='newProviderForm.razon_social' message='("provider.isRequired"|translate)')
+  
+  label.item.item-input.item-stacked-label(
+    ng-class="{'item-error': newProviderForm.nombre_establecimiento.$touched && newProviderForm.nombre_establecimiento.$error.required}"
+  )
+   span.input-label {{::("provider.name"|translate)}}*
+   input(
+     type='text',
+     name='nombre_establecimiento',
+     ng-model='providerVm.providerForm.nombre_establecimiento',
+     ng-class='input-error',
+     required
+   )
+  show-error(element='newProviderForm.nombre_establecimiento' message='("provider.isRequired"|translate)')
+
+  label.item.item-input.item-stacked-label
+    span.input-label {{::("provider.economicActivity"|translate)}}
+    input(
+      type='text',
+      name='actividad_economica',
+      ng-model='providerVm.providerForm.actividad_economica'
+    )
+  
+  label.item.item-input.item-stacked-label(
+    ng-class="{'item-error': newProviderForm.representante_legal.$touched && newProviderForm.representante_legal.$error.required}"
+  )
+    span.input-label {{::("provider.LegalRepresentative"|translate)}}*
+    input(
+      type='text',
+      name='representante_legal',
+      ng-model='providerVm.providerForm.representante_legal',
+      required
+    )
+  show-error(element='newProviderForm.representante_legal' message='("provider.isRequired"|translate)')
+  
+  label.item.item-input.item-stacked-label(
+    ng-class="{'item-error': newProviderForm.telefono.$touched && newProviderForm.telefono.$error.required}"
+  )
+    span.input-label {{::("provider.phone"|translate)}}*
+    input(
+      type='tel',
+      name='telefono',
+      ng-model='providerVm.providerForm.telefono',
+      required
+    )
+  show-error(element='newProviderForm.telefono' message='("provider.isRequired"|translate)')
+  
+  label.item.item-input.item-stacked-label(
+    ng-class="{'item-error': newProviderForm.email.$touched && newProviderForm.email.$error.required}"
+  )
+    span.input-label {{::("provider.email"|translate)}}*
+    input(
+      type='email',
+      placeholder='user@mydomain.com',
+      name='email',
+      ng-model='providerVm.providerForm.email',
+      required
+    )
+  show-error(element='newProviderForm.email' message='("provider.isRequired"|translate)')
+  
+  label.item.item-input.item-stacked-label
+    span.input-label {{::("provider.webSite"|translate)}}
+    input(
+      type='text',
+      name='website',
+      ng-model='providerVm.providerForm.website'
+    )
+  
+  label.item.item-input
+    span.input-label {{::("provider.methodPayment"|translate)}}
+    ion-list
+      ion-checkbox(
+        ng-repeat="method in providerVm.methodsPayment",
+        ng-checked="providerVm.selections.indexOf(method.value) != -1"
+        ng-click="providerVm.toggleCheck(method)"
+      ) {{ ::method.label }}
+  
+  label.item.item-input
+    span.input-label {{::("provider.logo"|translate)}}
+    input(
+      type='file'
+      ngf-select
+      ng-model="itemsVm.item.imagen"  
+      accept="image/*"
+    )
