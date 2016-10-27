@@ -1,41 +1,42 @@
 (function () {
   'use strict';
 
-  describe('ClientsController', function () {
+  describe('ItemsController', function () {
     var ctrl,
       $q,
       $controller,
       dependencies,
-      ClientsService,
-      deferGetClients,
+      ItemsService,
+      deferGetItems,
       ModalService,
+      $ionicActionSheet,
       $ionicLoading,
       $ionicPopup,
       $scope,
       $rootScope,
-      deferNewClient,
-      deferEditClient,
-      deferDeleteClient;
+      deferNewItem,
+      deferEditItem,
+      deferDeleteItem;
 
     beforeEach(module('porttare.controllers'));
     beforeEach(module('porttare.services', function($provide){
-      $provide.factory('ClientsService', function($q){
+      $provide.factory('ItemsService', function($q){
         return {
-          getClients: function(){
-            deferGetClients = $q.defer();
-            return deferGetClients.promise;
+          getItems: function(){
+            deferGetItems = $q.defer();
+            return deferGetItems.promise;
           },
-          newClient: function(){
-            deferNewClient = $q.defer();
-            return deferNewClient.promise;
+          newItem: function(){
+            deferNewItem = $q.defer();
+            return deferNewItem.promise;
           },
-          editClient: function(){
-            deferEditClient = $q.defer();
-            return deferEditClient.promise;
+          editItem: function(){
+            deferEditItem = $q.defer();
+            return deferEditItem.promise;
           },
-          deleteClient: function(){
-            deferDeleteClient = $q.defer();
-            return deferDeleteClient.promise;
+          deleteItem: function(){
+            deferDeleteItem = $q.defer();
+            return deferDeleteItem.promise;
           }
         };
       });
@@ -55,13 +56,13 @@
       function (_$q_,
         _$rootScope_,
         _$controller_,
-        _ClientsService_,
+        _ItemsService_,
         _ModalService_) {
         $rootScope = _$rootScope_;
         $scope = $rootScope.$new();
         $q = _$q_;
-        deferGetClients = $q.defer();
-        ClientsService = _ClientsService_;
+        deferGetItems = $q.defer();
+        ItemsService = _ItemsService_;
         ModalService = _ModalService_;
         $controller = _$controller_;
         $ionicLoading = {
@@ -78,25 +79,33 @@
       beforeEach(function () {
         dependencies = {
           $scope: $scope,
-          ClientsService: ClientsService,
+          ItemsService: ItemsService,
           ModalService: ModalService,
           $ionicLoading: $ionicLoading,
-          $ionicPopup: $ionicPopup
+          $ionicPopup: $ionicPopup,
+          $ionicActionSheet: $ionicActionSheet
         };
 
-        ctrl = $controller('ClientsController', dependencies);
+        ctrl = $controller('ItemsController', dependencies);
       });
 
-      describe('Get clients list', function () {
-        it('Get clients list', function () {
-          var data = {provider_clients: []}; //jshint ignore:line
-          deferGetClients.resolve(data);
+      describe('Get items list', function () {
+        it('Get items list', function () {
+          var data = {provider_items: []}; //jshint ignore:line
+          deferGetItems.resolve(data);
           $scope.$digest();
-          chai.assert.isArray(ctrl.clients);
+          chai.assert.isArray(ctrl.items);
+        });
+
+        it('if successful, ionicPopup.alert should be called', function () {
+          var data = {provider_items: []}; //jshint ignore:line
+          deferGetItems.reject(data);
+          $scope.$digest();
+          sinon.assert.calledOnce($ionicPopup.alert);
         });
       });
 
-      describe('Create client', function () {
+      describe('Create item', function () {
 
         beforeEach(inject(function () {
           ctrl.submitProcess(null);
@@ -107,22 +116,22 @@
         });
 
         it('if successful, ionicLoading.hide should be called', function () {
-          ctrl.clients = [];
-          deferNewClient.resolve({data: 'data'});
+          ctrl.items = [];
+          deferNewItem.resolve({data: 'data'});
           $scope.$digest();
           sinon.assert.calledOnce($ionicLoading.hide);
         });
 
         it('if successful, response should be added to clients', function () {
-          ctrl.clients = [];
-          deferNewClient.resolve({data: 'data'});
+          ctrl.items = [];
+          deferNewItem.resolve({data: 'data'});
           $scope.$digest();
-          chai.assert.isArray(ctrl.clients);
+          expect(ctrl.items).to.not.be.null; //jshint ignore:line
         });
 
         it('if successful, ionicPopup.alert should be called', function () {
-          ctrl.clients = [];
-          deferNewClient.resolve({data: 'data'});
+          ctrl.items = [];
+          deferNewItem.resolve({data: 'data'});
           $scope.$digest();
           sinon.assert.calledOnce($ionicPopup.alert);
         });
@@ -137,20 +146,20 @@
               ]
             }
           };
-          deferNewClient.reject(backendErrors);
+          deferNewItem.reject(backendErrors);
           $rootScope.$digest();
           expect(ctrl.messages).to.be.not.empty; //jshint ignore:line
         });
 
         it('if unsuccessful, ionicLoading.hide should be called', function () {
-          ctrl.clients = [];
-          deferNewClient.reject({data: 'data'});
+          ctrl.items = [];
+          deferNewItem.reject({data: 'data'});
           $scope.$digest();
           sinon.assert.calledOnce($ionicLoading.hide);
         });
       });
 
-      describe('Edit client', function () {
+      describe('Edit item', function () {
 
         beforeEach(inject(function () {
           ctrl.submitProcess(1);
@@ -161,15 +170,24 @@
         });
 
         it('if successful, ionicLoading.hide should be called', function () {
-          ctrl.clients = [];
-          deferEditClient.resolve({data: 'data'});
+          ctrl.items = [];
+          ctrl.items.findIndex = function (param) {
+            var row = {id:0};
+            param(row);
+          };
+          deferEditItem.resolve({id:0});
+          deferEditItem.resolve({data: 'data'});
           $scope.$digest();
           sinon.assert.calledOnce($ionicLoading.hide);
         });
 
         it('if successful, ionicPopup.alert should be called', function () {
-          ctrl.clients = [];
-          deferEditClient.resolve({id:0});
+          ctrl.items = [];
+          ctrl.items.findIndex = function (param) {
+            var row = {id:0};
+            param(row);
+          };
+          deferEditItem.resolve({id:0});
           $scope.$digest();
           sinon.assert.calledOnce($ionicPopup.alert);
         });
@@ -184,23 +202,23 @@
               ]
             }
           };
-          deferEditClient.reject(backendErrors);
+          deferEditItem.reject(backendErrors);
           $rootScope.$digest();
           expect(ctrl.messages).to.be.not.empty; //jshint ignore:line
         });
 
         it('if unsuccessful, ionicLoading.hide should be called', function () {
-          ctrl.clients = [];
-          deferEditClient.reject({data: 'data'});
+          ctrl.items = [];
+          deferEditItem.reject({data: 'data'});
           $scope.$digest();
           sinon.assert.calledOnce($ionicLoading.hide);
         });
       });
 
-      describe('Delete client', function () {
+      describe('Delete item', function () {
 
         beforeEach(inject(function () {
-          ctrl.deleteClient(0);
+          ctrl.deleteItem(0);
         }));
 
         it('ionicLoading.show should be called', function () {
@@ -208,38 +226,47 @@
         });
 
         it('if successful, ionicLoading.hide should be called', function () {
-          ctrl.clients = [];
-          deferDeleteClient.resolve();
+          ctrl.items = [];
+          ctrl.items.findIndex = function (param) {
+            var row = {id:0};
+            param(row);
+          };
+          deferDeleteItem.resolve();
           $scope.$digest();
           sinon.assert.calledOnce($ionicLoading.hide);
         });
 
         it('if successful, ionicPopup.alert should be called', function () {
-          ctrl.clients = [];
-          deferDeleteClient.resolve();
+          ctrl.items = [];
+          ctrl.items.findIndex = function (param) {
+            var row = {id:0};
+            param(row);
+          };
+          deferDeleteItem.resolve();
           $scope.$digest();
           sinon.assert.calledOnce($ionicPopup.alert);
         });
 
         it('if unsuccessful, ionicLoading.hide should be called', function () {
-          ctrl.clients = [];
-          deferDeleteClient.reject();
+          ctrl.items = [];
+          deferDeleteItem.reject();
           $scope.$digest();
           sinon.assert.calledOnce($ionicLoading.hide);
         });
       });
 
-      describe('Modal', function () {
+      describe('Modal and ActionSheet', function () {
         beforeEach(function () {
           dependencies = {
             $scope: $scope,
-            ClientsService: ClientsService,
+            ItemsService: ItemsService,
             ModalService: ModalService,
             $ionicLoading: $ionicLoading,
-            $ionicPopup: $ionicPopup
+            $ionicPopup: $ionicPopup,
+            $ionicActionSheet: $ionicActionSheet
           };
 
-          ctrl = $controller('ClientsController', dependencies);
+          ctrl = $controller('ItemsController', dependencies);
         });
 
         it('Show modal', function () {
@@ -249,8 +276,7 @@
         });
 
         beforeEach(inject(function () {
-          ctrl.clients = [];
-          ctrl.showEditModal(0);
+          ctrl.showEditModal({id:0});
         }));
 
         it('Show edit modal', function () {
@@ -262,7 +288,7 @@
         it('Close modal', function () {
           var spy = sinon.spy(ModalService, 'closeModal');
           ctrl.closeModal();
-          chai.assert.isNull(ctrl.client);
+          expect(ctrl.item).to.be.null; //jshint ignore:line
           chai.expect(spy.called).to.be.equal(true);
         });
       });

@@ -30,7 +30,8 @@
           .respond(objectToRespond);
 
         service.getClients().then(function(response){
-          chai.assert.isArray(response);
+          chai.assert.isObject(response, 'This is an object!');
+          chai.expect(response).to.include.keys('provider_clients');
         });
 
         $httpBackend.flush();
@@ -79,7 +80,8 @@
           .respond(objectToRespond);
 
         service.editClient(client).then(function(response){
-          chai.assert.isArray(response);
+          chai.assert.isObject(response, 'This is an object!');
+          chai.expect(response).to.include.keys('provider_client');
         });
 
         $httpBackend.flush();

@@ -6,39 +6,18 @@
     .factory('ItemsService', ItemsService);
 
   function ItemsService($http,
-                        $ionicPopup,
-                        $ionicLoading,
-                        $ionicModal,
-                        $auth,
                         Upload,
-                        ENV) {
+                        ENV,
+                        CommonService) {
 
     var service = {
       newItem: newItem,
       getItems: getItems,
       editItem: editItem,
-      modalInstance: modalInstance
+      deleteItem: deleteItem
     };
 
     return service;
-
-    function modalInstance($scope){
-      return $ionicModal.fromTemplateUrl('my-modal-item.html', {
-        scope: $scope,
-        animation: 'slide-in-up',
-        backdropClickToClose: false,
-        hardwareBackButtonClose: false
-      })
-        .then(function(modal){
-          return modal;
-        },
-        function error(){
-          $ionicPopup.alert({
-            title: 'Error',
-            template: '{{::("globals.pleaseTryAgain"|translate)}}'
-          });
-        });
-    }
 
     function newItem(data) {
       var promise;
@@ -67,58 +46,18 @@
     }
 
     function getItems() {
-      return $http({
-        method: 'GET',
-        url: ENV.apiHost + '/api/provider/items'
-      })
-        .then(function success(resp) {
-          /*jshint camelcase:false */
-          return resp.data.provider_items;
-        },
-        function error(resp) {
-          $ionicPopup.alert({
-            title: 'Error',
-            template: resp.data ? resp.data.error :
-              '{{::("globals.pleaseTryAgain"|translate)}}'
-          });
-        });
+      return CommonService.getObjects('/api/provider/items/');
     }
 
     function editItem(data) {
-      $ionicLoading.show({
-        template: '{{::("globals.updating"|translate)}}'
-      });
+      return CommonService.editObject(data, '/api/provider/items/');
+    }
+
+    function deleteItem(data) {
       return $http({
-        method: 'PUT',
-        url: ENV.apiHost + '/api/provider/items/' + data.id,
-        data: data
-      })
-        .then(function success(resp) {
-          $ionicLoading.hide();
-          $ionicPopup.alert({
-            title: 'Éxito',
-            template: '{{::("item.successUpdateItem"|translate)}}'
-          });
-          return resp.data;
-        },
-        function error(resp) {
-          if (resp.data.errors){
-            $ionicPopup.alert({
-              title: 'Faltan datos',
-              template: '{{::("globals.pleaseTryAgain"|translate)}}'
-            });
-            return resp.data;
-          } else {
-            $ionicPopup.alert({
-              title: 'Error',
-              template: resp.data ? resp.data.error :
-                '{{::("globals.pleaseTryAgain"|translate)}}'
-            });
-          }
-        })
-        .finally(function () {
-          $ionicLoading.hide();
-        });
+        method: 'DELETE',
+        url: ENV.apiHost + '/api/provider/items/' + data
+      });
     }
   }
 })();
