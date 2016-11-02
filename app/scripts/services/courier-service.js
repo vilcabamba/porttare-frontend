@@ -3,20 +3,20 @@
 
   angular
     .module('porttare.services')
-    .factory('ProviderService', ProviderService);
+    .factory('CourierService', CourierService);
 
-  function ProviderService($http, $q, ENV) {
+  function CourierService($http, $q, ENV) {
 
     var service = {
-      createNewProvider: createNewProvider
+      createNewCourier: createNewCourier
     };
 
     return service;
 
-    function createNewProvider(data) {
+    function createNewCourier(data) {
       return $http({
         method: 'POST',
-        url: ENV.apiHost + '/api/provider/profile',
+        url: ENV.apiHost + '/api/courier/profile',
         data: data
       }).then(function success(res){
         return res.data;
