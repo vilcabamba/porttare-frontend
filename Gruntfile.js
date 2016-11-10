@@ -392,7 +392,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test:ci', [
-    'jshint:all',
+    'jshint',
     'wiredep',
     'clean',
     'concurrent:test',
