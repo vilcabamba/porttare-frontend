@@ -58,9 +58,9 @@
       });
 
       it('should load array with options', function () {
-        expect(ctrl.locations).to.not.empty;
-        expect(ctrl.licenses).to.not.empty;
-        expect(ctrl.mobilization).to.not.empty;
+        expect(ctrl.locations).to.not.empty; //jshint ignore:line
+        expect(ctrl.licenses).to.not.empty; //jshint ignore:line
+        expect(ctrl.mobilization).to.not.empty; //jshint ignore:line
       });
 
     });
@@ -122,7 +122,7 @@
         };
         deferCreateCourier.reject(backendErrors);
         $rootScope.$digest();
-        expect(ctrl.messages).to.not.empty;
+        expect(ctrl.messages).to.not.empty; //jshint ignore:line
       });
     });
   });
