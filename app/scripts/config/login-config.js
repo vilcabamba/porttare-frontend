@@ -10,6 +10,7 @@
       tokenValidationPath: '/auth/user/validate_token',
       storage: 'localStorage',
       emailRegistrationPath: '/auth/user',
+      accountUpdatePath:  '/users/account',
       passwordResetPath: '/auth/user/password',
       passwordUpdatePath: '/auth/user/password',
       omniauthWindowType: 'newWindow',

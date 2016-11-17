@@ -150,6 +150,18 @@
         current: 'Contraseña',
         confirm: 'Confirmar contraseña',
         update: 'Actualizar'
+      },
+      user: {
+        profile: 'Perfil de Usuario',
+        showProfile: 'Ver perfil',
+        name: 'Nombre',
+        email:  'Correo electrónico',
+        age:  'Edad',
+        country:  'Ciudad',
+        image:  'Imagen',
+        successUpdateProfile: 'Perfil actualizado éxitosamente',
+        password: 'Contraseña',
+        birthdate:  'Fecha de Nacimiento'
       }
     });
 
