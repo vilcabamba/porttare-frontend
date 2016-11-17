@@ -7,9 +7,16 @@
       deferredGeolocation,
       $ionicPopup,
       GeolocationService,
+      $scope,
       $ionicLoading;
 
     beforeEach(module('porttare.controllers'));
+
+    beforeEach(angular.mock.module(function ($provide) {
+      $provide.value('ENV', {
+        gMapsgMapsKey: 'key'
+      });
+    }));
 
     beforeEach(inject(
       function ($q,
@@ -19,6 +26,7 @@
         $ionicPopup = { alert: sinon.stub() };
         $ionicLoading = { show: sinon.stub(), hide: sinon.stub() };
         GeolocationService = { getCurrentPosition: sinon.stub().returns(deferredGeolocation.promise) };
+        $scope = $rootScope.$new();
         window.google = {
           maps: {
             MapTypeId: {
@@ -62,7 +70,8 @@
         controller = $controller('MapController', {
           '$ionicPopup': $ionicPopup,
           '$ionicLoading': $ionicLoading,
-          'GeolocationService': GeolocationService
+          'GeolocationService': GeolocationService,
+          '$scope': $scope
         });
       }));
 
@@ -70,6 +79,7 @@
 
       beforeEach(inject(function (_$rootScope_) {
         $rootScope = _$rootScope_;
+        window.launchGMap();
       }));
 
       it('ionicLoading.show should be called', function () {

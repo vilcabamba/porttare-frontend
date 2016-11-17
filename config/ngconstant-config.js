@@ -13,7 +13,8 @@
       constants: {
         ENV: {
           name: 'development',
-          apiHost: 'http://localhost:3785'
+          apiHost: 'http://localhost:3785',
+          gMapsKey: 'AIzaSyDbY9wkWTMUHeT_J2Uehq0-i0S1PCaybFE'
         }
       }
     },
@@ -24,7 +25,8 @@
           apiHost: 'https://porttare-backend.herokuapp.com',
           projectId: '57b74bad95ca4e060c00001b',
           projectKey: 'c27409281900a11da93818458b182608',
-          airbrakeHost: 'https://pangi.shiriculapo.com'
+          airbrakeHost: 'https://pangi.shiriculapo.com',
+          gMapsKey: process.env.GOOGLE_MAPS_API_KEY
         }
       }
     },
