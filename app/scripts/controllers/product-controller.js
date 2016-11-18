@@ -8,6 +8,9 @@
   function ProductController(ProductsService) {
     var productVm = this;
     productVm.more = false;
+    productVm.updatePrice = updatePrice;
+    productVm.toggleShow = toggleShow;
+
     init();
 
     productVm.slickConfig = {
@@ -17,22 +20,18 @@
       arrows: false
     };
 
-    productVm.showMore = function () {
-      if(productVm.more){
-        productVm.more = false;
-      }else{
-        productVm.more = true;
-      }
-    };
+    function toggleShow() {
+      productVm.more = !productVm.more;
+    }
 
-    productVm.updatePrice = function (opt) {
+    function updatePrice (opt) {
       if(opt === 'add'){
         productVm.product.amount ++;
       }else if(opt === 'remove'){
         productVm.product.amount --;
       }
       productVm.product.totalPrice = (productVm.product.amount * productVm.product.unitPrice);
-    };
+    }
 
     function init() {
       ProductsService.getProduct().then(function(results){

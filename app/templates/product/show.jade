@@ -15,7 +15,7 @@ ion-view(
             .title
               h4 {{productVm.product.name}}
               .more-label
-                button.button.button-clear.button-energized(ng-click="productVm.showMore()")
+                button.button.button-clear.button-energized(ng-click="productVm.toggleShow()")
                   | {{(productVm.more) ? ("product.less"|translate) : ("product.more"|translate)}}
             p {{productVm.product.description}}
           .add-product
