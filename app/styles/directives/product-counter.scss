@@ -1,0 +1,29 @@
+.product-counter {
+  display: flex;
+  font-family: Montserrat-Light;
+  font-size: 2em;
+  .actions-panel {
+    display: flex;
+    align-items: center;
+    .button-minus-container {
+      .button-minus {
+        color: $base-yellow;
+      }
+    }
+    .counter-container {
+      width: 3em;
+    }
+    .button-plus-container {
+      .button-plus {
+        color: $light-green;
+      }
+    }
+  }
+  .price-panel {
+    display: flex;
+    align-items: center;
+    .price {
+      width: 5em;
+    }
+  }
+}

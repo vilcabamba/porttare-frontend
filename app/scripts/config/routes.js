@@ -155,22 +155,52 @@ function routes($stateProvider, $urlRouterProvider) {
     }
   })
   .state('app.categories.provider', {
-    url: '/:category_id/provider/:id',
+    url: '/:category_id/provider/:provider_id',
     views: {
       'menuContent@app': {
         templateUrl: 'templates/provider/show.html',
         controller: 'ProviderDetailController',
-        controllerAs: 'providerDetVm'
+        controllerAs: 'providerDetVm',
+        resolve: {
+          data: function(ProductsService, $stateParams) {
+            var paramsData = {
+              categoryId: $stateParams.category_id, //jshint ignore:line
+              providerId: $stateParams.provider_id //jshint ignore:line
+            };
+            return ProductsService.getProviderProducts(paramsData).then(function(res){
+              return res;
+            });
+          }
+        }
       }
     }
   })
   .state('app.categories.provider.product', {
     url: '/product/:id',
+    params: {
+      product: null
+    },
     views: {
       'menuContent@app': {
         templateUrl: 'templates/product/show.html',
         controller: 'ProductController',
-        controllerAs: 'productVm'
+        controllerAs: 'productVm',
+        resolve: {
+          data: function (ProductsService, $stateParams) {
+            if ($stateParams.product && $stateParams.product.id) {
+              return $stateParams.product;
+            } else {
+              var paramsData = {
+                categoryId: $stateParams.category_id, //jshint ignore:line
+                providerId: $stateParams.provider_id, //jshint ignore:line,
+                productId: $stateParams.id
+              };
+              return ProductsService.getProduct(paramsData).then(function (res) {
+                return res;
+              });
+            }
+          }
+        }
       }
     }
   })
@@ -244,7 +274,7 @@ function routes($stateProvider, $urlRouterProvider) {
     url: '/',
     views: {
       'menuContent@app': {
-        templateUrl: 'templates/products/index.html',
+        templateUrl: 'templates/product/index.html',
         controller: 'ProductsController',
         controllerAs: 'productsVm'
       }
