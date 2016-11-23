@@ -42,18 +42,21 @@
     )
   .show-errors(ng-messages="providerVm.providerForm.direccion_matriz.$error" ng-if="providerVm.providerForm.direccion_matriz.$touched")
     span(ng-message="required" class="message-error") Campo requerido
+  show-error(array-messages="providerVm.errors.provider_offices.direccion")
 
   label.item.item-input.item-stacked-label
     span.input-label {{::("provider.openTime"|translate)}}*
   .dateTime(ion-datetime-picker="" time="" ng-model="providerVm.matrizProvider.hora_de_apertura" required)
     span(ng-if="!providerVm.matrizProvider.hora_de_apertura") Click para seleccionar
     | {{providerVm.matrizProvider.hora_de_apertura| date: "H:mm"}}
+  show-error(array-messages="providerVm.errors.provider_offices.hora_de_apertura")
 
   label.item.item-input.item-stacked-label
     span.input-label {{::("provider.closeTime"|translate)}}*
   .dateTime(ion-datetime-picker="" time="" ng-model="providerVm.matrizProvider.hora_de_cierre" required)
     span(ng-if="!providerVm.matrizProvider.hora_de_cierre") Click para seleccionar
     | {{providerVm.matrizProvider.hora_de_cierre| date: "H:mm"}}
+  show-error(array-messages="providerVm.errors.provider_offices.hora_de_cierre")
 
   label.item.item-input.item-stacked-label
     span.input-label {{::("provider.initialLaborDay"|translate)}}
@@ -83,3 +86,4 @@
     )
   .show-errors(ng-messages="providerVm.providerForm.telefono_matriz.$error" ng-if="providerVm.providerForm.telefono_matriz.$touched")
     span(ng-message="required" class="message-error") Campo requerido
+  show-error(array-messages="providerVm.errors.provider_offices.telefono")
