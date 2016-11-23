@@ -135,7 +135,8 @@
             });
           });
         },
-        function error() {
+        function error(responseError) {
+          providerVm.errors = responseError.errors;
           $ionicLoading.hide();
           providerVm.step = 1;
         });
