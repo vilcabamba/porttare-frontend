@@ -19,12 +19,16 @@
 
     function traslucentStatusBar() {
       // this view is dark. make status bar visible
-      window.StatusBar && window.StatusBar.styleBlackTranslucent();
+      if (window.StatusBar) {
+        window.StatusBar.styleBlackTranslucent();
+      }
     }
 
     function normalStatusBar() {
       // return to default status bar style for the rest of the app
-      window.StatusBar && window.StatusBar.styleDefault();
+      if (window.StatusBar) {
+        window.StatusBar.styleDefault();
+      }
     }
 
     function startApp() {
