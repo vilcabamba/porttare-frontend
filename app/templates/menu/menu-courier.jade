@@ -1,0 +1,25 @@
+ion-side-menus(enable-menu-with-back-views='false')
+  ion-side-menu-content
+    ion-nav-bar.bar-stable
+      ion-nav-back-button
+      ion-nav-buttons(side='left')
+        button.button.button-icon.button-clear.ion-navicon(menu-toggle='left')
+    ion-nav-view(name='menuContent')
+  ion-side-menu(side='left')
+    ion-header-bar.bar-stable
+    ion-content
+      ion-list
+        ion-item
+          | {{::("menu.courier.orders"|translate)}}
+        ion-item  
+          | {{::("menu.courier.account"|translate)}}
+        ion-item  
+          | {{::("menu.courier.payments"|translate)}}
+        ion-item  
+          | {{::("menu.courier.history"|translate)}}
+        ion-item  
+          | {{::("menu.invite"|translate)}}
+        ion-item.gray-item 
+          | {{::("menu.changeTo"|translate)}}
+        ion-item.user-type(menu-close='' ui-sref='app.categories.index')
+          | {{::("menu.user.buyer"|translate)}}

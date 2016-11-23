@@ -9,15 +9,23 @@ ion-side-menus(enable-menu-with-back-views='false')
     ion-header-bar.bar-stable
     ion-content
       ion-list
-        ion-item  {{::("provider.orders"|translate)}}
-        ion-item  {{::("provider.products"|translate)}}
-        ion-item  {{::("provider.account"|translate)}}
-        ion-item  {{::("provider.dispatchers"|translate)}}
-        ion-item  {{::("provider.establishments"|translate)}}
-        ion-item  {{::("provider.promotionsAndDiscounts"|translate)}}
-        ion-item  {{::("provider.moviggoAdvertising"|translate)}}
-        ion-item.change-user 
+        ion-item  
+          | {{::("menu.provider.orders"|translate)}}
+        ion-item(menu-close=''  ui-sref='app.items.index')
+          | {{::("menu.provider.products"|translate)}}
+        ion-item  
+          | {{::("menu.provider.account"|translate)}}
+        ion-item  
+          | {{::("menu.provider.dispatchers"|translate)}}
+        ion-item  
+          | {{::("menu.provider.establishments"|translate)}}
+        ion-item  
+          | {{::("menu.provider.promotionsAndDiscounts"|translate)}}
+        ion-item  
+          | {{::("menu.provider.moviggoAdvertising"|translate)}}
+        ion-item  
+          | {{::("menu.invite"|translate)}}
+        ion-item.gray-item 
           | {{::("menu.changeTo"|translate)}}
         ion-item.user-type(menu-close='' ui-sref='app.categories.index')
-          | {{::("menu.buyer"|translate)}}
-        ion-item.user-type  {{::("menu.courier"|translate)}}
+          | {{::("menu.user.buyer"|translate)}}

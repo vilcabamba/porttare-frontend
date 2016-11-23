@@ -77,16 +77,6 @@ function routes($stateProvider, $urlRouterProvider) {
       currentUser: accessIfUserAuth
     }
   })
-  .state('app.profile', {
-    url: '/profile',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/profile/profile.html',
-        controller: 'ProfileController',
-        controllerAs: 'profileVm'
-      }
-    }
-  })
   .state('app.categories', {
     url: '/categories',
     abstract: true
@@ -99,7 +89,7 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'CategoriesController',
         controllerAs: 'categoryVm',
         resolve: {
-          data: function (CategoriesService, $q, $ionicLoading, $ionicPopup) {
+          data: function (CategoriesService, $q, $ionicLoading, $ionicPopup, ErrorHandlerService) {
             $ionicLoading.show({
               template: '{{::("globals.loading"|translate)}}'
             });
@@ -107,15 +97,7 @@ function routes($stateProvider, $urlRouterProvider) {
               .then(function success(res) {
                 $ionicLoading.hide();
                 return res.data;
-              }, function error(res) {
-                $ionicLoading.hide();
-                var message = res.data.error ? res.data.error :
-                  '{{::("globals.pleaseTryAgain"|translate)}}';
-                $ionicPopup.alert({
-                  title: 'Error',
-                  template: message
-                });
-              });
+              }, ErrorHandlerService.handleCommonErrorGET);
           }
         }
       }
@@ -129,7 +111,7 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'CategoryController',
         controllerAs: 'categoryVm',
         resolve: {
-          data: function ($ionicLoading, $stateParams, $ionicPopup, CategoryService) {
+          data: function ($ionicLoading, $stateParams, $ionicPopup, CategoryService, ErrorHandlerService) {
             $ionicLoading.show({
               template: '{{::("globals.loading"|translate)}}'
             });
@@ -140,15 +122,7 @@ function routes($stateProvider, $urlRouterProvider) {
               .then(function success(res) {
                 $ionicLoading.hide();
                 return res.data;
-              }, function error(res) {
-                $ionicLoading.hide();
-                var message = res.data.error ? res.data.error :
-                  '{{::("globals.pleaseTryAgain"|translate)}}';
-                $ionicPopup.alert({
-                  title: 'Error',
-                  template: message
-                });
-              });
+              }, ErrorHandlerService.handleCommonErrorGET);
           }
         }
       }
@@ -207,16 +181,6 @@ function routes($stateProvider, $urlRouterProvider) {
   .state('app.items', {
     url: '/items',
     abstract: true
-  })
-  .state('app.items.index', {
-    url: '/',
-    views: {
-      'menuContent@app': {
-        templateUrl: 'templates/item/items.html',
-        controller: 'ItemsController',
-        controllerAs: 'itemsVm'
-      }
-    }
   })
   .state('app.clients', {
     url: '/clients',
@@ -288,7 +252,11 @@ function routes($stateProvider, $urlRouterProvider) {
   .state('provider.items', {
     url: '/items',
     views: {
-      'menuContent@provider': {}
+      'menuContent@provider': {
+        templateUrl: 'templates/item/items.html',
+        controller: 'ItemsController',
+        controllerAs: 'itemsVm'
+      }
     }
   })
   .state('app.courier', {
@@ -314,6 +282,96 @@ function routes($stateProvider, $urlRouterProvider) {
         controllerAs: 'courierVm'
       }
     }
+  })
+  .state('courier', {
+    url: '/courier',
+    abstract: true,
+    templateUrl: 'templates/menu/menu-courier.html'
+  })
+  .state('courier.orders', {
+    url: '/orders',
+    views: {
+      'menuContent@courier': {
+        templateUrl: 'templates/courier/orders.html'
+      }
+    }
+  })
+  .state('app.profile', {
+    url: '/profile',
+    abstract: true,
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/profile/profile.html',
+      }
+    }
+  })
+  .state('app.profile.info', {
+    url: '/info',
+    views: {
+      'menuContent@profileInfo': {
+        templateUrl: 'templates/profile/info/info.html',
+        controller: 'ProfileInfoController',
+        controllerAs: 'piVm'
+      }
+    }
+  })
+  .state('app.profile.addresses', {
+    url: '/addresses',
+    abstract: true
+  })
+  .state('app.profile.addresses.index', {
+    url: '/',
+    cache: false,
+    views: {
+      'menuContent@addressesIndex': {
+        templateUrl: 'templates/profile/addresses/index.html',
+        controller: 'ProfileAddressesController',
+        controllerAs: 'pfaVm',
+        resolve: {
+          data: function ($ionicLoading, $stateParams, $ionicPopup, ProfileAddressesService, ErrorHandlerService) {
+            return ProfileAddressesService.getAddresses()
+              .then(function success(res) {
+                $ionicLoading.hide();
+                return res;
+              }, ErrorHandlerService.handleCommonErrorGET);
+          }
+        }
+      }
+    }
+  })
+  .state('app.profile.addresses.new', {
+    url: '/new',
+    views: {
+      'menuContent@app': {
+        templateUrl: 'templates/profile/addresses/actions.html',
+        controller: 'ProfileCreateAddressesController',
+        controllerAs: 'pfaVm'
+      }
+    }
+  })
+  .state('app.profile.addresses.update', {
+    url: '/update/:id',
+    views: {
+      'menuContent@app': {
+        templateUrl: 'templates/profile/addresses/actions.html',
+        controller: 'ProfileUpdateAddressesController',
+        controllerAs: 'pfaVm',
+        params: {
+          id: null
+        },
+        resolve: {
+          data: function ($ionicLoading, $stateParams, $ionicPopup, ProfileAddressesService, ErrorHandlerService) {
+            if ($stateParams.id) {
+              return ProfileAddressesService.getAddress($stateParams.id)
+              .then(function success(res) {
+                $ionicLoading.hide();
+                return res;
+              }, ErrorHandlerService.handleCommonErrorGET);
+            }
+          }
+        }
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise(function ($injector, $location) {
@@ -330,7 +388,7 @@ function routes($stateProvider, $urlRouterProvider) {
   }
 
   function accessIfUserNotAuth($auth, $state, $ionicLoading, APP) {
-    $auth.validateUser()
+    return $auth.validateUser()
       .then(function userAuthorized() {
         $state.go(APP.successState).then(function () {
           $ionicLoading.hide();
@@ -341,7 +399,7 @@ function routes($stateProvider, $urlRouterProvider) {
   }
 
   function accessIfUserAuth($auth, $state, $ionicLoading, APP) {
-    $auth.validateUser()
+    return $auth.validateUser()
       .then(function userAuthorized(user) {
         return user;
       }, function userNotAuthorized() {

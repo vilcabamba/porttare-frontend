@@ -1,35 +1,34 @@
-/*jshint camelcase: false */
 (function () {
   'use strict';
 
   angular
     .module('porttare.controllers')
-    .controller('ProfileController', ProfileController);
+    .controller('ProfileInfoController', ProfileInfoController);
 
-  function ProfileController($auth,
-                            ModalService,
-                            ProfileService,
-                            $ionicLoading,
-                            $ionicPopup,
-                            $scope) {
-    var profileVm = this;
-    profileVm.showNewModal = showNewModal;
-    profileVm.closeModal = closeModal;
-    profileVm.submitProcess = submitProcess;
-    profileVm.messages = {};
+  function ProfileInfoController($auth,
+                                ModalService,
+                                ProfileService,
+                                $ionicLoading,
+                                $ionicPopup,
+                                $scope) {
+    var piVm = this;
+    piVm.showNewModal = showNewModal;
+    piVm.closeModal = closeModal;
+    piVm.submitProcess = submitProcess;
+    piVm.messages = {};
     init();
 
     function init(){
       ProfileService.getProfile().then(function(res){
-        profileVm.user = res;
+        piVm.user = res;
       });
     }
 
     function showNewModal() {
-      profileVm.userEdit= angular.copy(profileVm.user);
+      piVm.userEdit= angular.copy(piVm.user);
       ModalService.showModal({
         parentScope: $scope,
-        fromTemplateUrl: 'templates/profile/edit.html'
+        fromTemplateUrl: 'templates/profile/info/edit.html'
       });
     }
 
@@ -55,5 +54,6 @@
           $ionicLoading.hide();
         });
     }
+
   }
 })();

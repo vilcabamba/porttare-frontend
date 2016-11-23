@@ -20,13 +20,46 @@
       menu: {
         category: 'Categorías',
         location: 'Ubicación',
-        provider: 'Proveedor',
-        products: 'Productos',
         logout: 'Cerrar sesión',
-        courier: 'Mensajero',
         buyer: 'Comprador',
         changeTo: 'Cambiar a',
-        product: 'Producto'
+        product: 'Producto',
+        profile: 'Ver Perfil',
+        account: 'Cuenta',
+        invite: 'Invitar',
+        history: 'Historial',
+        user:{
+          courier: 'Mensajero',
+          buyer: 'Comprador',
+          provider: 'Proveedor',
+          dispatcher: 'Despachador'
+        },
+        client: {
+          category: 'Categorías',
+          myOrders: 'Mis Pedidos',
+          myLists: 'Mis Listas',
+          coupon: 'Cuponera',
+          payments: 'Pagos',
+          provider: 'Proveedor'
+        },
+        provider: {
+          orders: 'Pedidos',
+          products: 'Productos',
+          account: 'Cuenta',
+          dispatchers: 'Despachadores',
+          establishments: 'Establecimientos',
+          promotionsAndDiscounts: 'promociones y descuentos',
+          moviggoAdvertising: 'publicidad moviggo'
+        },
+        courier: {
+          orders: 'Pedidos',
+          account: 'Cuenta',
+          payments: 'Pagos',
+          history: 'Historial'
+        },
+        dispatcher: {
+          dispatch: 'Despachos'
+        }
       },
       provider: {
         itemsProvider: 'Productos de Proveedor',
@@ -47,11 +80,6 @@
         },
         orders: 'pedidos',
         products:  'productos',
-        account:  'cuenta',
-        dispatchers:  'despachadores',
-        establishments: 'establecimientos',
-        promotionsAndDiscounts: 'promociones y descuentos',
-        moviggoAdvertising: 'publicidad moviggo',
         logo: 'Logotipo',
         bank: {
           name: 'Nombre de su banco',
@@ -62,7 +90,10 @@
         },
         address: 'Dirección',
         city: 'Ciudad',
-        schedule: 'Horario',
+        openTime: 'Hora de Apertura',
+        closeTime: 'Hora de Cierre',
+        initialLaborDay: 'Inicio de Labores',
+        finalLaborDay: 'Final de Labores',
         isRequired: 'Este campo es obligatorio',
         nextStep: 'Siguiente Paso',
         createProvider: 'Crear Proveedor'
@@ -123,7 +154,6 @@
       actions: {
         showCategory: 'Lista de Categorías',
         newProvider: 'Nuevo Proveedor'
-
       },
       client: {
         formLegend: 'Datos cliente',
@@ -170,6 +200,30 @@
         buyNow: 'Comprar Ahora',
         addCar: 'Añadir al carrito',
         addWishlist: 'Añadir a mi whishlist'
+      },
+      profile: {
+        title: 'Perfil',
+        tabs: {
+          info: 'Datos',
+          addresses: 'Direcciones'
+        },
+        addresses: {
+          buttonEdit: 'Editar',
+          city: 'Ciudad',
+          parish: 'Parroquia',
+          neighborhood: 'Barrio',
+          addressOne: 'Dirección 1',
+          addressTwo: 'Dirección 2 (Opcional)',
+          zipCode: 'Código postal',
+          reference: 'Referencia',
+          telephoneNumber: 'Número convencional',
+          formLegendUpdate: 'Actualizar Dirección',
+          formLegendNew: 'Nueva Dirección',
+          name: 'Nombre',
+          addAddressBtnText: 'Agregar Dirección',
+          saveBtnText: 'Guardar Dirección',
+          updateBtnText: 'Actualizar Dirección'
+        }
       }
     });
 
