@@ -1,39 +1,17 @@
-ion-view(
-  view-title='{{::("user.profile"|translate)}}'
-)
-  ion-nav-title
-    .alt-logo
-  ion-content.profile-page
-    a(ng-click="profileVm.showNewModal(profileVm.user)") {{::("globals.edit"|translate)}} 
-    .row
-      label.item.item-input.item-stacked-label
-        span.input-label {{::("user.name"|translate)}}
-      
-      label.item.item-input.item-stacked-label
-        span.input-label {{profileVm.user.name}}
-    .row
-      label.item.item-input.item-stacked-label
-        span.input-label {{::("user.email"|translate)}}
-      
-      label.item.item-input.item-stacked-label
-        span.input-label {{profileVm.user.email}}
-    .row
-      label.item.item-input.item-stacked-label
-        span.input-label {{::("user.age"|translate)}}
-      
-      label.item.item-input.item-stacked-label
-        span.input-label {{profileVm.user.fecha_nacimiento | age}}
-    
-    .row
-      label.item.item-input.item-stacked-label
-        span.input-label {{::("user.country"|translate)}}
-      
-      label.item.item-input.item-stacked-label
-        span.input-label {{profileVm.user.ciudad}}
-    
-    .row
-      label.item.item-input.item-stacked-label
-        span.input-label {{::("user.password"|translate)}}
-      
-      label.item.item-input.item-stacked-label
-        span.input-label ********    
+ion-content(scroll="false")
+  .profile-page
+    .profile-header
+      .user-name
+        |{{ siteVm.user.name }}
+    .profile-body
+      ion-tabs.state-tabs
+        ion-tab(
+          title="{{::('profile.tabs.info'|translate)}}"
+          ui-sref="app.profile.info"
+        )
+          ion-nav-view(name='menuContent@profileInfo')
+        ion-tab(
+          title="{{::('profile.tabs.addresses'|translate)}}"
+          ui-sref="app.profile.addresses.index"
+        )
+          ion-nav-view(name='menuContent@addressesIndex')
