@@ -77,6 +77,20 @@ function routes($stateProvider, $urlRouterProvider) {
       currentUser: accessIfUserAuth
     }
   })
+  .state('app.cart', {
+    url: '/cart',
+    abstract: true
+  })
+  .state('app.cart.index', {
+    url: '/',
+    views: {
+      'menuContent@app': {
+        templateUrl: 'templates/cart/index.html',
+        controller: 'CartController',
+        controllerAs: 'cartVm'
+      }
+    }
+  })
   .state('app.categories', {
     url: '/categories',
     abstract: true
@@ -129,12 +143,43 @@ function routes($stateProvider, $urlRouterProvider) {
     }
   })
   .state('app.categories.provider', {
-    url: '/:category_id/provider/:id',
+    url: '/:categoryId/provider/:providerId',
     views: {
       'menuContent@app': {
         templateUrl: 'templates/provider/show.html',
         controller: 'ProviderDetailController',
-        controllerAs: 'providerDetVm'
+        controllerAs: 'providerDetVm',
+        resolve: {
+          data: function(ProductsService, $stateParams) {
+            return ProductsService.getProviderProducts($stateParams).then(function(res){
+              return res;
+            });
+          }
+        }
+      }
+    }
+  })
+  .state('app.categories.provider.product', {
+    url: '/product/:id',
+    params: {
+      product: null
+    },
+    views: {
+      'menuContent@app': {
+        templateUrl: 'templates/product/show.html',
+        controller: 'ProductController',
+        controllerAs: 'productVm',
+        resolve: {
+          data: function (ProductsService, $stateParams) {
+            if ($stateParams.product) {
+              return $stateParams.product;
+            } else {
+              return ProductsService.getProduct($stateParams).then(function (res) {
+                return res;
+              });
+            }
+          }
+        }
       }
     }
   })
@@ -198,7 +243,7 @@ function routes($stateProvider, $urlRouterProvider) {
     url: '/',
     views: {
       'menuContent@app': {
-        templateUrl: 'templates/products/index.html',
+        templateUrl: 'templates/product/index.html',
         controller: 'ProductsController',
         controllerAs: 'productsVm'
       }

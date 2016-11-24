@@ -21,8 +21,10 @@
         category: 'Categorías',
         location: 'Ubicación',
         logout: 'Cerrar sesión',
-        profile: 'Ver Perfil',
+        buyer: 'Comprador',
         changeTo: 'Cambiar a',
+        product: 'Producto',
+        profile: 'Ver Perfil',
         account: 'Cuenta',
         invite: 'Invitar',
         history: 'Historial',
@@ -38,7 +40,8 @@
           myLists: 'Mis Listas',
           coupon: 'Cuponera',
           payments: 'Pagos',
-          provider: 'Proveedor'
+          provider: 'Proveedor',
+          cart: 'Mi carro'
         },
         provider: {
           orders: 'Pedidos',
@@ -192,6 +195,13 @@
         password: 'Contraseña',
         birthdate:  'Fecha de Nacimiento'
       },
+      product: {
+        more: 'mostrar más',
+        less: 'mostrar menos',
+        buyNow: 'Comprar Ahora',
+        addCar: 'Añadir al carrito',
+        addWishlist: 'Añadir a mi whishlist'
+      },
       profile: {
         title: 'Perfil',
         tabs: {
@@ -215,6 +225,9 @@
           saveBtnText: 'Guardar Dirección',
           updateBtnText: 'Actualizar Dirección'
         }
+      },
+      cart: {
+        successfullyAdded: 'Ítem agregado exitosamente'
       }
     });
 

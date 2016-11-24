@@ -1,0 +1,11 @@
+.product-counter
+  .actions-panel
+    .button-minus-container
+      button.button-icon.icon.ion-ios-minus-outline.button-minus(ng-click="pcVm.handleClickMinus()")
+    .counter-container
+      | x{{pcVm.itemsCount}}
+    .button-plus-container
+      button.button-icon.icon.ion-ios-plus-outline.button-plus(ng-click="pcVm.handleClickPlus()")
+  .price-panel
+    .price
+      | {{pcVm.priceTotal | currency}}

@@ -7,14 +7,14 @@ ion-view(
     .provider-detail
       .row
         .col-25
-          img.format-image(src='{{providerDetVm.provider.image}}')
+          img.format-image(src='{{providerDetVm.provider.logotipo_url}}')
         .col-75.details
-          .nombre {{providerDetVm.provider.name}}
-          .descripcion {{providerDetVm.provider.description}}
+          .nombre {{providerDetVm.provider.razon_social}}
+          .descripcion {{providerDetVm.provider.actividad_economica}}
           .horario {{providerDetVm.provider.horary}}
       .grid-parent
-        .content.grid-33(ng-repeat="provider in providerDetVm.provider.products")
-            .product-detail
-              img.format-image(src='{{provider.image}}')
-              .descripcion {{provider.description}}
-              .precio {{provider.price}}
+        .content.grid-33(ng-repeat="product in providerDetVm.provider.provider_items")
+            .product-detail(ui-sref='app.categories.provider.product({id:product.id, product:product})')
+              img.format-image(src='{{product.imagenes[0]}}')
+              .descripcion {{product.titulo}}
+              .precio {{product.precio_cents}}

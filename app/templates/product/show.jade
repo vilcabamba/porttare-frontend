@@ -1,0 +1,38 @@
+ion-view(
+  view-title='{{::("menu.product"|translate)}}'
+)
+  ion-nav-title
+    .alt-logo
+  ion-content
+    .row
+      form.product-detail(name="selectProductForm" ng-submit='productVm.selectProduct()')
+        .list
+          slick(settings="productVm.slickConfig")
+            .slick-container(ng-repeat="image in productVm.product.imagenes track by $index")
+              .slick-content
+                .img(style="background-image: url('{{image.imagen_url}}')")
+          .description
+            .title
+              h4 {{productVm.product.titulo}}
+            p {{productVm.product.descripcion}}
+          .large-description
+            h4 Descripción Larga
+            .more-label(ng-if="::productVm.product.more")
+              button.button.button-clear.button-energized(ng-click="productVm.toggleShow()")
+                | {{(productVm.more) ? ("product.less"|translate) : ("product.more"|translate)}}
+            p(ng-if="productVm.more") {{::productVm.product.more}}
+        h4 Observaciones
+        textarea(ng-model='productVm.item.observaciones')
+        .add-product
+          button.button.button-outline.button-energized(ng-click="::productVm.addToCart()"
+                                                        ng-disabled="!productVm.item.cantidad")
+            | {{::("product.addCar"|translate)}}
+          button.button.button-outline.button-positive
+            | {{::("product.addWishlist"|translate)}}
+  ion-footer-bar.bar-stable(align-title='center')
+    .footer-product
+      .left-panel
+        button.button.button-outline.button-energized
+          | {{::("product.buyNow"|translate)}}
+      .center-panel
+        product-counter(options="productVm.options")

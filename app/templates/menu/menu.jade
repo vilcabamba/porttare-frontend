@@ -14,6 +14,8 @@ ion-side-menus(enable-menu-with-back-views='false')
           div
             a.show-profile(ui-sref='app.profile.info')
               | {{::("menu.profile"|translate)}}
+        ion-item(menu-close='' ui-sref='app.cart.index')
+          | {{::("menu.client.cart"|translate)}}
         ion-item(menu-close='' ui-sref='app.categories.index')
           | {{::("menu.client.category"|translate)}}
         ion-item
@@ -22,11 +24,11 @@ ion-side-menus(enable-menu-with-back-views='false')
           li {{::("menu.client.myOrders"|translate)}}
         ion-item.gray-item
           li {{::("menu.client.myLists"|translate)}}
-        ion-item.gray-item 
+        ion-item.gray-item
           li {{::("menu.client.coupon"|translate)}}
-        ion-item.gray-item 
+        ion-item.gray-item
           li {{::("menu.client.payments"|translate)}}
-        ion-item 
+        ion-item
           | {{::("menu.invite"|translate)}}
         ion-item(ng-controller='LoginController as loginVm', ng-click='loginVm.logout()')
           | {{::("menu.logout"|translate)}}
