@@ -40,7 +40,8 @@
           myLists: 'Mis Listas',
           coupon: 'Cuponera',
           payments: 'Pagos',
-          provider: 'Proveedor'
+          provider: 'Proveedor',
+          cart: 'Mi carro'
         },
         provider: {
           orders: 'Pedidos',

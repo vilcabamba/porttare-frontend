@@ -77,6 +77,20 @@ function routes($stateProvider, $urlRouterProvider) {
       currentUser: accessIfUserAuth
     }
   })
+  .state('app.cart', {
+    url: '/cart',
+    abstract: true
+  })
+  .state('app.cart.index', {
+    url: '/',
+    views: {
+      'menuContent@app': {
+        templateUrl: 'templates/cart/index.html',
+        controller: 'CartController',
+        controllerAs: 'cartVm'
+      }
+    }
+  })
   .state('app.categories', {
     url: '/categories',
     abstract: true

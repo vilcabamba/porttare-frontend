@@ -5,9 +5,10 @@
     .module('porttare.services')
     .factory('CartService', CartService);
 
-  function CartService($http, ENV, $q) {
+  function CartService($http, ENV, $q, ErrorHandlerService) {
     var service = {
-      addItem: addItem
+      addItem: addItem,
+      getCart: getCart
     };
 
     return service;
@@ -23,6 +24,16 @@
         }, function error(response){
           return $q.reject(response.data);
         });
+    }
+
+    function getCart() {
+      return $http({
+        method: 'GET',
+        url: ENV.apiHost + '/api/customer/cart'
+      })
+        .then(function success(response){
+          return response.data;
+        }, ErrorHandlerService.handleCommonErrorGET);
     }
   }
 })();
