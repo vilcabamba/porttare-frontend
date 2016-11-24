@@ -5,7 +5,7 @@
     .module('porttare.controllers')
     .controller('ProductController', ProductController);
 
-  function ProductController(data, CartService, $ionicPopup) {
+  function ProductController(data, CartService, $ionicPopup, $state) {
     var productVm = this;
     productVm.more = false;
     productVm.toggleShow = toggleShow;
@@ -34,8 +34,17 @@
     }
 
     function addToCart(){
-      CartService.addItem(productVm.item).then(function(response){
-        console.log(response);
+      CartService.addItem(productVm.item).then(function(){
+        var params = {
+          categoryId: $state.params.categoryId,
+          providerId: $state.params.providerId
+        };
+        $state.go('app.categories.provider', params).then(function(){
+          $ionicPopup.alert({
+            title: 'Alerta',
+            template: '{{::("cart.successfullyAdded"|translate)}}'
+          });
+        });
       }, function(){
         $ionicPopup.alert({
           title: 'Error',

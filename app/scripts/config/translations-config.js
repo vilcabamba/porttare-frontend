@@ -224,6 +224,9 @@
           saveBtnText: 'Guardar Dirección',
           updateBtnText: 'Actualizar Dirección'
         }
+      },
+      cart: {
+        successfullyAdded: 'Ítem agregado exitosamente'
       }
     });
 
