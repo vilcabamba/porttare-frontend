@@ -2,7 +2,7 @@
   'use strict';
 
   describe('IntroController', function () {
-    var ctrl, $controller, dependencies, $ionicSlideBoxDelegate, $state, $localStorage, $window;
+    var ctrl, $controller, dependencies, $ionicSlideBoxDelegate, $ionicPlatform, $state, $localStorage, $window;
 
     beforeEach(module('porttare.controllers'));
 
@@ -15,6 +15,7 @@
         $localStorage.get = sinon.stub();
         $state = { go: sinon.stub()};
         $ionicSlideBoxDelegate = { previous: sinon.stub(), next: sinon.stub()};
+        $ionicPlatform = { ready: sinon.stub() };
       })
     );
 
@@ -28,7 +29,8 @@
         dependencies = {
           $ionicSlideBoxDelegate: $ionicSlideBoxDelegate,
           $state: $state,
-          $localStorage: $localStorage
+          $localStorage: $localStorage,
+          $ionicPlatform: $ionicPlatform
         };
 
         ctrl = $controller('IntroController', dependencies);

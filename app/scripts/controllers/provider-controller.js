@@ -9,6 +9,7 @@
                               $translate,
                               $ionicPopup,
                               $state,
+                              $auth,
                               $ionicLoading,
                               $ionicScrollDelegate) {
     var providerVm = this;
@@ -126,7 +127,9 @@
 
       objectToSend.offices_attributes = [createOffice(providerVm.matrizProvider)];
       ProviderService.createNewProvider(objectToSend)
-        .then(function success() {
+        .then(function success(provider) {
+          //update auth user
+          $auth.user.provider_profile = provider.provider_profile;
           $ionicLoading.hide();
           $state.go(stateRedirect).then(function(){
             $ionicPopup.alert({
@@ -135,7 +138,8 @@
             });
           });
         },
-        function error() {
+        function error(responseError) {
+          providerVm.errors = responseError.errors;
           $ionicLoading.hide();
           providerVm.step = 1;
         });
