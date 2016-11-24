@@ -19,7 +19,8 @@ ion-view(
                   | {{(productVm.more) ? ("product.less"|translate) : ("product.more"|translate)}}
             p {{productVm.product.descripcion}}
           .add-product
-            button.button.button-outline.button-energized
+            button.button.button-outline.button-energized(ng-click="::productVm.addToCart()"
+                                                          ng-disabled="!productVm.count")
               | {{::("product.addCar"|translate)}}
             button.button.button-outline.button-positive
               | {{::("product.addWishlist"|translate)}}
