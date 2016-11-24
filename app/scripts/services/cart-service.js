@@ -12,19 +12,16 @@
 
     return service;
 
-    function addItem(productId, count) {
+    function addItem(item) {
       return $http({
         method: 'POST',
         url: ENV.apiHost + '/api/customer/cart/items',
-        data: {
-          provider_item_id: productId, //jshint ignore:line
-          cantidad: count
-        }
+        data: item
       })
         .then(function success(response){
           return response.data;
-        }, function error(error){
-          return $q.reject(error.data);
+        }, function error(response){
+          return $q.reject(response.data);
         });
     }
   }

@@ -11,12 +11,14 @@
     productVm.toggleShow = toggleShow;
     productVm.product = data;
     productVm.addToCart = addToCart;
-    productVm.count = 0;
+    productVm.item = {};
+    productVm.item.provider_item_id = productVm.product.id; //jshint ignore:line
+    productVm.item.cantidad = 0;
 
     productVm.options = {
       priceCents: data.precio_cents, // jshint ignore:line
       onChangeValue: function(data) {
-        productVm.count = data.itemsCount;
+        productVm.item.cantidad = data.itemsCount;
       }
     };
 
@@ -32,7 +34,7 @@
     }
 
     function addToCart(){
-      CartService.addItem(productVm.product.id, productVm.count).then(function(response){
+      CartService.addItem(productVm.item).then(function(response){
         console.log(response);
       }, function(){
         $ionicPopup.alert({

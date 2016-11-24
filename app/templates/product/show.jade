@@ -14,23 +14,21 @@ ion-view(
           .description
             .title
               h4 {{productVm.product.titulo}}
-              .more-label
-                button.button.button-clear.button-energized(ng-click="productVm.toggleShow()")
-                  | {{(productVm.more) ? ("product.less"|translate) : ("product.more"|translate)}}
             p {{productVm.product.descripcion}}
-          .add-product
-            button.button.button-outline.button-energized(ng-click="::productVm.addToCart()"
-                                                          ng-disabled="!productVm.count")
-              | {{::("product.addCar"|translate)}}
-            button.button.button-outline.button-positive
-              | {{::("product.addWishlist"|translate)}}
-          .more-description
-            .observations(ng-if="productVm.more")
-              .large-description
-                h4 Descripción Larga
-                p {{productVm.product.more}}
-              h4 Observaciones
-              textarea(ng-model='productVm.product.observaciones')
+          .large-description
+            h4 Descripción Larga
+            .more-label(ng-if="::productVm.product.more")
+              button.button.button-clear.button-energized(ng-click="productVm.toggleShow()")
+                | {{(productVm.more) ? ("product.less"|translate) : ("product.more"|translate)}}
+            p(ng-if="productVm.more") {{::productVm.product.more}}
+        h4 Observaciones
+        textarea(ng-model='productVm.item.observaciones')
+        .add-product
+          button.button.button-outline.button-energized(ng-click="::productVm.addToCart()"
+                                                        ng-disabled="!productVm.item.cantidad")
+            | {{::("product.addCar"|translate)}}
+          button.button.button-outline.button-positive
+            | {{::("product.addWishlist"|translate)}}
   ion-footer-bar.bar-stable(align-title='center')
     .footer-product
       .left-panel
