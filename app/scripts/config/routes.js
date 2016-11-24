@@ -129,7 +129,7 @@ function routes($stateProvider, $urlRouterProvider) {
     }
   })
   .state('app.categories.provider', {
-    url: '/:category_id/provider/:provider_id',
+    url: '/:categoryId/provider/:providerId',
     views: {
       'menuContent@app': {
         templateUrl: 'templates/provider/show.html',
@@ -137,11 +137,7 @@ function routes($stateProvider, $urlRouterProvider) {
         controllerAs: 'providerDetVm',
         resolve: {
           data: function(ProductsService, $stateParams) {
-            var paramsData = {
-              categoryId: $stateParams.category_id, //jshint ignore:line
-              providerId: $stateParams.provider_id //jshint ignore:line
-            };
-            return ProductsService.getProviderProducts(paramsData).then(function(res){
+            return ProductsService.getProviderProducts($stateParams).then(function(res){
               return res;
             });
           }
@@ -161,15 +157,10 @@ function routes($stateProvider, $urlRouterProvider) {
         controllerAs: 'productVm',
         resolve: {
           data: function (ProductsService, $stateParams) {
-            if ($stateParams.product && $stateParams.product.id) {
+            if ($stateParams.product) {
               return $stateParams.product;
             } else {
-              var paramsData = {
-                categoryId: $stateParams.category_id, //jshint ignore:line
-                providerId: $stateParams.provider_id, //jshint ignore:line,
-                productId: $stateParams.id
-              };
-              return ProductsService.getProduct(paramsData).then(function (res) {
+              return ProductsService.getProduct($stateParams).then(function (res) {
                 return res;
               });
             }

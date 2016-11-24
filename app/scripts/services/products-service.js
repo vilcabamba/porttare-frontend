@@ -47,7 +47,7 @@ function ProductsService($http, ENV, $ionicPopup, $q) {
       };
 
       getProviderProducts(params).then(function success(res) {
-        var selectedProduct = filterProducts(res, paramsData.productId);
+        var selectedProduct = filterProducts(res, paramsData.id);
         resolve(selectedProduct);
       }, reject);
     });
