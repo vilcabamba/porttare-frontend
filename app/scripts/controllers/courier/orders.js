@@ -52,7 +52,7 @@
       orVm.titleResultsFound = trans[transKeys[0]] + ' ' + orVm.totalOrders +  ' ' + trans[transKeys[1]];
     });
 
-      orVm.totalOrders = orVm.orders.length;
+    orVm.totalOrders = orVm.orders.length;
 
   }
 })();
