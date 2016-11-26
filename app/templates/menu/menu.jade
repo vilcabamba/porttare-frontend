@@ -9,7 +9,7 @@ ion-side-menus(enable-menu-with-back-views='false')
     ion-header-bar.bar-stable
     ion-content
       ion-list
-        ion-item(menu-close='' class='menu-header' ng-if="siteVm.user.name")
+        ion-item(menu-close='' class='menu-header')
           | {{siteVm.userName()}}
         ion-item(menu-close='' ui-sref='app.profile.info')
           | {{::("menu.profile"|translate)}}
@@ -18,8 +18,8 @@ ion-side-menus(enable-menu-with-back-views='false')
         ion-item(menu-close='' ui-sref='app.categories.index')
           | {{::("menu.client.category"|translate)}}
         ion-item.gray-item(ng-repeat='categorie in menuVm.categories'
-                           ui-sref='app.categories.show({id: categorie.id})'
-                           menu-close='')
+        ui-sref='app.categories.show({id: categorie.id})'
+        menu-close='')
           li {{::categorie.titulo}}
         ion-item
           | {{::("menu.account"|translate)}}
