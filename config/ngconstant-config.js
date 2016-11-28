@@ -13,7 +13,7 @@
       constants: {
         ENV: {
           name: 'development',
-          apiHost: 'http://localhost:3785',
+          apiHost: 'http://192.168.100.3:3785',
           gMapsKey: 'AIzaSyDbY9wkWTMUHeT_J2Uehq0-i0S1PCaybFE'
         }
       }
@@ -23,10 +23,22 @@
         ENV: {
           name: 'staging',
           apiHost: 'https://porttare-backend.herokuapp.com',
-          projectId: '57b74bad95ca4e060c00001b',
-          projectKey: 'c27409281900a11da93818458b182608',
           airbrakeHost: 'https://pangi.shiriculapo.com',
+          airbrakeProjectId: process.env.AIRBRAKE_PROJECT_ID,
+          airbrakeProjectKey: process.env.AIRBRAKE_PROJECT_KEY,
           gMapsKey: process.env.GOOGLE_MAPS_API_KEY
+        }
+      }
+    },
+    demo: {
+      constants: {
+        ENV: {
+          name: 'demo',
+          apiHost: 'https://demo-backend.moviggo.noggalito.com',
+          airbrakeHost: 'https://pangi.shiriculapo.com',
+          gMapsKey: process.env.GOOGLE_MAPS_API_KEY,
+          airbrakeProjectId: process.env.AIRBRAKE_PROJECT_ID,
+          airbrakeProjectKey: process.env.AIRBRAKE_PROJECT_KEY
         }
       }
     },
