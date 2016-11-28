@@ -7,7 +7,7 @@
 
   function SiteController($rootScope, $ionicLoading, $auth, CartService) {
     var siteVm = this,
-        currentUser = null;
+      currentUser = null;
 
     siteVm.userName = userName;
 
@@ -16,7 +16,7 @@
         return CartService.getCart().then(function(response){
           user.customer_order = response.customer_order; //jshint ignore:line
           currentUser = user;
-          return currentUser;          
+          return currentUser;
         });
       });
 
