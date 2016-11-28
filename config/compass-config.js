@@ -23,7 +23,7 @@
       options: {
         outputStyle: 'compressed',
         force: true,
-        cssDir: '<%= yeoman.dist %>',
+        cssDir: '<%= yeoman.styles %>/<%= yeoman.dist %>',
         generatedImagesDir: '<%= yeoman.dist %>/<%= yeoman.images %>/generated'
       }
     },
@@ -31,7 +31,7 @@
       options: {
         outputStyle: 'compressed',
         force: true,
-        cssDir: '<%= yeoman.app %>',
+        cssDir: '<%= yeoman.styles %>/<%= yeoman.app %>',
         generatedImagesDir: '<%= yeoman.dist %>/<%= yeoman.images %>/generated'
       }
     },
