@@ -64,12 +64,6 @@
         function error(resp) {
           if (resp && resp.errors) {
             courierVm.messages = resp.errors;
-          } else {
-            $ionicPopup.alert({
-              title: 'Error',
-              template: resp && resp.error ? resp.error :
-                '{{::("globals.pleaseTryAgain"|translate)}}'
-            });
           }
           $ionicLoading.hide();
         });
