@@ -15,20 +15,28 @@
       httpFontsPath: '/<%= yeoman.styles %>/fonts',
       relativeAssets: false,
       assetCacheBuster: false,
+      bundleExec: true,
       raw: 'Sass::Script::Number.precision = 10\n',
       specify: '<%= yeoman.app %>/<%= yeoman.styles %>/main.scss'
     },
     dist: {
       options: {
-        bundleExec: true,
         outputStyle: 'compressed',
         force: true,
+        cssDir: '<%= yeoman.dist %>',
         generatedImagesDir: '<%= yeoman.dist %>/<%= yeoman.images %>/generated'
       }
     },
+    staging: {
+      options: {
+        outputStyle: 'compressed',
+        force: true,
+        cssDir: '<%= yeoman.app %>',
+        generatedImagesDir: '<%= yeoman.dist %>/<%= yeoman.images %>/generated'
+      }
+    }
     server: {
       options: {
-        bundleExec: true,
         debugInfo: true
       }
     }
