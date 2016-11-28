@@ -7,7 +7,6 @@
     margin-top: 40px;
     margin-bottom: 50px;
 
-<<<<<<< 4bd5b6bf0615e18d9138aa3cde4c75932c8e7042
     @media (min-height: 500px) {
       margin-top: 60px;
     }
@@ -33,20 +32,9 @@
       margin-left: 25%;
       margin-right: 25%;
     }
-=======
+
     @media (min-height: 550px) {
       margin-top: 60px;
-    }
->>>>>>> UI enhances (#108)
-  }
-
-  .center-items-login {
-    margin-left: 0;
-    margin-right: 0;
-
-    @media (min-width: $grid-responsive-md-break) {
-      margin-left: 25%;
-      margin-right: 25%;
     }
   }
 
