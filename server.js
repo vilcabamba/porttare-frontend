@@ -9,7 +9,7 @@
     var enforce = require('express-sslify');
     app.use(enforce.HTTPS({ trustProtoHeader: true }));
   }
-  app.use(express.static('app'));
+  app.use(process.env.STATIC_FOLDER || express.static('app'));
   app.set('port', process.env.PORT || 5001);
   app.listen(app.get('port'), function () {
       console.log('Express server listening on port ' + app.get('port'));
