@@ -114,18 +114,7 @@ function routes($stateProvider, $urlRouterProvider) {
         templateUrl: 'templates/category/index.html',
         controller: 'CategoriesController',
         controllerAs: 'categoryVm',
-        resolve: {
-          data: function (CategoriesService, $q, $ionicLoading, $ionicPopup, ErrorHandlerService) {
-            $ionicLoading.show({
-              template: '{{::("globals.loading"|translate)}}'
-            });
-            return CategoriesService.getCategories()
-              .then(function success(res) {
-                $ionicLoading.hide();
-                return res.data;
-              }, ErrorHandlerService.handleCommonErrorGET);
-          }
-        }
+        cache: false
       }
     }
   })

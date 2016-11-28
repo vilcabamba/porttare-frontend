@@ -5,9 +5,23 @@
     .module('porttare.controllers')
     .controller('CategoriesController', CategoriesController);
 
-  function CategoriesController(data) {
+  function CategoriesController($scope) {
 
     var categoryVm = this;
-    categoryVm.categories = data.provider_categories;//jshint ignore:line
+    var counter = 0;
+    categoryVm.categories = $scope.$parent.menuVm.categories;
+
+    $scope.$on('$ionicView.enter', function() {
+      if (counter !== 0) {
+        $scope.$emit('update-categories');
+      }
+      counter++;
+    });
+
+    $scope.$watch('$parent.menuVm.categories', function(newVal, oldVal){
+      if (newVal !== oldVal) {
+        categoryVm.categories = newVal;
+      }
+    });
   }
 })();
