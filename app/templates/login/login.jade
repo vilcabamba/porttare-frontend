@@ -1,6 +1,6 @@
 ion-view(
-  view-title="Login",
-  hide-nav-bar="true"
+view-title="Login",
+hide-nav-bar="true"
 )
   ion-nav-bar
     back-button
@@ -13,23 +13,23 @@ ion-view(
           label.item.item-input
             i.icon.ion-email.placeholder-icon
             input(
-              type='email',
-              ng-model='loginVm.loginForm.email'
-              required='required'
-              placeholder='{{::("login.email"|translate)}}'
+            type='email',
+            ng-model='loginVm.loginForm.email'
+            required='required'
+            placeholder='{{::("login.email"|translate)}}'
             )
           label.item.item-input
             i.icon.ion.ion-android-lock.placeholder-icon
             input(
-              type='password',
-              ng-model='loginVm.loginForm.password',
-              required='required',
-              placeholder='{{::("login.password"|translate)}}'
+            type='password',
+            ng-model='loginVm.loginForm.password',
+            required='required',
+            placeholder='{{::("login.password"|translate)}}'
             )
         .list.list-inset.button-actions.constraint-width
           input(
-            type='submit',
-            value='{{::("login.login"|translate)}}'
+          type='submit',
+          value='{{::("login.login"|translate)}}'
           ).button.button-primary.button-block
 
     .list.list-inset.list--top-narrow.constraint-width
