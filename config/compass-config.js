@@ -34,7 +34,7 @@
         cssDir: '<%= yeoman.app %>',
         generatedImagesDir: '<%= yeoman.dist %>/<%= yeoman.images %>/generated'
       }
-    }
+    },
     server: {
       options: {
         debugInfo: true
