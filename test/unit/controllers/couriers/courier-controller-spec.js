@@ -9,6 +9,7 @@
       $ionicLoading,
       CourierService,
       deferCreateCourier,
+      ErrorHandlerService,
       deferStateGo,
       $state,
       $auth,
@@ -42,6 +43,9 @@
         $auth = {
           user: {}
         };
+        ErrorHandlerService = {
+          handleCommonErrorGET: sinon.stub()
+        };
         stateRedirect = 'courier.orders';
       })
     );
@@ -53,6 +57,7 @@
           $ionicLoading: $ionicLoading,
           $ionicPopup: $ionicPopup,
           $state: $state,
+          ErrorHandlerService: ErrorHandlerService,
           CourierService: CourierService
         };
 
@@ -104,12 +109,6 @@
         deferCreateCourier.resolve({courier_profile: {}}); //jshint ignore:line
         $rootScope.$digest();
         deferStateGo.resolve();
-        $rootScope.$digest();
-        sinon.assert.calledOnce($ionicPopup.alert);
-      });
-
-      it('if unsuccessful, should show a alert', function () {
-        deferCreateCourier.reject({ data: { error: 'error' } });
         $rootScope.$digest();
         sinon.assert.calledOnce($ionicPopup.alert);
       });
