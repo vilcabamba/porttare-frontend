@@ -41,7 +41,7 @@
           createNewCourier: sinon.stub().returns(deferCreateCourier.promise)
         };
         $auth = {
-          user: {}
+          user: {name:'', email:''}
         };
         ErrorHandlerService = {
           handleCommonErrorGET: sinon.stub()
@@ -68,6 +68,16 @@
         expect(ctrl.locations).to.not.empty; //jshint ignore:line
         expect(ctrl.licenses).to.not.empty; //jshint ignore:line
         expect(ctrl.mobilization).to.not.empty; //jshint ignore:line
+      });
+
+      it('name and email should exist in authenticated user', function () {
+        expect($auth.user.name).to.exist; //jshint ignore:line
+        expect($auth.user.email).to.exist; //jshint ignore:line
+      });
+
+      it('names and email should not be empty', function () {
+        chai.assert.isNotNull(ctrl.courier.nombres, 'exists!'); //jshint ignore:line
+        chai.assert.isNotNull(ctrl.courier.email, 'exists!');
       });
 
     });
@@ -124,6 +134,7 @@
         $rootScope.$digest();
         expect(ctrl.messages).to.not.empty; //jshint ignore:line
       });
+
     });
   });
 })();
