@@ -9,7 +9,7 @@
 
     var categoryVm = this;
     var counter = 0;
-    categoryVm.categories = $scope.$parent.menuVm.categories;
+    categoryVm.categories = function () { return $scope.$parent.menuVm.categories; };
 
     $scope.$on('$ionicView.enter', function() {
       if (counter !== 0) {
@@ -18,10 +18,8 @@
       counter++;
     });
 
-    $scope.$watch('$parent.menuVm.categories', function(newVal, oldVal){
-      if (newVal !== oldVal) {
-        categoryVm.categories = newVal;
-      }
+    $scope.$watch('$parent.menuVm.categories', function(){
+      categoryVm.categories();
     });
   }
 })();
