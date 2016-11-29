@@ -1,5 +1,6 @@
 .button {
   margin: auto;
+  min-height: 40px;
 
   &.button-link {
     color: $base-grey;
