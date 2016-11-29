@@ -65,7 +65,7 @@
       },
       provider: {
         itemsProvider: 'Productos de Proveedor',
-        formLegendFirts: 'Datos nuevo proveedor - Paso 1',
+        formLegendFirst: 'Datos nuevo proveedor - Paso 1',
         formLegendSecond: 'Datos bancarios proveedor - Paso 2',
         formLegendThird: 'Matriz proveedor - Paso 3',
         businessName: 'Razón social',
