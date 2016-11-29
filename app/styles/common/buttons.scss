@@ -29,29 +29,22 @@
   }
 }
 
-.button-white-cta {
-  background-color: $white;
+.button-outline {
   border-radius: 0;
-  border: 3px solid $base-yellow;
-  color: $base-yellow;
+  border-width: 3px;
   text-transform: uppercase;
+}
+
+.button-energized {
+  border-color: $base-yellow;
+  color: $base-yellow;
   padding: 3px 18px;
   line-height: 30px;
   font-family: Montserrat-Regular;
-
-  &:hover {
-    background-color: $base-yellow;
-    color: $white;
-  }
-
-  &.activated {
-    border-color: $base-yellow;
-    background-color: $base-yellow;
-  }
 }
 
 .facebook-login,
-.facebook-login.activated, {
+ {
   @extend .common-button;
   background-color: $facebook-blue;
 
@@ -61,8 +54,7 @@
 }
 
 .button-primary,
-.facebook-login,
-.button-white-cta {
+.facebook-login {
   &.activated {
     color: $white;
   }
@@ -70,5 +62,15 @@
   &:hover {
     color: $white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.button[disabled] {
+  pointer-events: auto;
+
+  &:active {
+    color: $button-stable-text;
+    border-color: $button-stable-active-border;
+    background-color: $button-stable-active-bg;
   }
 }
