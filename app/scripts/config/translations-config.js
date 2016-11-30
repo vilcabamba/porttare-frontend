@@ -65,9 +65,8 @@
       },
       provider: {
         itemsProvider: 'Productos de Proveedor',
-        formLegendFirst: 'Datos nuevo proveedor - Paso 1',
-        formLegendSecond: 'Datos bancarios proveedor - Paso 2',
-        formLegendThird: 'Matriz proveedor - Paso 3',
+        formLegendFirst: 'Proveedor nuevo - Paso 1',
+        formLegendSecond: 'Proveedor nuevo - Paso 2',
         businessName: 'Razón social',
         name: 'Nombre Establecimiento',
         economicActivity: 'Actividad económica',
@@ -244,6 +243,10 @@
       },
       cart: {
         successfullyAdded: 'Ítem agregado exitosamente'
+      },
+      form: {
+        requiredField: 'Campo requerido. ',
+        wrongEmail: 'Email incorrecto. '
       }
     });
 
