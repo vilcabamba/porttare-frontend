@@ -72,9 +72,21 @@ function routes($stateProvider, $urlRouterProvider) {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu/menu.html',
+    controller: 'MenuController',
+    controllerAs: 'menuVm',
     //only logged users will allow to go to /app/*
     resolve: {
-      currentUser: accessIfUserAuth
+      currentUser: accessIfUserAuth,
+      categories: function (CategoriesService, $q, $ionicLoading, $ionicPopup, ErrorHandlerService) {
+        $ionicLoading.show({
+          template: '{{::("globals.loading"|translate)}}'
+        });
+        return CategoriesService.getCategories()
+          .then(function success(res) {
+            $ionicLoading.hide();
+            return res.data;
+          }, ErrorHandlerService.handleCommonErrorGET);
+      }
     }
   })
   .state('app.cart', {
@@ -102,18 +114,7 @@ function routes($stateProvider, $urlRouterProvider) {
         templateUrl: 'templates/category/index.html',
         controller: 'CategoriesController',
         controllerAs: 'categoryVm',
-        resolve: {
-          data: function (CategoriesService, $q, $ionicLoading, $ionicPopup, ErrorHandlerService) {
-            $ionicLoading.show({
-              template: '{{::("globals.loading"|translate)}}'
-            });
-            return CategoriesService.getCategories()
-              .then(function success(res) {
-                $ionicLoading.hide();
-                return res.data;
-              }, ErrorHandlerService.handleCommonErrorGET);
-          }
-        }
+        cache: false
       }
     }
   })
