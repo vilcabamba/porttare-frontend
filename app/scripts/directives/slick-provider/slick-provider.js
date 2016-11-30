@@ -19,19 +19,21 @@
 
     return directive;
 
-    function slickProviderController($state) {
+    function slickProviderController() {
       var spcVm = this;
-      var itemsRoute = 'app.categories.provider';
-      var data = spcVm.options.data;
-      spcVm.goToProducts = goToProducts;
+      var data = spcVm.options.model.data;
+      var actions = spcVm.options.model.actions;
+      spcVm.cardClick = cardClick;
       spcVm.providers = data.providers;
-      spcVm.category = data.category;
 
-      function goToProducts(provider) {
-        $state.go(itemsRoute, {
-          categoryId: spcVm.category.id,
-          providerId: provider.id
-        });
+      function cardClick(provider) {
+        if (actions && actions.onCardClick) {
+          var cardData = {
+            provider: provider,
+            category: data.category
+          };
+          actions.onCardClick(cardData);
+        }
       }
     }
 

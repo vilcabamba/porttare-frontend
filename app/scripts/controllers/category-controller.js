@@ -5,7 +5,7 @@
     .module('porttare.controllers')
     .controller('CategoryController', CategoryController);
 
-  function CategoryController(data) {
+  function CategoryController(data, $state) {
     var categoryVm = this;
 
     categoryVm.category = data.provider_category;//jshint ignore:line
@@ -16,13 +16,23 @@
     // is moved to the left
     var centerMode = categoryVm.providers.length > 1;
     categoryVm.options = {
-      data: {
-        category: categoryVm.category,
-        providers: categoryVm.providers
+      model: {
+        data: {
+          category: categoryVm.category,
+          providers: categoryVm.providers
+        },
+        actions: {
+          onCardClick: function(data) {
+            var itemsRoute = 'app.categories.provider';
+            $state.go(itemsRoute, {
+              categoryId: data.category.id,
+              providerId: data.provider.id
+            });
+          }
+        }
       },
       slickSettings: {
         centerMode: centerMode,
-        slidesToShow: 4,
         responsive: [
           {
             breakpoint: 320,

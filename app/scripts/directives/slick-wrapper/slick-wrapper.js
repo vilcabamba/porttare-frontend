@@ -28,7 +28,8 @@
       slidesToShow: 1,
       slidesToScroll: 1,
       arrows: false,
-      swipeToSlide: true
+      swipeToSlide: true,
+      mobileFirst: true
     };
     swcVm.customSettings = angular.merge({}, defaultSlickConfig, swcVm.settings);
 
