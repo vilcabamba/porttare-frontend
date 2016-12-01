@@ -271,7 +271,7 @@
       form: {
         requiredField: 'Campo requerido. ',
         wrongEmail: 'Email incorrecto. '
-      } ,
+      },
       billingAddress: {
         legendForm: 'Dirección de facturación',
         newBillingAddress: 'Nueva dirección de facturación',
