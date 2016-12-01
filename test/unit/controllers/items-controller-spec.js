@@ -116,6 +116,7 @@
       describe('Create item', function () {
 
         beforeEach(inject(function () {
+          ctrl.item = {};
           ctrl.submitProcess(null);
         }));
 
@@ -170,6 +171,7 @@
       describe('Edit item', function () {
 
         beforeEach(inject(function () {
+          ctrl.item = {};
           ctrl.submitProcess(1);
         }));
 
