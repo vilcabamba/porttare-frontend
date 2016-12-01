@@ -93,10 +93,8 @@ ion-modal-view.item-page
         label.item.item-input.item-stacked-label.imgs
           span.input-label-imgs {{::("item.imagen"|translate|uppercase)}}
         .content
-          input(
-            type='file'
-            ngf-select
-            ng-model="itemsVm.item.imagenes"
+          button(
+            ngf-select="itemsVm.concatImages($files)"
             accept="image/*"
             class="inputfile"
             multiple
@@ -106,8 +104,8 @@ ion-modal-view.item-page
               img(class="img-camera")
             span.msgImg {{::("item.addImages"|translate)}}
         .content-prev-images
-          img.item-prev-image(ng-repeat="image in itemsVm.item.imagenes" ngf-src="image")
-          img.item-prev-image(ng-repeat="image in itemsVm.item.imagenes" ngf-src="image.imagen_url")
+          img.item-prev-image(ng-repeat="image in itemsVm.images" ngf-src="image")
+          img.item-prev-image(ng-repeat="image in itemsVm.images" ngf-src="image.imagen_url")
         show-error(array-messages='itemsVm.messages.imagen')
 
       .bar.bar-footer.footer-item-container

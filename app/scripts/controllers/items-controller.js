@@ -19,6 +19,8 @@
     itemsVm.submitProcess = submitProcess;
     itemsVm.deleteItem = deleteItem;
     itemsVm.query = '';
+    itemsVm.concatImages = concatImages;
+    itemsVm.images = [];
     var selectedItemIndex;
 
     getItems();
@@ -39,10 +41,15 @@
       $ionicLoading.hide();
     }
 
+    function concatImages(files){
+      itemsVm.images = itemsVm.images.concat(files);
+    }
+
     function newItem() {
       $ionicLoading.show({
         template: '{{::("globals.saving"|translate)}}'
       });
+      itemsVm.item.imagenes = itemsVm.images;
       ItemsService.newItem(itemsVm.item).then(function success(response){
         $ionicLoading.hide();
         $ionicPopup.alert({
@@ -58,6 +65,7 @@
       $ionicLoading.show({
         template: '{{::("globals.updating"|translate)}}'
       });
+      itemsVm.item.imagenes = itemsVm.images;
       ItemsService.editItem(itemsVm.item)
         .then(function success(resp) {
           $ionicLoading.hide();
