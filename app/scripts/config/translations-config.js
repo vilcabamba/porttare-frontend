@@ -42,7 +42,8 @@
           payments: 'Pagos',
           provider: 'Proveedor',
           cart: 'Mi carro',
-          wishlist: 'Wishlist'
+          wishlist: 'Wishlist',
+          billingAddresses : 'Direcciones de facturación'
         },
         provider: {
           orders: 'Pedidos',
@@ -270,6 +271,14 @@
       form: {
         requiredField: 'Campo requerido. ',
         wrongEmail: 'Email incorrecto. '
+      } ,
+      billingAddress: {
+        legendForm: 'Dirección de facturación',
+        newBillingAddress: 'Nueva dirección de facturación',
+        anyBillingAddress: 'No dispone de ninguna dirección de facturación.',
+        successSave: 'La dirección de facturación ha sido guardado éxitosamente',
+        successUpdate: 'La dirección de facturación ha sido actualizado éxitosamente',
+        isPatternRuc: 'Debe contener solo dígitos y una longitud de 13 caracteres'
       }
     });
 
