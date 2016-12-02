@@ -25,7 +25,7 @@
     }
 
     function showNewModal() {
-      piVm.userEdit= angular.copy(piVm.user);
+      piVm.userEdit = angular.copy(piVm.user);
       ModalService.showModal({
         parentScope: $scope,
         fromTemplateUrl: 'templates/profile/info/edit.html'
@@ -37,27 +37,21 @@
     }
 
     function submitProcess(user){
-      $ionicLoading.show({
-          template: 'Guardando...'
-        }
-      );
+      $ionicLoading.show({template: '{{::("globals.sending"|translate)}}'});
+
       $auth.updateAccount(user)
-        .then(function () {
-          $ionicLoading.hide();
-          $ionicPopup.alert({
-            title: 'Éxito',
-            template: '{{::("user.successUpdateProfile"|translate)}}'
+        .then(function (response) {
+          piVm.user = response.data.data;
+          $ionicLoading.hide().then(function () {
+            $ionicPopup.alert({
+              title: 'Éxito',
+              template: '{{::("user.successUpdateProfile"|translate)}}'
+            }).then(closeModal);
           });
-          closeModal();
         })
         .catch(function error(resp) {
           if (resp.data && resp.data.errors) {
             piVm.messages = resp.data.errors;
-          } else {
-            $ionicPopup.alert({
-              title: 'Error',
-              template: 'Hubo un error, intentalo nuevamente.'
-            });
           }
           $ionicLoading.hide();
         });
