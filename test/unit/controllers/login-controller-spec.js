@@ -14,7 +14,7 @@
         $ionicLoading,
         deferredLogout,
         deferIonicHistory,
-        LoginService,
+        SessionService,
         deferLoginWithFB,
         APP;
 
@@ -47,7 +47,8 @@
                           .returns(deferredLogout.promise)
       };
       $window           = _$window_;
-      LoginService = {
+      SessionService = {
+        logOut: sinon.stub().returns($auth.signOut()),
         loginWithFB: sinon.stub().returns(deferLoginWithFB.promise)
       };
       APP = {
@@ -66,7 +67,7 @@
           '$auth': $auth,
           '$window': $window,
           '$scope': $scope,
-          'LoginService': LoginService,
+          'SessionService': SessionService,
           'APP': APP
         });
         $rootScope = _$rootScope_;
@@ -113,7 +114,7 @@
           '$auth': $auth,
           '$ionicHistory': $ionicHistory,
           '$scope': $scope,
-          'LoginService': LoginService,
+          'SessionService': SessionService,
           'APP': APP
         });
         $rootScope = _$rootScope_;
