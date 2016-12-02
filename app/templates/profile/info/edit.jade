@@ -27,7 +27,7 @@ ion-modal-view.client-page
         show-error(array-messages='piVm.user.custom_image')
 
         label.item.item-input.item-stacked-label(
-          ng-class="{'item-error': piVm.user.email}"
+          ng-class="{'item-error': piVm.messages.email}"
         )
           span.input-label {{::("user.email"|translate)}}
           input(
