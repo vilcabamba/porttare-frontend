@@ -16,7 +16,7 @@
       'jade'
     ],
     test: [
-      'compass',
+      'compass:test',
       'copy:styles',
       'copy:vendor',
       'copy:fonts',

@@ -27,6 +27,11 @@
         generatedImagesDir: '<%= yeoman.dist %>/<%= yeoman.images %>/generated'
       }
     },
+    test: {
+      options: {
+        force: true
+      }
+    },
     staging: {
       options: {
         outputStyle: 'compressed',
