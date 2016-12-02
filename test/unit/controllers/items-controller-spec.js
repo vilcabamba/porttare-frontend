@@ -16,6 +16,7 @@
       $rootScope,
       deferNewItem,
       deferEditItem,
+      deferIonic,
       ErrorHandlerService,
       deferDeleteItem;
 
@@ -69,15 +70,16 @@
         $scope = $rootScope.$new();
         $q = _$q_;
         deferGetItems = $q.defer();
+        deferIonic = $q.defer();
         ItemsService = _ItemsService_;
         ModalService = _ModalService_;
         $controller = _$controller_;
         $ionicLoading = {
-          show: sinon.stub(),
-          hide: sinon.stub()
+          show: sinon.stub().returns(deferIonic.promise),
+          hide: sinon.stub().returns(deferIonic.promise)
         };
         $ionicPopup = {
-          alert: sinon.stub()
+          alert: sinon.stub().returns(deferIonic.promise)
         };
       })
     );
@@ -141,6 +143,7 @@
         it('if successful, ionicPopup.alert should be called', function () {
           ctrl.items = [];
           deferNewItem.resolve({data: 'data'});
+          deferIonic.resolve();
           $scope.$digest();
           sinon.assert.calledOnce($ionicPopup.alert);
         });

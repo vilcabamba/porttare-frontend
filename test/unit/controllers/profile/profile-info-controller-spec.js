@@ -13,6 +13,7 @@
       $ionicPopup,
       $scope,
       deferredUpdate,
+      deferIonic,
       deferGetProfile;
     beforeEach(module('porttare.controllers'));
     beforeEach(module('porttare.services', function($provide){
@@ -45,19 +46,20 @@
         $rootScope = _$rootScope_;
         $scope = $rootScope.$new();
         deferredUpdate = $q.defer();
+        deferIonic = $q.defer();
         ProfileService = _ProfileService_;
         ModalService = _ModalService_;
         $controller = _$controller_;
         $ionicLoading = {
-          show: sinon.stub(),
-          hide: sinon.stub()
+          show: sinon.stub().returns(deferIonic.promise),
+          hide: sinon.stub().returns(deferIonic.promise)
         };
         $auth             = {
           updateAccount: sinon.stub()
                             .returns(deferredUpdate.promise)
         };
         $ionicPopup = {
-          alert: sinon.stub()
+          alert: sinon.stub().returns(deferIonic.promise)
         };
       })
     );
@@ -83,7 +85,8 @@
                     fecha_nacimiento:'1973-08-06' //jshint ignore:line
                   };
         ctrl.submitProcess(user);
-        deferredUpdate.resolve();
+        deferredUpdate.resolve({data: { user: {}}});
+        deferIonic.resolve();
         $rootScope.$digest();
         sinon.assert.calledOnce($ionicPopup.alert);
       });
