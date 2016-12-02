@@ -1,36 +1,21 @@
-ion-content.profile-page
-  link-button(on-click="piVm.showNewModal(piVm.user)" text="{{::('globals.edit'|translate)}}")
-  .row
-    label.item.item-input.item-stacked-label
-      span.input-label {{::("user.name"|translate)}}
+ion-content.profile-page.responsive-md
+  .btn-edit
+    link-button(on-click="piVm.showNewModal(piVm.user)" text="{{::('globals.edit'|translate)}}")
+  .col.col-offset-25.col-50
+    .row
+      .col.col-label {{::("user.name"|translate)}}
+      .col.col-value {{piVm.user.name}}
+    .row
+      .col.col-label {{::("user.email"|translate)}}
+      .col.col-value {{piVm.user.email}}
+    .row
+      .col.col-label {{::("user.age"|translate)}}
+      .col.col-value {{piVm.user.fecha_nacimiento | age}}
 
-    label.item.item-input.item-stacked-label
-      span.input-label {{piVm.user.name}}
-  .row
-    label.item.item-input.item-stacked-label
-      span.input-label {{::("user.email"|translate)}}
+    .row
+      .col.col-label {{::("user.country"|translate)}}
+      .col.col-value {{piVm.user.ciudad}}
 
-    label.item.item-input.item-stacked-label
-      span.input-label {{piVm.user.email}}
-  .row
-    label.item.item-input.item-stacked-label
-      span.input-label {{::("user.age"|translate)}}
-
-    label.item.item-input.item-stacked-label
-      span.input-label {{piVm.user.fecha_nacimiento | age}}
-
-  .row
-    label.item.item-input.item-stacked-label
-      span.input-label {{::("user.country"|translate)}}
-
-    label.item.item-input.item-stacked-label
-      span.input-label {{piVm.user.ciudad}}
-
-  .row
-    label.item.item-input.item-stacked-label
-      span.input-label {{::("user.password"|translate)}}
-
-    label.item.item-input.item-stacked-label
-      span.input-label ********
-
-
+    .row
+      .col.col-label {{::("user.password"|translate)}}
+      .col.col-value ********
