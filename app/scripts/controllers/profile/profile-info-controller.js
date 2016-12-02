@@ -38,13 +38,16 @@
 
     function submitProcess(user){
       $auth.updateAccount(user)
-        .then(function() {
-          $ionicLoading.hide();
-          $ionicPopup.alert({
-            title: 'Éxito',
-            template: '{{::("user.successUpdateProfile"|translate)}}'
+        .then(function(response) {
+          piVm.user = response.data.user;
+          $ionicLoading.hide().then(function(){
+            $ionicPopup.alert({
+              title: 'Éxito',
+              template: '{{::("user.successUpdateProfile"|translate)}}'
+            }).then(function(){
+              closeModal();
+            });
           });
-          closeModal();
         })
         .catch(function() {
           $ionicPopup.alert({

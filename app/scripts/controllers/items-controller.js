@@ -51,13 +51,15 @@
       });
       itemsVm.item.imagenes = itemsVm.images;
       ItemsService.newItem(itemsVm.item).then(function success(response){
-        $ionicLoading.hide();
-        $ionicPopup.alert({
-          title: 'Éxito',
-          template: '{{::("item.successItemSave"|translate)}}'
+        $ionicLoading.hide().then(function(){
+          itemsVm.items.push(response.data.provider_item); //jshint ignore:line
+          $ionicPopup.alert({
+            title: 'Éxito',
+            template: '{{::("item.successItemSave"|translate)}}'
+          }).then(function(){
+            itemsVm.closeModal();
+          });
         });
-        itemsVm.items.push(response.provider_item); //jshint ignore:line
-        itemsVm.closeModal();
       }, error);
     }
 
