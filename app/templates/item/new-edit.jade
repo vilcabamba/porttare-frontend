@@ -27,9 +27,10 @@ ion-modal-view.item-page
             ng-class='input-error'
             required
           )
-        .show-errors(ng-messages="itemsVm.itemForm.titulo.$error" ng-if="itemsVm.itemForm.titulo.$touched")
-          span(ng-message="required" class="message-error") {{::("globals.isRequired"|translate)}}
-        show-error(array-messages='itemsVm.messages.titulo')
+        .errors-wrapper    
+          .show-errors(ng-messages="itemsVm.itemForm.titulo.$error" ng-if="itemsVm.itemForm.titulo.$touched")
+            span(ng-message="required" class="message-error") {{::("globals.isRequired"|translate)}}
+          show-error(array-messages='itemsVm.messages.titulo')
 
         label.item.item-input.item-stacked-label
           span.input-label {{::("item.descripcion"|translate|uppercase)}}
@@ -55,9 +56,10 @@ ion-modal-view.item-page
             option(selected='' value='volumen') Volumen
             option(value='unidades') Unidades
             option(value='longitud') Longitud
-        .show-errors(ng-messages="itemsVm.itemForm.unidad_medida.$error" ng-if="itemsVm.itemForm.unidad_medida.$touched")
-          span(ng-message="required" class="message-error") {{::("globals.isRequired"|translate)}}
-        show-error(array-messages='itemsVm.messages.unidad_medida')
+        .errors-wrapper    
+          span.show-errors(ng-messages="itemsVm.itemForm.unidad_medida.$error" ng-if="itemsVm.itemForm.unidad_medida.$touched")
+            span(ng-message="required" class="message-error") {{::("globals.isRequired"|translate)}}
+          show-error(array-messages='itemsVm.messages.unidad_medida')
 
         label.item.item-input.item-stacked-label
           span.input-label {{::("item.volumen"|translate|uppercase)}}
@@ -79,9 +81,10 @@ ion-modal-view.item-page
             ng-model='itemsVm.item.precio'
             required
           )
-        .show-errors(ng-messages="itemsVm.itemForm.precio.$error" ng-if="itemsVm.itemForm.precio.$touched")
-          span(ng-message="required" class="message-error") {{::("globals.isRequired"|translate)}}
-        show-error(array-messages='itemsVm.messages.precio')
+        .errors-wrapper
+          span.show-errors(ng-messages="itemsVm.itemForm.precio.$error" ng-if="itemsVm.itemForm.precio.$touched")
+            span(ng-message="required" class="message-error") {{::("globals.isRequired"|translate)}}
+          show-error(array-messages='itemsVm.messages.precio')
 
         label.item.item-input.item-stacked-label
           span.input-label {{::("item.peso"|translate|uppercase)}}
