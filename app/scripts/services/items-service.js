@@ -8,14 +8,17 @@
   function ItemsService($http,
                         Upload,
                         ENV,
-                        CommonService) {
+                        CommonService,
+                        CategoriesService,
+                        $q) {
 
     var service = {
       newItem: newItem,
       getItem: getItem,
       getItems: getItems,
       editItem: editItem,
-      deleteItem: deleteItem
+      deleteItem: deleteItem,
+      getConfigCategorias: getConfigCategorias
     };
 
     return service;
@@ -81,6 +84,23 @@
       }).then(function (resp) {
         return resp.data;
       });
+    }
+
+    function getConfigCategorias(){
+      var deferred = $q.defer();
+      var selectize = {
+        create: true,
+        plugins: ['remove_button'],
+        valueField: 'id',
+        labelField: 'titulo',
+        searchField: 'titulo'
+      };
+      CategoriesService.getCategories().then(function success(resp){
+        var data = {selectize: selectize, categories:resp.data.provider_categories}; //jshint ignore:line
+        deferred.resolve(data);
+      });
+      return deferred.promise;
+
     }
   }
 })();

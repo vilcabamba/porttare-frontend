@@ -5,31 +5,22 @@
     .module('porttare.controllers')
     .controller('ItemsController', ItemsController);
 
-<<<<<<< HEAD
+
   function ItemsController($ionicLoading,
-=======
-  function ItemsController(ItemsService,
-                           CategoriesService,
-                           ModalService,
-                           $ionicLoading,
->>>>>>> Asignación de categorias en producto
                            $ionicPopup,
                            $scope,
                            apiResources,
                            ItemsService,
-                           ModalService) {
+                           ModalService,
+                           ErrorHandlerService) {
     var itemsVm = this,
         modalScope;
     itemsVm.newItemModal = launchModal;
     itemsVm.submitProcess = newItem; // NB currently here only to honour specs. wipe me?
     itemsVm.query = '';
 
-<<<<<<< HEAD
     init();
-=======
-    getItems();
-    getCategorias();
->>>>>>> Asignación de categorias en producto
+    getConfigCategorias();
 
     function init() {
       itemsVm.items = apiResources.provider_items; //jshint ignore:line
@@ -60,59 +51,13 @@
       }, error);
     }
 
-<<<<<<< HEAD
-=======
-    function editItem() {
-      $ionicLoading.show({
-        template: '{{::("globals.updating"|translate)}}'
-      });
-      itemsVm.item.imagenes = itemsVm.images;
-      ItemsService.editItem(itemsVm.item)
-        .then(function success(resp) {
-          $ionicLoading.hide();
-          $ionicPopup.alert({
-            title: 'Éxito',
-            template: '{{::("item.successUpdateItem"|translate)}}'
-          });
-          itemsVm.items[selectedItemIndex] = resp.provider_item; //jshint ignore:line
-          itemsVm.closeModal();
-        }, error);
-    }
-
-    function deleteItem(itemId) {
-      $ionicLoading.show({
-        template: '{{::("globals.deleting"|translate)}}'
-      });
-      ItemsService.deleteItem(itemId)
-        .then(function success(){
-          $ionicLoading.hide();
-          $ionicPopup.alert({
-            title: 'Éxito',
-            template: '{{::("item.successDeleteItem"|translate)}}'
-          });
-          itemsVm.items.splice(selectedItemIndex, 1);
-        },
-        function error(){
-          $ionicLoading.hide();
-          $ionicPopup.alert({
-            title: 'Error',
-            template: '{{::("globals.pleaseTryAgain"|translate)}}'
-          });
-        });
-    }
-
-    function getCategorias(){
-      CategoriesService.getCategories().then(function success(resp){
-        itemsVm.categorias = resp.data.provider_categories; //jshint ignore:line
+    function getConfigCategorias(){
+      ItemsService.getConfigCategorias().then(function success(resp){
+        itemsVm.selectize = resp.selectize;
+        itemsVm.categorias = resp.categories;
       },ErrorHandlerService.handleCommonErrorGET);
     }
 
-    function resetImages(newImages) {
-      itemsVm.images = newImages;
-      loadImageUrls();
-    }
-
->>>>>>> Asignación de categorias en producto
     function launchModal() {
       modalScope = $scope.$new(true); // isolated
       modalScope.modalVm = itemsVm;
