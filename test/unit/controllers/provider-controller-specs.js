@@ -50,7 +50,7 @@
         $auth = {
           user: {name:'', email:''}
         };
-        stateRedirect = 'provider.items';
+        stateRedirect = 'provider.items.index';
       })
     );
 

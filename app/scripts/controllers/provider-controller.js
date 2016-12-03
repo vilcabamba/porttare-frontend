@@ -15,7 +15,7 @@
     var providerVm = this;
     initProvider();
 
-    var stateRedirect = 'provider.items';
+    var stateRedirect = 'provider.items.index';
     var transKeys = [
       'provider.methods.cash',
       'provider.methods.creditCard',
