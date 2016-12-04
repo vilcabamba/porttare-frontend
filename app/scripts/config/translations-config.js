@@ -329,6 +329,20 @@
         successSave: 'La dirección de facturación ha sido guardado éxitosamente',
         successUpdate: 'La dirección de facturación ha sido actualizado éxitosamente',
         isPatternRuc: 'Debe contener solo dígitos y una longitud de 13 caracteres'
+      },
+      dispatchers:{
+        dispatchers: 'Despachadores',
+        dispatcher: 'Despachador',
+        dispatcherSearch: 'Buscar Despachador',
+        id: 'Id',
+        dispatcherAny: 'No has agregado ningún despachador todavía',
+        dispacherClick:'Da click en Nuevo Despachador para empezar',
+        dispacherEmail: 'Email',
+        dispacherOffice: 'Sucursal',
+        dispatchersCreate: 'El Despachador ha sido guardado éxitosamente',
+        dispatchersUpdate: 'El Despachador ha sido actualizado éxitosamente',
+        dispatchersDelete: 'El Despachador ha sido eliminado éxitosamente',
+        dispatchersData: 'Datos del Despachador'
       }
     });
 

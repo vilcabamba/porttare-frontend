@@ -11,7 +11,8 @@
       editObject: editObject,
       newObject: newObject,
       getObjects: getObjects,
-      getObject: getObject
+      getObject: getObject,
+      deleteObject:deleteObject
     };
 
     return service;
@@ -57,5 +58,13 @@
           return resp.data;
         });
     }
+
+    function deleteObject(objectId, url){
+      return $http({
+        method: 'DELETE',
+        url: ENV.apiHost + url + objectId
+      });
+    }
+
   }
 })();

@@ -4,8 +4,8 @@ ion-view(
   ion-nav-title
     .alt-logo
   ion-content.billing-addresses-list
-    .row.footer-item-container
-      button.button-secondary-yellow(ng-click="billingAddressesVm.showNewModal()")
+    .row.col.text-center
+      button.action-button.yellow(ng-click="billingAddressesVm.showNewModal()")
         {{::("billingAddress.newBillingAddress"|translate)}}
 
     .row

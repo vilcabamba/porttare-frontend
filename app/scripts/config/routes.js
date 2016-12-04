@@ -473,6 +473,26 @@ function routes($stateProvider, $urlRouterProvider) {
         controllerAs: 'billingAddressesVm'
       }
     }
+})
+.state('provider.dispatchers', {
+    url: '/dispatchers',
+    views: {
+      'menuContent@provider': {
+        templateUrl: 'templates/dispatchers/dispatchers.html',
+        controller: 'DispatchersController',
+        controllerAs: 'dispatchersVm'
+      }
+    }
+})
+.state('provider.dispatcher', {
+    url: '/dispatcher/:id',
+    views: {
+      'menuContent@provider': {
+        templateUrl: 'templates/dispatchers/detail.html',
+        controller: 'DispatcherController',
+        controllerAs: 'dispatchersVm'
+      }
+    }
 });
 
   // if none of the above states are matched, use this as the fallback

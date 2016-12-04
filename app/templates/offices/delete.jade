@@ -1,5 +1,5 @@
 ion-modal-view.item-page
-  ion-header-bar.bar.bar-header.bar-light.bar-base-yellow(
+  ion-header-bar.bar.bar-header.bar-light(
     align-title="center"
   )
     .ion-nav-buttons(side="left")
@@ -42,7 +42,8 @@ ion-modal-view.item-page
               | {{::("office.not"|translate)}}
         show-error(array-messages="officesVm.messages.definitivo")
 
-      .bar.bar-footer.footer-item-container
-        button.button-secondary-red(
-          type="submit"
-        ) {{::("office.officeDeleteClose"|translate|uppercase)}}
+      .bar.bar-footer
+        row.col.text-center
+          button.action-button.red(
+            type="submit"
+          ) {{::("office.officeDeleteClose"|translate|uppercase)}}
