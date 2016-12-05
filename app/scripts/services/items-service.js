@@ -21,7 +21,7 @@
 
     function newItem(item) {
       var promise;
-      if (item && item.imagenes) {
+      if ( hasNestedImages(item) ) {
         promise = saveWithNestedImages({
           method: 'POST',
           resourceUri: '/api/provider/items',
@@ -30,9 +30,7 @@
       } else {
         promise = CommonService.newObject(item, '/api/provider/items');
       }
-      return promise.then(function (resp) {
-        return resp;
-      });
+      return promise;
     }
 
     function getItems() {
@@ -41,24 +39,28 @@
 
     function editItem(item) {
       var promise;
-      if (item && item.imagenes) {
+      if ( hasNestedImages(item ) ) {
         promise = saveWithNestedImages({
           method: 'PUT',
           resourceUri: '/api/provider/items/' + item.id,
           item: item
         });
       } else {
-        promise = CommonService.editObject(item, '/api/provider/items');
+        promise = CommonService.editObject(item, '/api/provider/items/');
       }
-      return promise.then(function (resp) {
-        return resp.data;
-      });
+      return promise;
     }
 
     function deleteItem(item) {
       return $http({
         method: 'DELETE',
         url: ENV.apiHost + '/api/provider/items/' + item
+      });
+    }
+
+    function hasNestedImages(item) {
+      return item && item.imagenes && item.imagenes.some(function (instance) {
+        return instance.constructor === File;
       });
     }
 
@@ -71,6 +73,8 @@
         method: options.method,
         url: ENV.apiHost + options.resourceUri,
         data: options.item
+      }).then(function (resp) {
+        return resp.data;
       });
     }
   }

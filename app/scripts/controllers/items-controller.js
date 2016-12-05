@@ -63,7 +63,7 @@
       itemsVm.item.imagenes = itemsVm.images;
       ItemsService.newItem(itemsVm.item).then(function success(response){
         $ionicLoading.hide().then(function(){
-          itemsVm.items.push(response.data.provider_item); //jshint ignore:line
+          itemsVm.items.push(response.provider_item); //jshint ignore:line
           $ionicPopup.alert({
             title: 'Éxito',
             template: '{{::("item.successItemSave"|translate)}}'
@@ -79,16 +79,16 @@
         template: '{{::("globals.updating"|translate)}}'
       });
       itemsVm.item.imagenes = itemsVm.images;
-      ItemsService.editItem(itemsVm.item)
-        .then(function success(resp) {
-          $ionicLoading.hide();
+      ItemsService.editItem(itemsVm.item).then(function success(resp) {
+        itemsVm.items[selectedItemIndex] = resp.provider_item; //jshint ignore:line
+
+        $ionicLoading.hide().then(function () {
           $ionicPopup.alert({
             title: 'Éxito',
             template: '{{::("item.successUpdateItem"|translate)}}'
-          });
-          itemsVm.items[selectedItemIndex] = resp.provider_item; //jshint ignore:line
-          itemsVm.closeModal();
-        }, error);
+          }).then(itemsVm.closeModal);
+        });
+      }, error);
     }
 
     function deleteItem(itemId) {
