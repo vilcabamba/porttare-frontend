@@ -11,7 +11,8 @@
                                  ErrorHandlerService,
                                  $scope,
                                  $ionicLoading,
-                                 $ionicPopup) {
+                                 $ionicPopup,
+                                 $state){
 
     var dispatchersVm = this;
     dispatchersVm.showEditDispatcher = showEditDispatcher;
@@ -34,6 +35,7 @@
           title: 'Éxito',
           template: '{{::("dispatchers.dispatchersDelete"|translate)}}'
         });
+        $state.go('provider.dispatchers.index');
       },ErrorHandlerService.handleCommonErrorGET);
     }
 
@@ -51,13 +53,15 @@
     function submitDispatcher(){
       $ionicLoading.show({template: '{{::("globals.updating"|translate)}}'});
       DispatchersService.updateDispatcher(dispatchersVm.dispatcher).then(function success(resp){
-        $ionicLoading.hide();
-        $ionicPopup.alert({
-          title: 'Éxito',
-          template: '{{::("dispatchers.dispatchersUpdate"|translate)}}'
+        $ionicLoading.hide().then(function(){
+          dispatchersVm.dispatcherDetail = resp.provider_dispatcher; //jshint ignore:line
+          $ionicPopup.alert({
+            title: 'Éxito',
+            template: '{{::("dispatchers.dispatchersUpdate"|translate)}}'
+          }).then(function(){
+            closeDispatcher();
+          });
         });
-        closeDispatcher();
-        dispatchersVm.dispatcherDetail = resp.provider_dispatcher; //jshint ignore:line
       }, function(rpta){
         dispatchersVm.messages = rpta.status===422 ? rpta.data.errors:undefined;
         $ionicLoading.hide();

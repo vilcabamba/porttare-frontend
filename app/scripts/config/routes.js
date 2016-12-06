@@ -476,6 +476,10 @@ function routes($stateProvider, $urlRouterProvider) {
 })
 .state('provider.dispatchers', {
     url: '/dispatchers',
+    abstract: true
+})
+.state('provider.dispatchers.index', {
+    url: '/',
     views: {
       'menuContent@provider': {
         templateUrl: 'templates/dispatchers/dispatchers.html',
@@ -484,8 +488,8 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
 })
-.state('provider.dispatcher', {
-    url: '/dispatcher/:id',
+.state('provider.dispatchers.show', {
+    url: '/:id',
     views: {
       'menuContent@provider': {
         templateUrl: 'templates/dispatchers/detail.html',

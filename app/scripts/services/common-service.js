@@ -63,7 +63,10 @@
       return $http({
         method: 'DELETE',
         url: ENV.apiHost + url + objectId
-      });
+      })
+        .then(function success(resp){
+          return resp.data;
+        });
     }
 
   }

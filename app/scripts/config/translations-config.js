@@ -146,7 +146,9 @@
         start: 'Empezar',
         sendRequest: 'Enviar solicitud',
         isRequired: 'Este campo es obligatorio',
-        disabledUser: 'Su cuenta ha sido deshabilitada'
+        disabledUser: 'Su cuenta ha sido deshabilitada',
+        id: 'Id',
+        email: 'Email',
       },
       item: {
         item: 'Producto',
@@ -334,10 +336,8 @@
         dispatchers: 'Despachadores',
         dispatcher: 'Despachador',
         dispatcherSearch: 'Buscar Despachador',
-        id: 'Id',
         dispatcherAny: 'No has agregado ningún despachador todavía',
         dispacherClick:'Da click en Nuevo Despachador para empezar',
-        dispacherEmail: 'Email',
         dispacherOffice: 'Sucursal',
         dispatchersCreate: 'El Despachador ha sido guardado éxitosamente',
         dispatchersUpdate: 'El Despachador ha sido actualizado éxitosamente',

@@ -14,13 +14,13 @@ ion-modal-view.item-page
       novalidate
     )
       .list.list-inset
-        legend(ng-hide="dispatchersVm.dispatcher.id").title {{::("globals.new"|translate)}} {{::("dispatchers.dispatcher"|translate)}}
-        legend(ng-show="dispatchersVm.dispatcher.id").title {{::("globals.edit"|translate)}} {{::("dispatchers.dispatcher"|translate)}}
+        legend(ng-if ="!dispatchersVm.dispatcher.id").title {{::("globals.new"|translate)}} {{::("dispatchers.dispatcher"|translate)}}
+        legend(ng-if ="dispatchersVm.dispatcher.id").title {{::("globals.edit"|translate)}} {{::("dispatchers.dispatcher"|translate)}}
 
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': dispatchersVm.form.email.$touched && dispatchersVm.form.email.$invalid}"
         )
-          span.input-label {{::("dispatchers.dispacherEmail"|translate|uppercase)}}
+          span.input-label {{::("globals.email"|translate|uppercase)}}
           input(
             type="email"
             name="email"
@@ -29,8 +29,8 @@ ion-modal-view.item-page
             required
           )
           .show-errors(ng-messages="dispatchersVm.form.email.$error" ng-if="dispatchersVm.form.email.$touched")
-            span(ng-message="required" class="message-error") {{::("form.requiredField"|translate)}}
-            span(ng-message="email" class="message-error") {{::("form.wrongEmail"|translate)}}
+            span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
+            span.message-error(ng-message="email") {{::("form.wrongEmail"|translate)}}
         show-error(array-messages="dispatchersVm.messages.email")
 
         label.item.item-input.item-select(
@@ -42,7 +42,7 @@ ion-modal-view.item-page
                 ng-options="item.id as item.direccion for item in dispatchersVm.offices"
                 required)
           .show-errors(ng-messages="dispatchersVm.form.provider_office_id.$error" ng-if="dispatchersVm.form.provider_office_id.$touched")
-            span(ng-message="required" class="message-error") {{::("form.requiredField"|translate)}}
+            span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
         show-error(array-messages="dispatchersVm.messages.provider_office_id")
 
       .bar.bar-footer
