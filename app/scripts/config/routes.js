@@ -474,12 +474,12 @@ function routes($stateProvider, $urlRouterProvider) {
         controllerAs: 'billingAddressesVm'
       }
     }
-})
-.state('provider.dispatchers', {
+  })
+  .state('provider.dispatchers', {
     url: '/dispatchers',
     abstract: true
-})
-.state('provider.dispatchers.index', {
+  })
+  .state('provider.dispatchers.index', {
     cache: false,
     url: '/',
     views: {
@@ -489,8 +489,8 @@ function routes($stateProvider, $urlRouterProvider) {
         controllerAs: 'dispatchersVm'
       }
     }
-})
-.state('provider.dispatchers.show', {
+  })
+  .state('provider.dispatchers.show', {
     url: '/:id',
     views: {
       'menuContent@provider': {
@@ -499,7 +499,7 @@ function routes($stateProvider, $urlRouterProvider) {
         controllerAs: 'dispatchersVm'
       }
     }
-});
+  });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise(function ($injector, $location) {
