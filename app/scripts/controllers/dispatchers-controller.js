@@ -41,21 +41,23 @@
     }
 
     function submitDispatcher(){
-      $ionicLoading.show({template: '{{::("globals.saving"|translate)}}'});
-      DispatchersService.createDispatcher(dispatchersVm.dispatcher).then(function success(resp){
-        $ionicLoading.hide().then(function(){
-          dispatchersVm.dispatchers.push(resp.provider_dispatcher); //jshint ignore:line
-          $ionicPopup.alert({
-            title: 'Éxito',
-            template: '{{::("dispatchers.dispatchersCreate"|translate)}}'
-          }).then(function(){
-            closeDispatcher();
+      if(dispatchersVm.form.$valid){
+        $ionicLoading.show({template: '{{::("globals.saving"|translate)}}'});
+        DispatchersService.createDispatcher(dispatchersVm.dispatcher).then(function success(resp){
+          $ionicLoading.hide().then(function(){
+            dispatchersVm.dispatchers.push(resp.provider_dispatcher); //jshint ignore:line
+            $ionicPopup.alert({
+              title: 'Éxito',
+              template: '{{::("dispatchers.dispatchersCreate"|translate)}}'
+            }).then(function(){
+              closeDispatcher();
+            });
           });
+        }, function(rpta){
+          dispatchersVm.messages = rpta.status===422 ? rpta.data.errors:undefined;
+          $ionicLoading.hide();
         });
-      }, function(rpta){
-        dispatchersVm.messages = rpta.status===422 ? rpta.data.errors:undefined;
-        $ionicLoading.hide();
-      });
+      }
     }
 
     function closeDispatcher() {

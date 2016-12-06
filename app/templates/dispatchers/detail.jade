@@ -15,7 +15,7 @@ ion-view(
     .row
         table.table
           tr
-            td.opacity {{::("globals.id"|translate)}}
+            td.opacity {{::("globals.id"|translate|uppercase)}}
             td.text-center {{dispatchersVm.dispatcherDetail.id}}
           tr
             td.opacity {{::("globals.email"|translate)}}

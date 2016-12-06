@@ -52,15 +52,22 @@
       if(billingAddressesVm.form.$valid){
         billingAddressesVm.billingAddress.id ? updateBillingAddress():saveBillingAddress();// jshint ignore:line
       }
-  }
+    }
 
     function saveBillingAddress(){
       $ionicLoading.show({
         template: '{{::("globals.saving"|translate)}}'
       });
       BillingAddressesService.createBillingAddress(billingAddressesVm.billingAddress).then(function success(resp){
-        showMessage('billingAddress.successSave');
-        billingAddressesVm.billingAddresses.push(resp.customer_billing_address); //jshint ignore:line
+        $ionicLoading.hide().then(function(){
+          billingAddressesVm.billingAddresses.push(resp.customer_billing_address); //jshint ignore:line
+          $ionicPopup.alert({
+            title: 'Éxito',
+            template: '{{::("billingAddress.successSave"|translate)}}'
+          }).then(function(){
+            closeModal();
+          });
+        });
       }, error);
     }
 
@@ -69,23 +76,22 @@
         template: '{{::("globals.updating"|translate)}}'
       });
       BillingAddressesService.updateBillingAddress(billingAddressesVm.billingAddress).then(function success(resp){
-        showMessage('billingAddress.successUpdate');
-        billingAddressesVm.billingAddresses[billingAddressesIndex] = resp.customer_billing_address; //jshint ignore:line
+        $ionicLoading.hide().then(function(){
+          billingAddressesVm.billingAddresses[billingAddressesIndex] = resp.customer_billing_address; //jshint ignore:line
+          $ionicPopup.alert({
+            title: 'Éxito',
+            template: '{{::("billingAddress.successUpdate"|translate)}}'
+          }).then(function(){
+            closeModal();
+          });
+        });
+
       }, error);
     }
 
     function error(res){
       billingAddressesVm.messages = res.status===422 ? res.data.errors:undefined;
       $ionicLoading.hide();
-    }
-
-    function showMessage(template){
-      $ionicLoading.hide();
-      $ionicPopup.alert({
-        title: 'Éxito',
-        template: '{{::("'+template+'"|translate)}}'
-      });
-      closeModal();
     }
 
   }

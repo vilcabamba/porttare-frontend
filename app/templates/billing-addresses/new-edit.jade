@@ -14,8 +14,8 @@ ion-modal-view.item-page
       novalidate
     )
       .list.list-inset
-        legend(ng-hide="billingAddressesVm.billingAddress.id").title {{::("billingAddress.newBillingAddress"|translate|uppercase)}}
-        legend(ng-show="billingAddressesVm.billingAddress.id").title {{::("globals.edit"|translate|uppercase)}} {{::("billingAddress.legendForm"|translate|uppercase)}}
+        legend(ng-if="!billingAddressesVm.billingAddress.id").title {{::("billingAddress.newBillingAddress"|translate|uppercase)}}
+        legend(ng-if="billingAddressesVm.billingAddress.id").title {{::("globals.edit"|translate|uppercase)}} {{::("billingAddress.legendForm"|translate|uppercase)}}
 
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': billingAddressesVm.form.ruc.$touched && billingAddressesVm.form.ruc.$invalid}"
@@ -30,8 +30,8 @@ ion-modal-view.item-page
             required
           )
           .show-errors(ng-messages="billingAddressesVm.form.ruc.$error" ng-if="billingAddressesVm.form.ruc.$touched")
-            span(ng-message="required" class="message-error") {{::("form.requiredField"|translate)}}
-            span(ng-message="pattern" class="message-error") {{::("billingAddress.isPatternRuc"|translate)}}
+            span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
+            span.message-error(ng-message="pattern") {{::("billingAddress.isPatternRuc"|translate)}}
         show-error(array-messages="billingAddressesVm.messages.ruc")
 
         label.item.item-input.item-stacked-label(
@@ -46,7 +46,7 @@ ion-modal-view.item-page
             required
           )
           .show-errors(ng-messages="billingAddressesVm.form.razon_social.$error" ng-if="billingAddressesVm.form.razon_social.$touched")
-            span(ng-message="required" class="message-error") {{::("form.requiredField"|translate)}}
+            span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
         show-error(array-messages="billingAddressesVm.messages.razon_social")
 
         label.item.item-input.item-stacked-label(
@@ -61,7 +61,7 @@ ion-modal-view.item-page
             required
           )
           .show-errors(ng-messages="billingAddressesVm.form.direccion.$error" ng-if="billingAddressesVm.form.direccion.$touched")
-            span(ng-message="required" class="message-error") {{::("form.requiredField"|translate)}}
+            span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
         show-error(array-messages="billingAddressesVm.messages.direccion")
 
         label.item.item-input.item-stacked-label
@@ -84,7 +84,7 @@ ion-modal-view.item-page
             ng-class="input-error"
           )
           .show-errors(ng-messages="billingAddressesVm.form.email.$error" ng-if="billingAddressesVm.form.email.$touched")
-            span(ng-message="email" class="message-error") {{::("form.wrongEmail"|translate)}}
+            span.message-error(ng-message="email") {{::("form.wrongEmail"|translate)}}
         show-error(array-messages="billingAddressesVm.messages.email")
 
         label.item.item-input.item-stacked-label
