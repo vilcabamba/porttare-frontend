@@ -12,7 +12,8 @@
                                  $scope,
                                  $ionicLoading,
                                  $ionicPopup,
-                                 $state){
+                                 $state,
+                                 $stateParams){
 
     var dispatchersVm = this;
     dispatchersVm.showEditDispatcher = showEditDispatcher;
@@ -22,8 +23,8 @@
     initDispatcher();
 
     function initDispatcher() {
-      DispatchersService.getDispatcher().then(function(results){
-         dispatchersVm.dispatcherDetail = results; //jshint ignore:line
+      DispatchersService.getDispatcher($stateParams.id).then(function(results){
+         dispatchersVm.dispatcherDetail = results.provider_dispatcher; //jshint ignore:line
       }, ErrorHandlerService.handleCommonErrorGET);
     }
 
@@ -34,8 +35,10 @@
         $ionicPopup.alert({
           title: 'Éxito',
           template: '{{::("dispatchers.dispatchersDelete"|translate)}}'
+        }).then(function(){
+          $state.go('provider.dispatchers.index');
         });
-        $state.go('provider.dispatchers.index');
+
       },ErrorHandlerService.handleCommonErrorGET);
     }
 

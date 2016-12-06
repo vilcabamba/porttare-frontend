@@ -290,6 +290,7 @@ function routes($stateProvider, $urlRouterProvider) {
     }
   })
   .state('provider.offices', {
+    cache: false,
     url: '/offices',
     views: {
       'menuContent@provider': {
@@ -479,6 +480,7 @@ function routes($stateProvider, $urlRouterProvider) {
     abstract: true
 })
 .state('provider.dispatchers.index', {
+    cache: false,
     url: '/',
     views: {
       'menuContent@provider': {

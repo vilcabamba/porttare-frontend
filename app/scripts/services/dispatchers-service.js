@@ -21,13 +21,8 @@
       return CommonService.getObjects('/api/provider/dispatchers');
     }
 
-    function getDispatcher() {
-      var defered = $q.defer();
-      defered.resolve({id:1,
-                      email:'lisseth.lopez@unl.edu.ec',
-                      provider_office_id: 3, //jshint ignore:line
-                      sucursal:'10 de agosto'});
-      return defered.promise;
+    function getDispatcher(id) {
+      return CommonService.getObject(id, '/api/provider/dispatchers/');
     }
 
     function createDispatcher(data) {
