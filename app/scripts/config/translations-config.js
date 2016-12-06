@@ -146,7 +146,9 @@
         start: 'Empezar',
         sendRequest: 'Enviar solicitud',
         isRequired: 'Este campo es obligatorio',
-        disabledUser: 'Su cuenta ha sido deshabilitada'
+        disabledUser: 'Su cuenta ha sido deshabilitada',
+        id: 'Id',
+        email: 'Email',
       },
       item: {
         item: 'Producto',
@@ -329,6 +331,18 @@
         successSave: 'La dirección de facturación ha sido guardado éxitosamente',
         successUpdate: 'La dirección de facturación ha sido actualizado éxitosamente',
         isPatternRuc: 'Debe contener solo dígitos y una longitud de 13 caracteres'
+      },
+      dispatchers:{
+        dispatchers: 'Despachadores',
+        dispatcher: 'Despachador',
+        dispatcherSearch: 'Buscar Despachador',
+        dispatcherAny: 'No has agregado ningún despachador todavía',
+        dispacherClick:'Da click en Nuevo Despachador para empezar',
+        dispacherOffice: 'Sucursal',
+        dispatchersCreate: 'El Despachador ha sido guardado éxitosamente',
+        dispatchersUpdate: 'El Despachador ha sido actualizado éxitosamente',
+        dispatchersDelete: 'El Despachador ha sido eliminado éxitosamente',
+        dispatchersData: 'Datos del Despachador'
       }
     });
 

@@ -1,0 +1,25 @@
+ion-view(
+  view-title='{{::("dispatchers.dispatchers"|translate)}}'
+)
+  ion-nav-title
+    .alt-logo
+  ion-content.content-dispatchers
+    .row
+      .col
+        {{::("dispatchers.dispatchersData"|translate)}}
+      .col
+        a.action(ng-click="dispatchersVm.showEditDispatcher()") {{::("globals.edit"|translate)}}
+      .col
+        a.action.delete(ng-click="dispatchersVm.showDeleteDispatcher()") {{::("globals.delete"|translate)}}
+
+    .row
+        table.table
+          tr
+            td.opacity {{::("globals.id"|translate|uppercase)}}
+            td.text-center {{dispatchersVm.dispatcherDetail.id}}
+          tr
+            td.opacity {{::("globals.email"|translate)}}
+            td.text-center {{dispatchersVm.dispatcherDetail.email}}
+          tr
+            td.opacity {{::("dispatchers.dispacherOffice"|translate)}}
+            td.text-center {{dispatchersVm.dispatcherDetail.provider_office.direccion}}

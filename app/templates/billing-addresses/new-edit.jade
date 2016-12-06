@@ -1,13 +1,12 @@
 ion-modal-view.item-page
-  ion-header-bar.bar.bar-header.bar-light.bar-base-yellow(
+  ion-header-bar.bar-stable.bar.bar-header(
     align-title="center"
   )
-    h4(ng-hide="billingAddressesVm.billingAddress.id").title {{::("billingAddress.newBillingAddress"|translate|uppercase)}}
-    h4(ng-show="billingAddressesVm.billingAddress.id").title {{::("globals.edit"|translate|uppercase)}} {{::("billingAddress.legendForm"|translate|uppercase)}}
     .ion-nav-buttons(side="left")
       button.button.ion-chevron-left.button-clear.left(
         ng-click="billingAddressesVm.closeModal()"
       )
+    .title.alt-logo
   ion-content.resource-form
     form(
       name='billingAddressesVm.form'
@@ -15,6 +14,9 @@ ion-modal-view.item-page
       novalidate
     )
       .list.list-inset
+        legend(ng-if="!billingAddressesVm.billingAddress.id").title {{::("billingAddress.newBillingAddress"|translate|uppercase)}}
+        legend(ng-if="billingAddressesVm.billingAddress.id").title {{::("globals.edit"|translate|uppercase)}} {{::("billingAddress.legendForm"|translate|uppercase)}}
+
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': billingAddressesVm.form.ruc.$touched && billingAddressesVm.form.ruc.$invalid}"
           )
@@ -28,8 +30,8 @@ ion-modal-view.item-page
             required
           )
           .show-errors(ng-messages="billingAddressesVm.form.ruc.$error" ng-if="billingAddressesVm.form.ruc.$touched")
-            span(ng-message="required" class="message-error") {{::("form.requiredField"|translate)}}
-            span(ng-message="pattern" class="message-error") {{::("billingAddress.isPatternRuc"|translate)}}
+            span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
+            span.message-error(ng-message="pattern") {{::("billingAddress.isPatternRuc"|translate)}}
         show-error(array-messages="billingAddressesVm.messages.ruc")
 
         label.item.item-input.item-stacked-label(
@@ -44,7 +46,7 @@ ion-modal-view.item-page
             required
           )
           .show-errors(ng-messages="billingAddressesVm.form.razon_social.$error" ng-if="billingAddressesVm.form.razon_social.$touched")
-            span(ng-message="required" class="message-error") {{::("form.requiredField"|translate)}}
+            span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
         show-error(array-messages="billingAddressesVm.messages.razon_social")
 
         label.item.item-input.item-stacked-label(
@@ -59,7 +61,7 @@ ion-modal-view.item-page
             required
           )
           .show-errors(ng-messages="billingAddressesVm.form.direccion.$error" ng-if="billingAddressesVm.form.direccion.$touched")
-            span(ng-message="required" class="message-error") {{::("form.requiredField"|translate)}}
+            span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
         show-error(array-messages="billingAddressesVm.messages.direccion")
 
         label.item.item-input.item-stacked-label
@@ -82,7 +84,7 @@ ion-modal-view.item-page
             ng-class="input-error"
           )
           .show-errors(ng-messages="billingAddressesVm.form.email.$error" ng-if="billingAddressesVm.form.email.$touched")
-            span(ng-message="email" class="message-error") {{::("form.wrongEmail"|translate)}}
+            span.message-error(ng-message="email") {{::("form.wrongEmail"|translate)}}
         show-error(array-messages="billingAddressesVm.messages.email")
 
         label.item.item-input.item-stacked-label
@@ -94,6 +96,6 @@ ion-modal-view.item-page
           )
         show-error(array-messages="billingAddressesVm.messages.telefono")
 
-      .bar.bar-footer.footer-item-container
-        button.button-secondary-yellow(type="submit")
-          {{::("globals.save"|translate)}}
+      .bar.bar-footer
+        row.col.text-center
+          button.action-button.yellow(type="submit") {{::("globals.save"|translate)}}

@@ -7,8 +7,8 @@ ion-view(
     .div(ng-class="{'content-office-disabled': officesVm.officeDetail.enabled==false}")
       .row.content-office
         h4.item-title {{::("office.office"|translate)}}
-          span(ng-show="officesVm.officeDetail.enabled") {{::("office.activo"|translate)}}
-          span(ng-show="!officesVm.officeDetail.enabled") {{::("office.inactivo"|translate)}}
+          span(ng-if="officesVm.officeDetail.enabled") {{::("office.activo"|translate)}}
+          span(ng-if="!officesVm.officeDetail.enabled") {{::("office.inactivo"|translate)}}
         ion-toggle.toogle(ng-checked="officesVm.officeDetail.enabled" ng-disabled="true")
 
       .row.content-office-map

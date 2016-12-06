@@ -1,0 +1,39 @@
+ion-view(
+  view-title='{{::("dispatchers.dispatchers"|translate)}}'
+)
+  ion-nav-title
+    .alt-logo
+  ion-content.content-dispatchers
+    .row.margin
+      label.search-input
+        i.icon.ion-search.placeholder-icon
+        input(
+          ng-model="dispatchersVm.filtro"
+          type="text"
+          placeholder='{{::("dispatchers.dispatcherSearch"|translate)}}'
+        )
+    .row.margin
+      .col.text-center
+        button.action-button.yellow(ng-click="dispatchersVm.showNewDispatcher()")
+          {{::("globals.new"|translate)}} {{::("dispatchers.dispatcher"|translate)}}
+
+    .row
+      .col.col-10
+        strong {{::("globals.id"|translate|uppercase)}}
+      .col.col-80
+        strong {{::("dispatchers.dispatcher"|translate|uppercase)}}
+      .col.col-10
+
+     .row.col
+        hr.opacity
+
+    .row(ng-repeat='item in dispatchersVm.dispatchers | filter: dispatchersVm.filtro track by $index')
+      .col.col-10{{$index+1}}
+      .col.col-80{{item.email}}
+      .col.col-10.text-right
+        a(ui-sref='provider.dispatchers.show({ id: item.id})'){{::("globals.seeMore"|translate)}}
+
+    .row.margin(ng-show="!dispatchersVm.dispatchers.length")
+      .col.text-center
+        p {{::("dispatchers.dispatcherAny"|translate)}}
+        p {{::("dispatchers.dispacherClick"|translate)}}

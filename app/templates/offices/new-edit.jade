@@ -1,13 +1,12 @@
 ion-modal-view.item-page
-  ion-header-bar.bar.bar-header.bar-light.bar-base-yellow(
+  ion-header-bar.bar-stable.bar.bar-header(
     align-title="center"
   )
-    h4(ng-hide="officesVm.office.id").title {{::("globals.new"|translate)}} {{::("office.office"|translate)}}
-    h4(ng-show="officesVm.office.id").title {{::("globals.edit"|translate)}} {{::("office.office"|translate)}}
     .ion-nav-buttons(side="left")
       button.button.ion-chevron-left.button-clear.left(
         ng-click="officesVm.closeModal()"
       )
+    .title.alt-logo
   ion-content.resource-form
     form(
       name='officesVm.form'
@@ -15,7 +14,8 @@ ion-modal-view.item-page
       novalidate
     )
       .list.list-inset
-        legend {{::("office.officeLegend"|translate)}}
+        legend(ng-hide="officesVm.office.id").title {{::("globals.new"|translate)}} {{::("office.office"|translate)}}
+        legend(ng-show="officesVm.office.id").title {{::("globals.edit"|translate)}} {{::("office.office"|translate)}}
 
         label.item.item-input.item-stacked-label
           span.input-label {{::("office.ciudad"|translate|uppercase)}}
@@ -38,7 +38,7 @@ ion-modal-view.item-page
             required
           )
           .show-errors(ng-messages="officesVm.form.direccion.$error" ng-if="officesVm.form.direccion.$touched")
-            span(ng-message="required" class="message-error") {{::("form.requiredField"|translate)}}
+            span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
         show-error(array-messages="officesVm.messages.direccion")
 
         label.item.item-input.item-stacked-label(
@@ -53,7 +53,7 @@ ion-modal-view.item-page
             required
           )
           .show-errors(ng-messages="officesVm.form.telefono.$error" ng-if="officesVm.form.telefono.$touched")
-            span(ng-message="required" class="message-error") {{::("form.requiredField"|translate)}}
+            span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
         show-error(array-messages='officesVm.messages.telefono')
 
         label.item.item-input.item-select
@@ -84,7 +84,8 @@ ion-modal-view.item-page
             | {{officesVm.office.hora_de_cierre| date: 'HH:mm a'}}
         show-error(array-messages='officesVm.messages.hora_de_cierre')
 
-      .bar.bar-footer.footer-item-container
-        button.button-secondary-yellow(
-          type="submit"
-        ) {{::("globals.save"|translate)}}
+      .bar.bar-footer
+        .row.col.text-center
+          button.action-button.yellow(
+            type="submit"
+          ) {{::("globals.save"|translate)}}
