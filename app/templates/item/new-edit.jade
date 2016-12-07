@@ -27,7 +27,7 @@ ion-modal-view.item-form
             ng-class='input-error'
             required
           )
-        .errors-wrapper    
+        .errors-wrapper
           .show-errors(ng-messages="modalVm.itemForm.titulo.$error" ng-if="modalVm.itemForm.titulo.$touched")
             span.message-error(ng-message="required")
               | {{::("globals.isRequired"|translate)}}
@@ -59,7 +59,7 @@ ion-modal-view.item-form
             option(value='volumen') Volumen
             option(value='unidades') Unidades
             option(value='longitud') Longitud
-        .errors-wrapper    
+        .errors-wrapper
           span.show-errors(ng-messages="modalVm.itemForm.unidad_medida.$error" ng-if="modalVm.itemForm.unidad_medida.$touched")
             span(ng-message="required" class="message-error") {{::("globals.isRequired"|translate)}}
           show-error(array-messages='modalVm.messages.unidad_medida')
@@ -100,6 +100,22 @@ ion-modal-view.item-form
         .errors-wrapper
           show-error(array-messages='modalVm.messages.peso')
 
+        label.item.item-input.item-stacked-label
+          span.input-label {{::("item.cantidad"|translate|uppercase)}}
+          input(
+            min='0'
+            type='number'
+            ng-model='itemsVm.item.cantidad'
+          )
+        .errors-wrapper
+          show-error(array-messages='itemsVm.messages.cantidad')
+        ion-toggle(
+          ng-model='itemsVm.item.en_stock'
+          ng-checked='true'
+          toggle-class='toggle-energized'
+        )
+          span.input-label{{::("item.stock"|translate)}}  
+
         label.item.item-input.item-input--no-borders.item-stacked-label
           span.input-label {{::("item.imagen"|translate)}}
         .uploader(
@@ -117,7 +133,7 @@ ion-modal-view.item-form
             ng-repeat="image in modalVm.imagesUrls"
           )
             img(ngf-src="image")
-          
+
           .img-wrapper.col-33(ng-if="modalVm.item.imagenes.length > 0")
             .add-image-placeholder(
               ngf-select="modalVm.concatImages($files)"
