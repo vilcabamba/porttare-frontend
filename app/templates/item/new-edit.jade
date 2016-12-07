@@ -105,16 +105,19 @@ ion-modal-view.item-form
           input(
             min='0'
             type='number'
-            ng-model='itemsVm.item.cantidad'
+            ng-model='modalVm.item.cantidad'
           )
         .errors-wrapper
-          show-error(array-messages='itemsVm.messages.cantidad')
+          show-error(array-messages='modalVm.messages.cantidad')
+
         ion-toggle(
-          ng-model='itemsVm.item.en_stock'
+          ng-model='modalVm.item.en_stock'
           ng-checked='true'
           toggle-class='toggle-energized'
         )
-          span.input-label{{::("item.stock"|translate)}}  
+          span.input-label{{::("item.stock"|translate)}}
+        .errors-wrapper
+          show-error(array-messages='modalVm.messages.stock')
 
         label.item.item-input.item-input--no-borders.item-stacked-label
           span.input-label {{::("item.imagen"|translate)}}
