@@ -21,7 +21,8 @@
   }
 
   label.item-input.item-stacked-label,
-  label.item-input.item-select {
+  label.item-input.item-select,
+  label.item-input.item-radio {
     // override default
     margin-top: 15px;
     margin-bottom: 30px;
@@ -73,6 +74,27 @@
     }
   }
 
+  label.item-input.item-radio {
+    margin-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .item-radios {
+    .ion-list {
+      width: 100%;
+    }
+  }
+
+  .datetime-picker {
+    .input-label {
+      padding-bottom: 7px;
+    }
+    .datetime-picker-value,
+    .datetime-picker-placeholder {
+      padding-left: 15px;
+    }
+  }
+
   .bar.bar-footer {
     position: relative;
   }
@@ -83,5 +105,9 @@
   .errors-wrapper {
     position: absolute;
     margin-top: -30px;
+
+    .message-error {
+      margin-right: 5px;
+    }
   }
 }

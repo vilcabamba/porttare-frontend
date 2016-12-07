@@ -1,0 +1,61 @@
+.resource-collection {
+  .resource-collection-table {
+    .col {
+      align-self: center;
+
+      &:first-child {
+        max-height: 50px;
+        white-space: pre-line;
+        overflow: hidden;
+      }
+
+      &:not(:first-child) {
+        text-align: center;
+      }
+
+      &.text-right {
+        text-align: right;
+      }
+
+      .button-clear.button-small {
+        font-size: 12px;
+        letter-spacing: -0.5px;
+        min-height: 25px;
+        line-height: 25px;
+      }
+    }
+
+    .table-headers {
+      color: $dark;
+      font-size: 0.9em;
+      text-transform: uppercase;
+      font-family: Montserrat-Regular;
+      margin-bottom: 5px;
+
+      .col {
+        padding-bottom: 10px;
+        border-bottom: 1px solid transparentize($base-grey, .5);
+        align-self: flex-end;
+      }
+    }
+  }
+
+  .without-items {
+    margin-top: 100px;
+    color: $base-grey;
+    text-align: center;
+    font-family: Montserrat-Light;
+
+    p {
+      margin-bottom: 5px;
+    }
+  }
+
+  .search-input {
+    margin: 10px;
+  }
+
+  .item {
+    font-family: Montserrat-Light;
+  }
+}

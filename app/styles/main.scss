@@ -18,6 +18,7 @@
 @import "common/search-input";
 @import "common/state-tabs";
 @import "common/grid";
+@import "common/slick";
 @import "forms/general";
 @import "forms/inputs";
 @import "forms/resource-form";
@@ -39,7 +40,10 @@
 @import "categories/show";
 @import "item/index";
 @import "item/form";
-@import "client/client";
+@import "item/show";
+@import "resource/details-table";
+@import "resource/collection-table";
+@import "clients/index";
 @import "wishlist/wishlist";
 @import "error/error";
 @import "menu/menu";
@@ -50,5 +54,5 @@
 @import "profile/profile-addresses-update";
 @import "couriers/orders";
 @import "billing-addresses/billing-addresses";
-@import "offices/offices";
-@import "dispatchers/dispatchers"
+@import "offices/show";
+@import "dispatchers/show"

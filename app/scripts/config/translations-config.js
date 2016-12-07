@@ -149,6 +149,7 @@
         disabledUser: 'Su cuenta ha sido deshabilitada',
         id: 'Id',
         email: 'Email',
+        confirmTitle: '¿Estás seguro?'
       },
       item: {
         item: 'Producto',
@@ -172,7 +173,16 @@
         imagen: 'Fotografías',
         addImages: 'Agregar fotografías',
         observaciones: 'Descripción larga',
-        unidadMedida: 'Unidad de medida'
+        unidadMedida: 'Unidad de medida',
+        valorMedida: 'Valor de medida',
+        stockLabel: 'Producto en stock',
+        productDetails:'Detalles del producto',
+        cantidad: 'Cantidad',
+        cantidadPrefix: 'x',
+        currency: '$ ',
+        seeAsCustomer: 'Ver como cliente',
+        unregisterItem: 'Dar de baja',
+        confirmUnregisterItem: '¿Estás seguro de querer dar de baja este producto?'
       },
       actions: {
         showCategory: 'Lista de Categorías',
@@ -189,7 +199,8 @@
         successClientSave: 'Cliente guardado éxitosamente',
         successUpdateClient: 'Cliente actualizado éxitosamente',
         successDeleteClient: 'Cliente eliminado éxitosamente',
-        unsubscribe: 'Dar de baja',
+        disable: 'Eliminar',
+        confirmDisable: '¿Estás seguro de querer eliminar este cliente?',
         import: 'Importar',
         export: 'Exportar',
         clientName: 'Nombre del cliente',
@@ -200,7 +211,8 @@
         nombres: 'Nombres',
         direccion: 'Dirección',
         telefono: 'Teléfono',
-        email: 'email'
+        email: 'email',
+        noClients: 'No tienes ningún cliente todavía.'
       },
       wishlist: {
         wishlists: 'Listas de deseos',
@@ -235,24 +247,22 @@
         telefono: 'Teléfono',
         horaApertura: 'Hora de apertura',
         horaCierre: 'Hora de cierre',
-        activo: 'Activo',
-        inactivo: 'Inactivo',
         officeNumber: 'Sucursal número',
         officeAttention:'Horario de atención',
         officeStart:'Inicio de labores',
         officeFinish: 'Final de Labores',
         officeDelete: '¿Seguro quieres eliminar este establecimiento?',
-        officeDeleteReasons: 'Dinos las razones',
+        officeDeleteReasons: 'Cuéntanos las razones',
         officeDeleteMotive: 'Motivo del cierre',
         officeDeleteTime: 'Tiempo del cierre',
         officeDeleteDefinitive: 'Es un cierre definitivo',
-        officeDeleteClose: 'Cerrar establecimiento',
+        disableOffice: 'Dar de baja',
         officeSuccessDelete: 'Local eliminado',
         officeSuccess: 'Correctamente',
         officesAny: 'No dispone de ningún Establecimiento o Sucursal',
-        locationNotFound: 'No se ha encontrado la ubicación especificada',
+        locationNotFound: 'No he encontrado la dirección: ',
         taskInProgress: 'Tarea en progreso',
-        placeholderDate: 'Click para seleccionar',
+        selectHourPlaceholder: 'Seleccionar hora',
         mon: 'Lunes',
         tue: 'Martes',
         wed: 'Miercoles',
@@ -261,8 +271,8 @@
         sat: 'Sabado',
         sun: 'Domingo',
         yes: 'Si',
-        not: 'No'
-
+        not: 'No',
+        officeEnabled: 'Establecimiento activo'
       },
       password: {
         updatePassword: 'Actualizar contraseña',
@@ -342,7 +352,8 @@
         dispatchersCreate: 'El Despachador ha sido guardado éxitosamente',
         dispatchersUpdate: 'El Despachador ha sido actualizado éxitosamente',
         dispatchersDelete: 'El Despachador ha sido eliminado éxitosamente',
-        dispatchersData: 'Datos del Despachador'
+        dispatchersData: 'Datos del Despachador',
+        notAccepted: 'Esta invitación no ha sido aceptada todavía.'
       }
     });
 

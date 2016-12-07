@@ -20,6 +20,7 @@
     officesVm.closeModal = closeModal;
     officesVm.submitOffice = submitOffice;
     officesVm.submitOfficeDelete = submitOfficeDelete;
+    officesVm.updateOfficeState = updateOfficeState;
     getOffice();
 
     function getOffice(){
@@ -32,9 +33,16 @@
 
     function loadOffice(){
       convertStringToDate();
-      MapsService.loadGMap().then(function(){
+      MapsService.loadGMaps().then(function(){
         $ionicLoading.hide();
-        MapsService.loadGMapAddress(officesVm.officeDetail.direccion);
+        var map = MapsService.renderMap('office-map');
+        MapsService.renderAddressMarker(map, {
+          address: officesVm.officeDetail.direccion,
+          componentRestrictions: {
+            country: 'EC',
+            locality: officesVm.officeDetail.ciudad
+          }
+        });
       });
     }
 
@@ -61,9 +69,9 @@
     }
 
     function closeModal() {
-      ModalService.closeModal();
       officesVm.office = {};
       officesVm.messages = {};
+      return ModalService.closeModal();
     }
 
     function submitOffice(){
@@ -73,11 +81,11 @@
           $ionicLoading.hide().then(function(){
             officesVm.officeDetail = resp.provider_office; //jshint ignore:line
             loadOffice();
-            $ionicPopup.alert({
-              title: 'Éxito',
-              template: '{{::("office.officeSuccessUpdate"|translate)}}'
-            }).then(function(){
-              closeModal();
+            closeModal().then(function () {
+              $ionicPopup.alert({
+                title: 'Éxito',
+                template: '{{::("office.officeSuccessUpdate"|translate)}}'
+              });
             });
           });
         }, function(rpta){
@@ -90,7 +98,7 @@
     function submitOfficeDelete(){
       $ionicPopup.alert({
         title: 'Error',
-        template: '{{::("office.taskInProgress"|translate|uppercase)}} !!!'
+        template: '{{::("office.taskInProgress"|translate)}} !!!'
       }).then(function(){
         officesVm.closeModal();
       });
@@ -100,6 +108,10 @@
       $ionicLoading.show({
         template: '{{::("'+template+'"|translate)}}'
       });
+    }
+
+    function updateOfficeState() {
+      console.log('updateOfficeState!' + officesVm.officeDetail.enabled);
     }
   }
 })();

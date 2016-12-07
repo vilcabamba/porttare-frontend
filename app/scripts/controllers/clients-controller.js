@@ -9,13 +9,14 @@
                              ModalService,
                              $ionicLoading,
                              $ionicPopup,
-                             $scope) {
+                             $scope,
+                             $translate) {
     var clientsVm = this;
     clientsVm.showNewModal = showNewModal;
     clientsVm.showEditModal = showEditModal;
     clientsVm.closeModal = closeModal;
     clientsVm.submitProcess = submitProcess;
-    clientsVm.deleteClient = deleteClient;
+    clientsVm.askToDeleteClient = askToDeleteClient;
     clientsVm.listOptions = [
       {name: 'Nombres', filterField: 'nombres'},
       {name: 'Antigüedad', filterField: 'created_at'}
@@ -42,12 +43,11 @@
       ClientsService.newClient(clientsVm.client)
         .then(function success(resp){
           $ionicLoading.hide();
+          clientsVm.clients.push(resp);
           $ionicPopup.alert({
             title: 'Éxito',
             template: '{{::("client.successClientSave"|translate)}}'
-          });
-          clientsVm.clients.push(resp);
-          clientsVm.closeModal();
+          }).then(closeModal);
         },
         function error(resp){
           clientsVm.messages = resp.status===422 ? resp.data.errors:undefined;
@@ -62,17 +62,29 @@
       ClientsService.editClient(clientsVm.client)
         .then(function success(resp) {
           $ionicLoading.hide();
+          clientsVm.clients[selectedClientIndex] = resp.provider_client; //jshint ignore:line
           $ionicPopup.alert({
             title: 'Éxito',
             template: '{{::("client.successUpdateClient"|translate)}}'
-          });
-          clientsVm.clients[selectedClientIndex] = resp.provider_client; //jshint ignore:line
-          closeModal();
+          }).then(closeModal);
         },
         function error(resp){
           clientsVm.messages = resp.status===422 ? resp.data.errors:undefined;
           $ionicLoading.hide();
         });
+    }
+
+    function askToDeleteClient(clientId) {
+      $translate('globals.confirmTitle').then(function(confirmationTitle) {
+        $ionicPopup.confirm({
+          title: confirmationTitle,
+          template: '{{::("client.confirmDisable"|translate)}}'
+        }).then(function (confirmed) {
+          if (confirmed) {
+            deleteClient(clientId);
+          }
+        });
+      });
     }
 
     function deleteClient(clientId) {
@@ -87,7 +99,6 @@
             template: '{{::("client.successDeleteClient"|translate)}}'
           });
           clientsVm.clients.splice(selectedClientIndex, 1);
-          closeModal();
         },
         function error(){
           $ionicLoading.hide();

@@ -12,6 +12,7 @@
 
     var service = {
       newItem: newItem,
+      getItem: getItem,
       getItems: getItems,
       editItem: editItem,
       deleteItem: deleteItem
@@ -37,6 +38,10 @@
       return CommonService.getObjects('/api/provider/items/');
     }
 
+    function getItem(stateParams) {
+      return CommonService.getObject('/api/provider/items/', stateParams.id);
+    }
+
     function editItem(item) {
       var promise;
       if ( hasNestedImages(item ) ) {
@@ -51,10 +56,10 @@
       return promise;
     }
 
-    function deleteItem(item) {
+    function deleteItem(itemId) {
       return $http({
         method: 'DELETE',
-        url: ENV.apiHost + '/api/provider/items/' + item
+        url: ENV.apiHost + '/api/provider/items/' + itemId
       });
     }
 

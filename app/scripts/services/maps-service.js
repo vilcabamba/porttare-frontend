@@ -7,22 +7,23 @@
 
   function MapsService($window, ENV, $q, $ionicPopup) {
     var service = {
-      loadGMap: loadGMap,
-      loadGMapAddress: loadGMapAddress
+      loadGMaps: loadGMaps,
+      renderMap: renderMap,
+      renderAddressMarker: renderAddressMarker
     };
-    var deferred,
+    var loadDefered,
         gmapsLoaded;
 
     return service;
 
-    function loadGMap() {
+    function loadGMaps() {
       if (gmapsLoaded) {
         return $q.resolve();
       } else {
-        deferred = $q.defer();
+        loadDefered = $q.defer();
         appendGMapsScript();
         gmapsLoaded = true;
-        return deferred.promise;
+        return loadDefered.promise;
       }
     }
 
@@ -37,7 +38,7 @@
     }
 
     function gMapsCallback(){
-      deferred.resolve();
+      loadDefered.resolve();
       removeGMapsCallback();
     }
 
@@ -45,21 +46,25 @@
       delete $window.gMapsCallback;
     }
 
-    function loadGMapAddress(address) {
+    function renderMap(domId) {
+      return new google.maps.Map(
+        document.getElementById(domId),
+        mapOptionsDefault()
+      );
+    }
+
+    function renderAddressMarker(map, options) {
       var geocoder = new google.maps.Geocoder();
-      geocoder.geocode({'address': address}, function(results, status) {
-        var options = mapOptionsDefault();
-        var map = new google.maps.Map(document.getElementById('map'), options);
+      geocoder.geocode(options, function(results, status) {
         if (status === 'OK') {
           map.setCenter(results[0].geometry.location);
           displayMarker(map, results[0].geometry.location);
-        }else{
+        } else {
           var positionDefault = mapPositionDefault();
           map.setCenter(positionDefault);
-          displayMarker(map, positionDefault);
           $ionicPopup.alert({
             title: 'Error',
-            template: '{{::("office.locationNotFound"|translate)}}'
+            template: '{{::("office.locationNotFound"|translate)}}' + options.address
           });
         }
       });
@@ -76,17 +81,15 @@
       return {
         zoom: 17,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControl: true,
-        mapTypeControlOptions: {
-          style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
-          position: google.maps.ControlPosition.LEFT_BOTTOM
-        }
+        mapTypeControl: false,
+        disableDefaultUI: true,
+        center: mapPositionDefault()
       };
     }
 
     function mapPositionDefault(){
-      var latitude = -4.0078909;
-      var longitude = -79.21127690000003;
+      var latitude = -3.996704;
+      var longitude = -79.201699;
       return new google.maps.LatLng(latitude, longitude);
     }
 
