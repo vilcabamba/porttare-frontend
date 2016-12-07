@@ -11,7 +11,7 @@
     $ionicConfigProvider.backButton.icon(backButtonIcon());
     $ionicConfigProvider.backButton.text(false);
 
-    window.ionic.Platform.ready(styleStatusBar);
+    document.addEventListener('deviceready', styleStatusBar, false);
 
     function backButtonIcon() {
       if (window.ionic.Platform.isIOS()) {
