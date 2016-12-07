@@ -75,10 +75,9 @@
     "cordova-plugin-geolocation",
     "ionic-plugin-keyboard",
     "cordova-plugin-statusbar",
-    "cordova-plugin-whitelist",
     "cordova-plugin-whitelist@~1.3.0",
-    "https://github.com/Wizcorp/phonegap-facebook-plugin.git",
-    "cordova-plugin-camera"
+    "cordova-plugin-camera",
+    "https://github.com/Wizcorp/phonegap-facebook-plugin.git"
   ],
   "cordovaPlatforms": [
     "android",
