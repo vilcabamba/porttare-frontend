@@ -167,6 +167,7 @@
         subtitleWithoutItems: 'Presiona Nuevo Producto para empezar a vender.',
         titulo: 'Nombre del producto',
         descripcion: 'Descripción corta',
+        stock:'Producto en Stock',
         precio: 'Precio',
         volumen: 'Volumen',
         peso: 'Peso',
