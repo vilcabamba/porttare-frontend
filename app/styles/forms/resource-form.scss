@@ -19,23 +19,11 @@
       color: $error-red;
     }
   }
-  div.item.item-toggle{
-    padding: 6px 0 5px 5px;
-    margin-top: 15px;
-    margin-bottom: 2px;
-    // hide borders
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    .input-label {
-      font-size: 14px;
-      text-transform: uppercase;
-      font-family: Montserrat-Regular;
-    }
-  }
+
   label.item-input.item-stacked-label,
   label.item-input.item-select,
-  label.item-input.item-radio {
+  label.item-input.item-radio,
+  .item-toggle {
     // override default
     margin-top: 15px;
     margin-bottom: 30px;
@@ -90,6 +78,12 @@
   label.item-input.item-radio {
     margin-bottom: 0;
     border-bottom: 0;
+  }
+
+  .item-toggle {
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
   }
 
   .item-radios {
