@@ -30,8 +30,13 @@
     }
 
     function updateStock() {
-      console.log('post to backend!');
-      // console.log(providerItemVm.providerItem.en_stock);
+      ItemsService.editItem({
+        id: providerItemVm.providerItem.id,
+        en_stock: providerItemVm.providerItem.en_stock // jshint ignore:line
+      }).then(function (response) {
+        providerItemVm.providerItem = response.provider_item; // jshint ignore:line
+        init();
+      });
     }
 
     function loadImagesUrls() {

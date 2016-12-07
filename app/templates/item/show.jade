@@ -40,12 +40,9 @@ ion-view(
         .col.col-50.label {{::("item.valorMedida"|translate)}}
         .col.col-50.value {{providerItemVm.providerItem.volumen}}
       .row
-        .col.col-50.label {{::("item.volumen"|translate)}}
-        .col.col-50.value {{providerItemVm.providerItem.volumen}}
-      .row
         .col.col-50.label {{::("item.cantidad"|translate)}}
         .col.col-50.value
-          | {{::("item.cantidadPrefix"|translate)}}{{providerItemVm.providerItem.volumen}}
+          | {{::("item.cantidadPrefix"|translate)}}{{providerItemVm.providerItem.cantidad}}
       .row
         .col.col-50.label {{::("item.observaciones"|translate)}}
         .col.col-50.value {{providerItemVm.providerItem.observaciones}}
