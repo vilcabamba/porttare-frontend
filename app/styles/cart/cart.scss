@@ -1,0 +1,73 @@
+.cart-page {
+  .modal-header {
+    border: none;
+    .title {
+      text-transform: uppercase;
+    }
+  }
+  .item-stacked-label {
+    margin: 10px 0;
+  }
+  .item-select {
+    margin: 20px 0;
+  }
+  .modal-content {
+    .row-select-date {
+      display: flex;
+      justify-content: space-between;
+    }
+    .placeholder {
+      opacity: 0.7;
+    }
+    .button-edit {
+      border: none;
+      background: none;
+      text-transform: uppercase;
+      color: $button-blue;
+    }
+  }
+  .modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-item {
+    border: none;
+    cursor: pointer;
+    border-bottom: 0.2rem solid $light-grey;
+    &:last-child {
+      border-bottom: none;
+    }
+    &:hover {
+      background-color: $light-grey;
+    }
+    &.selected {
+      background-color: $base-yellow;
+      color: $white;
+    }
+  }
+  .ion-android-checkmark-circle {
+    margin-right: 0.5rem;
+  }
+  .input-label {
+    width: 100%;
+    max-width: 100%;
+  }
+  .label-list {
+    margin-top: 30px;
+  }
+}
+
+.cart-page-footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  .total {
+    font-family: Montserrat-Regular;
+    .value {
+      margin-left: 0.5rem;
+      font-size: 2em;
+      color: $button-blue
+    }
+  }
+}

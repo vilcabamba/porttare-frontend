@@ -149,7 +149,8 @@
         disabledUser: 'Su cuenta ha sido deshabilitada',
         id: 'Id',
         email: 'Email',
-        confirmTitle: '¿Estás seguro?'
+        confirmTitle: '¿Estás seguro?',
+        dateDelivery: 'Fecha y hora de entrega'
       },
       item: {
         item: 'Producto',
@@ -226,7 +227,6 @@
         titleEdit: 'Editar lista',
         listName: 'Nombre de la lista',
         items: 'Items',
-        dateDelivery: 'Fecha y hora de entrega',
         shareWith: 'Compartir lista con',
         save: 'Guardar lista',
         remove: 'Eliminar lista',
@@ -329,7 +329,15 @@
         }
       },
       cart: {
-        successfullyAdded: 'Ítem agregado exitosamente'
+        successfullyAdded: 'Ítem agregado exitosamente',
+        buyItems: 'Comprar Items',
+        modalTitle: 'Finalizar pedido',
+        modalBtnOk: 'Listo',
+        observations: 'Observaciones',
+        deliveryAddress: 'Dirección de entrega',
+        deliveryMethod: 'Método de entrega',
+        paymentMethod: 'Método de pago',
+        successfullyOrder: 'Pedido generado exitosamente'
       },
       form: {
         requiredField: 'Campo requerido. ',

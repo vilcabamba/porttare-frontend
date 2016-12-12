@@ -36,6 +36,7 @@
 @import "directives/action-button";
 @import "directives/link-button";
 @import "directives/slick-provider";
+@import "directives/slick-item";
 @import "categories/index";
 @import "categories/show";
 @import "item/index";
@@ -55,4 +56,5 @@
 @import "couriers/orders";
 @import "billing-addresses/billing-addresses";
 @import "offices/show";
-@import "dispatchers/show"
+@import "dispatchers/show";
+@import "cart/cart";
