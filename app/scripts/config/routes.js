@@ -16,7 +16,6 @@ function routes($stateProvider, $urlRouterProvider) {
       auth: accessIfUserNotAuth
     }
   })
-
   .state('register', {
     url: '/register',
     controller: 'RegisterController',
@@ -250,6 +249,41 @@ function routes($stateProvider, $urlRouterProvider) {
   .state('provider.items', {
     url: '/items',
     abstract: true
+  })
+  .state('provider.profile-provider', {
+    url: '/profile',
+    abstract: true,
+    views: {
+      'menuContent': {
+        templateUrl:'templates/profile-provider/profileProvider.html'
+      }
+    }
+  })
+  .state('provider.profile-provider.info', {
+    url: '/info',
+    views: {
+      'menuContent@profileProviderInfo': {
+        templateUrl: 'templates/profile-provider/info.html',
+        controller: 'ProfileProviderUpdateController',
+        controllerAs: 'providerProfileVm'
+      }
+    }
+  })
+  .state('provider.profile-provider.metrics', {
+    url: '/metrics',
+    views: {
+      'menuContent@profileProviderMetrics': {
+        templateUrl: 'templates/profile-provider/metrics.html'
+      }
+    }
+  })
+  .state('provider.profile-provider.managements', {
+    url: '/managements',
+    views: {
+      'menuContent@profileProviderManagements': {
+        templateUrl: 'templates/profile-provider/managements.html'
+      }
+    }
   })
   .state('provider.items.index', {
     url: '/',
