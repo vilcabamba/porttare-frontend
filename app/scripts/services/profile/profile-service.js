@@ -7,7 +7,6 @@
     .factory('ProfileService', ProfileService);
 
   function ProfileService($http,$q, ENV, $auth,Upload) {
-    var RESOURCE_URI = '/api/users/account';
 
     var service = {
       getProfile: getProfile,
@@ -32,7 +31,7 @@
     function updateProfileProvider(providerData){
       return $http({
         method: 'PUT',
-        url: ENV.apiHost + '/api/provider/profile' ,
+        url: ENV.apiHost + '/api/provider/profile',
         data: providerData
 
       }).then(function success(res) {
@@ -47,7 +46,7 @@
       if(user.custom_image){
         promise = Upload.upload({
           method: 'PUT',
-          url: ENV.apiHost + RESOURCE_URI,
+          url: ENV.apiHost + '/api/users/account',
           data: user
         });
       }
