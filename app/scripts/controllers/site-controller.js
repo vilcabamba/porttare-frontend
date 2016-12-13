@@ -5,11 +5,12 @@
     .module('porttare.controllers')
     .controller('SiteController', SiteController);
 
-  function SiteController($rootScope, $ionicLoading, $auth) {
+  function SiteController($rootScope, $ionicLoading, $auth, APP) {// jshint ignore:line
     var siteVm = this,
         currentUser = null;
 
     siteVm.userName = userName;
+    siteVm.getUserImageURL = getUserImageURL;
 
     init();
 
@@ -46,5 +47,18 @@
         return currentUser[presentAttribute];
       }
     }
+
+    function getUserImageURL(){
+      /* jshint ignore:start */
+      return currentUser.custom_image_url 
+              || ( currentUser.custom_image && currentUser.custom_image.url ) 
+              || currentUser.image 
+              || APP.defaultProfileImage;
+      /* jshint ignore:end */
+    }
+
+    $rootScope.$on('currentUserUpdated',function(event, updatedCurrentUser){
+      currentUser = updatedCurrentUser;
+    });
   }
 })();

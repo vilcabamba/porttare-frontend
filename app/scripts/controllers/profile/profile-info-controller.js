@@ -16,6 +16,7 @@
     piVm.closeModal = closeModal;
     piVm.submitProcess = submitProcess;
     piVm.messages = {};
+
     init();
 
     function init(){
@@ -42,9 +43,12 @@
 
     function submitProcess(user){
       $ionicLoading.show({template: '{{::("globals.sending"|translate)}}'});
-      $auth.updateAccount(user)
+
+      ProfileService.editProfile(user)
         .then(function (response) {
           piVm.user = response.data.data;
+          $scope.$emit('currentUserUpdated', piVm.user);
+
           $ionicLoading.hide().then(function () {
             $ionicPopup.alert({
               title: 'Éxito',
@@ -59,6 +63,5 @@
           $ionicLoading.hide();
         });
     }
-
   }
 })();

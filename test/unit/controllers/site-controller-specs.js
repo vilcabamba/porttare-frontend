@@ -87,6 +87,7 @@
         $rootScope.$digest();
         sinon.assert.calledOnce($ionicLoading.hide);
       });
+
     });
 
     describe('without user', function(){
