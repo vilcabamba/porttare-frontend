@@ -19,7 +19,9 @@
       deferEditItem,
       deferIonic,
       deferDeleteItem,
-      apiResources;
+      apiResources,
+      ErrorHandlerService,
+      deferConfigCategorias;
 
     beforeEach(module('porttare.controllers'));
     beforeEach(module('porttare.services', function($provide){
@@ -40,6 +42,10 @@
           deleteItem: function(){
             deferDeleteItem = $q.defer();
             return deferDeleteItem.promise;
+          },
+          getConfigCategorias: function(){
+            deferConfigCategorias = $q.defer();
+            return deferConfigCategorias.promise;
           }
         };
       });
@@ -53,6 +59,9 @@
           }
         };
       });
+      $provide.factory('ErrorHandlerService', function(){
+        return {};
+      });
     }));
 
     beforeEach(inject(
@@ -60,7 +69,8 @@
         _$rootScope_,
         _$controller_,
         _ItemsService_,
-        _ModalService_) {
+        _ModalService_,
+        _ErrorHandlerService_) {
         $rootScope = _$rootScope_;
         $scope = $rootScope.$new();
         $q = _$q_;
@@ -69,6 +79,7 @@
         ItemsService = _ItemsService_;
         ModalService = _ModalService_;
         $controller = _$controller_;
+        ErrorHandlerService = _ErrorHandlerService_;
         apiResources = {};
         $ionicLoading = {
           show: sinon.stub().returns(deferIonic.promise),
@@ -90,8 +101,7 @@
           $ionicLoading: $ionicLoading,
           $ionicPopup: $ionicPopup,
           apiResources: apiResources,
-          $ionicScrollDelegate: $ionicScrollDelegate,
-          $timeout: $timeout
+          ErrorHandlerService: ErrorHandlerService
         };
 
         ctrl = $controller('ItemsController', dependencies);
