@@ -13,7 +13,8 @@
                                   $ionicLoading,
                                   apiResources,
                                   ModalService,
-                                  ItemsService) {
+                                  ItemsService,
+                                  ErrorHandlerService) {
     var providerItemVm = this,
         modalScope,
         productScope;
@@ -62,7 +63,7 @@
       modalScope.modalVm.imagesUrls = loadImagesUrls();
     }
 
-    function launchModal() {
+    function launchModalShow() {
       modalScope = $scope.$new(true); // isolated
       modalScope.modalVm = providerItemVm;
       // unfortunately item is the providerItem we'll edit
@@ -75,6 +76,14 @@
         parentScope: modalScope,
         fromTemplateUrl: 'templates/item/new-edit.html'
       });
+    }
+
+    function launchModal(){
+      ItemsService.getProviderItemCategories().then(function success(resp){
+        providerItemVm.selectize = ItemsService.getSelectizeItemsCategorias();
+        providerItemVm.categorias = resp.provider_item_categories; //jshint ignore:line
+        launchModalShow();
+      },ErrorHandlerService.handleCommonErrorGET);
     }
 
     function closeModal() {

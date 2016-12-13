@@ -18,9 +18,7 @@
     itemsVm.newItemModal = launchModal;
     itemsVm.submitProcess = newItem; // NB currently here only to honour specs. wipe me?
     itemsVm.query = '';
-
     init();
-    getConfigCategorias();
 
     function init() {
       itemsVm.items = apiResources.provider_items; //jshint ignore:line
@@ -51,14 +49,7 @@
       }, error);
     }
 
-    function getConfigCategorias(){
-      ItemsService.getConfigCategorias().then(function success(resp){
-        itemsVm.selectize = resp.selectize;
-        itemsVm.categorias = resp.categories;
-      },ErrorHandlerService.handleCommonErrorGET);
-    }
-
-    function launchModal() {
+    function launchModalShow() {
       modalScope = $scope.$new(true); // isolated
       modalScope.modalVm = itemsVm;
       // unfortunately item is the providerItem we'll edit
@@ -71,6 +62,14 @@
         parentScope: modalScope,
         fromTemplateUrl: 'templates/item/new-edit.html'
       });
+    }
+
+    function launchModal(){
+      ItemsService.getProviderItemCategories().then(function success(resp){
+        itemsVm.selectize = ItemsService.getSelectizeItemsCategorias();
+        itemsVm.categorias = resp.provider_item_categories; //jshint ignore:line
+        launchModalShow();
+      },ErrorHandlerService.handleCommonErrorGET);
     }
 
     function closeModal() {

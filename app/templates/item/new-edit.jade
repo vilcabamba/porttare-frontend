@@ -129,9 +129,10 @@ ion-modal-view.item-form
         .item-selectize
           input(selectize
             config ="modalVm.selectize"
-            ng-model="modalVm.item.categorias"
             options="modalVm.categorias",
-            placeholder='Seleccione las categorias')
+            item = "modalVm.item",
+            ng-model="modalVm.item.categorias"
+            placeholder='Seleccione la categoria')
 
         label.item.item-input.item-input--no-borders.item-stacked-label
           span.input-label {{::("item.imagen"|translate)}}

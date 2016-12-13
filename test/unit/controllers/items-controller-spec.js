@@ -21,7 +21,7 @@
       deferDeleteItem,
       apiResources,
       ErrorHandlerService,
-      deferConfigCategorias;
+      deferGetProviderItemCategories;
 
     beforeEach(module('porttare.controllers'));
     beforeEach(module('porttare.services', function($provide){
@@ -43,9 +43,9 @@
             deferDeleteItem = $q.defer();
             return deferDeleteItem.promise;
           },
-          getConfigCategorias: function(){
-            deferConfigCategorias = $q.defer();
-            return deferConfigCategorias.promise;
+          getProviderItemCategories: function(){
+            deferGetProviderItemCategories = $q.defer();
+            return deferGetProviderItemCategories.promise;
           }
         };
       });
