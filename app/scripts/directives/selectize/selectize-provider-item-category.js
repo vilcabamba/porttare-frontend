@@ -3,9 +3,9 @@
 
   angular
     .module('porttare.directives')
-    .directive('selectize', selectize);
+    .directive('selectizeprovideritemcategory', selectizeProviderItemCategory);
 
-  function selectize() {
+  function selectizeProviderItemCategory() {
     return {
       restrict: 'A',
       require: 'ngModel',
@@ -20,24 +20,21 @@
         angular.forEach(scope.options, function(tag) {
           selectize.addOption(tag);
         });
+        selectize.addItem(scope.item.provider_item_category_id);//jshint ignore:line
 
-        var change = function(value) {
-          if(!scope.item.provider_item_category_attributes){ //jshint ignore:line
-            scope.item.provider_item_category_id = value; //jshint ignore:line
-          }
-        };
         var optionAdd = function(value) {
           scope.item.provider_item_category_attributes= {nombre: value}; //jshint ignore:line
         };
 
-        var optionRemove= function (){
+        var itemRemove= function(value){
+          if(scope.item.provider_item_category_attributes){ //jshint ignore:line
+            	selectize.removeOption(value);
+          }
           scope.item.provider_item_category_attributes = undefined; //jshint ignore:line
-          scope.item.provider_item_category_id = undefined; //jshint ignore:line
         };
 
-        selectize.on('change', change);
         selectize.on('option_add', optionAdd);
-        selectize.on('option_remove', optionRemove);
+        selectize.on('item_remove', itemRemove);
       }
     };
   }

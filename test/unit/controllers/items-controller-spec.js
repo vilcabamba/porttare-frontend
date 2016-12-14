@@ -20,8 +20,7 @@
       deferIonic,
       deferDeleteItem,
       apiResources,
-      ErrorHandlerService,
-      deferGetProviderItemCategories;
+      ErrorHandlerService;
 
     beforeEach(module('porttare.controllers'));
     beforeEach(module('porttare.services', function($provide){
@@ -42,10 +41,6 @@
           deleteItem: function(){
             deferDeleteItem = $q.defer();
             return deferDeleteItem.promise;
-          },
-          getProviderItemCategories: function(){
-            deferGetProviderItemCategories = $q.defer();
-            return deferGetProviderItemCategories.promise;
           }
         };
       });

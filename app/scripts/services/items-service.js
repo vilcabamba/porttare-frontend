@@ -15,9 +15,7 @@
       getItem: getItem,
       getItems: getItems,
       editItem: editItem,
-      deleteItem: deleteItem,
-      getProviderItemCategories: getProviderItemCategories,
-      getSelectizeItemsCategorias:getSelectizeItemsCategorias
+      deleteItem: deleteItem
     };
 
     return service;
@@ -83,21 +81,6 @@
       }).then(function (resp) {
         return resp.data;
       });
-    }
-
-    function getProviderItemCategories(){
-      return CommonService.getObjects('/api/provider/item_categories');
-    }
-
-    function getSelectizeItemsCategorias(){
-      return {
-        maxItems: 1,
-        create: true,
-        persist:false,
-        valueField: 'id',
-        labelField: 'nombre',
-        searchField: 'nombre'
-      };
     }
   }
 })();

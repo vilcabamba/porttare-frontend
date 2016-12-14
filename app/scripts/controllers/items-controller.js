@@ -12,6 +12,7 @@
                            apiResources,
                            ItemsService,
                            ModalService,
+                           ItemCategoriesService,
                            ErrorHandlerService) {
     var itemsVm = this,
         modalScope;
@@ -19,9 +20,17 @@
     itemsVm.submitProcess = newItem; // NB currently here only to honour specs. wipe me?
     itemsVm.query = '';
     init();
+    getProviderItemCategories();
 
     function init() {
       itemsVm.items = apiResources.provider_items; //jshint ignore:line
+    }
+
+    function getProviderItemCategories(){
+      ItemCategoriesService.getProviderItemCategories().then(function success(resp){
+        itemsVm.selectize = ItemCategoriesService.getSelectizeItemCategorias();
+        itemsVm.categorias = resp.provider_item_categories; //jshint ignore:line
+      },ErrorHandlerService.handleCommonErrorGET);
     }
 
     function error(resp){
@@ -41,6 +50,7 @@
       ItemsService.newItem(modalScope.modalVm.item).then(function success(response){
         $ionicLoading.hide().then(function(){
           itemsVm.items.push(response.provider_item); //jshint ignore:line
+          getProviderItemCategories();
           $ionicPopup.alert({
             title: 'Éxito',
             template: '{{::("item.successItemSave"|translate)}}'
@@ -49,7 +59,7 @@
       }, error);
     }
 
-    function launchModalShow() {
+    function launchModal() {
       modalScope = $scope.$new(true); // isolated
       modalScope.modalVm = itemsVm;
       // unfortunately item is the providerItem we'll edit
@@ -62,14 +72,6 @@
         parentScope: modalScope,
         fromTemplateUrl: 'templates/item/new-edit.html'
       });
-    }
-
-    function launchModal(){
-      ItemsService.getProviderItemCategories().then(function success(resp){
-        itemsVm.selectize = ItemsService.getSelectizeItemsCategorias();
-        itemsVm.categorias = resp.provider_item_categories; //jshint ignore:line
-        launchModalShow();
-      },ErrorHandlerService.handleCommonErrorGET);
     }
 
     function closeModal() {

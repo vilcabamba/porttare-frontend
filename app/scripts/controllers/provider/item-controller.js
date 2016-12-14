@@ -14,6 +14,7 @@
                                   apiResources,
                                   ModalService,
                                   ItemsService,
+                                  ItemCategoriesService,
                                   ErrorHandlerService) {
     var providerItemVm = this,
         modalScope,
@@ -30,12 +31,20 @@
     };
 
     init();
+    getProviderItemCategories();
 
     function init() {
       providerItemVm.imagesLoaded = true;
       providerItemVm.providerItem.precio = $filter('priceCurrency')(
         providerItemVm.providerItem.precio_cents // jshint ignore:line
       );
+    }
+
+    function getProviderItemCategories(){
+      ItemCategoriesService.getProviderItemCategories().then(function success(resp){
+        providerItemVm.selectize = ItemCategoriesService.getSelectizeItemCategorias();
+        providerItemVm.categorias = resp.provider_item_categories; //jshint ignore:line
+      },ErrorHandlerService.handleCommonErrorGET);
     }
 
     function updateStock() {
@@ -63,7 +72,7 @@
       modalScope.modalVm.imagesUrls = loadImagesUrls();
     }
 
-    function launchModalShow() {
+    function launchModal() {
       modalScope = $scope.$new(true); // isolated
       modalScope.modalVm = providerItemVm;
       // unfortunately item is the providerItem we'll edit
@@ -76,14 +85,6 @@
         parentScope: modalScope,
         fromTemplateUrl: 'templates/item/new-edit.html'
       });
-    }
-
-    function launchModal(){
-      ItemsService.getProviderItemCategories().then(function success(resp){
-        providerItemVm.selectize = ItemsService.getSelectizeItemsCategorias();
-        providerItemVm.categorias = resp.provider_item_categories; //jshint ignore:line
-        launchModalShow();
-      },ErrorHandlerService.handleCommonErrorGET);
     }
 
     function closeModal() {
@@ -101,7 +102,7 @@
         providerItemVm.imagesLoaded = true;
         providerItemVm.providerItem = resp.provider_item; //jshint ignore:line
         init();
-
+        getProviderItemCategories();
         $ionicLoading.hide().then(function () {
           $ionicPopup.alert({
             title: 'Éxito',
