@@ -21,12 +21,16 @@
     providerItemVm.updateStock = updateStock;
     providerItemVm.showEditModal = launchModal;
     providerItemVm.unregisterItem = unregisterItem;
-    providerItemVm.slickSettings = { dots: true };
-    providerItemVm.imagesLoaded = true;
+    providerItemVm.slickSettings = {
+      dots: true,
+      lazyLoad: 'progressive',
+      adaptiveHeight: true
+    };
 
     init();
 
     function init() {
+      providerItemVm.imagesLoaded = true;
       providerItemVm.providerItem.precio = providerItemVm.providerItem.precio_cents / APP.centsInDollar; // jshint ignore:line
     }
 

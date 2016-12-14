@@ -18,9 +18,9 @@ ion-view(
         ) {{::("globals.edit"|translate)}}
 
     slick-wrapper(settings="providerItemVm.slickSettings" ng-if="providerItemVm.imagesLoaded")
-      .slick-container(ng-repeat="image in providerItemVm.providerItem.imagenes")
+      .slick-container(ng-repeat="image in ::providerItemVm.providerItem.imagenes")
         .slick-content
-          img(ng-src="{{::image.imagen_url}}")
+          img(data-lazy="{{::image.imagen_url}}")
 
     .list.list-inset.list--no-borders.resource-detail-summary
       h2 {{providerItemVm.providerItem.titulo}}
