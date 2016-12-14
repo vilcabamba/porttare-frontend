@@ -76,8 +76,19 @@
       max-width: 100%;
       right: initial;
       direction: ltr;
+    }
+  }
+
+  label.item-input {
+    select, textarea {
       font-size: 16px;
       font-family: Montserrat-Light;
+    }
+
+    textarea {
+      margin-top: 5px;
+      padding-left: 15px;
+      padding-bottom: 20px;
     }
   }
 
