@@ -16,9 +16,7 @@
       },
 
       link: function(scope, elemento, attrs) {//jshint ignore:line
-        console.log(elemento);
         var selectize = elemento.selectize(scope.config)[0].selectize;
-        console.log(selectize);
         angular.forEach(scope.options, function(tag) {
           selectize.addOption(tag);
         });
