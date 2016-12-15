@@ -8,6 +8,7 @@
 @import "overrides/bar-footer";
 @import "overrides/input-icons";
 @import "overrides/base-colors";
+@import "overrides/popup";
 
 @import "fonts/fonts";
 @import "common/rows";
@@ -22,6 +23,7 @@
 @import "forms/general";
 @import "forms/inputs";
 @import "forms/resource-form";
+@import "forms/resource-form-picture-uploader";
 
 @import "intro";
 @import "branding-logos";
@@ -52,7 +54,6 @@
 @import "products/add-to-wishlist";
 @import "profile/profile";
 @import "profile/profile-addresses-update";
-@import "profile/profile-edit";
 @import "couriers/orders";
 @import "billing-addresses/billing-addresses";
 @import "offices/show";

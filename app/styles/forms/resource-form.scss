@@ -117,6 +117,14 @@
     .datetime-picker-placeholder {
       padding-left: 15px;
     }
+
+    &.item {
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      margin-bottom: 30px;
+      font-family: Montserrat-Light;
+    }
   }
 
   .bar.bar-footer {

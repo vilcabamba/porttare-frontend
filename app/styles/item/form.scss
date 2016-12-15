@@ -1,26 +1,4 @@
 .item-form {
-  .uploader {
-    cursor: pointer;
-    padding: 20px 0;
-    margin: 10px 0;
-
-    .img-placeholder {
-      width: 90px;
-      height: 70px;
-      margin: auto;
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-image: url('../images/camera.png');
-
-      &--legend {
-        margin-top: 15px;
-        text-align: center;
-        color: $base-yellow;
-        font-family: Montserrat-Regular;
-      }
-    }
-  }
-
   .images-previews {
     flex-wrap: wrap;
     margin-bottom: 30px;

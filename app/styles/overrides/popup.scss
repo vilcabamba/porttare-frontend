@@ -1,0 +1,14 @@
+.popup {
+  // overriding popup for ion datetime picker
+  .popup-head {
+    h3 {
+      font-family: Montserrat-SemiBold;
+    }
+  }
+  select, .year-input input {
+    font-family: Montserrat-Regular;
+  }
+  .popup-body {
+    font-family: Montserrat-Light;
+  }
+}

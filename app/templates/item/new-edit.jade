@@ -126,7 +126,7 @@ ion-modal-view.item-form
 
         label.item.item-input.item-input--no-borders.item-stacked-label
           span.input-label {{::("item.imagen"|translate)}}
-        .uploader(
+        .picture-uploader(
           ng-if="modalVm.item.imagenes.length === 0"
           ngf-select="modalVm.concatImages($files)"
           ngf-capture="'camera'"
