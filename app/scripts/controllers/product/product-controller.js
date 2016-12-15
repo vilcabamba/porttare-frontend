@@ -5,13 +5,13 @@
     .module('porttare.controllers')
     .controller('ProductController', ProductController);
 
-  function ProductController(data, CartService, $ionicPopup, $state,
+  function ProductController(providerItem, CartService, $ionicPopup, $state,
                             $scope, WishlistsService, ModalService,
                             ErrorHandlerService, $ionicLoading, $auth) {
     var productVm = this;
     productVm.more = false;
     productVm.toggleShow = toggleShow;
-    productVm.product = data;
+    productVm.product = providerItem;
     productVm.runAction = runAction;
     productVm.closeModal = closeModal;
     productVm.item = {};
@@ -25,7 +25,7 @@
     productVm.wishlistName = '';
     productVm.clearData = clearData;
     productVm.options = {
-      priceCents: data.precio_cents, // jshint ignore:line
+      priceCents: providerItem.precio_cents, // jshint ignore:line
       onChangeValue: function (data) {
         productVm.item.cantidad = data.itemsCount;
       }

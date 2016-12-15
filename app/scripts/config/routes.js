@@ -171,13 +171,11 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'ProductController',
         controllerAs: 'productVm',
         resolve: {
-          data: function (ProductsService, $stateParams) {
+          providerItem: function (ProductsService, $stateParams) {
             if ($stateParams.product) {
               return $stateParams.product;
             } else {
-              return ProductsService.getProduct($stateParams).then(function (res) {
-                return res;
-              });
+              return ProductsService.getProduct($stateParams);
             }
           }
         }

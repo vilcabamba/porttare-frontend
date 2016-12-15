@@ -35,29 +35,13 @@ function ProductsService($http, ENV, $ionicPopup, $q) {
   }
 
   function getProduct(paramsData) {
-    return $q(function (resolve, reject) {
-      var params = {
-        categoryId: paramsData.categoryId,
-        providerId: paramsData.providerId
-      };
-
-      getProviderProducts(params).then(function success(res) {
-        var selectedProduct = filterProducts(res, paramsData.id);
-        resolve(selectedProduct);
-      }, reject);
+    return $http({
+      method: 'GET',
+      url: ENV.apiHost + '/api/categories/' + paramsData.categoryId + '/providers/' + paramsData.providerId + '/items/' + paramsData.id
+    }).then(function success(res) {
+      return res.data.provider_item; // jshint ignore:line
+    }, function error(res) {
+      return $q.reject(res.data);
     });
-  }
-
-  function filterProducts(res, id) {
-      var product = null;
-      var parsedId = parseInt(id);
-      if (res && res.provider_profile && res.provider_profile.provider_items) { //jshint ignore:line
-        angular.forEach(res.provider_profile.provider_items, function (elem) { //jshint ignore:line
-          if (elem.id === parsedId) {
-            product = elem;
-          }
-        });
-      }
-      return product;
   }
 }
