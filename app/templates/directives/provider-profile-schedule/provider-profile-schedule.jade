@@ -1,4 +1,6 @@
-span.office-schedule
+span.office-schedule(
+  ng-if="::ppSVm.openingTime"
+)
   | {{ ::ppSVm.openingTime | timeSchedule | formatDate:'HH:mm' }} - {{ ::ppSVm.closingTime | timeSchedule | formatDate:'HH:mm' }}
 span(
   ng-if="ppSVm.fromDay"

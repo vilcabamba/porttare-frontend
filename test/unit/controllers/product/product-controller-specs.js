@@ -43,7 +43,7 @@
       $provide.factory('ErrorHandlerService', function () {
         return {};
       });
-      $provide.value('data', {
+      $provide.value('providerItem', {
         id: 1,
         precio_cents: 100
       });
@@ -68,7 +68,7 @@
     }));
 
     beforeEach(inject(function (_$q_, _$rootScope_, _$controller_,
-      _WishlistsService_, _data_, _CartService_, _$ionicPopup_,
+      _WishlistsService_, _providerItem_, _CartService_, _$ionicPopup_,
       _$state_, _ModalService_, _ErrorHandlerService_, _$ionicLoading_, _$auth_) {
 
       $scope = _$rootScope_.$new();
@@ -86,7 +86,7 @@
         CartService: CartService,
         ModalService: ModalService,
         ErrorHandlerService: ErrorHandlerService,
-        data: _data_,
+        providerItem: _providerItem_,
         $ionicPopup: _$ionicPopup_,
         $state: $state,
         $ionicLoading: _$ionicLoading_,
