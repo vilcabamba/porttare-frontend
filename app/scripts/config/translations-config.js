@@ -106,7 +106,8 @@
         finalLaborDay: 'Final de Labores',
         isRequired: 'Este campo es obligatorio',
         nextStep: 'Siguiente Paso',
-        createProvider: 'Crear Proveedor'
+        createProvider: 'Crear Proveedor',
+        noMoreItems: 'No hay más productos que mostrar'
       },
       courier: {
         successCourierSave: 'Mensajero guardado éxitosamente',
