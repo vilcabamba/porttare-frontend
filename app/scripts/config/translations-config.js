@@ -321,7 +321,6 @@
           managements:'Gestiones'
         },
         addresses: {
-          buttonEdit: 'Editar',
           city: 'Ciudad',
           parish: 'Parroquia',
           neighborhood: 'Barrio',

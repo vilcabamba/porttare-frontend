@@ -7,7 +7,7 @@ ion-content.addresses-wrapper(
     .list.list-inset.list--no-borders.text-center.actions-wrapper
       button.button.button-clear.button-positive(
         ng-click="pfaVm.redirectToUpdateAddressView(address.id)"
-      ) {{::('profile.addresses.buttonEdit'|translate)}}
+      ) {{::('globals.edit'|translate)}}
     
     .list.list-inset.list--no-borders.resource-details-table
       p.resource-detail-title {{ address.nombre || address.direccion_uno }}

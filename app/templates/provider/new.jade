@@ -7,8 +7,8 @@ ion-view(
   form(name="providerVm.providerForm" ng-submit='providerVm.submit()' novalidate)
     ion-content.resource-form(locking="false")
       .row
-        .fields-wrapper(ng-if="providerVm.step === 1" ng-include="'templates/provider/partials/new_first_part.html'")
-        .fields-wrapper(ng-if="providerVm.step === 2" ng-include="'templates/provider/partials/new_second_part.html'")
+        .fields-wrapper--spaced(ng-if="providerVm.step === 1" ng-include="'templates/provider/partials/new_first_part.html'")
+        .fields-wrapper--spaced(ng-if="providerVm.step === 2" ng-include="'templates/provider/partials/new_second_part.html'")
     ion-footer-bar.bar.bar-footer.bar-stable
       button.button.button-outline.button-energized.button-small(
         type='submit'

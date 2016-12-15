@@ -1,7 +1,11 @@
 .resource-form {
   .fields-wrapper {
-    width: 100%;
-    padding-bottom: 100px; // some padding because of fixed bottom bar
+    padding-bottom: 25px;
+
+    &--spaced {
+      width: 100%;
+      padding-bottom: 100px; // some padding because of fixed bottom bar
+    }
   }
 
   legend {
