@@ -28,7 +28,7 @@ ion-view(
           ui-sref='app.categories.provider.product({id:providerItem.id, product:providerItem})'
         )
           .img-wrapper
-            img(ng-src='{{null|defaultImage}}')
+            img(ng-src='{{ ::(providerItem.imagenes[0].imagen_url | defaultImage)}}')
           .info-wrapper
             .provider-item--title {{ ::providerItem.titulo }}
             .provider-item--subtitle
