@@ -16,22 +16,24 @@
       },
 
       link: function(scope, elemento, attrs) {//jshint ignore:line
+        console.log(elemento);
         var selectize = elemento.selectize(scope.config)[0].selectize;
+        console.log(selectize);
         angular.forEach(scope.options, function(tag) {
           selectize.addOption(tag);
         });
         selectize.addItem(scope.item.provider_item_category_id);//jshint ignore:line
 
-        var optionAdd = function(value) {
+        function optionAdd(value) {
           scope.item.provider_item_category_attributes= {nombre: value}; //jshint ignore:line
-        };
+        }
 
-        var itemRemove= function(value){
+        function itemRemove(value){
           if(scope.item.provider_item_category_attributes){ //jshint ignore:line
-            	selectize.removeOption(value);
+            selectize.removeOption(value);
           }
           scope.item.provider_item_category_attributes = undefined; //jshint ignore:line
-        };
+        }
 
         selectize.on('option_add', optionAdd);
         selectize.on('item_remove', itemRemove);
