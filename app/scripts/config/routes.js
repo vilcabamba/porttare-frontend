@@ -145,9 +145,6 @@ function routes($stateProvider, $urlRouterProvider) {
   })
   .state('app.categories.provider', {
     url: '/:categoryId/provider/:providerId',
-    params: {
-      imagen: null
-    },
     views: {
       'menuContent@app': {
         templateUrl: 'templates/provider/show.html',
@@ -156,10 +153,7 @@ function routes($stateProvider, $urlRouterProvider) {
         resolve: {
           data: function(ProductsService, $stateParams) {
             return ProductsService.getProviderProducts($stateParams).then(function(res){
-              var resp={};
-              resp.imagen=$stateParams.imagen;
-              resp.data=res;
-              return resp;
+              return res;
             });
           }
         }

@@ -1,17 +1,17 @@
 ion-view(
-view-title='{{::("menu.user.provider"|translate)}}'
+  view-title='{{::("menu.user.provider"|translate)}}'
 )
   ion-nav-title
     .alt-logo
   ion-content
     .provider-detail
-      .row.fondo(style="background-image:url('{{providerDetVm.imagenFondo}}')")
+      .row.fondo(style="background-image:url('../../images/bg.png')")
         .col-25
           img.format-image(src='{{providerDetVm.provider.logotipo_url}}')
         .col-75.details
           .nombre {{providerDetVm.provider.razon_social}}
           .descripcion {{providerDetVm.provider.actividad_economica}}
-          .i.icon.ion-clock  {{providerDetVm.fecha_ap}} - {{providerDetVm.fecha_cie}}
+          .i.icon.ion-clock  {{providerDetVm.provider.provider_offices[0].hora_de_apertura | time:'HH:mm'}} - {{providerDetVm.provider.provider_offices[0].hora_de_cierre | time:'HH:mm'}}
       .grid-parent
         .content.cabecera {{providerDetVm.provider.provider_item_categories[0].nombre | uppercase}}
         .content.grid-33(ng-repeat="product in providerDetVm.provider.provider_item_categories[0].provider_items")

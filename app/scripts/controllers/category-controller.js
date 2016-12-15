@@ -22,8 +22,7 @@
             var itemsRoute = 'app.categories.provider';
             $state.go(itemsRoute, {
               categoryId: data.category.id,
-              providerId: data.provider.id,
-              imagen:data.category.imagen_url  //jshint ignore:line
+              providerId: data.provider.id
             });
           }
         }
