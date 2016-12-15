@@ -5,7 +5,10 @@ slick-wrapper.providers-carousel(
     .slick-content(ng-click="spcVm.cardClick(provider)")
       .provider-card
         .img-container
-          .img(style="background-image: url('{{provider.imagen | defaultImage:'../images/ionic.png'}}')")
+          img(
+            data-lazy="{{::(provider.logotipo_url | defaultImage)}}"
+          )
+
         .provider-card-footer
           .nombre {{provider.nombre_establecimiento}}
           .horario {{provider.horario}}
