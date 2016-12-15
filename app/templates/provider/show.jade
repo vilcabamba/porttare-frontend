@@ -29,5 +29,7 @@ ion-view(
         )
           .img-wrapper
             img(ng-src='{{null|defaultImage}}')
-          .provider-item--title {{providerItem.titulo}}
-          .provider-item--subtitle {{providerItem.precio_cents}}
+          .info-wrapper
+            .provider-item--title {{ ::providerItem.titulo }}
+            .provider-item--subtitle
+              | {{ ::(providerItem.precio_cents | priceCurrency | currency)}}

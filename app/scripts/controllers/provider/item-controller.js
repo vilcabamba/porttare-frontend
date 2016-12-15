@@ -7,11 +7,11 @@
 
   function ProviderItemController($scope,
                                   $state,
+                                  $filter,
                                   $translate,
                                   $ionicPopup,
                                   $ionicLoading,
                                   apiResources,
-                                  APP,
                                   ModalService,
                                   ItemsService) {
     var providerItemVm = this,
@@ -31,7 +31,9 @@
 
     function init() {
       providerItemVm.imagesLoaded = true;
-      providerItemVm.providerItem.precio = providerItemVm.providerItem.precio_cents / APP.centsInDollar; // jshint ignore:line
+      providerItemVm.providerItem.precio = $filter('priceCurrency')(
+        providerItemVm.providerItem.precio_cents // jshint ignore:line
+      );
     }
 
     function updateStock() {

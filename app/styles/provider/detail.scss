@@ -61,6 +61,8 @@ $gridBgColor: #F2F2F2;
       font-family: Montserrat-Light;
       border-right: 3px solid $gridBgColor;
       border-bottom: 3px solid $gridBgColor;
+      display: flex;
+      flex-wrap: wrap;
 
       &:nth-child(3n+0) {
         border-right: 0;
@@ -75,6 +77,10 @@ $gridBgColor: #F2F2F2;
           max-width: 100%;
           max-height: 100%;
         }
+      }
+
+      .info-wrapper {
+        align-self: flex-start;
       }
 
       .provider-item--title {
