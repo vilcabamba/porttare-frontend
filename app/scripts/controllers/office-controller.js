@@ -12,6 +12,7 @@
                             $ionicPopup,
                             $scope,
                             $stateParams,
+                            $filter,
                             MapsService) {
 
     var officesVm = this;
@@ -47,10 +48,24 @@
     }
 
     function convertStringToDate(){
-      var hora_de_apertura= moment(officesVm.officeDetail.hora_de_apertura, 'HH:mm Z').format('YYYY/MM/DD HH:mm Z');//jshint ignore:line
-      var hora_de_cierre= moment(officesVm.officeDetail.hora_de_cierre, 'HH:mm Z').format('YYYY/MM/DD HH:mm Z'); //jshint ignore:line
-      officesVm.officeDetail.hora_de_apertura = new Date(hora_de_apertura); //jshint ignore:line
-      officesVm.officeDetail.hora_de_cierre = new Date(hora_de_cierre); //jshint ignore:line
+      /* jshint ignore:start */
+      var officeDetail = officesVm.officeDetail;
+      officeDetail.hora_de_apertura = scheduleToDate(
+        officeDetail.hora_de_apertura
+      );
+      officeDetail.hora_de_cierre = scheduleToDate(
+        officeDetail.hora_de_cierre
+      );
+      /* jshint ignore:end */
+    }
+
+    function scheduleToDate(schedule) {
+      var toTime = $filter('timeSchedule')(schedule),
+          toDateStr = $filter('formatDate')(
+            toTime,
+            'YYYY/MM/DD HH:mm Z'
+          );
+      return new Date(toDateStr);
     }
 
     function showEditOffice() {
