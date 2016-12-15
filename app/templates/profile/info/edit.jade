@@ -1,30 +1,34 @@
 ion-modal-view.client-page
-  ion-header-bar.bar.bar-header.bar-light.bar-base-yellow(
+  ion-header-bar.bar-stable.bar.bar-header(
     align-title="center"
   )
-    h4 {{::("globals.edit"|translate)}}
-    .ion-nav-buttons(side="left")
-      button.button.ion-chevron-left.button-clear.left(
+    .back-button-wrapper
+      span.button.button-clear(
         ng-click="piVm.closeModal()"
       )
-  ion-content.resource-form
-    form(
-      name="piVm.updateProfileForm"
-      ng-submit="piVm.submitProcess(piVm.userEdit)"
-      novalidate
-    )
+        i.icon.ion-android-arrow-back
+    .title.alt-logo
+  form(
+    name="piVm.updateProfileForm"
+    ng-submit="piVm.submitProcess(piVm.userEdit)"
+    novalidate
+  )
+    ion-content.resource-form.item-form
       .list.list-inset
         legend {{::("client.formLegend"|translate)}}
 
         label.item.item-input.item-stacked-label
-          span.input-label {{::("item.imagen"|translate|uppercase)}}
-          input.button.ion-button(
-            type='file'
+          span.input-label {{::("user.image"|translate|uppercase)}}
+          img.uploader(
+            type = "file"
             ngf-select
-            ng-model="piVm.userEdit.custom_image"
-            accept="image/*"
+            ng-model = "piVm.userEdit.custom_image"
+            ngf-capture = "'camera'"
+            accept = "image/*"
           )
-        show-error(array-messages='piVm.messages.custom_image')
+            .img-placeholder
+            .img-placeholder--legend {{::("client.addImage"|translate)}}
+        show-error(array-messages='piVm.user.custom_image')
 
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': piVm.updateProfileForm.email.$touched && piVm.updateProfileForm.email.$invalid}"
@@ -41,12 +45,13 @@ ion-modal-view.client-page
             span.message-error(ng-message="email") {{::("form.wrongEmail"|translate)}}
           show-error(array-messages="piVm.messages.email")
 
-        label.item.item-input.item-stacked-label(
+        label.item.item-input.item-stacked-label.input-calendar(
           ng-class="{'item-error': piVm.messages.fecha_de_nacimiento}"
         )
           span.input-label {{::("user.birthdate"|translate)}}
-        .item(ion-datetime-picker date ng-model='piVm.userEdit.fecha_nacimiento')
-          | {{piVm.userEdit.fecha_nacimiento| date: "yyyy-MM-dd"}}
+        .item.item-icon-left(ion-datetime-picker date ng-model='piVm.userEdit.fecha_nacimiento')
+          i.icon.ion-ios-calendar-outline
+          strong {{piVm.userEdit.fecha_nacimiento| date: "yyyy-MM-dd"}}
         show-error(array-messages="piVm.messages.fecha_nacimiento")
 
         label.item.item-input.item-stacked-label(
@@ -69,9 +74,9 @@ ion-modal-view.client-page
           )
         show-error(array-messages="piVm.messages.ciudad")
 
-      .bar.bar-footer
-        input.button.button-primary(
-          type="submit"
-          value="{{::('globals.save'|translate)}}"
-          ng-class='{disabled: piVm.updateProfileForm.$invalid}'
+    ion-footer-bar.bar.bar-footer.bar-stable
+        button.button.button-outline.button-energized.button-small(
+            type="submit"
+            ng-disabled='piVm.updateProfileForm.$invalid'
         )
+         | {{::('globals.save'|translate)}}
