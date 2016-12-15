@@ -29,14 +29,22 @@
     justify-content: center;
     background-position: 50%;
 
-    .title{
-      font-size: 18px;
+    &.grid-50 .title {
+      font-size: 20px;
       line-height: 25px;
+    }
+
+    &.grid-100 .title {
+      font-size: 28px;
+      line-height: 30px;
+    }
+
+    .title{
       text-transform: uppercase;
-      font-family: Montserrat-Bold;
+      font-family: Montserrat-SemiBold;
       color: $white;
       text-align: center;
-      text-shadow: -1px -1px 1px rgba(0,0,0,.2);
+      text-shadow: 1px 1px 1px rgba(0,0,0,.2);
       padding: 0 5px;
     }
 
@@ -44,9 +52,17 @@
       height: 250px;
 
       .title {
+        padding: 0 10px;
+      }
+
+      &.grid-50 .title {
         font-size: 25px;
         line-height: 35px;
-        padding: 0 10px;
+      }
+
+      &.grid-100 .title {
+        font-size: 38px;
+        line-height: 40px;
       }
     }
   }
