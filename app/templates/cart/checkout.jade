@@ -18,7 +18,7 @@ ion-modal-view.cart-page
             span.placeholder(ng-if="!cartVm.checkoutForm.deliver_at")
               | dd/mm/yyyy hh:mm
             span(ng-if="cartVm.checkoutForm.deliver_at")
-              | {{cartVm.checkoutForm.deliver_at | customDate:'DD/MM/YYYY HH:mm'}}
+              | {{cartVm.checkoutForm.deliver_at | formatDate:'DD/MM/YYYY HH:mm'}}
             button.button-edit(
               type="button"
               ion-datetime-picker

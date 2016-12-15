@@ -3,18 +3,33 @@ ion-view(
 )
   ion-nav-title
     .alt-logo
-  ion-content
-    .provider-detail
-      .row
-        .col-25
-          img.format-image(src='{{providerDetVm.provider.logotipo_url}}')
-        .col-75.details
-          .nombre {{providerDetVm.provider.razon_social}}
-          .descripcion {{providerDetVm.provider.actividad_economica}}
-          .horario {{providerDetVm.provider.horary}}
+  ion-content.provider-show-page
+    .provider-header(
+      style="background-image:url('{{ ::providerDetVm.provider.cover_url }}')"
+    )
+      .provider-logo
+        img(
+          ng-src='{{ ::providerDetVm.provider.logotipo_url | defaultImage }}'
+        )
+      .provider-info
+        .title.wrapper {{ ::providerDetVm.provider.nombre_establecimiento }}
+        .subtitle.wrapper {{ ::providerDetVm.provider.actividad_economica }}
+        .wrapper
+          span.i.icon.ion-clock
+          span {{ ::providerDetVm.openingTime | timeSchedule | formatDate:'HH:mm' }} - {{ ::providerDetVm.closingTime | timeSchedule | formatDate:'HH:mm' }}
+
+    .provider-categories(
+      ng-repeat="providerItemCategory in ::providerDetVm.provider.provider_item_categories"
+    )
+      .provider-category--title {{ ::providerItemCategory.nombre }}
       .grid-parent
-        .content.grid-33(ng-repeat="product in providerDetVm.provider.provider_items")
-            .product-detail(ui-sref='app.categories.provider.product({id:product.id, product:product})')
-              img.format-image(src='{{product.imagenes[0]}}')
-              .descripcion {{product.titulo}}
-              .precio {{product.precio_cents}}
+        .provider-item.col.col-33(
+          ng-repeat="providerItem in ::providerItemCategory.provider_items"
+          ui-sref='app.categories.provider.product({id:providerItem.id, product:providerItem})'
+        )
+          .img-wrapper
+            img(ng-src='{{ ::(providerItem.imagenes[0].imagen_url | defaultImage)}}')
+          .info-wrapper
+            .provider-item--title {{ ::providerItem.titulo }}
+            .provider-item--subtitle
+              | {{ ::(providerItem.precio_cents | priceCurrency | currency)}}

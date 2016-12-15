@@ -12,6 +12,7 @@
       deferStateGo,
       $state,
       $auth,
+      $filter,
       $ionicPopup,
       $ionicScrollDelegate,
       $translate,
@@ -19,12 +20,15 @@
       deferTranslate;
 
     beforeEach(module('porttare.controllers'));
+    beforeEach(module('porttare.filters'));
 
     beforeEach(inject(
       function ($q,
+        _$filter_,
         _$controller_,
         _$rootScope_) {
 
+        $filter = _$filter_;
         deferCreateProvider = $q.defer();
         deferStateGo = $q.defer();
         deferTranslate = $q.defer();
@@ -63,6 +67,7 @@
           $ionicPopup: $ionicPopup,
           $state: $state,
           $auth: $auth,
+          $filter: $filter,
           $translate: $translate,
           $ionicScrollDelegate: $ionicScrollDelegate
         };

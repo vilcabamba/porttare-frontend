@@ -1,25 +1,97 @@
-.provider-detail{
-  .format-image{
-    width: 100%;
-    height: 120px;
-  }
-  .details{
-    padding: 20px;
-  }
-  .grid-parent{
-    background: #D8D8D8;
+$gridBgColor: #F2F2F2;
 
-    .grid-33{
-      width: 33.333%;
+.provider-show-page {
+  .provider-header {
+    max-height: 160px;
+    position: relative;
+    background-size: cover;
+
+    .provider-logo {
+      height: 100%;
+      width: 150px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        vertical-align: bottom;
+      }
     }
 
-    .content{
-      padding: 2px;
-      display: flex;
+    .provider-info {
+      left: 150px;
+      position: absolute;
+      display: inline-block;
+      vertical-align: top;
+      top: 0;
+      color: $white;
+      font-family: Montserrat-SemiBold;
+      margin: 15px;
 
-      .product-detail{
-        background: white;
-        flex-grow: 1;
+      .wrapper {
+        margin: 8px 0;
+        font-size: 14px;
+      }
+
+      .title {
+        font-size: 16px;
+      }
+
+      .icon {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .provider-categories {
+    background-color: $gridBgColor;
+
+    .provider-category--title {
+      color: $base-grey;
+      padding: 15px 15px 15px 20px;
+      text-transform: uppercase;
+      font-family: Montserrat-Regular;
+      font-size: 15px;
+    }
+
+    .provider-item {
+      background-color: $white;
+      font-family: Montserrat-Light;
+      border-right: 3px solid $gridBgColor;
+      border-bottom: 3px solid $gridBgColor;
+      display: flex;
+      flex-wrap: wrap;
+
+      &:nth-child(3n+0) {
+        border-right: 0;
+      }
+
+      .img-wrapper {
+        height: 190px;
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+
+        img {
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
+
+      .info-wrapper {
+        align-self: flex-start;
+      }
+
+      .provider-item--title {
+        text-transform: uppercase;
+        color: $grey-secondary;
+      }
+
+      .provider-item--subtitle {
+        color: $dark;
       }
     }
   }

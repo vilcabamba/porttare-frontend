@@ -38,4 +38,4 @@ ion-view(
           ) {{ ::item.titulo }}
         .col.col-15
           span(ng-if="item.unidad_medida=='unidades'") X {{ ::item.volumen }}
-        .col.col-25 $ {{ ::item.precio_cents/100 }}
+        .col.col-25 {{ ::(item.precio_cents | priceCurrency | currency) }}
