@@ -3,23 +3,23 @@
   /* jshint validthis:true */
   angular
     .module('porttare.directives')
-    .directive('slickProvider', slickProvider);
+    .directive('providersCarousel', providersCarousel);
 
-  function slickProvider() {
+  function providersCarousel() {
     var directive = {
       restrict: 'E',
-      templateUrl: 'templates/directives/slick-provider/slick-provider.html',
+      templateUrl: 'templates/directives/providers-carousel/providers-carousel.html',
       scope: {
         options: '='
       },
-      controller: slickProviderController,
+      controller: providersCarouselController,
       controllerAs: 'spcVm',
       bindToController: true
     };
 
     return directive;
 
-    function slickProviderController() {
+    function providersCarouselController() {
       var spcVm = this;
       var data = spcVm.options.model.data;
       var actions = spcVm.options.model.actions;
