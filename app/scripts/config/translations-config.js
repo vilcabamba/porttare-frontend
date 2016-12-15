@@ -158,7 +158,16 @@
         id: 'Id',
         email: 'Email',
         confirmTitle: '¿Estás seguro?',
-        dateDelivery: 'Fecha y hora de entrega'
+        dateDelivery: 'Fecha y hora de entrega',
+        shortDayNames: {
+          mon: 'Lun',
+          tue: 'Mar',
+          wed: 'Mié',
+          thu: 'Jue',
+          fri: 'Vie',
+          sat: 'Sáb',
+          sun: 'Dom'
+        }
       },
       item: {
         item: 'Producto',
@@ -273,13 +282,6 @@
         locationNotFound: 'No he encontrado la dirección: ',
         taskInProgress: 'Tarea en progreso',
         selectHourPlaceholder: 'Seleccionar hora',
-        mon: 'Lunes',
-        tue: 'Martes',
-        wed: 'Miercoles',
-        thu: 'Jueves',
-        fri:'Viernes',
-        sat: 'Sabado',
-        sun: 'Domingo',
         yes: 'Si',
         not: 'No',
         officeEnabled: 'Establecimiento activo'

@@ -18,7 +18,9 @@ ion-view(
           ng-if="::providerDetVm.provider.provider_offices"
         )
           span.i.icon.ion-clock
-          span {{ ::providerDetVm.openingTime | timeSchedule | formatDate:'HH:mm' }} - {{ ::providerDetVm.closingTime | timeSchedule | formatDate:'HH:mm' }}
+          provider-profile-schedule(
+            provider-profile='providerDetVm.provider'
+          )
 
     .provider-categories(
       ng-repeat="providerItemCategory in ::providerDetVm.provider.provider_item_categories"

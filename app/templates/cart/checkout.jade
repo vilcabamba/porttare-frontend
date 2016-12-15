@@ -67,7 +67,7 @@ ion-modal-view.cart-page
 
         .modal-list(ng-if="cartVm.checkoutForm.delivery_method === 'shipping'")
           span.input-label.label-list
-            {{::("cart.deliveryAddress"|translate)}}
+            | {{::("cart.deliveryAddress"|translate)}}
           ion-list
             ion-item.modal-item(
                 ng-repeat="address in cartVm.addresses track by $index"

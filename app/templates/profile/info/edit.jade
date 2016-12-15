@@ -53,7 +53,7 @@ ion-modal-view
           ng-model='piVm.userEdit.fecha_nacimiento'
         )
           i.icon.ion-ios-calendar-outline
-          {{ piVm.userEdit.fecha_nacimiento| date: "yyyy-MM-dd" }}
+          | {{ piVm.userEdit.fecha_nacimiento| date: "yyyy-MM-dd" }}
         show-error(array-messages="piVm.messages.fecha_nacimiento")
 
         label.item.item-input.item-stacked-label(

@@ -21,6 +21,7 @@
     providerVm.paymentMethods = [];
     providerVm.matrizProvider = {};
     providerVm.touchedPayments = false;
+    // TODO translate:
     providerVm.laborDays = [{
       label: 'Lunes',
       name: 'mon'
