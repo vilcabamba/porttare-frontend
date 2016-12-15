@@ -11,7 +11,8 @@ ion-view(
         .col-75.details
           .nombre {{providerDetVm.provider.razon_social}}
           .descripcion {{providerDetVm.provider.actividad_economica}}
-          .i.icon.ion-clock  {{providerDetVm.provider.provider_offices[0].hora_de_apertura | time:'HH:mm'}} - {{providerDetVm.provider.provider_offices[0].hora_de_cierre | time:'HH:mm'}}
+          .i.icon.ion-clock
+            | {{ providerDetVm.provider.provider_offices[0].hora_de_apertura | timeSchedule | formatDate:'HH:mm' }} - {{ providerDetVm.provider.provider_offices[0].hora_de_cierre | timeSchedule | formatDate:'HH:mm' }}
       .grid-parent
         .content.cabecera {{providerDetVm.provider.provider_item_categories[0].nombre | uppercase}}
         .content.grid-33(ng-repeat="product in providerDetVm.provider.provider_item_categories[0].provider_items")

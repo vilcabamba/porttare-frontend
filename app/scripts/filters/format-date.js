@@ -3,9 +3,9 @@
 
   angular
     .module('porttare.filters')
-    .filter('customDate', customDate);
+    .filter('formatDate', formatDate);
 
-  function customDate() {
+  function formatDate() {
     return function (currentValue, formatStr) {
       var _date = new Date(currentValue);
       return moment(_date).format(formatStr);

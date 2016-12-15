@@ -32,5 +32,5 @@
         span(ng-if="!wishlistsVm.wishlist.entregar_en")
           | {{::("wishlist.buttonAddDate"|translate)}}
         span(ng-if="wishlistsVm.wishlist.entregar_en")
-          | {{wishlistsVm.wishlist.entregar_en | customDate:'YYYY-MM-DD HH:mm'}}
+          | {{wishlistsVm.wishlist.entregar_en | formatDate:'YYYY-MM-DD HH:mm'}}
   show-error(array-messages="wishlistsVm.messages.entregar_en")
