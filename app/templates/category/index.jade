@@ -9,4 +9,4 @@ ion-view(
                     ng-class="categoryVm.categoryGridClassFor($index, $last)"
                     ui-sref="app.categories.show({id: category.id})"
                     style="background-image: url('{{category.imagen_url|defaultImage}}')")
-        .title {{category.titulo}}
+        .title.grid-text-shadow {{category.titulo}}

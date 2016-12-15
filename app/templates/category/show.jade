@@ -3,9 +3,9 @@ ion-view(
 )
   ion-nav-title
     .alt-logo
-  ion-content(class="category-page",
-    style="background-image: url('{{categoryVm.category.imagen_url|defaultImage}}')"
+  ion-content.category-page(
+    style="background-image: url('{{categoryVm.category.imagen_url}}')"
   )
-    .category-title {{categoryVm.category.titulo}}
-    .category-description {{categoryVm.category.descripcion}}
+    .category-title.grid-text-shadow {{categoryVm.category.titulo}}
+    .category-description.grid-text-shadow {{categoryVm.category.descripcion}}
     slick-provider(options="categoryVm.options")

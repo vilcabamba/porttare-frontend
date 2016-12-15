@@ -11,10 +11,7 @@
     categoryVm.category = data.provider_category;//jshint ignore:line
     categoryVm.providers = data.provider_category.provider_profiles;//jshint ignore:line
 
-    // use centerMode only if there's more than
-    // one provider. Otherwise unique provider
-    // is moved to the left
-    var centerMode = categoryVm.providers.length > 1;
+    var centerMode = categoryVm.providers.length === 1;
     categoryVm.options = {
       model: {
         data: {
@@ -33,6 +30,9 @@
       },
       slickSettings: {
         centerMode: centerMode,
+        mobileFirst: true,
+        variableWidth: true,
+        infinite: false,
         responsive: [
           {
             breakpoint: 320,
