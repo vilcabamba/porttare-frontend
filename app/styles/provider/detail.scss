@@ -95,4 +95,13 @@ $gridBgColor: #F2F2F2;
       }
     }
   }
+
+  .provider-category--no-more-items {
+    color: $grey-secondary;
+    background-color: $gridBgColor;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 25px 15px;
+    font-family: Montserrat-Regular;
+  }
 }

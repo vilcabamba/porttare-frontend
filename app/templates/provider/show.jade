@@ -33,3 +33,6 @@ ion-view(
             .provider-item--title {{ ::providerItem.titulo }}
             .provider-item--subtitle
               | {{ ::(providerItem.precio_cents | priceCurrency | currency)}}
+
+    .provider-category--no-more-items
+      | {{ ::("provider.noMoreItems" | translate)}}
