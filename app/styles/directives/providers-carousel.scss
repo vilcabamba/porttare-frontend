@@ -7,8 +7,7 @@
       .provider-card {
         background-color: $white;
         min-height: 300px;
-        max-width: 250px;
-        min-width: 240px;
+        width: 220px;
         margin: 5px auto;
         color: $base-grey;
         position: relative;
@@ -17,9 +16,10 @@
 
         .img-container {
           height: 250px;
+          margin-bottom: 5px;
           display: flex;
           align-items: center;
-          margin-bottom: 5px;
+          justify-content: center;
 
           img {
             max-width: 100%;

@@ -11,7 +11,6 @@
     categoryVm.category = data.provider_category;//jshint ignore:line
     categoryVm.providers = data.provider_category.provider_profiles;//jshint ignore:line
 
-    var centerMode = categoryVm.providers.length === 1;
     categoryVm.options = {
       model: {
         data: {
@@ -29,7 +28,7 @@
         }
       },
       slickSettings: {
-        centerMode: centerMode,
+        centerMode: true,
         mobileFirst: true,
         variableWidth: true,
         infinite: false,
