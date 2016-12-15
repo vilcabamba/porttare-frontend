@@ -1,3 +1,94 @@
+$gridBgColor: #F2F2F2;
+
+.provider-show-page {
+  .provider-header {
+    max-height: 160px;
+    position: relative;
+    background-size: cover;
+
+    .provider-logo {
+      height: 100%;
+      width: 150px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        vertical-align: bottom;
+      }
+    }
+
+    .provider-info {
+      left: 150px;
+      position: absolute;
+      display: inline-block;
+      vertical-align: top;
+      top: 0;
+      color: $white;
+      font-family: Montserrat-SemiBold;
+      margin: 15px;
+
+      .wrapper {
+        margin: 8px 0;
+        font-size: 14px;
+      }
+
+      .title {
+        font-size: 16px;
+      }
+
+      .icon {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .provider-categories {
+    background-color: $gridBgColor;
+
+    .provider-category--title {
+      color: $base-grey;
+      padding: 15px 15px 15px 20px;
+      text-transform: uppercase;
+      font-family: Montserrat-Regular;
+      font-size: 15px;
+    }
+
+    .provider-item {
+      background-color: $white;
+      font-family: Montserrat-Light;
+      border-right: 3px solid $gridBgColor;
+      border-bottom: 3px solid $gridBgColor;
+
+      &:nth-child(3n+0) {
+        border-right: 0;
+      }
+
+      .img-wrapper {
+        height: 190px;
+        display: flex;
+        align-items: center;
+
+        img {
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
+
+      .provider-item--title {
+        text-transform: uppercase;
+        color: $grey-secondary;
+      }
+
+      .provider-item--subtitle {
+        color: $dark;
+      }
+    }
+  }
+}
+
 .provider-detail{
 
   .fondo {

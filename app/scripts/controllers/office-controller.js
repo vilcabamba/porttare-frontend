@@ -48,19 +48,17 @@
     }
 
     function convertStringToDate(){
-      /* jshint ignore:start */
       var officeDetail = officesVm.officeDetail;
-      officeDetail.hora_de_apertura = scheduleToDate(
-        officeDetail.hora_de_apertura
+      officeDetail.hora_de_apertura = scheduleToDate( // jshint ignore:line
+        officeDetail.hora_de_apertura // jshint ignore:line
       );
-      officeDetail.hora_de_cierre = scheduleToDate(
-        officeDetail.hora_de_cierre
+      officeDetail.hora_de_cierre = scheduleToDate( // jshint ignore:line
+        officeDetail.hora_de_cierre // jshint ignore:line
       );
-      /* jshint ignore:end */
     }
 
     function scheduleToDate(schedule) {
-      var toTime = $filter('timeSchedule')(schedule),
+      var toTime    = $filter('timeSchedule')(schedule),
           toDateStr = $filter('formatDate')(
             toTime,
             'YYYY/MM/DD HH:mm Z'
