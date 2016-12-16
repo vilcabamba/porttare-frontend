@@ -111,7 +111,6 @@
       var productScope = $scope.$new(true);
       productScope.productVm = {
         closeModal: closeModal,
-        loadedView: loadedView,
         product: providerItemVm.providerItem,
         slickConfig: providerItemVm.slickSettings,
         disableInputs: true
