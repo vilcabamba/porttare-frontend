@@ -7,7 +7,7 @@
 
   function ProductController(providerItem, CartService, $ionicPopup, $state,
                             $scope, WishlistsService, ModalService,
-                            ErrorHandlerService, $ionicLoading, $auth) {
+                            ErrorHandlerService, $ionicLoading, $auth, $ionicScrollDelegate, $timeout) {
     var productVm = this;
     productVm.more = false;
     productVm.toggleShow = toggleShow;
@@ -54,6 +54,9 @@
 
     function toggleShow() {
       productVm.more = !productVm.more;
+      $timeout(function(){
+        $ionicScrollDelegate.resize();
+      }, 250); // animation takes 0.2s
     }
 
     function addToCart() {

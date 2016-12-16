@@ -65,11 +65,16 @@
           hide: sinon.stub()
         };
       });
+      $provide.factory('$ionicScrollDelegate', function (){
+        return {
+          resize: sinon.stub()
+        };
+      });
     }));
 
     beforeEach(inject(function (_$q_, _$rootScope_, _$controller_,
       _WishlistsService_, _providerItem_, _CartService_, _$ionicPopup_,
-      _$state_, _ModalService_, _ErrorHandlerService_, _$ionicLoading_, _$auth_) {
+      _$state_, _ModalService_, _ErrorHandlerService_, _$ionicLoading_, _$auth_, _$ionicScrollDelegate_) {
 
       $scope = _$rootScope_.$new();
       $q = _$q_;
@@ -90,7 +95,8 @@
         $ionicPopup: _$ionicPopup_,
         $state: $state,
         $ionicLoading: _$ionicLoading_,
-        $auth: _$auth_
+        $auth: _$auth_,
+        $ionicScrollDelegate: _$ionicScrollDelegate_
       };
 
       ctrl = $controller('ProductController', dependencies);

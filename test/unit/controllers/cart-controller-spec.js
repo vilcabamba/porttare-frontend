@@ -42,7 +42,9 @@
           closeModal: sinon.stub()
         };
       });
-      $provide.value('APP', {});
+      $provide.value('APP', {
+        deliveryMethods: []
+      });
       $provide.factory('$ionicLoading', function () {
         return {
           show: sinon.stub(),
@@ -58,9 +60,9 @@
       $provide.factory('ProfileAddressesService', function () {
         return {};
       });
-      $provide.factory('$ionicPopup', function () {
+      $provide.factory('$ionicPopup', function ($q) {
         return {
-          alert: sinon.stub()
+          alert: sinon.stub().returns($q.defer().promise)
         };
       });
       $provide.factory('$state', function ($q) {
