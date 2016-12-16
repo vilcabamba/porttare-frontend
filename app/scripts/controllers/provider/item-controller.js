@@ -15,7 +15,8 @@
                                   ModalService,
                                   ItemsService) {
     var providerItemVm = this,
-        modalScope;
+        modalScope,
+        productScope;
 
     providerItemVm.providerItem = apiResources.provider_item;  // jshint ignore:line
     providerItemVm.updateStock = updateStock;
@@ -108,12 +109,13 @@
     }
 
     function seeAsCustomer() {
-      var productScope = $scope.$new(true);
+      productScope = $scope.$new(true);
       productScope.productVm = {
+        more: false,
+        disableInputs: true,
         closeModal: closeModal,
         product: providerItemVm.providerItem,
-        slickConfig: providerItemVm.slickSettings,
-        disableInputs: true
+        slickConfig: providerItemVm.slickSettings
       };
       ModalService.showModal({
         parentScope: productScope,

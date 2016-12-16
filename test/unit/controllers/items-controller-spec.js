@@ -13,6 +13,8 @@
       $ionicPopup,
       $scope,
       $rootScope,
+      $ionicScrollDelegate,
+      $timeout,
       deferNewItem,
       deferEditItem,
       deferIonic,
@@ -75,6 +77,7 @@
         $ionicPopup = {
           alert: sinon.stub().returns(deferIonic.promise)
         };
+        $timeout = sinon.stub();
       })
     );
 
@@ -86,7 +89,9 @@
           ModalService: ModalService,
           $ionicLoading: $ionicLoading,
           $ionicPopup: $ionicPopup,
-          apiResources: apiResources
+          apiResources: apiResources,
+          $ionicScrollDelegate: $ionicScrollDelegate,
+          $timeout: $timeout
         };
 
         ctrl = $controller('ItemsController', dependencies);
