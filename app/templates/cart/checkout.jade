@@ -58,28 +58,31 @@ ion-modal-view.cart-page
             ng-options="method.value as method.label for method in cartVm.formattedDeliveryMethods track by method.value")
         show-error(array-messages='cartVm.messages.delivery_method')
 
-        .modal-list
-          span.input-label.label-list {{::("billingAddress.legendForm"|translate)}}
+        .wrapper(
+          ng-if="cartVm.checkoutForm.delivery_method === 'shipping'"
+          )
+          label.item.item-input.item-input--no-borders.item-stacked-label.select-list-label
+            span.input-label {{::("cart.deliveryAddress"|translate)}}
           ion-list
-            ion-item.modal-item(
-                ng-repeat="billingAddress in cartVm.billingAddresses track by $index"
-                ng-click="cartVm.assignBillingAddress(billingAddress)"
-                ng-class="{'selected': billingAddress.selected}"
-            )
-              i.ion-android-checkmark-circle
-              span {{billingAddress.razon_social}} {{billingAddress.direccion}}
-
-        .modal-list(ng-if="cartVm.checkoutForm.delivery_method === 'shipping'")
-          span.input-label.label-list
-            | {{::("cart.deliveryAddress"|translate)}}
-          ion-list
-            ion-item.modal-item(
+            ion-item.select-list-item(
                 ng-repeat="address in cartVm.addresses track by $index"
                 ng-click="cartVm.assignAddress(address)"
                 ng-class="{'selected': address.selected}"
             )
               i.ion-android-checkmark-circle
-              span {{address.nombre || address.direccion_uno}}
+              span {{ address.nombre }} ({{ address.direccion_uno }})
+
+        label.item.item-input.item-input--no-borders.item-stacked-label.select-list-label
+          span.input-label {{::("billingAddress.legendForm"|translate)}}
+        ion-list
+          ion-item.select-list-item(
+              ng-repeat="billingAddress in cartVm.billingAddresses track by $index"
+              ng-click="cartVm.assignBillingAddress(billingAddress)"
+              ng-class="{'selected': billingAddress.selected}"
+          )
+            i.ion-android-checkmark-circle
+            span {{billingAddress.razon_social}} ({{billingAddress.direccion}})
+
     ion-footer-bar.modal-footer
       action-button(
         type="submit"

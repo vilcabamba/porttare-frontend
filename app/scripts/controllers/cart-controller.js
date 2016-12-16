@@ -12,7 +12,6 @@
     cartVm.total = 0;
     cartVm.showCheckoutModal = showCheckoutModal;
     cartVm.closeModal = closeModal;
-    cartVm.checkoutForm = {};
     cartVm.runCheckout = runCheckout;
     cartVm.paymentMethods = APP.paymentMethods;
     cartVm.billingAddresses = [];
@@ -21,6 +20,9 @@
     cartVm.assignAddress = assignAddress;
     cartVm.messages = {};
     cartVm.clearDeliveryTime = clearDeliveryTime;
+    cartVm.checkoutForm = {
+      forma_de_pago: 'efectivo' // only method supported ATM
+    };
     cartVm.slickSettings = {
       infinite: false,
       lazyLoad: 'progressive',
@@ -178,7 +180,7 @@
       }, {});
       var translationKeys = Object.keys(translationMapping);
       $translate(translationKeys).then(function (translations) {
-        var formattedMethods = translationKeys.map(function (translationKey, i) {
+        var formattedMethods = translationKeys.map(function (translationKey) {
           return {
             value: translationMapping[translationKey],
             label: translations[translationKey]
