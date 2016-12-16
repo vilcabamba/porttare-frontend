@@ -42,7 +42,6 @@ ion-view(
               span(ng-message="required" class="message-error") Campo requerido
           show-error(array-messages='courierVm.messages.ruc')
 
-
           label.item.item-input.item-stacked-label(
             ng-class="{'item-error': courierVm.courierForm.telefono.$touched && courierVm.courierForm.telefono.$invalid}"
           )
