@@ -1,17 +1,19 @@
 .product-counter {
   display: flex;
   font-family: Montserrat-Light;
-  font-size: 2em;
+  font-size: 32px;
+  line-height: 34px;
+  justify-content: flex-end;
+
   .actions-panel {
     display: flex;
     align-items: center;
+    width: 100%;
+
     .button-minus-container {
       .button-minus {
         color: $base-yellow;
       }
-    }
-    .counter-container {
-      width: 3em;
     }
     .button-plus-container {
       .button-plus {
@@ -19,11 +21,10 @@
       }
     }
   }
+
   .price-panel {
     display: flex;
+    padding-right: 15px;
     align-items: center;
-    .price {
-      width: 5em;
-    }
   }
 }

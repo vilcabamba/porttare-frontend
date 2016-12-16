@@ -32,10 +32,11 @@
 
     pcVm.handleClickMinus = handleClickMinus;
     pcVm.handleClickPlus = handleClickPlus;
-    pcVm.itemsCount = 0;
-    pcVm.priceTotal = 0;
 
     init();
+
+    pcVm.itemsCount = options.cantidad;
+    pcVm.priceTotalCents = getTotal();
 
     function processData(option) {
       if (isInRange(pcVm.itemsCount)) {
@@ -55,11 +56,11 @@
       } else if (option === actions.subtract) {
         pcVm.itemsCount--;
       }
-      pcVm.priceTotal = getTotal();
+      pcVm.priceTotalCents = getTotal();
       if (options.onChangeValue && angular.isFunction(options.onChangeValue)) {
         var data = {
           itemsCount: pcVm.itemsCount,
-          priceTotal: pcVm.priceTotal
+          priceTotalCents: pcVm.priceTotalCents
         };
         options.onChangeValue(data);
       }
@@ -86,7 +87,8 @@
         priceCents: 0,
         onClickMinus: null,
         onClickPlus: null,
-        onChangeValue: null
+        onChangeValue: null,
+        cantidad: 0
       };
 
       if (!isValidNumber(pcVm.options.priceCents)) {
@@ -105,7 +107,7 @@
     }
 
     function getTotal() {
-      return pcVm.itemsCount * (options.priceCents * centValue);
+      return pcVm.itemsCount * (options.priceCents);
     }
   }
 })();

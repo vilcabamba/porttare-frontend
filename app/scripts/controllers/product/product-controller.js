@@ -16,7 +16,7 @@
     productVm.closeModal = closeModal;
     productVm.item = {};
     productVm.item.provider_item_id = productVm.product.id; //jshint ignore:line
-    productVm.item.cantidad = 0;
+    productVm.item.cantidad = 1;
     productVm.wishlists = [];
     productVm.onWishlistSelect = onWishlistSelect;
     productVm.createNewWishlist = createNewWishlist;
@@ -25,6 +25,7 @@
     productVm.wishlistName = '';
     productVm.clearData = clearData;
     productVm.options = {
+      cantidad: productVm.item.cantidad,
       priceCents: providerItem.precio_cents, // jshint ignore:line
       onChangeValue: function (data) {
         productVm.item.cantidad = data.itemsCount;
