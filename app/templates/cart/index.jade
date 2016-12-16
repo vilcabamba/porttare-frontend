@@ -1,13 +1,15 @@
 ion-view(
   view-title='{{::("menu.client.cart"|translate)}}'
 )
-  ion-nav-title
-    .alt-logo
-  ion-content.cart-page
-    .item(ng-repeat="provider in cartVm.cart.provider_profiles track by $index")
-      .provider-items-container
-        .business-name {{provider.razon_social}}
-        slick-item(settings="cartVm.slickSettings" data="provider")
+  ion-nav-title {{ ::('cart.title' | translate) }}
+  ion-content.cart-preview
+    .provider-profile-section(
+      ng-repeat="providerProfile in cartVm.cart.provider_profiles track by $index"
+    )
+      .provider-profile--title
+        | {{ ::providerProfile.nombre_establecimiento }}
+      .provider-items-in-cart
+        slick-item(settings="cartVm.slickSettings" data="providerProfile")
 
   ion-footer-bar.cart-page-footer
     action-button(

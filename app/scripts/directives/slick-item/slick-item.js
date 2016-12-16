@@ -21,9 +21,6 @@
     return directive;
 
     function slickItemController() {
-      var sicVm = this;
-      sicVm.centsVal = 0.01;
     }
-
   }
 })();

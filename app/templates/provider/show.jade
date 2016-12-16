@@ -15,7 +15,7 @@ ion-view(
         .title.wrapper {{ ::providerDetVm.provider.nombre_establecimiento }}
         .subtitle.wrapper {{ ::providerDetVm.provider.actividad_economica }}
         .wrapper(
-          ng-if="::providerDetVm.provider.provider_offices"
+          ng-if="::providerDetVm.provider.provider_offices.length"
         )
           span.i.icon.ion-clock
           provider-profile-schedule(

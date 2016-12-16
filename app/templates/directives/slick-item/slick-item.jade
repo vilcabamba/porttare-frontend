@@ -1,10 +1,17 @@
-.slick-item
-  slick-wrapper(settings="sicVm.settings")
-    .slick-container(ng-repeat="item in sicVm.data.customer_order_items track by $index")
-      .slick-content
-        .item-card
-          .img-container
-            .img(style="background-image: url('{{item.provider_item.imagenes[0] | defaultImage:'../images/ionic.png'}}')")
-          .item-card-footer
-            .title {{item.provider_item.titulo}}
-            .value {{(item.provider_item_precio_cents * item.cantidad) * sicVm.centsVal | currency}} / {{item.cantidad}}
+slick-wrapper(
+  settings="sicVm.settings"
+)
+  .slick-container(
+    ng-repeat="providerItem in sicVm.data.customer_order_items track by $index"
+  )
+    .slick-content
+      .img-wrapper
+        img(
+          data-lazy="{{ ::providerItem.provider_item.imagenes[0].imagen_url }}"
+        )
+        
+      .customer-item-description
+        .customer-item--title
+          | {{ ::providerItem.provider_item.titulo }}
+        .customer-item--value
+          | {{ (providerItem.provider_item_precio_cents * providerItem.cantidad) | priceCurrency | currency }} / {{ providerItem.cantidad }} {{ (providerItem.cantidad > 1) ? ('cart.cantidadPlural' | translate) : ('cart.cantidadSingular' | translate) }}
