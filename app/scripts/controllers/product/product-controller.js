@@ -131,7 +131,7 @@
           $ionicPopup.alert({
             title: 'Alerta',
             template: '{{::("cart.successfullyAdded"|translate)}}'
-          });
+          }).then(closeModal);
         });
     }
 
@@ -154,7 +154,6 @@
       wishlist.provider_items_ids.push(item); //jshint ignore:line
       WishlistsService.updateWishlist(wishlist)
         .then(function success() {
-          closeModal();
           onSuccess();
         }, onError);
     }

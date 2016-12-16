@@ -33,7 +33,7 @@ ion-modal-view
             ng-if="clientsVm.clientForm.ruc.$touched"
           )
             span.message-error(ng-message="required")
-              | {{::("globals.isRequired"|translate)}}.
+              | {{::("globals.isRequired"|translate)}}
           show-error(array-messages="clientsVm.messages.ruc")
 
         label.item.item-input.item-stacked-label(

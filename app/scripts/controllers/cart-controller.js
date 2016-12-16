@@ -85,7 +85,6 @@
       });
       CartService.checkout(cartVm.checkoutForm)
         .then(function success() {
-          closeModal();
           var categoryRoute = 'app.categories.index';
           $state.go(categoryRoute)
             .then(function () {
@@ -93,7 +92,7 @@
               $ionicPopup.alert({
                 title: 'Alerta',
                 template: '{{::("cart.successfullyOrder"|translate)}}'
-              });
+              }).then(closeModal);
               $scope.$emit('order-finished');
             });
         }, function error(res) {
