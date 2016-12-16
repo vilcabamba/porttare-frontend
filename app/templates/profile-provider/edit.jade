@@ -24,11 +24,13 @@ ion-modal-view
             name="ruc"
             type="text"
             ng-model="providerProfileVm.profileEdit.ruc"
+            ng-pattern="/^[0-9]/"
             required
           )
         .errors-wrapper
           span.show-errors(ng-messages="providerProfileVm.providerProfileForm.ruc.$error" ng-if="providerProfileVm.providerProfileForm.ruc.$touched")
             span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
+            span.message-error(ng-message="pattern") {{::("globals.isPatternRuc"|translate)}}
           show-error(array-messages="providerProfileVm.errors.ruc")
 
         label.item.item-input.item-stacked-label(

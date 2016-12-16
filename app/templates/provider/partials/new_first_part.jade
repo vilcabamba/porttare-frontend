@@ -10,11 +10,13 @@
       name='ruc',
       ng-model='providerVm.provider.ruc',
       ng-class='input-error',
+      ng-pattern="/^[0-9]/"
       required
     )
   .errors-wrapper
     span.show-errors(ng-messages="providerVm.providerForm.ruc.$error" ng-if="providerVm.providerForm.ruc.$touched")
       span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
+      span.message-error(ng-message="pattern") {{::("globals.isPatternRuc"|translate)}}
     show-error(array-messages="providerVm.errors.ruc")
 
   label.item.item-input.item-stacked-label(

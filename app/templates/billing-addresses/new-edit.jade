@@ -26,12 +26,12 @@ ion-modal-view.item-page
             name="ruc"
             ng-class="input-error",
             ng-model="billingAddressesVm.billingAddress.ruc"
-            ng-pattern="/^[0-9]{13}$/"
+            ng-pattern="/^[0-9]/"
             required
           )
           .show-errors(ng-messages="billingAddressesVm.form.ruc.$error" ng-if="billingAddressesVm.form.ruc.$touched")
             span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
-            span.message-error(ng-message="pattern") {{::("billingAddress.isPatternRuc"|translate)}}
+            span.message-error(ng-message="pattern") {{::("globals.isPatternRuc"|translate)}}
         show-error(array-messages="billingAddressesVm.messages.ruc")
 
         label.item.item-input.item-stacked-label(
