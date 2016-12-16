@@ -32,10 +32,8 @@
     };
 
     productVm.slickConfig = {
-      infinite: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      arrows: false
+      arrows: false,
+      dots: true
     };
 
     productVm.actions = {

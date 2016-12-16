@@ -346,6 +346,7 @@
         modalTitle: 'Finalizar pedido',
         modalBtnOk: 'Listo',
         observations: 'Observaciones',
+        observacionesPlaceholder: 'Ej: sin cebollas',
         deliveryAddress: 'Dirección de entrega',
         deliveryMethod: 'Método de entrega',
         paymentMethod: 'Método de pago',

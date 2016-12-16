@@ -29,7 +29,6 @@
       },
       slickSettings: {
         centerMode: true,
-        mobileFirst: true,
         variableWidth: true,
         infinite: false,
         responsive: [

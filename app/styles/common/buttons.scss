@@ -42,9 +42,23 @@
 .button-energized {
   border-color: $base-yellow;
   color: $base-yellow;
+}
+
+.button-energized,
+.button-positive {
   padding: 3px 18px;
   line-height: 30px;
   font-family: Montserrat-Regular;
+}
+
+.button-stretched {
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 26px;
+}
+
+.button-letter-stretched {
+  letter-spacing: -0.5px;
 }
 
 .button-text-yellow {

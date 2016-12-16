@@ -3,39 +3,55 @@ ion-view(
 )
   ion-nav-title
     .alt-logo
-  ion-content
-    .row
-      form.product-detail(name="selectProductForm" ng-submit='productVm.selectProduct()')
-        .list
-          slick(settings="productVm.slickConfig")
-            .slick-container(ng-repeat="image in productVm.product.imagenes track by $index")
-              .slick-content
-                .img(style="background-image: url('{{image.imagen_url}}')")
-          .description
-            .title
-              h4 {{productVm.product.titulo}}
-            p {{productVm.product.descripcion}}
-          .large-description
-            h4 Descripción Larga
-            .more-label(ng-if="::productVm.product.more")
-              button.button.button-clear.button-energized(ng-click="productVm.toggleShow()")
-                | {{(productVm.more) ? ("product.less"|translate) : ("product.more"|translate)}}
-            p(ng-if="productVm.more") {{::productVm.product.more}}
-        h4 Observaciones
-        textarea(ng-model='productVm.item.observaciones')
-        .add-product
-          action-button.add-product-button(
+  ion-content.item-show-page
+    form(
+      name="selectProductForm"
+      ng-submit='productVm.selectProduct()'
+    )
+      slick-wrapper(settings="productVm.slickConfig")
+        .slick-container(
+          ng-repeat="image in ::productVm.product.imagenes track by $index"
+        )
+          .slick-content
+            img(data-lazy="{{ ::image.imagen_url }}")
+
+      .list.list-inset.resource-detail-summary
+        h2 {{productVm.product.titulo}}
+        p {{productVm.product.descripcion}}
+      
+      .list.list-inset.action-buttons-wrapper
+        .buttons-width-constraint
+          button.button.button-outline.button-energized.button-stretched(
             ng-click="productVm.runAction(productVm.actions.cart)"
             ng-disabled="!productVm.item.cantidad"
-            text="{{::('product.addCar'|translate)}}"
-          )
-          action-button.add-product-button(
+          ) {{::('product.addCar' | translate)}}
+          button.button.button-outline.button-positive.button-stretched.button-letter-stretched(
             ng-click="productVm.runAction(productVm.actions.wishlist)"
-            text="{{::('product.addWishlist'|translate)}}"
             ng-disabled="!productVm.item.cantidad"
-            color="blue"
+          ) {{::('product.addWishlist' | translate)}}
+
+      .list.list-inset.resource-detail-long-summary(
+        ng-if="::productVm.product.observaciones"
+      )
+        p(
+          ng-class="{'expanded': productVm.more}"
+        ) {{ ::productVm.product.observaciones }}
+        
+        .text-center
+          button.button.button-clear.button-positive.button-letter-stretched.more-label(
+            ng-click="productVm.toggleShow()"
+          ) {{ (productVm.more) ? ("product.less"|translate) : ("product.more"|translate) }}
+
+      .list.list-inset
+        label.item.item-input.item-stacked-label.observaciones-wrapper
+          span.input-label {{ ::('cart.observations' | translate) }}
+          textarea(
+            msd-elastic
+            ng-model='productVm.item.observaciones'
+            placeholder='{{ ::("cart.observacionesPlaceholder" | translate)}}'
           )
-  ion-footer-bar.bar-stable(align-title='center')
+
+  ion-footer-bar.bar-stable
     .footer-product
       .left-panel
         button.button.button-outline.button-energized
