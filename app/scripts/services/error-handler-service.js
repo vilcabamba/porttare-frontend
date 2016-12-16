@@ -5,7 +5,7 @@
     .module('porttare.services')
     .factory('ErrorHandlerService', ErrorHandlerService);
 
-  function ErrorHandlerService($ionicLoading, $ionicPopup) {
+  function ErrorHandlerService($q, $ionicLoading, $ionicPopup) {
 
     var service = {
       handleCommonErrorGET: handleCommonErrorGET
@@ -27,6 +27,7 @@
           template: message
         });
       }
+      return $q.reject(backendResponse);
     }
 
   }

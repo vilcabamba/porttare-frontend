@@ -93,7 +93,7 @@
         $ionicLoading.show({
           template: '{{::("globals.loading"|translate)}}'
         });
-        actions[options.acionName].listener(options.data)
+        return actions[options.acionName].listener(options.data)
           .then(reditectToList, ErrorHandlerService.handleCommonErrorGET);
       }
     }

@@ -18,7 +18,9 @@
         acionName: 'update',
         data: pfaVm.addressFormData
       };
-      ProfileAddressesService.runAction(options);
+      ProfileAddressesService.runAction(options).catch(function (response){
+        pfaVm.messages = response.errors;
+      });
     }
   }
 })();

@@ -60,7 +60,8 @@ ion-view(
             type='text'
             ng-model='pfaVm.addressFormData.direccion_uno'
           )
-        show-error(array-messages='pfaVm.messages.direccion_uno')
+        .errors-wrapper
+          show-error(array-messages='pfaVm.messages.direccion_uno')
 
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': pfaVm.messages.direccion_dos}"
