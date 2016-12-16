@@ -11,13 +11,11 @@ ion-view(
       .provider-items-in-cart
         slick-item(settings="cartVm.slickSettings" data="providerProfile")
 
-  ion-footer-bar.cart-page-footer
-    action-button(
+  ion-footer-bar.bar-light.cart-page-footer.item-show-footer
+    button.button.button-small.button-outline.button-energized.button-letter-stretched(
+      ng-click="cartVm.showCheckoutModal()"
       ng-disabled="!cartVm.cart.provider_profiles"
-      on-click="cartVm.showCheckoutModal()"
-      text="{{::('cart.buyItems'|translate)}}"
-    )
+    ) {{ ::('cart.buyItems'|translate) }}
+
     .total
-      | (Subtotal)
-      span.value
-        | {{cartVm.total | currency}}
+      span.value {{ cartVm.total | currency }}

@@ -60,15 +60,20 @@
 
 .cart-page-footer {
   display: flex;
-  justify-content: space-around;
   align-items: center;
+
   .total {
     font-family: Montserrat-Regular;
+    margin-right: 15px;
+
     .value {
-      margin-left: 0.5rem;
-      font-size: 2em;
+      font-size: 32px;
       color: $button-blue
     }
+  }
+
+  .button {
+    margin-left: 15px;
   }
 }
 
@@ -76,6 +81,8 @@
   background-color: $light-grey;
 
   .provider-profile-section {
+    margin-bottom: 20px;
+
     .provider-profile--title {
       color: $base-yellow;
       background-color: $white;

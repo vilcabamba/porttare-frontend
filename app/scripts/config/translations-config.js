@@ -342,7 +342,7 @@
       },
       cart: {
         successfullyAdded: 'Ítem agregado exitosamente',
-        buyItems: 'Comprar Items',
+        buyItems: 'Comprar ítems',
         modalTitle: 'Finalizar pedido',
         modalBtnOk: 'Listo',
         observations: 'Observaciones',
