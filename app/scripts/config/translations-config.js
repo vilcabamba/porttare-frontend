@@ -344,7 +344,7 @@
         successfullyAdded: 'Ítem agregado exitosamente',
         buyItems: 'Comprar ítems',
         modalTitle: 'Finalizar pedido',
-        modalBtnOk: 'Listo',
+        placeOrder: 'Enviar pedido',
         observations: 'Observaciones',
         observacionesPlaceholder: 'Ej: sin cebollas',
         deliveryAddress: 'Dirección de entrega',

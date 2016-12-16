@@ -33,7 +33,8 @@ ion-modal-view.cart-page
             ng-if="cartVm.checkoutForm.deliver_at"
             ng-click="cartVm.clearDeliveryTime()"
           ) {{ ::('cart.deliverNow' | translate) }}
-        show-error(array-messages="cartVm.messages.deliver_at")
+        .errors-wrapper
+          show-error(array-messages="cartVm.messages.deliver_at")
 
         label.item.item-input.item-stacked-label
           span.input-label {{::("cart.observations"|translate)}}
@@ -42,21 +43,24 @@ ion-modal-view.cart-page
             ng-model="cartVm.checkoutForm.observaciones"
             placeholder="{{::('cart.observations'|translate)}}"
           )
-        show-error(array-messages="cartVm.messages.observaciones")
+        .errors-wrapper
+          show-error(array-messages="cartVm.messages.observaciones")
 
         label.item.item-input.item-select
           span.input-label {{::("cart.paymentMethod"|translate)}}
           select(
             ng-model='cartVm.checkoutForm.forma_de_pago'
             ng-options="paymentMethod as paymentMethod for paymentMethod in cartVm.paymentMethods")
-        show-error(array-messages='cartVm.messages.forma_de_pago')
+        .errors-wrapper
+          show-error(array-messages='cartVm.messages.forma_de_pago')
 
         label.item.item-input.item-select
           span.input-label {{::("cart.deliveryMethod"|translate)}}
           select(
             ng-model='cartVm.checkoutForm.delivery_method'
             ng-options="method.value as method.label for method in cartVm.formattedDeliveryMethods track by method.value")
-        show-error(array-messages='cartVm.messages.delivery_method')
+        .errors-wrapper
+          show-error(array-messages='cartVm.messages.delivery_method')
 
         .wrapper(
           ng-if="cartVm.checkoutForm.delivery_method === 'shipping'"
@@ -83,9 +87,7 @@ ion-modal-view.cart-page
             i.ion-android-checkmark-circle
             span {{billingAddress.razon_social}} ({{billingAddress.direccion}})
 
-    ion-footer-bar.modal-footer
-      action-button(
+    ion-footer-bar.bar-stable
+      button.button.button-outline.button-energized(
         type="submit"
-        text="{{::('cart.modalBtnOk'|translate)}}"
-        color="blue"
-      )
+      ) {{::('cart.placeOrder'|translate)}}
