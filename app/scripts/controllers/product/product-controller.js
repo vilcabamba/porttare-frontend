@@ -7,10 +7,9 @@
 
   function ProductController(providerItem, CartService, $ionicPopup, $state,
                             $scope, WishlistsService, ModalService,
-                            ErrorHandlerService, $ionicLoading, $auth, $ionicScrollDelegate, $timeout) {
+                            ErrorHandlerService, $ionicLoading, $auth) {
     var productVm = this;
     productVm.more = false;
-    productVm.toggleShow = toggleShow;
     productVm.product = providerItem;
     productVm.runAction = runAction;
     productVm.closeModal = closeModal;
@@ -50,13 +49,6 @@
       if (action && action.onActionSelect) {
         action.onActionSelect();
       }
-    }
-
-    function toggleShow() {
-      productVm.more = !productVm.more;
-      $timeout(function(){
-        $ionicScrollDelegate.resize();
-      }, 250); // animation takes 0.2s
     }
 
     function addToCart() {

@@ -8,11 +8,9 @@
   function ProviderItemController($scope,
                                   $state,
                                   $filter,
-                                  $timeout,
                                   $translate,
                                   $ionicPopup,
                                   $ionicLoading,
-                                  $ionicScrollDelegate,
                                   apiResources,
                                   ModalService,
                                   ItemsService) {
@@ -116,7 +114,6 @@
         more: false,
         disableInputs: true,
         closeModal: closeModal,
-        toggleShow: toggleShow,
         product: providerItemVm.providerItem,
         slickConfig: providerItemVm.slickSettings
       };
@@ -125,14 +122,6 @@
         focusFirstInput: false,
         fromTemplateUrl: 'templates/item/as-customer.html'
       });
-    }
-
-    function toggleShow(){
-      // TODO should be a directive?
-      productScope.productVm.more = !productScope.productVm.more;
-      $timeout(function(){
-        $ionicScrollDelegate.resize();
-      }, 250); // animation length is 0.2s
     }
 
     function unregisterItem() {
