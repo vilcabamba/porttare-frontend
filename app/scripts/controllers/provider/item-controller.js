@@ -8,14 +8,17 @@
   function ProviderItemController($scope,
                                   $state,
                                   $filter,
+                                  $timeout,
                                   $translate,
                                   $ionicPopup,
                                   $ionicLoading,
+                                  $ionicScrollDelegate,
                                   apiResources,
                                   ModalService,
                                   ItemsService) {
     var providerItemVm = this,
-        modalScope;
+        modalScope,
+        productScope;
 
     providerItemVm.providerItem = apiResources.provider_item;  // jshint ignore:line
     providerItemVm.updateStock = updateStock;
@@ -108,18 +111,28 @@
     }
 
     function seeAsCustomer() {
-      var productScope = $scope.$new(true);
+      productScope = $scope.$new(true);
       productScope.productVm = {
+        more: false,
+        disableInputs: true,
         closeModal: closeModal,
+        toggleShow: toggleShow,
         product: providerItemVm.providerItem,
-        slickConfig: providerItemVm.slickSettings,
-        disableInputs: true
+        slickConfig: providerItemVm.slickSettings
       };
       ModalService.showModal({
         parentScope: productScope,
         focusFirstInput: false,
         fromTemplateUrl: 'templates/item/as-customer.html'
       });
+    }
+
+    function toggleShow(){
+      // TODO should be a directive?
+      productScope.productVm.more = !productScope.productVm.more;
+      $timeout(function(){
+        $ionicScrollDelegate.resize();
+      }, 250); // animation length is 0.2s
     }
 
     function unregisterItem() {
