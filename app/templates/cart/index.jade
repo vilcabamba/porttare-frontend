@@ -11,7 +11,7 @@ ion-view(
       .provider-items-in-cart
         slick-item(settings="cartVm.slickSettings" data="providerProfile")
 
-  ion-footer-bar.bar-light.cart-page-footer.item-show-footer
+  ion-footer-bar.bar-light.cart-page-footer.bar-footer--tall
     button.button.button-small.button-outline.button-energized.button-letter-stretched(
       ng-click="cartVm.showCheckoutModal()"
       ng-disabled="!cartVm.cart.provider_profiles"
