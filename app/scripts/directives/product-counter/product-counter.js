@@ -23,7 +23,6 @@
   function productCounterController() {
     var pcVm = this,
       options = {},
-      centValue = 0.01,
       limit = 0,
       actions = {
         subtract: 'subtract',
