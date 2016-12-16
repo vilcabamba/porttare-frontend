@@ -5,7 +5,7 @@
     .module('porttare.services')
     .factory('ModalService', ModalService);
 
-  function ModalService($ionicModal) {
+  function ModalService($q, $ionicModal) {
 
     var service = {
       showModal: showModal,
@@ -41,9 +41,13 @@
     }
 
     function closeModal(){
-      return modalInstance.scope.modal.remove().then(function () {
-        modalInstance.scope = null;
-      });
+      if (modalInstance.scope && modalInstance.scope.modal) {
+        return modalInstance.scope.modal.remove().then(function () {
+          modalInstance.scope = null;
+        });
+      } else {
+        return $q.resolve();
+      }
     }
   }
 })();
