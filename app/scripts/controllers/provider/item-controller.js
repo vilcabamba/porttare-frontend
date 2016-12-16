@@ -21,10 +21,10 @@
     providerItemVm.updateStock = updateStock;
     providerItemVm.showEditModal = launchModal;
     providerItemVm.unregisterItem = unregisterItem;
+    providerItemVm.seeAsCustomer = seeAsCustomer;
     providerItemVm.slickSettings = {
       dots: true,
-      lazyLoad: 'progressive',
-      adaptiveHeight: true
+      lazyLoad: 'progressive'
     };
 
     init();
@@ -105,6 +105,22 @@
       providerItemVm.imagesLoaded = true;
       modalScope.modalVm.messages = resp.status===422 ? resp.data.errors:undefined;
       $ionicLoading.hide();
+    }
+
+    function seeAsCustomer() {
+      var productScope = $scope.$new(true);
+      productScope.productVm = {
+        closeModal: closeModal,
+        loadedView: loadedView,
+        product: providerItemVm.providerItem,
+        slickConfig: providerItemVm.slickSettings,
+        disableInputs: true
+      };
+      ModalService.showModal({
+        parentScope: productScope,
+        focusFirstInput: false,
+        fromTemplateUrl: 'templates/item/as-customer.html'
+      });
     }
 
     function unregisterItem() {

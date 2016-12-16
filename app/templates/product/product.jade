@@ -13,10 +13,11 @@ slick-wrapper(settings="productVm.slickConfig")
   .buttons-width-constraint
     button.button.button-outline.button-energized.button-stretched(
       ng-click="productVm.runAction(productVm.actions.cart)"
-      ng-disabled="!productVm.item.cantidad"
+      ng-disabled="!productVm.item.cantidad || productVm.disableInputs"
     ) {{::('product.addCar' | translate)}}
     button.button.button-outline.button-positive.button-stretched.button-letter-stretched(
       ng-click="productVm.runAction(productVm.actions.wishlist)"
+      ng-disabled="productVm.disableInputs"
     ) {{::('product.addWishlist' | translate)}}
 
 .list.list-inset.resource-detail-long-summary(
@@ -37,5 +38,6 @@ slick-wrapper(settings="productVm.slickConfig")
     textarea(
       msd-elastic
       ng-model='productVm.item.observaciones'
+      ng-disabled='productVm.disableInputs'
       placeholder='{{ ::("cart.observacionesPlaceholder" | translate)}}'
     )
