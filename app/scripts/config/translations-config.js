@@ -353,7 +353,12 @@
         successfullyOrder: 'Pedido generado exitosamente',
         cantidadPlural: 'unidades',
         cantidadSingular: 'unidad',
-        title: 'Carrito'
+        title: 'Carrito',
+        deliverNow: 'Entregar inmediatamente',
+        deliveryMethods: {
+          pickup: 'Recoger en local',
+          shipping: 'Enviar a domicilio',
+        }
       },
       form: {
         requiredField: 'Campo requerido. ',

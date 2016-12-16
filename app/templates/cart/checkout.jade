@@ -1,40 +1,44 @@
 ion-modal-view.cart-page
-  ion-header-bar.bar.bar-header.bar-light.modal-header(align-title="center")
+  ion-header-bar.bar-stable.bar.bar-header
     .title {{::("cart.modalTitle"|translate)}}
-    .buttons
-      button.button.ion-close.button-clear(
+    
+    .ion-nav-buttons.buttons(side="primary")
+      button.button.button-clear.button-positive(
         ng-click="cartVm.closeModal()"
-      )
+      ) {{::('globals.cancel'|translate)}}
+
   form(
     name="courierVm.courierForm"
     ng-submit='cartVm.runCheckout()'
     novalidate
   )
-    ion-content.modal-content
-      .list.list-inset.checkout-form
-        label.item.item-input.item-stacked-label
+    ion-content.resource-form.checkout-form
+      .list.list-inset
+        label.item.item-input.item-input--no-borders.item-stacked-label
           span.input-label {{::("globals.dateDelivery"|translate)}}
-          .row-select-date
+        .delivery-time-wrapper
+          ion-datetime-picker.item.item-icon-left.datetime-picker(
+            date
+            time
+            am-pm
+            only-valid="{'after': 'today', 'inclusive': true}"
+            ng-model='cartVm.checkoutForm.deliver_at'
+          )
+            i.icon.ion-ios-calendar-outline
             span.placeholder(ng-if="!cartVm.checkoutForm.deliver_at")
-              | dd/mm/yyyy hh:mm
+              | {{ ::('cart.deliverNow' | translate) }}
             span(ng-if="cartVm.checkoutForm.deliver_at")
-              | {{cartVm.checkoutForm.deliver_at | formatDate:'DD/MM/YYYY HH:mm'}}
-            button.button-edit(
-              type="button"
-              ion-datetime-picker
-              date
-              time
-              am-pm
-              only-valid="{'after': 'today', 'inclusive': true}"
-              ng-model='cartVm.checkoutForm.deliver_at'
-            )
-              span {{::('globals.edit'|translate)}}
+              | {{ cartVm.checkoutForm.deliver_at | formatDate:'DD/MM/YYYY HH:mm' }}
+          .button.button-clear.button-positive.button-small(
+            ng-if="cartVm.checkoutForm.deliver_at"
+            ng-click="cartVm.clearDeliveryTime()"
+          ) {{ ::('cart.deliverNow' | translate) }}
         show-error(array-messages="cartVm.messages.deliver_at")
 
         label.item.item-input.item-stacked-label
           span.input-label {{::("cart.observations"|translate)}}
-          input(
-            type="text"
+          textarea(
+            msd-elastic
             ng-model="cartVm.checkoutForm.observaciones"
             placeholder="{{::('cart.observations'|translate)}}"
           )
@@ -51,7 +55,7 @@ ion-modal-view.cart-page
           span.input-label {{::("cart.deliveryMethod"|translate)}}
           select(
             ng-model='cartVm.checkoutForm.delivery_method'
-            ng-options="deliveryMethod as deliveryMethod for deliveryMethod in cartVm.deliveryMethods")
+            ng-options="method.value as method.label for method in cartVm.formattedDeliveryMethods track by method.value")
         show-error(array-messages='cartVm.messages.delivery_method')
 
         .modal-list

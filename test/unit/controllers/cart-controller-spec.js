@@ -17,7 +17,9 @@
       deferCheckout,
       deferStateGo,
       $auth,
-      $ionicPopup;
+      $ionicPopup,
+      $translate,
+      translateDeferred;
 
     beforeEach(module('porttare.controllers'));
     beforeEach(module('porttare.services', function ($provide) {
@@ -67,12 +69,15 @@
           go: sinon.stub().returns(deferStateGo.promise)
         };
       });
-
+      $provide.factory('$translate', function ($q) {
+        translateDeferred = $q.defer();
+        return sinon.stub().returns(translateDeferred.promise);
+      });
     }));
 
     beforeEach(inject(function (_$q_, _$rootScope_, _$controller_,
       _CartService_, _$ionicPopup_, _BillingAddressesService_, _ProfileAddressesService_,
-      _$state_, _ModalService_, _ErrorHandlerService_, _$ionicLoading_, _$auth_, _APP_) {
+      _$state_, _ModalService_, _ErrorHandlerService_, _$ionicLoading_, _$auth_, _APP_, _$translate_) {
 
       $scope = _$rootScope_.$new();
       $q = _$q_;
@@ -86,6 +91,7 @@
       $ionicLoading = _$ionicLoading_;
       $auth = _$auth_;
       $ionicPopup= _$ionicPopup_;
+      $translate = _$translate_;
 
       dependencies = {
         $scope: $scope,

@@ -7,7 +7,7 @@
 
   function CartController($auth, ModalService, $scope, APP, $ionicLoading,
     BillingAddressesService, ErrorHandlerService, ProfileAddressesService,
-    $q, CartService, $ionicPopup, $state) {
+    $q, CartService, $ionicPopup, $state, $translate) {
     var cartVm = this;
     cartVm.total = 0;
     cartVm.showCheckoutModal = showCheckoutModal;
@@ -15,12 +15,12 @@
     cartVm.checkoutForm = {};
     cartVm.runCheckout = runCheckout;
     cartVm.paymentMethods = APP.paymentMethods;
-    cartVm.deliveryMethods = APP.deliveryMethods;
     cartVm.billingAddresses = [];
     cartVm.addresses = [];
     cartVm.assignBillingAddress = assignBillingAddress;
     cartVm.assignAddress = assignAddress;
     cartVm.messages = {};
+    cartVm.clearDeliveryTime = clearDeliveryTime;
     cartVm.slickSettings = {
       infinite: false,
       lazyLoad: 'progressive',
@@ -57,6 +57,7 @@
     function init() {
       cartVm.cart = $auth.user.customer_order;
       cartVm.total = calculateTotal();
+      getDeliveryMethods();
     }
 
     function showCheckoutModal() {
@@ -164,5 +165,27 @@
       return total;
     }
 
+    function clearDeliveryTime(){
+      cartVm.checkoutForm.deliver_at = null;
+    }
+
+    function getDeliveryMethods(){
+      // APP.deliveryMethods
+      var methodsKeys = APP.deliveryMethods;
+      var translationMapping = methodsKeys.reduce(function (memo, method) {
+        memo['cart.deliveryMethods.' + method] = method;
+        return memo;
+      }, {});
+      var translationKeys = Object.keys(translationMapping);
+      $translate(translationKeys).then(function (translations) {
+        var formattedMethods = translationKeys.map(function (translationKey, i) {
+          return {
+            value: translationMapping[translationKey],
+            label: translations[translationKey]
+          };
+        });
+        cartVm.formattedDeliveryMethods = formattedMethods;
+      });
+    }
   }
 })();
