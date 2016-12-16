@@ -36,12 +36,10 @@ ion-view(
               type='text'
               name='ruc'
               ng-model='courierVm.courier.ruc'
-              ng-pattern="/^[0-9]/"
               required
             )
             .show-errors(ng-messages="courierVm.courierForm.ruc.$error" ng-if="courierVm.courierForm.ruc.$touched")
               span(ng-message="required" class="message-error") Campo requerido
-              span(ng-message="pattern" class="message-error") {{::("globals.isPatternRuc"|translate)}}
           show-error(array-messages='courierVm.messages.ruc')
 
 

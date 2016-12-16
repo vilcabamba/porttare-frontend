@@ -159,7 +159,6 @@
         email: 'Email',
         confirmTitle: '¿Estás seguro?',
         dateDelivery: 'Fecha y hora de entrega',
-        isPatternRuc:'Debe contener solo dígitos',
         shortDayNames: {
           mon: 'Lun',
           tue: 'Mar',

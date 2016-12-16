@@ -25,7 +25,6 @@ ion-modal-view
             type="text"
             ng-class="input-error"
             ng-model="clientsVm.client.ruc"
-            ng-pattern="/^[0-9]/"
             required
           )
         .errors-wrapper
@@ -35,8 +34,6 @@ ion-modal-view
           )
             span.message-error(ng-message="required")
               | {{::("globals.isRequired"|translate)}}
-            span.message-error(ng-message="pattern")
-              | {{::("globals.isPatternRuc"|translate)}}
           show-error(array-messages="clientsVm.messages.ruc")
 
         label.item.item-input.item-stacked-label(
