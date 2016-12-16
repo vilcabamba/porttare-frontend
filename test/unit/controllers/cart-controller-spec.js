@@ -116,7 +116,7 @@
         ctrl.runCheckout();
         deferCheckout.resolve();
         $scope.$digest();
-        sinon.assert.calledOnce(ModalService.closeModal);
+        sinon.assert.calledOnce($state.go);
       });
       it('Should run checkout', function () {
         ctrl.runCheckout();

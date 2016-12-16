@@ -7,6 +7,7 @@
 
   .slick-container {
     align-self: flex-end;
+    margin: 5px 0;
 
     .img-wrapper {
       height: 180px;
@@ -28,6 +29,7 @@
       letter-spacing: -0.5px;
 
       .customer-item--title {
+        margin-top: 5px;
         color: $grey-secondary;
         text-transform: uppercase;
       }
