@@ -28,7 +28,7 @@
 
       modalInstance.scope = myOptions.parentScope;
 
-      $ionicModal.fromTemplateUrl(myOptions.fromTemplateUrl, {
+      return $ionicModal.fromTemplateUrl(myOptions.fromTemplateUrl, {
         scope: modalInstance.scope,
         animation: myOptions.animation,
         backdropClickToClose: false,
