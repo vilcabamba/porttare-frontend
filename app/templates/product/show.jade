@@ -8,47 +8,9 @@ ion-view(
       name="selectProductForm"
       ng-submit='productVm.selectProduct()'
     )
-      slick-wrapper(settings="productVm.slickConfig")
-        .slick-container(
-          ng-repeat="image in ::productVm.product.imagenes track by $index"
-        )
-          .slick-content
-            img(data-lazy="{{ ::image.imagen_url }}")
-
-      .list.list-inset.resource-detail-summary
-        h2 {{productVm.product.titulo}}
-        p {{productVm.product.descripcion}}
-      
-      .list.list-inset.action-buttons-wrapper
-        .buttons-width-constraint
-          button.button.button-outline.button-energized.button-stretched(
-            ng-click="productVm.runAction(productVm.actions.cart)"
-            ng-disabled="!productVm.item.cantidad"
-          ) {{::('product.addCar' | translate)}}
-          button.button.button-outline.button-positive.button-stretched.button-letter-stretched(
-            ng-click="productVm.runAction(productVm.actions.wishlist)"
-          ) {{::('product.addWishlist' | translate)}}
-
-      .list.list-inset.resource-detail-long-summary(
-        ng-if="::productVm.product.observaciones"
+      div(
+        ng-include="'templates/product/product.html'"
       )
-        p(
-          ng-class="{'expanded': productVm.more}"
-        ) {{ ::productVm.product.observaciones }}
-        
-        .text-center
-          button.button.button-clear.button-positive.button-letter-stretched.more-label(
-            ng-click="productVm.toggleShow()"
-          ) {{ (productVm.more) ? ("product.less"|translate) : ("product.more"|translate) }}
-
-      .list.list-inset
-        label.item.item-input.item-stacked-label.observaciones-wrapper
-          span.input-label {{ ::('cart.observations' | translate) }}
-          textarea(
-            msd-elastic
-            ng-model='productVm.item.observaciones'
-            placeholder='{{ ::("cart.observacionesPlaceholder" | translate)}}'
-          )
 
   ion-footer-bar.bar-stable.item-show-footer.bar-footer--tall
     .left-panel
