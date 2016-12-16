@@ -34,7 +34,7 @@
       constants: {
         ENV: {
           name: 'demo',
-          apiHost: 'https://demo-backend.moviggo.noggalito.com',
+          apiHost: 'https://demo-backend.moviggo.com',
           airbrakeHost: 'https://pangi.shiriculapo.com',
           gMapsKey: process.env.GOOGLE_MAPS_API_KEY,
           airbrakeProjectId: '5848435995ca4e0605000061',
