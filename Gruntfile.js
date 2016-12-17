@@ -214,15 +214,18 @@ module.exports = function (grunt) {
     //     }
     //   }
     // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/<%= yeoman.scripts %>/scripts.js': [
-    //         '<%= yeoman.dist %>/<%= yeoman.scripts %>/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
+    uglify: {
+      options: {
+        sourceMap: true
+      }
+      // dist: {
+      //   files: {
+      //     '<%= yeoman.dist %>/<%= yeoman.scripts %>/scripts.js': [
+      //       '<%= yeoman.dist %>/<%= yeoman.scripts %>/scripts.js'
+      //     ]
+      //   }
+      // }
+    },
     // concat: {
     //   dist: {}
     // },
