@@ -5,7 +5,7 @@
     .module('porttare') //porttare module has ENV config
     .factory('$exceptionHandler', exceptionHandler);
 
-  function exceptionHandler($log, ENV) {
+  function exceptionHandler($log, $localStorage, ENV) {
     var airbrake = new airbrakeJs.Client({
       projectId: ENV.airbrakeProjectId,
       projectKey: ENV.airbrakeProjectKey,
@@ -18,8 +18,16 @@
     });
 
     function notification(exception, cause) {
+      airbrake.notify({
+        error: exception,
+        params: {
+          angular_cause: cause //jshint ignore:line
+        },
+        session: {
+          'auth_headers': $localStorage.get('auth_headers') // jshint ignore:line
+        }
+      });
       $log.error(exception);
-      airbrake.notify({error: exception, params: {angular_cause: cause}}); //jshint ignore:line
     }
 
     return notification;
