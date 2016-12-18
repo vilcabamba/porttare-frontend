@@ -15,3 +15,5 @@ undefined
 
 app/scripts/config/constants-config.js
 app/templates/**/*.html
+.bundle/config
+vendor/bundle
