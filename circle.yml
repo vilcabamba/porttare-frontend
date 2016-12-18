@@ -1,6 +1,3 @@
-dependencies:
-  cache_directories:
-    - "~/.rvm/gems/ruby-2.1.4/gems/"
 machine:
   ruby:
     version: 2.1.4
