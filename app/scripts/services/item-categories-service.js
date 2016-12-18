@@ -5,10 +5,7 @@
     .module('porttare.services')
     .factory('ItemCategoriesService', ItemCategoriesService);
 
-  function ItemCategoriesService($http,
-                        Upload,
-                        ENV,
-                        CommonService) {
+  function ItemCategoriesService(CommonService) {
 
     var service = {
       getProviderItemCategories: getProviderItemCategories,
