@@ -366,10 +366,17 @@
         cantidadSingular: 'unidad',
         title: 'Carrito',
         deliverNow: 'Entregar inmediatamente',
+        shippingCosts: '(costos de envío)',
+        deliveryPlaceholder: 'Entrega:',
         deliveryMethods: {
           pickup: 'Recoger en local',
           shipping: 'Enviar a domicilio',
         }
+      },
+      orders: {
+        collectionTitle: 'Orden #',
+        date: 'Fecha',
+        total: 'Total'
       },
       form: {
         requiredField: 'Campo requerido. ',
