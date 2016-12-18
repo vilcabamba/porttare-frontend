@@ -5,22 +5,32 @@
     .module('porttare.controllers')
     .controller('ItemsController', ItemsController);
 
+
   function ItemsController($ionicLoading,
                            $ionicPopup,
                            $scope,
                            apiResources,
                            ItemsService,
-                           ModalService) {
+                           ModalService,
+                           ItemCategoriesService,
+                           ErrorHandlerService) {
     var itemsVm = this,
         modalScope;
     itemsVm.newItemModal = launchModal;
     itemsVm.submitProcess = newItem; // NB currently here only to honour specs. wipe me?
     itemsVm.query = '';
-
     init();
+    getProviderItemCategories();
 
     function init() {
       itemsVm.items = apiResources.provider_items; //jshint ignore:line
+    }
+
+    function getProviderItemCategories(){
+      ItemCategoriesService.getProviderItemCategories().then(function success(resp){
+        itemsVm.selectize = ItemCategoriesService.getSelectizeItemCategorias();
+        itemsVm.categorias = resp.provider_item_categories; //jshint ignore:line
+      },ErrorHandlerService.handleCommonErrorGET);
     }
 
     function error(resp){
@@ -40,6 +50,7 @@
       ItemsService.newItem(modalScope.modalVm.item).then(function success(response){
         $ionicLoading.hide().then(function(){
           itemsVm.items.push(response.provider_item); //jshint ignore:line
+          getProviderItemCategories();
           $ionicPopup.alert({
             title: 'Éxito',
             template: '{{::("item.successItemSave"|translate)}}'

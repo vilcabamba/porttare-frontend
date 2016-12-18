@@ -124,6 +124,16 @@ ion-modal-view.item-form
         .errors-wrapper
           show-error(array-messages='modalVm.messages.stock')
 
+        label.item.item-input.item-stacked-label
+          span.input-label {{::("item.providerItemCategory"|translate|uppercase)}}
+        .item-selectize
+          input(selectizeprovideritemcategory
+            config ="modalVm.selectize"
+            options="modalVm.categorias",
+            item = "modalVm.item",
+            ng-model="modalVm.item.provider_item_category_id"
+            placeholder='Seleccione una categoría')
+
         label.item.item-input.item-input--no-borders.item-stacked-label
           span.input-label {{::("item.imagen"|translate)}}
         .picture-uploader(
