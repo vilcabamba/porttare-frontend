@@ -55,6 +55,8 @@
         ENV: {
           name: 'test',
           apiHost: 'http://porttare-integration.herokuapp.com'
+          // airbrakeProjectId: '5855956095ca4e44a000002a',
+          // airbrakeProjectKey: 'ae5467f02e5a6d6443a81cf25c418e75'
         }
       }
     }

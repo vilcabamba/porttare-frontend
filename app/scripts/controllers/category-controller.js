@@ -6,10 +6,14 @@
     .controller('CategoryController', CategoryController);
 
   function CategoryController(data, $state) {
-    var categoryVm = this;
+    var categoryVm = this,
+        slickCenterMode, slickInitialSlide;
 
     categoryVm.category = data.provider_category;//jshint ignore:line
     categoryVm.providers = data.provider_category.provider_profiles;//jshint ignore:line
+
+    slickCenterMode = categoryVm.providers.length === 1 || categoryVm.providers.length > 2;
+    slickInitialSlide = categoryVm.providers.length > 2 ? 1 : 0;
 
     categoryVm.options = {
       model: {
@@ -28,9 +32,11 @@
         }
       },
       slickSettings: {
-        centerMode: true,
-        variableWidth: true,
         infinite: false,
+        variableWidth: true,
+        lazyLoad: 'progressive',
+        centerMode: slickCenterMode,
+        initialSlide: slickInitialSlide,
         responsive: [
           {
             breakpoint: 320,
