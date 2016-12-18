@@ -13,7 +13,6 @@
       $ionicPopup,
       $scope,
       $rootScope,
-      $ionicScrollDelegate,
       $timeout,
       deferNewItem,
       deferEditItem,
