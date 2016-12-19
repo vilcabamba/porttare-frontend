@@ -8,33 +8,46 @@
   function selectizeProviderItemCategory() {
     return {
       restrict: 'A',
-      require: 'ngModel',
       scope: {
         options: '=',
         config: '=',
-        item: '='
+        item: '=',
+        bindTo: '@',
+        nestedParam: '@'
       },
 
-      link: function(scope, elemento, attrs) {//jshint ignore:line
+      link: function(scope, elemento) {
         var selectize = elemento.selectize(scope.config)[0].selectize;
         angular.forEach(scope.options, function(tag) {
           selectize.addOption(tag);
         });
-        selectize.addItem(scope.item.provider_item_category_id);//jshint ignore:line
 
-        function optionAdd(value) {
-          scope.item.provider_item_category_attributes= {nombre: value}; //jshint ignore:line
+        // select current option
+        selectize.addItem(
+          scope.item[scope.bindTo],
+          false
+        );
+
+        selectize.on('item_add', chooseItemCategory);
+        selectize.on('option_add', addItemCategory);
+        selectize.on('item_remove', deselectItemCategory);
+
+        function addItemCategory(value) {
+          scope.item[scope.nestedParam] = {
+            nombre: value
+          };
         }
 
-        function itemRemove(value){
-          if(scope.item.provider_item_category_attributes){ //jshint ignore:line
-            selectize.removeOption(value);
-          }
-          scope.item.provider_item_category_attributes = undefined; //jshint ignore:line
+        function deselectItemCategory(){
+          scope.item[scope.bindTo] = null;
+          scope.item[scope.nestedParam] = undefined;
         }
 
-        selectize.on('option_add', optionAdd);
-        selectize.on('item_remove', itemRemove);
+        function chooseItemCategory(value) {
+          // only allow integers. strings are new categories
+          // and should be part of nested params
+          scope.item[scope.bindTo] = isFinite(value) ? value : undefined;
+        }
       }
     };
   }

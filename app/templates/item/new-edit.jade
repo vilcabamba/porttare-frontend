@@ -131,7 +131,8 @@ ion-modal-view.item-form
             config ="modalVm.selectize"
             options="modalVm.categorias",
             item = "modalVm.item",
-            ng-model="modalVm.item.provider_item_category_id"
+            bind-to = "provider_item_category_id"
+            nested-param = "provider_item_category_attributes"
             placeholder='Seleccione una categoría')
 
         label.item.item-input.item-input--no-borders.item-stacked-label
