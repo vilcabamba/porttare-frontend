@@ -38,7 +38,10 @@
           };
         }
 
-        function deselectItemCategory(){
+        function deselectItemCategory(value){
+          if(scope.item[scope.nestedParam]){
+            selectize.removeOption(value);
+          }
           scope.item[scope.bindTo] = null;
           scope.item[scope.nestedParam] = undefined;
         }

@@ -22,7 +22,6 @@
       return {
         maxItems: 1,
         create: true,
-        persist: false,
         valueField: 'id',
         labelField: 'nombre',
         searchField: 'nombre'
