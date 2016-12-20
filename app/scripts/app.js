@@ -2,6 +2,7 @@
   'use strict';
   angular.module('porttare', [
     'ionic',
+    'porttare.fake-storage',
     'ng-token-auth',
     'porttare.config',
     'porttare.controllers',
@@ -39,4 +40,5 @@
   angular.module('porttare.directives', []);
   angular.module('porttare.services', []);
   angular.module('porttare.filters', []);
+  angular.module('porttare.fake-storage', []);
 })();

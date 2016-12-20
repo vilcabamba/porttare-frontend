@@ -33,7 +33,7 @@
 
     function startApp() {
       normalStatusBar();
-      $localStorage.set('hasViewedTutorial','true');
+      $localStorage.setItem('hasViewedTutorial','true');
       $state.go('prelogin');
     }
 
