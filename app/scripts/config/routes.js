@@ -198,10 +198,6 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   })
-  .state('app.items', {
-    url: '/items',
-    abstract: true
-  })
   .state('app.map', {
     url: '/map',
     views: {
@@ -260,10 +256,6 @@ function routes($stateProvider, $urlRouterProvider) {
             }
     }
   })
-  .state('provider.items', {
-    url: '/items',
-    abstract: true
-  })
   .state('provider.profile-provider', {
     url: '/profile',
     abstract: true,
@@ -299,6 +291,10 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   })
+  .state('provider.items', {
+    url: '/items',
+    abstract: true
+  })
   .state('provider.items.index', {
     url: '/',
     cache: false,
@@ -309,9 +305,7 @@ function routes($stateProvider, $urlRouterProvider) {
         controllerAs: 'itemsVm',
         resolve: {
           apiResources: function (ItemsService) {
-            return ItemsService.getItems().then(function (response) {
-              return response;
-            });
+            return ItemsService.getItems();
           }
         }
       }
@@ -346,11 +340,17 @@ function routes($stateProvider, $urlRouterProvider) {
   })
   .state('provider.clients.index', {
     url: '/',
+    cache: false,
     views: {
       'menuContent@provider': {
         templateUrl: 'templates/client/clients.html',
         controller: 'ClientsController',
-        controllerAs: 'clientsVm'
+        controllerAs: 'clientsVm',
+        resolve: {
+          providerClients: function (ClientsService) {
+            return ClientsService.getClients();
+          }
+        }
       }
     }
   })

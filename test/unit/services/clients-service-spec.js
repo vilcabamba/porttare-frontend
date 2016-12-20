@@ -24,14 +24,14 @@
 
       it('should get all clients', function(){
         var expectedUrl = ENV.apiHost + '/api/provider/clients';
-        var objectToRespond = {'provider_clients':[]};
+        var objectToRespond = {'provider_clients':[{}]};
 
         $httpBackend.expectGET(expectedUrl)
           .respond(objectToRespond);
 
         service.getClients().then(function(response){
-          chai.assert.isObject(response, 'This is an object!');
-          chai.expect(response).to.include.keys('provider_clients');
+          chai.assert.isArray(response, 'This is an object!');
+          chai.expect(response.length).to.eq(1);
         });
 
         $httpBackend.flush();
