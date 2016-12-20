@@ -37,18 +37,15 @@
   .factory('$localStorage', [
     '$window', '$fakeStorage',
     function($window, $fakeStorage) {
-      function isStorageSupported(storageName)
-      {
+      function isStorageSupported(storageName) {
         var testKey = 'test',
         storage = $window[storageName];
-        try
-        {
+        try {
           storage.setItem(testKey, '1');
           storage.removeItem(testKey);
           return true;
         }
-        catch (error)
-        {
+        catch (error) {
           return false;
         }
       }

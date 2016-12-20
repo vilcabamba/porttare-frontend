@@ -18,7 +18,8 @@
       deferNewClient,
       deferEditClient,
       deferDeleteClient,
-      confirmationDeferred;
+      confirmationDeferred,
+      providerClients;
 
     beforeEach(module('porttare.controllers'));
     beforeEach(module('porttare.services', function($provide){
@@ -52,6 +53,9 @@
           }
         };
       });
+      $provide.factory('providerClients', function (){
+        return [];
+      });
     }));
 
     beforeEach(inject(
@@ -59,7 +63,8 @@
         _$rootScope_,
         _$controller_,
         _ClientsService_,
-        _ModalService_) {
+        _ModalService_,
+        _providerClients_) {
         $rootScope = _$rootScope_;
         $scope = $rootScope.$new();
         $q = _$q_;
@@ -78,6 +83,7 @@
         };
         translateDeferred = $q.defer();
         $translate = sinon.stub().returns(translateDeferred.promise);
+        providerClients = _providerClients_;
       })
     );
 
@@ -89,7 +95,8 @@
           ModalService: ModalService,
           $ionicLoading: $ionicLoading,
           $ionicPopup: $ionicPopup,
-          $translate: $translate
+          $translate: $translate,
+          providerClients: providerClients
         };
 
         ctrl = $controller('ClientsController', dependencies);

@@ -1,5 +1,6 @@
-// Generated on 2015-09-12 using generator-ionic 0.7.3
 'use strict';
+
+require('dotenv').config({silent: true});
 
 var _ = require('lodash');
 var path = require('path');
@@ -213,15 +214,18 @@ module.exports = function (grunt) {
     //     }
     //   }
     // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/<%= yeoman.scripts %>/scripts.js': [
-    //         '<%= yeoman.dist %>/<%= yeoman.scripts %>/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
+    uglify: {
+      options: {
+        sourceMap: true
+      }
+      // dist: {
+      //   files: {
+      //     '<%= yeoman.dist %>/<%= yeoman.scripts %>/scripts.js': [
+      //       '<%= yeoman.dist %>/<%= yeoman.scripts %>/scripts.js'
+      //     ]
+      //   }
+      // }
+    },
     // concat: {
     //   dist: {}
     // },
@@ -235,6 +239,7 @@ module.exports = function (grunt) {
         frameworks: ['mocha', 'chai', 'sinon'],
         files: [
           'node_modules/phantomjs-polyfill/bind-polyfill.js',
+          'node_modules/phantomjs-polyfill-find/find-polyfill.js',
           '<%= yeoman.app %>/bower_components/angular/angular.js',
           '<%= yeoman.app %>/bower_components/angular-mocks/angular-mocks.js',
           '<%= yeoman.app %>/bower_components/angular-animate/angular-animate.js',

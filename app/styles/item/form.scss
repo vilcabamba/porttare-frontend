@@ -36,3 +36,9 @@
     }
   }
 }
+
+.item-selectize{
+  .selectize-control .selectize-input .item {
+    vertical-align: middle;
+  }
+}

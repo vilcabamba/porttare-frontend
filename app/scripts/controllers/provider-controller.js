@@ -21,6 +21,7 @@
     providerVm.paymentMethods = [];
     providerVm.matrizProvider = {};
     providerVm.touchedPayments = false;
+    providerVm.removeImage = removeImage;
     // TODO translate:
     providerVm.laborDays = [{
       label: 'Lunes',
@@ -57,6 +58,10 @@
       providerVm.provider.email = $auth.user.email;
     }
 
+    function removeImage(){
+      providerVm.provider.logotipo = null;
+    }
+
     function createOffice(office){
       var newOffice = angular.copy(office);
       newOffice.hora_de_apertura = $filter('formatDate')(
@@ -77,7 +82,7 @@
         template: 'enviando...'
       });
 
-      var objectToSend = angular.copy(providerVm.provider);
+      var objectToSend = providerVm.provider;
       objectToSend.formas_de_pago = providerVm.paymentMethods;
 
       objectToSend.offices_attributes = [createOffice(providerVm.matrizProvider)];

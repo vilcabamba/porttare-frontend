@@ -10,7 +10,8 @@
                              $ionicLoading,
                              $ionicPopup,
                              $scope,
-                             $translate) {
+                             $translate,
+                             providerClients) {
     var clientsVm = this;
     clientsVm.showNewModal = showNewModal;
     clientsVm.showEditModal = showEditModal;
@@ -22,15 +23,8 @@
       {name: 'Antigüedad', filterField: 'created_at'}
     ];
     clientsVm.query = '';
+    clientsVm.clients = providerClients;
     var selectedClientIndex;
-    getClients();
-
-    function getClients() {
-      ClientsService.getClients()
-        .then(function success(resp) {
-          clientsVm.clients = resp.provider_clients; //jshint ignore:line
-        });
-    }
 
     function submitProcess(id){
       (id) ? editClient() : newClient(); //jshint ignore:line

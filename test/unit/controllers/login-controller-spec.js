@@ -13,7 +13,6 @@
         $window,
         $ionicLoading,
         deferredLogout,
-        deferIonicHistory,
         SessionService,
         deferLoginWithFB,
         APP;
@@ -27,14 +26,13 @@
 
       deferredLogin     = $q.defer();
       deferredLogout    = $q.defer();
-      deferIonicHistory = $q.defer();
       deferLoginWithFB  = $q.defer();
       $ionicPopup       = {
         alert: sinon.stub().returns(deferredLogin.promise),
         show: sinon.stub().returns(deferredLogin.promise)
       };
       $ionicHistory     = {
-        clearCache: sinon.stub().returns(deferIonicHistory.promise)
+        clearHistory: sinon.stub()
       };
       $ionicLoading     = { show: sinon.stub(), hide: sinon.stub()};
       $state            = { go: sinon.stub() };
@@ -52,7 +50,8 @@
         loginWithFB: sinon.stub().returns(deferLoginWithFB.promise)
       };
       APP = {
-        successState: 'app.categories.index'
+        successState: 'app.categories.index',
+        preloginState: 'prelogin'
       };
     }));
 
@@ -126,7 +125,7 @@
       });
 
       describe('when the logout is executed,', function () {
-        var loginState = 'login';
+        var preloginState = 'prelogin';
 
         it('should show loading', function () {
           sinon.assert.calledOnce($ionicLoading.show);
@@ -135,18 +134,15 @@
         it('if successful, should clear history', function () {
           deferredLogout.resolve();
           $rootScope.$digest();
-          sinon.assert.calledOnce($ionicHistory.clearCache);
+          sinon.assert.calledOnce($ionicHistory.clearHistory);
         });
 
         it('if successful, should change state', function () {
-          deferredLogout.promise.then(function () {
-            deferIonicHistory.resolve();
-          });
           deferredLogout.resolve();
           $rootScope.$digest();
 
           sinon.assert.calledWithExactly($state.go,
-            loginState,
+            preloginState,
             {},
             { location: 'replace' });
         });

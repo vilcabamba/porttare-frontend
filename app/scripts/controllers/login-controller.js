@@ -20,7 +20,7 @@
     loginVm.loginWithFB = SessionService.loginWithFB;
     loginVm.loginForm = {};
     var successState = APP.successState;
-    var loginState = 'login';
+    var preloginState = APP.preloginState;
 
     function login() {
       $ionicLoading.show({
@@ -49,9 +49,8 @@
       });
       SessionService.logOut()
         .then(function () {
-          $ionicHistory.clearCache().then(function () {
-            $state.go(loginState, {}, { location: 'replace' });
-          });
+          $ionicHistory.clearHistory();
+          $state.go(preloginState, {}, { location: 'replace' });
         })
         .catch(function () {
           $ionicPopup.alert({

@@ -1,4 +1,4 @@
-.list.list-inset
+.list.list-inset.item-form
   legend {{::("provider.formLegendSecond"|translate)}}
 
   label.item.item-input.item-stacked-label(
@@ -53,9 +53,29 @@
 
   label.item.item-input.item-stacked-label
     span.input-label {{::("provider.logo"|translate)}}
-    input(
-      type='file'
-      ngf-select
-      ng-model="itemsVm.item.imagen"
-      accept="image/*"
+  .picture-uploader(
+    ng-if="!providerVm.provider.logotipo"
+    type="file"
+    ngf-select
+    ng-model="providerVm.provider.logotipo"
+    ngf-capture="'camera'"
+    accept="image/*"
+  )
+    .img-placeholder
+    .img-placeholder--legend {{::("item.addImages"|translate)}}
+
+  .images-previews.text-center(ng-if="providerVm.provider.logotipo")
+    .img-wrapper.col-offset-25.col-50
+      img(
+        ngf-src="providerVm.provider.logotipo"
+        type="file"
+        ngf-select
+        ng-model="providerVm.provider.logotipo"
+        ngf-capture="'camera'"
+        accept="image/*"
+      )
+    .button.button-clear.button-positive(
+      ng-click="providerVm.removeImage()"
     )
+        | Quitar imagen
+  show-error(array-messages='providerVm.errors.imagen')

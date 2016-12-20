@@ -99,7 +99,23 @@ function routes($stateProvider, $urlRouterProvider) {
       'menuContent@app': {
         templateUrl: 'templates/cart/index.html',
         controller: 'CartController',
-        controllerAs: 'cartVm'
+        controllerAs: 'cartVm',
+        resolve: {
+          deliveryAddresses:
+            function (ProfileAddressesService,
+                      ErrorHandlerService) {
+              return ProfileAddressesService
+                       .getAddresses()
+                       .catch(ErrorHandlerService.handleCommonErrorGET);
+          },
+          billingAddresses:
+            function (BillingAddressesService,
+                      ErrorHandlerService) {
+              return BillingAddressesService
+                       .getBillingAddresses()
+                       .catch(ErrorHandlerService.handleCommonErrorGET);
+          }
+        }
       }
     }
   })
@@ -182,10 +198,6 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   })
-  .state('app.items', {
-    url: '/items',
-    abstract: true
-  })
   .state('app.map', {
     url: '/map',
     views: {
@@ -244,10 +256,6 @@ function routes($stateProvider, $urlRouterProvider) {
             }
     }
   })
-  .state('provider.items', {
-    url: '/items',
-    abstract: true
-  })
   .state('provider.profile-provider', {
     url: '/profile',
     abstract: true,
@@ -283,6 +291,10 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   })
+  .state('provider.items', {
+    url: '/items',
+    abstract: true
+  })
   .state('provider.items.index', {
     url: '/',
     cache: false,
@@ -293,9 +305,7 @@ function routes($stateProvider, $urlRouterProvider) {
         controllerAs: 'itemsVm',
         resolve: {
           apiResources: function (ItemsService) {
-            return ItemsService.getItems().then(function (response) {
-              return response;
-            });
+            return ItemsService.getItems();
           }
         }
       }
@@ -330,11 +340,17 @@ function routes($stateProvider, $urlRouterProvider) {
   })
   .state('provider.clients.index', {
     url: '/',
+    cache: false,
     views: {
       'menuContent@provider': {
         templateUrl: 'templates/client/clients.html',
         controller: 'ClientsController',
-        controllerAs: 'clientsVm'
+        controllerAs: 'clientsVm',
+        resolve: {
+          providerClients: function (ClientsService) {
+            return ClientsService.getClients();
+          }
+        }
       }
     }
   })
@@ -437,11 +453,10 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'ProfileAddressesController',
         controllerAs: 'pfaVm',
         resolve: {
-          data: function (ProfileAddressesService, ErrorHandlerService) {
-            return ProfileAddressesService.getAddresses()
-              .then(function success(res) {
-                return res;
-              }, ErrorHandlerService.handleCommonErrorGET);
+          customerAddresses: function (ProfileAddressesService, ErrorHandlerService) {
+            return ProfileAddressesService
+                     .getAddresses()
+                     .catch(ErrorHandlerService.handleCommonErrorGET);
           }
         }
       }
@@ -545,6 +560,28 @@ function routes($stateProvider, $urlRouterProvider) {
         templateUrl: 'templates/dispatchers/detail.html',
         controller: 'DispatcherController',
         controllerAs: 'dispatchersVm'
+      }
+    }
+  })
+  .state('app.customerorders', {
+    url: '/customer_orders',
+    abstract: true
+  })
+  .state('app.customerorders.index', {
+    cache: false,
+    url: '/',
+    views: {
+      'menuContent@app': {
+        controllerAs: 'customerOrdersVm',
+        controller: 'CustomerOrdersIndexController',
+        templateUrl: 'templates/customer/orders/index.html',
+        resolve: {
+          customerOrders: function (CustomerOrdersService, ErrorHandlerService){
+            return CustomerOrdersService
+                     .getCustomerOrders()
+                     .catch(ErrorHandlerService.handleCommonErrorGET);
+          }
+        }
       }
     }
   });

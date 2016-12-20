@@ -13,7 +13,9 @@
                                   $ionicLoading,
                                   apiResources,
                                   ModalService,
-                                  ItemsService) {
+                                  ItemsService,
+                                  ItemCategoriesService,
+                                  ErrorHandlerService) {
     var providerItemVm = this,
         modalScope,
         productScope;
@@ -29,12 +31,20 @@
     };
 
     init();
+    getProviderItemCategories();
 
     function init() {
       providerItemVm.imagesLoaded = true;
       providerItemVm.providerItem.precio = $filter('priceCurrency')(
         providerItemVm.providerItem.precio_cents // jshint ignore:line
       );
+    }
+
+    function getProviderItemCategories(){
+      ItemCategoriesService.getProviderItemCategories().then(function success(resp){
+        providerItemVm.selectize = ItemCategoriesService.getSelectizeItemCategorias();
+        providerItemVm.categorias = resp.provider_item_categories; //jshint ignore:line
+      },ErrorHandlerService.handleCommonErrorGET);
     }
 
     function updateStock() {
@@ -92,7 +102,7 @@
         providerItemVm.imagesLoaded = true;
         providerItemVm.providerItem = resp.provider_item; //jshint ignore:line
         init();
-
+        getProviderItemCategories();
         $ionicLoading.hide().then(function () {
           $ionicPopup.alert({
             title: 'Éxito',

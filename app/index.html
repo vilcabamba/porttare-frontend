@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
     <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
     <link rel="stylesheet" href="bower_components/ion-datetime-picker/release/ion-datetime-picker.min.css" />
+    <link rel="stylesheet" href="bower_components/selectize/dist/css/selectize.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <link href="styles/main.css" rel="stylesheet">
@@ -40,11 +41,17 @@
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/ng-file-upload/dist/ng-file-upload.js"></script>
     <script src="bower_components/angular-elastic/elastic.js"></script>
+    <script src="bower_components/sifter/sifter.js"></script>
+    <script src="bower_components/microplugin/src/microplugin.js"></script>
+    <script src="bower_components/selectize/dist/js/selectize.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
+
+    <!-- moment locales -->
+    <script src="bower_components/moment/locale/es.js"></script>
 
     <!-- your app's js -->
     <!-- build:js scripts/scripts.js -->
@@ -56,6 +63,7 @@
     <script src="scripts/config/http-provider.js"></script>
     <script src="scripts/config/routes.js"></script>
     <script src="scripts/config/ionic-config.js"></script>
+    <script src="scripts/config/moment-config.js"></script>
     <!-- controllers -->
     <script src="scripts/controllers/site-controller.js"></script>
     <script src="scripts/controllers/login-controller.js"></script>
@@ -89,6 +97,7 @@
     <script src="scripts/controllers/dispatchers-controller.js"></script>
     <script src="scripts/controllers/dispatcher-controller.js"></script>
     <script src="scripts/controllers/provider/item-controller.js"></script>
+    <script src="scripts/controllers/customer/orders/customer-orders-index-controller.js"></script>
     <!-- services -->
     <script src="scripts/services/geolocation-service.js"></script>
     <script src="scripts/services/interceptors-service.js"></script>
@@ -115,6 +124,8 @@
     <script src="scripts/services/billing-addresses-service.js"></script>
     <script src="scripts/services/offices-service.js"></script>
     <script src="scripts/services/dispatchers-service.js"></script>
+    <script src="scripts/services/item-categories-service.js"></script>
+    <script src="scripts/services/customer-orders-service.js"></script>
     <!-- directives -->
     <script src="scripts/directives/back-button/back-button.js"></script>
     <script src="scripts/directives/autosize-input/autosize-input.js"></script>
@@ -128,7 +139,10 @@
     <script src="scripts/directives/payment-methods/payment-methods.js"></script>
     <script src="scripts/directives/account-type/account-type.js"></script>
     <script src="scripts/directives/toggle-expand/toggle-expand.js"></script>
+    <script src="scripts/directives/cart/order-items-total.js"></script>
     <script src="scripts/directives/provider-profile-schedule/provider-profile-schedule.js"></script>
+    <script src="scripts/directives/user-image/user-image.js"></script>
+    <script src="scripts/directives/selectize/selectize-provider-item-category.js"></script>
     <!-- filters -->
     <script src="scripts/filters/default-image.js"></script>
     <script src="scripts/filters/age.js"></script>

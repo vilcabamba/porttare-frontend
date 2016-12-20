@@ -159,6 +159,15 @@
         email: 'Email',
         confirmTitle: '¿Estás seguro?',
         dateDelivery: 'Fecha y hora de entrega',
+        dayNames: {
+          mon: 'Lunes',
+          tue: 'Martes',
+          wed: 'Miércoles',
+          thu: 'Jueves',
+          fri: 'Viernes',
+          sat: 'Sábado',
+          sun: 'Domingo'
+        },
         shortDayNames: {
           mon: 'Lun',
           tue: 'Mar',
@@ -190,6 +199,7 @@
         volumen: 'Volumen',
         peso: 'Peso',
         imagen: 'Fotografías',
+        providerItemCategory: 'Categorías',
         addImages: 'Agregar fotografías',
         observaciones: 'Descripción larga',
         unidadMedida: 'Unidad de medida',
@@ -300,6 +310,7 @@
         age:  'Edad',
         country:  'Ciudad',
         image:  'Imagen',
+        changeImagen: 'Cambiar Imagen',
         successUpdateProfile: 'Perfil actualizado éxitosamente',
         password: 'Contraseña',
         birthdate:  'Fecha de Nacimiento'
@@ -355,10 +366,17 @@
         cantidadSingular: 'unidad',
         title: 'Carrito',
         deliverNow: 'Entregar inmediatamente',
+        shippingCosts: '(costos de envío)',
+        deliveryPlaceholder: 'Entrega:',
         deliveryMethods: {
           pickup: 'Recoger en local',
           shipping: 'Enviar a domicilio',
         }
+      },
+      orders: {
+        collectionTitle: 'Orden #',
+        date: 'Fecha',
+        total: 'Total'
       },
       form: {
         requiredField: 'Campo requerido. ',

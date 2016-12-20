@@ -1,0 +1,22 @@
+.cart-delivery-address
+  span.placeholder-title
+    | {{ ::("cart.deliveryPlaceholder" | translate) }}
+  span Sábado 16 de Julio - 10:00 AM
+  span - Departamento
+  button.button.button-clear.button-energized.button-small
+    | {{ ::("globals.edit" | translate) }}
+
+.provider-profile-section(
+  ng-repeat="providerProfile in cartVm.cart.provider_profiles track by $index"
+)
+  .provider-profile--title
+    | {{ ::providerProfile.nombre_establecimiento }}
+  .provider-profile--subtitle
+    span
+      order-items-total(
+        order-items="providerProfile.customer_order_items"
+      )
+    span + $1.50
+    span {{ ::('cart.shippingCosts' | translate) }}
+  .provider-items-in-cart
+    slick-item(settings="cartVm.slickSettings" data="providerProfile")

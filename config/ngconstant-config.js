@@ -37,8 +37,8 @@
           apiHost: 'https://demo-backend.moviggo.com',
           airbrakeHost: 'https://pangi.shiriculapo.com',
           gMapsKey: process.env.GOOGLE_MAPS_API_KEY,
-          airbrakeProjectId: '5848435995ca4e0605000061',
-          airbrakeProjectKey: 'c93b42d9688bda77d66196c0476a926b'
+          airbrakeProjectId: process.env.AIRBRAKE_PROJECT_ID,
+          airbrakeProjectKey: process.env.AIRBRAKE_PROJECT_KEY
         }
       }
     },
@@ -55,6 +55,8 @@
         ENV: {
           name: 'test',
           apiHost: 'http://porttare-integration.herokuapp.com'
+          // airbrakeProjectId: '5855956095ca4e44a000002a',
+          // airbrakeProjectKey: 'ae5467f02e5a6d6443a81cf25c418e75'
         }
       }
     }
