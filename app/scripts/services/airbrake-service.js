@@ -24,7 +24,7 @@
           angular_cause: cause //jshint ignore:line
         },
         session: {
-          'auth_headers': $localStorage.get('auth_headers') // jshint ignore:line
+          'auth_headers': $localStorage.getItem('auth_headers') // jshint ignore:line
         }
       });
       $log.error(exception);

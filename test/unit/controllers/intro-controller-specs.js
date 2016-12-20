@@ -11,8 +11,8 @@
         $controller = _$controller_;
         $window = _$window_;
         $localStorage = {};
-        $localStorage.set = sinon.stub();
-        $localStorage.get = sinon.stub();
+        $localStorage.setItem = sinon.stub();
+        $localStorage.getItem = sinon.stub();
         $state = { go: sinon.stub()};
         $ionicSlideBoxDelegate = { previous: sinon.stub(), next: sinon.stub()};
         $ionicPlatform = { ready: sinon.stub() };
@@ -38,7 +38,7 @@
 
       it('should call $localstorage and $state.go on startApp()', function(){
         ctrl.startApp();
-        sinon.assert.calledOnce($localStorage.set);
+        sinon.assert.calledOnce($localStorage.setItem);
         sinon.assert.calledOnce($state.go);
       });
 
