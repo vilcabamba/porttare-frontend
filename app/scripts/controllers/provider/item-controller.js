@@ -44,6 +44,7 @@
       ItemCategoriesService.getProviderItemCategories().then(function success(resp){
         providerItemVm.selectize = ItemCategoriesService.getSelectizeItemCategorias();
         providerItemVm.categorias = resp.provider_item_categories; //jshint ignore:line
+        getProviderItemCategoryName();
       },ErrorHandlerService.handleCommonErrorGET);
     }
 
@@ -132,6 +133,19 @@
         focusFirstInput: false,
         fromTemplateUrl: 'templates/item/as-customer.html'
       });
+    }
+
+    function getProviderItemCategoryName() {
+      var providerItemCategory,
+          categories,
+          providerItem;
+
+      categories = providerItemVm.categorias;
+      providerItem = providerItemVm.providerItem;
+      providerItemCategory = categories.find(function (providerItemCategory) {
+        return providerItemCategory.id === providerItem.provider_item_category_id; // jshint ignore:line
+      });
+      providerItemVm.providerItemCategoryName = providerItemCategory && providerItemCategory.nombre;
     }
 
     function unregisterItem() {

@@ -44,6 +44,9 @@ ion-view(
         .col.col-50.value
           | {{::("item.cantidadPrefix"|translate)}}{{providerItemVm.providerItem.cantidad}}
       .row
+        .col.col-50.label {{::("item.providerItemCategory"|translate)}}
+        .col.col-50.value {{providerItemVm.providerItemCategoryName}}
+      .row
         .col.col-50.label {{::("item.observaciones"|translate)}}
         .col.col-50.value {{providerItemVm.providerItem.observaciones}}
 
