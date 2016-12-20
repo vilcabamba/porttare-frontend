@@ -36,12 +36,12 @@
         {
           value: 'efectivo',
           label: trans[transKeys[0]],
-          checked: false
+          checked: checkedVm.methods.includes('efectivo')
         },
         {
           value: 'tarjeta_credito',
           label: trans[transKeys[1]],
-          checked: false
+          checked: checkedVm.methods.includes('tarjeta_credito')
         }
       ];
     });
