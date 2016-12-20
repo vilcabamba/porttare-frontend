@@ -32,7 +32,7 @@
       };
       $window           = _$window_;
       $localStorage     = {
-        get: sinon.stub().returns(true)
+        getItem: sinon.stub().returns(true)
       };
       $auth = {
         validateUser: function() {
