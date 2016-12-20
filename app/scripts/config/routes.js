@@ -347,8 +347,10 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'ClientsController',
         controllerAs: 'clientsVm',
         resolve: {
-          providerClients: function (ClientsService) {
-            return ClientsService.getClients();
+          providerClients: function (ClientsService, ErrorHandlerService) {
+            return ClientsService
+                    .getClients()
+                    .catch(ErrorHandlerService.handleCommonErrorGET);
           }
         }
       }
