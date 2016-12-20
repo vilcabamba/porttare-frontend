@@ -586,6 +586,38 @@ function routes($stateProvider, $urlRouterProvider) {
         }
       }
     }
+  })
+  .state('app.customerorders.show', {
+    url: '/:id',
+    params: {
+      customerorder: null
+    },
+    views: {
+      'menuContent@app': {
+        templateUrl: 'templates/customer/orders/show.html',
+        controller: 'CustomerOrderController',
+        controllerAs: 'customerOrderVm',
+        resolve: {
+          customerOrder: function ($ionicLoading, $stateParams, CustomerOrdersService, ErrorHandlerService) {
+            if ($stateParams.customerorder) {
+              return $stateParams.customerorder;
+            } else {
+              $ionicLoading.show({
+                template: '{{::("globals.loading"|translate)}}'
+              });
+
+              var customerOrderId = $stateParams.id;
+
+              return CustomerOrdersService.getCustomerOrder(customerOrderId)
+                .then(function success(res) {
+                  $ionicLoading.hide();
+                  return res.data;
+                }, ErrorHandlerService.handleCommonErrorGET);
+            }
+          }
+        }
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback

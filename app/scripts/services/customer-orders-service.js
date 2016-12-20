@@ -7,7 +7,8 @@
   
   function CustomerOrdersService($http, ENV) {
     var service = {
-      getCustomerOrders: getCustomerOrders
+      getCustomerOrders: getCustomerOrders,
+      getCustomerOrder: getCustomerOrder
     };
     
     return service;
@@ -20,5 +21,13 @@
         return response.data.customer_orders; // jshint ignore:line
       });
     }
+
+    function getCustomerOrder(customerOrderId) {
+      return $http({
+        method: 'GET',
+        url: ENV.apiHost + '/api/customer/orders/' + customerOrderId
+      });
+    }
+
   }
 })();

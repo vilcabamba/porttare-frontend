@@ -22,5 +22,5 @@ ion-view(
           | {{ ::(customerOrder.subtotal_items_cents | priceCurrency | currency) }}
         .col.col-20.text-right
           a.button.button-clear.button-positive.button-small(
-            ui-sref='app.customerorders.show({ id: customerOrder.id })'
+            ui-sref='app.customerorders.show({ id: customerOrder.id , customerorder : customerOrder })'
           ) {{::("globals.seeMore"|translate)}}
