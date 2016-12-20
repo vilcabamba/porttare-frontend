@@ -199,7 +199,7 @@
         volumen: 'Volumen',
         peso: 'Peso',
         imagen: 'Fotografías',
-        providerItemCategory: 'Categorías',
+        providerItemCategory: 'Categoría',
         addImages: 'Agregar fotografías',
         observaciones: 'Descripción larga',
         unidadMedida: 'Unidad de medida',

@@ -116,15 +116,7 @@ ion-modal-view.item-form
         .errors-wrapper
           show-error(array-messages='modalVm.messages.cantidad')
 
-        ion-toggle(
-          ng-model='modalVm.item.en_stock'
-          toggle-class='toggle-energized'
-        )
-          span.input-label {{::("item.stock"|translate)}}
-        .errors-wrapper
-          show-error(array-messages='modalVm.messages.stock')
-
-        label.item.item-input.item-stacked-label
+        label.item.item-input.item-input--no-borders.item-stacked-label
           span.input-label {{::("item.providerItemCategory"|translate|uppercase)}}
         .item-selectize
           input(selectizeprovideritemcategory
@@ -134,6 +126,14 @@ ion-modal-view.item-form
             bind-to = "provider_item_category_id"
             nested-param = "provider_item_category_attributes"
             placeholder='Seleccione una categoría')
+
+        ion-toggle(
+          ng-model='modalVm.item.en_stock'
+          toggle-class='toggle-energized'
+        )
+          span.input-label {{::("item.stock"|translate)}}
+        .errors-wrapper
+          show-error(array-messages='modalVm.messages.stock')
 
         label.item.item-input.item-input--no-borders.item-stacked-label
           span.input-label {{::("item.imagen"|translate)}}

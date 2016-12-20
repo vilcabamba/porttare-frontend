@@ -101,6 +101,42 @@
     border-bottom: 0;
   }
 
+  .item-selectize {
+    .selectize-control {
+      .selectize-input {
+        border-top: 0;
+        border-right: 0;
+        border-left: 0;
+        box-shadow: none;
+        border-radius: 0;
+        font-family: Montserrat-Light;
+        font-size: 14px;
+
+        .item {
+          border: 0;
+          padding: 0 10px 0 0;
+        }
+
+        input {
+          height: 20px;
+          font-size: 14px;
+        }
+
+        &:not(.has-items) {
+          input {
+            width: 100% !important;
+          }
+        }
+      }
+
+      .selectize-dropdown {
+        font-family: Montserrat-Light;
+        box-shadow: none;
+        font-size: 14px;
+      }
+    }
+  }
+
   .item-toggle {
     border-left: 0;
     border-right: 0;
