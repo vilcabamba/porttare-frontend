@@ -3,17 +3,14 @@ ion-view(
 )
   ion-nav-title
     .alt-logo
-  ion-content.addresses-wrapper(
-    scroll="false"
-  )
+  ion-content
     .address-wrapper(
       ng-repeat="address in ::pfaVm.addresses"
     )
       .list.list-inset.list--no-borders.text-center.actions-wrapper
         button.button.button-clear.button-positive(
-          ng-click="pfaVm.redirectToUpdateAddressView(address.id)"
-        ) {{::('globals.edit'|translate)}}
-
+        ng-click="pfaVm.redirectToUpdateAddressView(address.id)"
+      ) {{::('globals.edit'|translate)}}
       .list.list-inset.list--no-borders.resource-details-table
         p.resource-detail-title {{ address.nombre || address.direccion_uno }}
         .row
@@ -43,5 +40,5 @@ ion-view(
 
     .list.list-inset.list--no-borders.text-center.actions-wrapper
       button.button.button-outline.button-energized(
-        ng-click="pfaVm.redirectToNewAddressView()"
+      ng-click="pfaVm.redirectToNewAddressView()"
       ) {{::("profile.addresses.addAddressBtnText"|translate)}}
