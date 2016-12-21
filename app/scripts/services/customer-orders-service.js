@@ -26,6 +26,8 @@
       return $http({
         method: 'GET',
         url: ENV.apiHost + '/api/customer/orders/' + customerOrderId
+      }).then(function (response) {
+        return response.data;
       });
     }
 

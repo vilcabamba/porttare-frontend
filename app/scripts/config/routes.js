@@ -611,7 +611,7 @@ function routes($stateProvider, $urlRouterProvider) {
               return CustomerOrdersService.getCustomerOrder(customerOrderId)
                 .then(function success(res) {
                   $ionicLoading.hide();
-                  return res.data;
+                  return res;
                 }, ErrorHandlerService.handleCommonErrorGET);
             }
           }
