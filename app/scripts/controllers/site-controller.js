@@ -7,7 +7,7 @@
 
   function SiteController($rootScope, $ionicLoading, $auth, ProfileService) {// jshint ignore:line
     var siteVm = this,
-        currentUser = null;
+      currentUser = null;
 
     siteVm.userName = null;
     siteVm.userImageURL = null;
@@ -58,12 +58,6 @@
 
     function getUserImageURL(){
       return ProfileService.getUserImageURL(currentUser);
-    }
-
-    function getProviderImageURL () {
-      if (currentUser) {
-        return currentUser.provider_profile.logotipo_url;//jshint ignore:line
-      }
     }
 
     $rootScope.$on('currentUserUpdated',function(event, updatedCurrentUser){
