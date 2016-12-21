@@ -643,7 +643,7 @@ function routes($stateProvider, $urlRouterProvider) {
       });
   }
 
-  function accessIfUserAuth($auth, $state, $ionicLoading, APP, UserAuthService, CartService) {
+  function accessIfUserAuth($auth, $state, APP, UserAuthService, CartService) {
     return $auth.validateUser()
       .then(function userAuthorized(user) {
           if (user.agreed_tos) { //jshint ignore:line
@@ -652,14 +652,10 @@ function routes($stateProvider, $urlRouterProvider) {
               return user;
             });
           } else {
-            $state.go('termsAndCond').then(function () {
-              $ionicLoading.hide();
-            });
+            $state.go('termsAndCond');
           }
       }, function userNotAuthorized() {
-        $state.go(APP.preloginState).then(function () {
-          $ionicLoading.hide();
-        });
+        $state.go(APP.preloginState);
       });
   }
 }

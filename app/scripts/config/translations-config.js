@@ -428,7 +428,7 @@
       },
       termsAndConditions: {
         termsAndConditions: 'Términos y Condiciones',
-        description: 'Usted acepta los términos y condiciones?'
+        description: '¿Usted acepta los términos y condiciones?'
       }
     });
 

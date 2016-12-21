@@ -12,4 +12,4 @@ ion-view(
         p {{::("termsAndConditions.description"|translate)}}
     .row
       .list.list-inset.list--centered
-        a.button.button-outline.button-energized(ng-click="terCondVm.acceptTermsCond()"){{::("globals.accept"|translate)}}
+        button.button.button-energized(ng-click="terCondVm.agreeTermsOfService()"){{::("globals.accept"|translate)}}

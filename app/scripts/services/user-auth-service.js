@@ -8,7 +8,7 @@
   function UserAuthService($auth, $state, $ionicLoading, $http, ENV) {
     var service = {
       checkIfEnabledProvider : checkIfEnabledProvider,
-      acceptTermsCond : acceptTermsCond
+      agreeTermsOfService : agreeTermsOfService
     };
 
     return service;
@@ -27,12 +27,11 @@
       });
     }
 
-    function acceptTermsCond( data) {
+    function agreeTermsOfService( data) {
       return $http({
         method: 'POST',
         data: data,
-        url: ENV.apiHost + '/api/users/tos',
-        headers: { 'Accept': 'application/json' }
+        url: ENV.apiHost + '/api/users/tos'
       });
     }
   }

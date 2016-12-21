@@ -5,16 +5,16 @@
     .module('porttare.controllers')
     .controller('TermsAndCondController', TermsAndCondController);
 
-  function TermsAndCondController($q, $auth, APP, UserAuthService, $state, $ionicLoading, $ionicPopup){
+  function TermsAndCondController($auth, APP, UserAuthService, $state, $ionicLoading, $ionicPopup){
 
     var terCondVm = this;
-    terCondVm.acceptTermsCond = acceptTermsCond;
+    terCondVm.agreeTermsOfService = agreeTermsOfService;
 
-    function acceptTermsCond() {
+    function agreeTermsOfService() {
       var data = $auth.user;
-      UserAuthService.acceptTermsCond(data)
+      UserAuthService.agreeTermsOfService(data)
         .then(function success() {
-          $auth.user.agreed_tos = true;
+          $auth.user.agreed_tos = true; //jshint ignore:line
           $state.go(APP.successState)
             .then( function (){
               $ionicLoading.hide();
