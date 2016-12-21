@@ -1,23 +1,32 @@
-ion-modal-view
-  ion-header-bar.bar-stable.bar.bar-header
-    .title.alt-logo
-
+ion-modal-view.cart-edit-item-modal
+  ion-content(overflow-scroll="true")
     .ion-nav-buttons.buttons(side="primary")
-      button.button.button-clear.button-positive(
+      button.button.button-clear.button-positive.button-small(
         ng-click="cartVm.closeModal()"
-      ) {{::('globals.cancel'|translate)}}
-  ion-content.order-item-modal
+      )
+        i.ion-close
+
     .item-title {{cartVm.currentItem.provider_item.titulo}}
     .item-image
-      img(ng-src="{{cartVm.currentItem.provider_item.imagenes[0].imagen_url}}")
+      img(
+        ng-src="{{cartVm.currentItem.provider_item.imagenes[0].imagen_url}}"
+      )
     product-counter(options="cartVm.counterOptions")
     show-error(array-messages="cartVm.updateErrors.cantidad")
-    .item-comment
+
+    label.item.item-input.item-stacked-label.item-input--extra-margin
+      span.input-label {{::("cart.observations"|translate)}}
       textarea(
         msd-elastic
         ng-model='cartVm.currentItem.observaciones'
         placeholder='{{ ::("cart.observacionesPlaceholder" | translate)}}'
       )
-  ion-footer-bar.bar-stable.item-show-footer.bar-footer--tall
-    button.button.button-outline.button-assertive(ng-click="cartVm.removeOrderItem(cartVm.currentItem)") Eliminar
-    button.button.button-outline.button-positive(ng-click="cartVm.updateOrderItem()") Listo
+
+  ion-footer-bar.bar-stable.text-center
+    .constraint-width
+      button.button.button-outline.button-assertive.button-small(
+        ng-click="cartVm.removeOrderItem(cartVm.currentItem)"
+      ) Eliminar
+      button.button.button-outline.button-positive.button-small(
+        ng-click="cartVm.updateOrderItem()"
+      ) Listo

@@ -197,7 +197,8 @@
       };
       ModalService.showModal({
         parentScope: $scope,
-        fromTemplateUrl: 'templates/cart/order-item.html'
+        fromTemplateUrl: 'templates/cart/order-item.html',
+        backdropClickToClose: true
       });
     }
 
