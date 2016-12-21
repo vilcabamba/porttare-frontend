@@ -598,21 +598,12 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'CustomerOrderController',
         controllerAs: 'customerOrderVm',
         resolve: {
-          customerOrder: function ($ionicLoading, $stateParams, CustomerOrdersService, ErrorHandlerService) {
+          customerOrder: function ($ionicLoading, $stateParams, CustomerOrdersService) {
             if ($stateParams.customerorder) {
               return $stateParams.customerorder;
             } else {
-              $ionicLoading.show({
-                template: '{{::("globals.loading"|translate)}}'
-              });
-
               var customerOrderId = $stateParams.id;
-
-              return CustomerOrdersService.getCustomerOrder(customerOrderId)
-                .then(function success(res) {
-                  $ionicLoading.hide();
-                  return res;
-                }, ErrorHandlerService.handleCommonErrorGET);
+              return CustomerOrdersService.getCustomerOrder(customerOrderId);
             }
           }
         }
