@@ -55,9 +55,14 @@
   .product-counter {
     display: block;
     margin-bottom: 15px;
+    font-size: 28px;
 
     .price-panel {
       justify-content: center;
+    }
+
+    .counter-container {
+      margin: 5px 15px;
     }
   }
 
