@@ -1,16 +1,16 @@
 ion-view(
-  view-title="{{ ::('client.myOrders' | translate) }}"
+  view-title="{{ ::('menu.client.myOrders' | translate) }}"
 )
   ion-nav-title
     .alt-logo
   ion-content
-    .resource-collection(ng-repeat='providerProfile in ::customerOrderVm.customerOrder.provider_profiles')
+    .resource-collection(ng-repeat='providerProfile in ::customerOrderVm.customerOrder.provider_profiles track by $index')
       .list.list-inset.list--no-borders.resource-collection-table
         .row.table-headers
           .col.col-50 {{ providerProfile.nombre_establecimiento || providerProfile.razon_social }}
-          .col.col-25 {{ ::("order.providerProfile.quantity" |translate | uppercase ) }}
-          .col.col-25 {{ ::("order.providerProfile.price" |translate | uppercase ) }}
+          .col.col-25 {{ ::("order.providerProfile.quantity" |translate) }}
+          .col.col-25 {{ ::("order.providerProfile.price" |translate) }}
         .item.row(ng-repeat='item in providerProfile.customer_order_items')
-          .col.col-50 {{ item.provider_item.titulo}}
-          .col.col-25 {{ 'X' + item.cantidad }}
+          .col.col-50 {{ ::item.provider_item.titulo}}
+          .col.col-25 {{ ::('X' + item.cantidad) }}
           .col.col-25 {{ ::(item.provider_item_precio_cents | priceCurrency | currency) }}

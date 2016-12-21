@@ -590,7 +590,7 @@ function routes($stateProvider, $urlRouterProvider) {
   .state('app.customerorders.show', {
     url: '/:id',
     params: {
-      customerorder: null
+      customerOrder: null
     },
     views: {
       'menuContent@app': {
@@ -598,9 +598,9 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'CustomerOrderController',
         controllerAs: 'customerOrderVm',
         resolve: {
-          customerOrder: function ($ionicLoading, $stateParams, CustomerOrdersService,ErrorHandlerService) {
-            if ($stateParams.customerorder) {
-              return $stateParams.customerorder;
+          customerOrder: function ($stateParams, CustomerOrdersService,ErrorHandlerService) {
+            if ($stateParams.customerOrder) {
+              return $stateParams.customerOrder;
             } else {
               var customerOrderId = $stateParams.id;
               return CustomerOrdersService
