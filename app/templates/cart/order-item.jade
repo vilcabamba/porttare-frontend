@@ -26,7 +26,7 @@ ion-modal-view.cart-edit-item-modal
     .constraint-width
       button.button.button-outline.button-assertive.button-small.button-letter-stretched(
         ng-click="cartVm.removeOrderItem(cartVm.currentItem)"
-      ) Eliminar
+      ) {{ ::("globals.delete" | translate) }}
       button.button.button-outline.button-positive.button-small.button-letter-stretched(
         ng-click="cartVm.updateOrderItem()"
       ) {{ ::("globals.save" | translate) }}
