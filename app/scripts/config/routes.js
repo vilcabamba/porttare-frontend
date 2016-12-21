@@ -598,12 +598,14 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'CustomerOrderController',
         controllerAs: 'customerOrderVm',
         resolve: {
-          customerOrder: function ($ionicLoading, $stateParams, CustomerOrdersService) {
+          customerOrder: function ($ionicLoading, $stateParams, CustomerOrdersService,ErrorHandlerService) {
             if ($stateParams.customerorder) {
               return $stateParams.customerorder;
             } else {
               var customerOrderId = $stateParams.id;
-              return CustomerOrdersService.getCustomerOrder(customerOrderId);
+              return CustomerOrdersService
+                        .getCustomerOrder(customerOrderId)
+                        .catch(ErrorHandlerService.handleCommonErrorGET);
             }
           }
         }
