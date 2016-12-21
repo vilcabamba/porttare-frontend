@@ -26,9 +26,12 @@
     cartVm.assignAddress = assignAddress;
     cartVm.messages = {};
     cartVm.clearDeliveryTime = clearDeliveryTime;
+    cartVm.updateOrderItem = updateOrderItem;
+    cartVm.removeOrderItem = removeOrderItem;
     cartVm.checkoutForm = {
       forma_de_pago: 'efectivo' // only method supported ATM
     };
+    cartVm.openEditModal = openEditModal;
     cartVm.slickSettings = {
       infinite: false,
       lazyLoad: 'progressive',
@@ -67,6 +70,7 @@
       cartVm.total = calculateTotal();
       cartVm.billingAddresses = billingAddresses;
       cartVm.addresses = deliveryAddresses;
+      cartVm.slickFlag = true; // https://github.com/devmark/angular-slick-carousel#slide-data
       getDeliveryMethods();
     }
 
@@ -85,6 +89,8 @@
     function clearData() {
       cartVm.checkoutForm = {};
       cartVm.messages = {};
+      cartVm.updateErrors = {};
+      cartVm.currentItem = null;
     }
 
     function runCheckout() {
@@ -176,6 +182,45 @@
           };
         });
         cartVm.formattedDeliveryMethods = formattedMethods;
+      });
+    }
+
+    function openEditModal(item){
+      cartVm.currentItem = angular.copy(item);
+      cartVm.counterOptions = {
+        limit: 1,
+        cantidad: cartVm.currentItem.cantidad,
+        priceCents: cartVm.currentItem.provider_item_precio_cents, // jshint ignore:line
+        onChangeValue: function (data) {
+          cartVm.currentItem.cantidad = data.itemsCount;
+        }
+      };
+      ModalService.showModal({
+        parentScope: $scope,
+        fromTemplateUrl: 'templates/cart/order-item.html',
+        backdropClickToClose: true
+      });
+    }
+
+    function updateOrderItem(){
+      cartVm.slickFlag = false;
+      CartService.updateOrderItem(cartVm.currentItem).then(function(response){
+        cartVm.cart = response.customer_order; //jshint ignore:line
+        cartVm.total = calculateTotal();
+        cartVm.slickFlag = true;
+        closeModal();
+      }, function(errorResponse){
+        cartVm.updateErrors = errorResponse.errors;
+      });
+    }
+
+    function removeOrderItem(item){
+      cartVm.slickFlag = false;
+      CartService.removeOrderItem(item).then(function success(resp){
+        cartVm.cart=resp.data.customer_order;
+        cartVm.total= calculateTotal();
+        cartVm.slickFlag = true;
+        closeModal();
       });
     }
   }

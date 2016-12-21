@@ -22,7 +22,8 @@
 
       var myOptions = {
         animation: 'slide-in-up',
-        focusFirstInput: true
+        focusFirstInput: true,
+        backdropClickToClose: false
       };
 
       angular.extend(myOptions, options);
@@ -30,11 +31,11 @@
       modalInstance.scope = myOptions.parentScope;
 
       return $ionicModal.fromTemplateUrl(myOptions.fromTemplateUrl, {
-        backdropClickToClose: false,
         hardwareBackButtonClose: false,
         scope: modalInstance.scope,
         animation: myOptions.animation,
-        focusFirstInput: myOptions.focusFirstInput
+        focusFirstInput: myOptions.focusFirstInput,
+        backdropClickToClose: myOptions.backdropClickToClose
       }).then(function(modal){
         modalInstance.scope.modal = modal;
         modalInstance.scope.modal.show();
