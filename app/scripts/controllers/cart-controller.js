@@ -27,6 +27,7 @@
     cartVm.messages = {};
     cartVm.clearDeliveryTime = clearDeliveryTime;
     cartVm.updateOrderItem = updateOrderItem;
+    cartVm.removeOrderItem = removeOrderItem;
     cartVm.checkoutForm = {
       forma_de_pago: 'efectivo' // only method supported ATM
     };
@@ -202,13 +203,23 @@
 
     function updateOrderItem(){
       cartVm.slickFlag = false;
-      CartService.updateItem(cartVm.currentItem).then(function(response){
+      CartService.updateOrderItem(cartVm.currentItem).then(function(response){
         cartVm.cart = response.customer_order; //jshint ignore:line
         cartVm.total = calculateTotal();
         cartVm.slickFlag = true;
         closeModal();
       }, function(errorResponse){
         cartVm.updateErrors = errorResponse.errors;
+      });
+    }
+
+    function removeOrderItem(item){
+      cartVm.slickFlag = false;
+      CartService.removeOrderItem(item).then(function success(resp){
+        cartVm.cart=resp.data.customer_order;
+        cartVm.total= calculateTotal();
+        cartVm.slickFlag = true;
+        closeModal();
       });
     }
   }
