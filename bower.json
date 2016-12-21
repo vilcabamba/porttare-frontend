@@ -28,5 +28,13 @@
   "resolutions": {
     "ng-file-upload": "12.2.13.1-noggalito",
     "angular": "1.5.3"
+  },
+  "overrides": {
+    "moment": {
+      "main": [
+        "min/moment.min.js",
+        "locale/es.js"
+      ]
+    }
   }
 }
