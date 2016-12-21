@@ -465,7 +465,7 @@ function routes($stateProvider, $urlRouterProvider) {
   .state('app.profile.addresses.new', {
     url: '/new',
     views: {
-      'menuContent@app': {
+      'menuContent@addressesIndex': {
         templateUrl: 'templates/profile/addresses/actions.html',
         controller: 'ProfileCreateAddressesController',
         controllerAs: 'pfaVm'
@@ -475,7 +475,7 @@ function routes($stateProvider, $urlRouterProvider) {
   .state('app.profile.addresses.update', {
     url: '/update/:id',
     views: {
-      'menuContent@app': {
+      'menuContent@addressesIndex': {
         templateUrl: 'templates/profile/addresses/actions.html',
         controller: 'ProfileUpdateAddressesController',
         controllerAs: 'pfaVm',
