@@ -378,6 +378,16 @@
         date: 'Fecha',
         total: 'Total'
       },
+      order: {
+        providerProfile : {
+          quantity : 'Can',
+          price : 'Precio',
+        },
+        subtotal : 'Subtotal',
+        shippingCosts : 'Costos de Envio',
+        VAT : '%',
+        total: 'Total de Compra'
+      },
       form: {
         requiredField: 'Campo requerido. ',
         wrongEmail: 'Email incorrecto. '
