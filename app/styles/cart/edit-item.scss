@@ -5,7 +5,7 @@
 }
 
 .cart-edit-item-modal {
-  max-width: 90%;
+  max-width: 85%;
   min-height: 80%;
   max-height: 95%;
   margin: 15px auto;
@@ -13,7 +13,7 @@
   right: 0;
 
   ion-content {
-    padding: 10px;
+    padding: 0 10px 10px 10px;
   }
 
   .ion-nav-buttons {
@@ -81,11 +81,11 @@
 
   .bar-stable {
     .constraint-width {
-      max-width: 300px;
+      max-width: 350px;
       margin: auto;
 
       .button {
-        margin: auto 15px ;
+        margin: auto 10px;
         display: inline-block;
       }
     }

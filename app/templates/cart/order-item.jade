@@ -1,5 +1,5 @@
 ion-modal-view.cart-edit-item-modal
-  ion-content(overflow-scroll="true")
+  ion-content(scroll="true")
     .ion-nav-buttons.buttons(side="primary")
       button.button.button-clear.button-positive.button-small(
         ng-click="cartVm.closeModal()"
@@ -24,9 +24,9 @@ ion-modal-view.cart-edit-item-modal
 
   ion-footer-bar.bar-stable.text-center
     .constraint-width
-      button.button.button-outline.button-assertive.button-small(
+      button.button.button-outline.button-assertive.button-small.button-letter-stretched(
         ng-click="cartVm.removeOrderItem(cartVm.currentItem)"
       ) Eliminar
-      button.button.button-outline.button-positive.button-small(
+      button.button.button-outline.button-positive.button-small.button-letter-stretched(
         ng-click="cartVm.updateOrderItem()"
-      ) Listo
+      ) {{ ::("globals.save" | translate) }}
