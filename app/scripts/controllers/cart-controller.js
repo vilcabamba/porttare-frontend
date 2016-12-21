@@ -15,6 +15,7 @@
                           billingAddresses,
                           deliveryAddresses,
                           ModalService,
+                          BillingAddressesService,
                           CartService) {
     var cartVm = this;
     cartVm.total = 0;
@@ -74,11 +75,33 @@
       getDeliveryMethods();
     }
 
+    function saveNewAddress(){
+      if ($scope.billingAddressesVm.form.$valid) {
+        BillingAddressesService.createBillingAddress($scope.billingAddressesVm.billingAddress).then(function success(resp){
+          cartVm.billingAddresses.push(resp.customer_billing_address); //jshint ignore:line
+          closeModal();
+        }, function(error){
+          $scope.billingAddressesVm.messages = error.data.errors;
+        });
+      }
+    }
+
     function showCheckoutModal() {
-      ModalService.showModal({
-        parentScope: $scope,
-        fromTemplateUrl: 'templates/cart/checkout.html'
-      });
+      if (cartVm.billingAddresses.length === 0) {
+        $scope.billingAddressesVm = {
+          closeModal: closeModal,
+          submitModal: saveNewAddress
+        };
+        ModalService.showModal({
+          parentScope: $scope,
+          fromTemplateUrl: 'templates/billing-addresses/new-edit.html'
+        });
+      }else{
+        ModalService.showModal({
+          parentScope: $scope,
+          fromTemplateUrl: 'templates/cart/checkout.html'
+        });
+      }
     }
 
     function closeModal() {
@@ -91,6 +114,7 @@
       cartVm.messages = {};
       cartVm.updateErrors = {};
       cartVm.currentItem = null;
+      $scope.billingAddressesVm = {};
     }
 
     function runCheckout() {
