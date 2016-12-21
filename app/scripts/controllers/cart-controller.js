@@ -198,7 +198,8 @@
       ModalService.showModal({
         parentScope: $scope,
         fromTemplateUrl: 'templates/cart/order-item.html',
-        backdropClickToClose: true
+        backdropClickToClose: true,
+        focusFirstInput: false
       });
     }
 
