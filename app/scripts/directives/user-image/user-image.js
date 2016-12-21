@@ -12,7 +12,7 @@
       scope: {
         user: '='
       },
-      controller: userImageController,
+      controller: ['ProfileService', userImageController],
       controllerAs: 'uimVm',
       bindToController: true,
       replace:true
