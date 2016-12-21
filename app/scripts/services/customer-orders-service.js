@@ -4,15 +4,15 @@
   angular
     .module('porttare.services')
     .factory('CustomerOrdersService', CustomerOrdersService);
-  
-  function CustomerOrdersService($http, ENV) {
+
+  function CustomerOrdersService($http, ENV, ErrorHandlerService) {
     var service = {
       getCustomerOrders: getCustomerOrders,
       getCustomerOrder: getCustomerOrder
     };
-    
+
     return service;
-    
+
     function getCustomerOrders() {
       return $http({
         method: 'GET',
@@ -28,7 +28,9 @@
         url: ENV.apiHost + '/api/customer/orders/' + customerOrderId
       }).then(function (response) {
         return response.data;
-      });
+      }).catch(
+        ErrorHandlerService.handleCommonErrorGET
+      );
     }
 
   }

@@ -598,14 +598,13 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'CustomerOrderController',
         controllerAs: 'customerOrderVm',
         resolve: {
-          customerOrder: function ($stateParams, CustomerOrdersService,ErrorHandlerService) {
+          customerOrder: function ($stateParams, CustomerOrdersService) {
             if ($stateParams.customerOrder) {
               return $stateParams.customerOrder;
             } else {
               var customerOrderId = $stateParams.id;
               return CustomerOrdersService
-                        .getCustomerOrder(customerOrderId)
-                        .catch(ErrorHandlerService.handleCommonErrorGET);
+                        .getCustomerOrder(customerOrderId);
             }
           }
         }
