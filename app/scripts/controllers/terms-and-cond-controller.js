@@ -14,10 +14,11 @@
       var data = $auth.user;
       UserAuthService.acceptTermsCond(data)
         .then(function success() {
+          $auth.user.agreed_tos = true;
           $state.go(APP.successState)
             .then( function (){
               $ionicLoading.hide();
-          });
+            });
         }, function error(){
           $ionicLoading.hide();
           $ionicPopup.alert({

@@ -5,7 +5,7 @@
     .module('porttare.services')
     .factory('UserAuthService', UserAuthService);
 
-  function UserAuthService($auth, $state, $ionicLoading, $http, ENV, $q) {
+  function UserAuthService($auth, $state, $ionicLoading, $http, ENV) {
     var service = {
       checkIfEnabledProvider : checkIfEnabledProvider,
       acceptTermsCond : acceptTermsCond
@@ -33,12 +33,7 @@
         data: data,
         url: ENV.apiHost + '/api/users/tos',
         headers: { 'Accept': 'application/json' }
-      })
-        .then(function success(res){
-          return res.data;
-        }, function error(res){
-          return $q.reject(res.data);
-        });
+      });
     }
   }
 })();
