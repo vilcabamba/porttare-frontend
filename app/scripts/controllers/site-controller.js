@@ -60,6 +60,12 @@
       return ProfileService.getUserImageURL(currentUser);
     }
 
+    function getProviderImageURL () {
+      if (currentUser) {
+        return currentUser.provider_profile.logotipo_url;//jshint ignore:line
+      }
+    }
+
     $rootScope.$on('currentUserUpdated',function(event, updatedCurrentUser){
       currentUser = updatedCurrentUser;
       updateProperties();

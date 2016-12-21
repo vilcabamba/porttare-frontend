@@ -16,6 +16,33 @@ ion-modal-view
       .list.list-inset
         legend {{::("provider.updateInfoProvider"|translate)}}
 
+        label.item.item-input.item-input--no-borders.item-stacked-label
+          span.input-label {{::("provider.logo"|translate)}}
+        .picture-uploader(
+          ng-if="!providerProfileVm.profileEdit.logotipo_url && !providerProfileVm.profileEdit.logotipo"
+          type="file"
+          ngf-select
+          ng-model="providerProfileVm.profileEdit.logotipo"
+          ngf-capture="'camera'"
+          accept="image/*"
+        )
+          .img-placeholder
+          .img-placeholder--legend {{::("client.addImage"|translate)}}
+
+        .images-previews(
+          ng-if="providerProfileVm.profileEdit.logotipo || providerProfileVm.profileEdit.logotipo_url"
+        )
+          .img-wrapper
+            img(
+              ngf-src="providerProfileVm.profileEdit.logotipo || providerProfileVm.profileEdit.logotipo_url"
+              type="file"
+              ngf-select
+              ng-model="providerProfileVm.profileEdit.logotipo"
+              ngf-capture="'camera'"
+              accept="image/*"
+            )
+        show-error(array-messages='providerProfileVm.errors.imagen')
+
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': providerProfileVm.providerProfileForm.ruc.$touched && providerProfileVm.providerProfileForm.ruc.$invalid}"
         )
