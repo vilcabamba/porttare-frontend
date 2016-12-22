@@ -12,14 +12,14 @@ ion-modal-view
     ng-submit="piVm.submitProcess(piVm.userEdit)"
     novalidate
   )
-    ion-content.resource-form
+    ion-content.resource-form.customer-profile-form
       .list.list-inset
         legend {{::("client.formLegend"|translate)}}
 
         label.item.item-input.item-input--no-borders.item-stacked-label
           span.input-label {{::("user.image"|translate)}}
-        .row.images-previews
-          .img-wrapper.col-offset-25.col-50
+        .row.image-preview
+          .img-wrapper
             img( ng-if="piVm.hasImageFile(piVm.userEdit)" 
                   ngf-src="piVm.userEdit.custom_image"
                   style="max-width: 70px; max-height: 70px;border-radius: 50%;"
@@ -35,7 +35,9 @@ ion-modal-view
           accept="image/*"
         )
           .img-placeholder
-          .img-placeholder--legend {{::("user.changeImagen"|translate)}}
+          .text-center
+            .button.button-clear.button-positive.button-small
+              | {{::("user.changeImagen"|translate)}}
 
         show-error(array-messages='piVm.user.custom_image')
 

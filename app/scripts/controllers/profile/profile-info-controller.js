@@ -47,7 +47,7 @@
         .then(function(resp) {
           piVm.user = resp.data.data;
           $scope.$emit('currentUserUpdated', piVm.user);
-          
+
           $ionicPopup.alert({
             title: 'Éxito',
             template: '{{::("user.successUpdateProfile"|translate)}}'

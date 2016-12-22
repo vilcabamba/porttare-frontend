@@ -1,9 +1,16 @@
-ion-view(
+ion-view.addresses-wrapper--parent(
   view-title="{{::('profile.tabs.addresses'|translate)}}"
 )
   ion-nav-title
     .alt-logo
-  ion-content
+  ion-content.addresses-wrapper.addresses-wrapper--fix-scroll(
+    scroll="false"
+  )
+    .list.list-inset.list--no-borders.text-center.actions-wrapper
+      button.button.button-outline.button-energized(
+      ng-click="pfaVm.redirectToNewAddressView()"
+      ) {{::("profile.addresses.addAddressBtnText"|translate)}}
+
     .address-wrapper(
       ng-repeat="address in ::pfaVm.addresses"
     )
@@ -37,8 +44,3 @@ ion-view(
         .row
           .col.col-50.label {{::('profile.addresses.telephoneNumber'|translate)}}
           .col.col-50.value {{address.numero_convencional}}
-
-    .list.list-inset.list--no-borders.text-center.actions-wrapper
-      button.button.button-outline.button-energized(
-      ng-click="pfaVm.redirectToNewAddressView()"
-      ) {{::("profile.addresses.addAddressBtnText"|translate)}}
