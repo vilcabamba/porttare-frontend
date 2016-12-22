@@ -16,7 +16,8 @@
     'ngFileUpload',
     'ngMessages',
     'ion-datetime-picker',
-    'monospaced.elastic'
+    'monospaced.elastic',
+    'uiGmapgoogle-maps'
   ])
 
   .run(function($ionicPlatform) {

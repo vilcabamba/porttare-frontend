@@ -2,6 +2,11 @@
   .fields-wrapper {
     padding-bottom: 25px;
 
+    .angular-google-map-container {
+      height: 400px;
+      width: 500px;
+    }
+
     &--spaced {
       width: 100%;
       padding-bottom: 100px; // some padding because of fixed bottom bar
