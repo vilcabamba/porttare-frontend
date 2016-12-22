@@ -33,7 +33,7 @@
         .then(function success(resp) {
           $ionicLoading.hide();
           providerProfileVm.profileProvider = resp.provider_profile;//jshint ignore:line
-          $scope.$emit('providerUpdated', providerProfileVm.profileProvider);
+          $scope.$emit('providerInfo', providerProfileVm.profileProvider);
           $ionicPopup.alert({
             title: 'Éxito',
             template: '{{::("provider.successUpdateProfileProvider"|translate)}}'
