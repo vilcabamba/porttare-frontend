@@ -382,6 +382,9 @@
         providerProfile : {
           quantity : 'Can',
           price : 'Precio',
+          item : {
+            observations:'Observaciones : '
+          }
         },
         subtotal : 'Subtotal',
         shippingCosts : 'Costos de Envio',
