@@ -1,0 +1,10 @@
+ion-modal-view.item-page
+  ion-header-bar.bar-stable.bar.bar-header(
+    align-title="center"
+  )
+    .ion-nav-buttons(side="left")
+      button.button.ion-chevron-left.button-clear.left(
+        ng-click="pfaVm.closeModal()"
+      )
+    .title.alt-logo
+  ng-include(src="'templates/profile/addresses/form_template.html'")

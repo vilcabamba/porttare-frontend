@@ -15,6 +15,8 @@
                           billingAddresses,
                           deliveryAddresses,
                           ModalService,
+                          BillingAddressesService,
+                          ProfileAddressesService,
                           CartService) {
     var cartVm = this;
     cartVm.total = 0;
@@ -74,11 +76,57 @@
       getDeliveryMethods();
     }
 
+    function saveNewBillingAddress(){
+      if ($scope.billingAddressesVm.form.$valid) {
+        BillingAddressesService.createBillingAddress($scope.billingAddressesVm.billingAddress).then(function success(resp){
+          cartVm.billingAddresses.push(resp.customer_billing_address); //jshint ignore:line
+          closeModal();
+          showCheckoutModal();
+        }, function(error){
+          $scope.billingAddressesVm.messages = error.data.errors;
+        });
+      }
+    }
+
+    function saveNewAddress(){
+      if ($scope.pfaVm.addressForm.$valid) {
+        ProfileAddressesService.createAddresses($scope.pfaVm.addressFormData).then(function(response){
+          cartVm.addresses.push(response.customer_address); //jshint ignore:line
+          closeModal();
+          showCheckoutModal();
+        }, function(error){
+          $scope.pfaVm.messages = error.data.errors;
+        });
+      }
+    }
+
     function showCheckoutModal() {
-      ModalService.showModal({
-        parentScope: $scope,
-        fromTemplateUrl: 'templates/cart/checkout.html'
-      });
+      if (cartVm.addresses.length === 0) {
+        $scope.pfaVm = {
+          closeModal: closeModal,
+          processAddress: saveNewAddress
+        };
+        ModalService.showModal({
+          parentScope: $scope,
+          fromTemplateUrl: 'templates/profile/addresses/modal-form.html'
+        });
+      }else{
+        if (cartVm.billingAddresses.length === 0) {
+          $scope.billingAddressesVm = {
+            closeModal: closeModal,
+            submitModal: saveNewBillingAddress
+          };
+          ModalService.showModal({
+            parentScope: $scope,
+            fromTemplateUrl: 'templates/billing-addresses/new-edit.html'
+          });
+        }else{
+          ModalService.showModal({
+            parentScope: $scope,
+            fromTemplateUrl: 'templates/cart/checkout.html'
+          });
+        }
+      }
     }
 
     function closeModal() {
@@ -91,6 +139,8 @@
       cartVm.messages = {};
       cartVm.updateErrors = {};
       cartVm.currentItem = null;
+      $scope.billingAddressesVm = {};
+      $scope.pfaVm = {};
     }
 
     function runCheckout() {

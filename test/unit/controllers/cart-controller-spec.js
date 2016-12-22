@@ -12,6 +12,8 @@
       ModalService,
       $ionicLoading,
       deferCheckout,
+      deferAddress,
+      deferBilling,
       deferStateGo,
       $auth,
       $ionicPopup,
@@ -26,6 +28,18 @@
         deferCheckout = $q.defer();
         return {
           checkout: sinon.stub().returns(deferCheckout.promise)
+        };
+      });
+      $provide.factory('BillingAddressesService', function ($q) {
+        deferBilling = $q.defer();
+        return {
+          createBillingAddress: sinon.stub().returns(deferBilling.promise)
+        };
+      });
+      $provide.factory('ProfileAddressesService', function ($q) {
+        deferAddress = $q.defer();
+        return {
+          createAddresses: sinon.stub().returns(deferAddress.promise)
         };
       });
       $provide.factory('$auth', function () {
@@ -77,8 +91,8 @@
       $state = _$state_;
       CartService = _CartService_;
       ModalService = _ModalService_;
-      deliveryAddresses = [];
-      billingAddresses = [];
+      deliveryAddresses = [1,2,3];
+      billingAddresses = [1,2,3];
       $ionicLoading = _$ionicLoading_;
       $auth = _$auth_;
       $ionicPopup= _$ionicPopup_;
