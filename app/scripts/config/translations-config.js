@@ -386,7 +386,8 @@
         subtotal : 'Subtotal',
         shippingCosts : 'Costos de Envio',
         VAT : '%',
-        total: 'Total de Compra'
+        total: 'Total de Compra',
+        observations:'Observaciones'
       },
       form: {
         requiredField: 'Campo requerido. ',

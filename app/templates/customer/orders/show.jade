@@ -17,3 +17,10 @@ ion-view(
             .col.col-25 {{ ::(item.provider_item_precio_cents | priceCurrency | currency) }}
           .item.row(ng-if="item.observaciones")
             .col.col-100.col--elastic {{ ::('OBSERVACIONES : ' + item.observaciones) }}
+    .resource-collection(ng-if="customerOrderVm.customerOrder.observaciones")
+      .list.list-inset.list--no-borders.resource-collection-table
+        .row.table-headers
+          .col.col-100 {{ ::("order.observations"|translate) }}
+        .row.item
+          .col.col-100 {{ ::customerOrderVm.customerOrder.observaciones }}
+
