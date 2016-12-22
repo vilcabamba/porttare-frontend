@@ -27,7 +27,7 @@
         method: 'GET',
         url: ENV.apiHost + '/api/customer/orders/' + customerOrderId
       }).then(function (response) {
-        return response.data;
+        return response.data.customer_order; // jshint ignore:line
       }).catch(
         ErrorHandlerService.handleCommonErrorGET
       );

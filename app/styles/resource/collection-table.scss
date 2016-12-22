@@ -23,6 +23,11 @@
         min-height: 25px;
         line-height: 25px;
       }
+
+      &.col--elastic {
+        max-height: 100%;
+        text-align: justify;
+      }
     }
 
     .table-headers {
