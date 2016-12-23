@@ -26,10 +26,13 @@
 }
 
 .addresses-wrapper {
-  // fix scrolling
-  height: auto;
-  bottom: initial;
-  padding-bottom: 20px;
+  top: 0;
+
+  &--fix-scroll {
+    height: auto;
+    bottom: initial;
+    padding-bottom: 15px;
+  }
 
   .address-wrapper {
     .resource-detail-title {
@@ -37,4 +40,8 @@
       margin-bottom: 5px;
     }
   }
+}
+
+.addresses-wrapper--parent {
+  overflow: initial;
 }
