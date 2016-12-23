@@ -58,6 +58,98 @@
       );
     }
 
+    // function getGeocoderLocation(options){
+    //   var defered = $q.defer();
+    //   var geocoder = new google.maps.Geocoder();
+    //   var posicion;
+    //   geocoder.geocode(options, function success(results, status) {
+    //     if (status === 'OK') {
+    //       posicion = results[0].geometry.location;
+    //     } else {
+    //       posicion = mapPositionDefault();
+    //       $ionicPopup.alert({
+    //         title: 'Error',
+    //         template: 'No se ha encontrado la dirección' + options.address
+    //       });
+    //     }
+    //     defered.resolve(posicion);
+    //   });
+    //   return defered.promise;
+    // }
+
+    function renderPosicionActualDestinoMarker(map, destinoOptions){
+      var origen;
+      var destino;
+      GeolocationService.getCurrentPosition().then(function onSuccess(respuesta) {
+            origen = respuesta;
+            getGeocoderLocation(destinoOptions).then(function success(respuesta){
+              destino = respuesta;
+              renderOrigenDestinoMarker(map, origen, destino);
+            });
+          }, function onError(err) {
+            origen =  mapPositionDefault();
+            getGeocoderLocation(destinoOptions).then(function success(respuesta){
+              destino = respuesta;
+              renderOrigenDestinoMarker(map, origen, destino);
+            });
+            $ionicPopup.alert({
+              title: 'Error',
+              template: 'No se ha encontrado su ubicación actual: ' + err.message
+            });
+      });
+    }
+
+    function renderOrigenDestinoMarker(map, origen, destino){
+      var directionsDisplay = new google.maps.DirectionsRenderer();
+      var directionsService = new google.maps.DirectionsService();
+      directionsDisplay.setMap(map);
+      directionsService.route({
+        origin: origen,
+        destination: destino,
+        travelMode: google.maps.TravelMode.WALKING,
+        provideRouteAlternatives: true
+      }, function(response, status) {
+        if (status === 'OK') {
+          directionsDisplay.setDirections(response);
+          var myRoute = response.routes[0].legs[0];
+          for (var i = 0; i < myRoute.steps.length; i++) {
+            var marker = new google.maps.Marker({
+              position: myRoute.steps[i].end_location, //jshint ignore:line
+              map: map,
+              visible: i+1 == myRoute.steps.length ? true : false //jshint ignore:line
+            });
+            var infoWindow = new google.maps.InfoWindow();
+            infoWindow.setContent("<b>"+ myRoute.steps[i].duration.text + "</b><br>" + myRoute.steps[i].distance.text); //jshint ignore:line
+            infoWindow.open(map,marker);
+          }
+
+        } else {
+          $ionicPopup.alert({
+            title: 'Error',
+            template: 'No se ha podido cargar la ruta' + status
+          });
+        }
+      });
+    }
+
+    function renderAddressMarker(map, options) {
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode(options, function(results, status) {
+        if (status === 'OK') {
+          map.setCenter(results[0].geometry.location);
+          displayMarker(map, results[0].geometry.location);
+        } else {
+          var positionDefault = mapPositionDefault();
+          map.setCenter(positionDefault);
+          $ionicPopup.alert({
+            title: 'Error',
+            template: '{{::("office.locationNotFound"|translate)}}' + options.address
+          });
+        }
+      });
+    }
+
+// >>>>>>> Vista de un pedido
     function displayMarker(map, marker){
       return new google.maps.Marker({
         map: map,

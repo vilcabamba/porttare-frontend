@@ -14,10 +14,10 @@ ion-view(
             .distance-circle
               .range
                 | 1.2
-            .establishment
+            .establishment(ui-sref='courier.order({ id: order.id, order: order})')
               .name
                 .text {{order.provider_profile.nombre_establecimiento}}
                 .icon-location
               .location 1.2 km {{::("courier.labels.currentLocation"| translate)}}
               .time 1 hora {{::("courier.labels.forDelivery"| translate)}}
-            
+

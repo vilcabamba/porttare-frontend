@@ -27,6 +27,7 @@
       }
 
       .establishment {
+        cursor:pointer;
         padding: 5px;
         border-radius: 5px;
         border: 1px solid $base-yellow;
@@ -49,6 +50,16 @@
           opacity: 0.5;
         }
       }
+    }
+  }
+
+  .order-map {
+    height: 300px;
+    margin: 0 0 15px 0;
+    box-shadow: 0 1px 5px transparentize($base-grey, .5);
+
+    #order-map {
+      height: 100%;
     }
   }
 }

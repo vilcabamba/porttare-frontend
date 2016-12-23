@@ -580,6 +580,28 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   })
+  .state('courier.order', {
+    url: '/orders/:id',
+    params: {
+      order: null
+    },
+    views: {
+      'menuContent@courier': {
+        templateUrl: 'templates/courier/orders/show.html',
+        controller: 'CourierOrderController',
+        controllerAs: 'coVm',
+        resolve: {
+          courierOrder: function ($stateParams) {
+            if ($stateParams.order) {
+              return $stateParams.order;
+            } else {
+              return $stateParams.id;
+            }
+          }
+        }
+      }
+    }
+  })
   .state('app.profile', {
     url: '/profile',
     abstract: true,

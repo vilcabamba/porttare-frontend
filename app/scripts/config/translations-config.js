@@ -136,6 +136,11 @@
         deliveryAddresses: 'Lugar de entrega',
         ready: 'Listo',
         customerOrderDeliveryUpdate: 'Datos de entrega actualizado éxitosamente',
+        order: 'Pedido #',
+        ordersNumber: 'Pedido número',
+        dateDispatcher: 'Hora del despacho',
+        nameDispatcher: 'Nombre despachador',
+        orderDispatcher: 'Tomar pedido',
         labels: {
           found: 'Encontramos',
           closeToYou: 'pedidos cerca de ti',

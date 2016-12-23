@@ -23,21 +23,22 @@
     geolocalizacion();
 
     function geolocalizacion(){
-      if (!$auth.user.current_place) { //jshint ignore:line
-        performing('globals.geolocation');
-        GeolocationService.getCurrentPosition().then(function success(resp) {
-          selectPlaceDistanciaCorta({
-            latitude: resp.coords.latitude,
-            longitude: resp.coords.longitude
-          });
-        }).catch(function (error) {
-          finishedPerforming();
-          $ionicPopup.alert({
-            title: 'Error',
-            template: error
-          });
-        });
+      if ($auth.user.current_place) { //jshint ignore:line
+        return;
       }
+      performing('globals.geolocation');
+      GeolocationService.getCurrentPosition().then(function success(resp) {
+        selectPlaceDistanciaCorta({
+          latitude: resp.coords.latitude,
+          longitude: resp.coords.longitude
+        });
+      }).catch(function (error) {
+        finishedPerforming();
+        $ionicPopup.alert({
+          title: 'Error',
+          template: error
+        });
+      });
     }
 
     function selectPlaceDistanciaCorta(position){
