@@ -1,10 +1,10 @@
-ion-modal-view.item-page
-  ion-header-bar.bar-stable.bar.bar-header(
-    align-title="center"
-  )
-    .ion-nav-buttons(side="left")
-      button.button.ion-chevron-left.button-clear.left(
-        ng-click="pfaVm.closeModal()"
-      )
+ion-modal-view
+  ion-header-bar.bar-stable.bar.bar-header
     .title.alt-logo
+
+    .ion-nav-buttons.buttons(side="primary")
+      button.button.button-clear.button-positive(
+        ng-click="pfaVm.closeModal()"
+      ) {{::('globals.cancel'|translate)}}
+
   ng-include(src="'templates/profile/addresses/form_template.html'")
