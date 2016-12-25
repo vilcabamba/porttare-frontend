@@ -14,7 +14,8 @@ form(
           type='text'
           ng-model='pfaVm.addressFormData.nombre'
         )
-      show-error(array-messages='pfaVm.messages.nombre')
+      .errors-wrapper
+        show-error(array-messages='pfaVm.messages.nombre')
 
       label.item.item-input.item-stacked-label(
         ng-class="{'item-error': pfaVm.messages.ciudad}"
@@ -24,7 +25,8 @@ form(
           type='text'
           ng-model='pfaVm.addressFormData.ciudad'
         )
-      show-error(array-messages='pfaVm.messages.ciudad')
+      .errors-wrapper
+        show-error(array-messages='pfaVm.messages.ciudad')
 
       label.item.item-input.item-stacked-label(
         ng-class="{'item-error': pfaVm.messages.parroquia}"
@@ -34,7 +36,8 @@ form(
           type='text'
           ng-model='pfaVm.addressFormData.parroquia'
         )
-      show-error(array-messages='pfaVm.messages.parroquia')
+      .errors-wrapper
+        show-error(array-messages='pfaVm.messages.parroquia')
 
       label.item.item-input.item-stacked-label(
         ng-class="{'item-error': pfaVm.messages.barrio}"
@@ -44,7 +47,8 @@ form(
           type='text'
           ng-model='pfaVm.addressFormData.barrio'
         )
-      show-error(array-messages='pfaVm.messages.barrio')
+      .errors-wrapper
+        show-error(array-messages='pfaVm.messages.barrio')
 
       label.item.item-input.item-stacked-label(
         ng-class="{'item-error': pfaVm.messages.direccion_uno}"
@@ -65,7 +69,8 @@ form(
           type='text'
           ng-model='pfaVm.addressFormData.direccion_dos'
         )
-      show-error(array-messages='pfaVm.messages.direccion_dos')
+      .errors-wrapper
+        show-error(array-messages='pfaVm.messages.direccion_dos')
 
       label.item.item-input.item-stacked-label(
         ng-class="{'item-error': pfaVm.messages.codigo_postal}"
@@ -75,7 +80,8 @@ form(
           type='text'
           ng-model='pfaVm.addressFormData.codigo_postal'
         )
-      show-error(array-messages='pfaVm.messages.codigo_postal')
+      .errors-wrapper
+        show-error(array-messages='pfaVm.messages.codigo_postal')
 
       label.item.item-input.item-stacked-label(
         ng-class="{'item-error': pfaVm.messages.numero_convencional}"
@@ -85,7 +91,8 @@ form(
           type='text'
           ng-model='pfaVm.addressFormData.numero_convencional'
         )
-      show-error(array-messages='pfaVm.messages.numero_convencional')
+      .errors-wrapper
+        show-error(array-messages='pfaVm.messages.numero_convencional')
 
       label.item.item-input.item-stacked-label(
         ng-class="{'item-error': pfaVm.messages.referencia}"
@@ -95,7 +102,8 @@ form(
           type='text'
           ng-model='pfaVm.addressFormData.referencia'
         )
-      show-error(array-messages='pfaVm.messages.referencia')
+      .errors-wrapper
+        show-error(array-messages='pfaVm.messages.referencia')
 
   .bar.bar-footer.bar-stable
     button.button.button-small.button-outline.button-energized(

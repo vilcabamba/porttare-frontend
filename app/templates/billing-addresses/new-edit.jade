@@ -28,9 +28,10 @@ ion-modal-view.item-page
             ng-model="billingAddressesVm.billingAddress.ruc"
             required
           )
-          .show-errors(ng-messages="billingAddressesVm.form.ruc.$error" ng-if="billingAddressesVm.form.ruc.$touched")
+        .errors-wrapper
+          span.show-errors(ng-messages="billingAddressesVm.form.ruc.$error" ng-if="billingAddressesVm.form.ruc.$touched")
             span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
-        show-error(array-messages="billingAddressesVm.messages.ruc")
+          show-error(array-messages="billingAddressesVm.messages.ruc")
 
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': billingAddressesVm.form.razon_social.$touched && billingAddressesVm.form.razon_social.$invalid}"
@@ -43,9 +44,10 @@ ion-modal-view.item-page
             ng-class="input-error"
             required
           )
-          .show-errors(ng-messages="billingAddressesVm.form.razon_social.$error" ng-if="billingAddressesVm.form.razon_social.$touched")
+        .errors-wrapper
+          span.show-errors(ng-messages="billingAddressesVm.form.razon_social.$error" ng-if="billingAddressesVm.form.razon_social.$touched")
             span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
-        show-error(array-messages="billingAddressesVm.messages.razon_social")
+          show-error(array-messages="billingAddressesVm.messages.razon_social")
 
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': billingAddressesVm.form.direccion.$touched && billingAddressesVm.form.direccion.$invalid}"
@@ -58,9 +60,10 @@ ion-modal-view.item-page
             ng-class="input-error"
             required
           )
+        .errors-wrapper
           .show-errors(ng-messages="billingAddressesVm.form.direccion.$error" ng-if="billingAddressesVm.form.direccion.$touched")
             span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
-        show-error(array-messages="billingAddressesVm.messages.direccion")
+          show-error(array-messages="billingAddressesVm.messages.direccion")
 
         label.item.item-input.item-stacked-label
           span.input-label {{::("user.country"|translate|uppercase)}}
@@ -81,9 +84,10 @@ ion-modal-view.item-page
             ng-model='billingAddressesVm.billingAddress.email'
             ng-class="input-error"
           )
+        .errors-wrapper
           .show-errors(ng-messages="billingAddressesVm.form.email.$error" ng-if="billingAddressesVm.form.email.$touched")
             span.message-error(ng-message="email") {{::("form.wrongEmail"|translate)}}
-        show-error(array-messages="billingAddressesVm.messages.email")
+          show-error(array-messages="billingAddressesVm.messages.email")
 
         label.item.item-input.item-stacked-label
           span.input-label {{::("client.telefono"|translate|uppercase)}}
@@ -92,7 +96,8 @@ ion-modal-view.item-page
             ng-model='billingAddressesVm.billingAddress.telefono '
             ng-class="input-error"
           )
-        show-error(array-messages="billingAddressesVm.messages.telefono")
+        .errors-wrapper
+          show-error(array-messages="billingAddressesVm.messages.telefono")
 
       .bar.bar-footer
         row.col.text-center
