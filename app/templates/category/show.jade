@@ -3,6 +3,15 @@ ion-view(
 )
   ion-nav-title
     .alt-logo
+
+  //- cart
+  ion-nav-buttons(side="right")
+    button.cart-main-button(
+      ui-sref='app.cart.index'
+      ng-if='menuVm.existCartActive'
+    )
+      i.ion-ios-cart-outline
+
   ion-content.category-page(
     style="background-image: url('{{categoryVm.category.imagen_url}}')"
   )
