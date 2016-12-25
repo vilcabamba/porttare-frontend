@@ -1,18 +1,18 @@
-ion-modal-view.item-page
-  ion-header-bar.bar-stable.bar.bar-header(
-    align-title="center"
-  )
-    .ion-nav-buttons(side="left")
-      button.button.ion-chevron-left.button-clear.left(
-        ng-click="billingAddressesVm.closeModal()"
-      )
+ion-modal-view
+  ion-header-bar.bar-stable.bar.bar-header
     .title.alt-logo
-  ion-content.resource-form
-    form(
-      name='billingAddressesVm.form'
-      ng-submit='billingAddressesVm.submitModal()'
-      novalidate
-    )
+
+    .ion-nav-buttons.buttons(side="primary")
+      button.button.button-clear.button-positive(
+        ng-click="billingAddressesVm.closeModal()"
+      ) {{::('globals.cancel'|translate)}}
+
+  form(
+    name='billingAddressesVm.form'
+    ng-submit='billingAddressesVm.submitModal()'
+    novalidate
+  )
+    ion-content.resource-form
       .list.list-inset
         legend(ng-if="!billingAddressesVm.billingAddress.id").title {{::("billingAddress.newBillingAddress"|translate|uppercase)}}
         legend(ng-if="billingAddressesVm.billingAddress.id").title {{::("globals.edit"|translate|uppercase)}} {{::("billingAddress.legendForm"|translate|uppercase)}}
@@ -99,7 +99,8 @@ ion-modal-view.item-page
         .errors-wrapper
           show-error(array-messages="billingAddressesVm.messages.telefono")
 
-      .bar.bar-footer
-        row.col.text-center
-          button.action-button.yellow(type="submit")
-            | {{::("globals.save"|translate)}}
+    .bar.bar-footer.bar-stable
+      button.button.button-small.button-outline.button-energized(
+        type="submit"
+        ng-disabled="billingAddressesVm.form.$invalid"
+      ) {{::("globals.save"|translate)}}
