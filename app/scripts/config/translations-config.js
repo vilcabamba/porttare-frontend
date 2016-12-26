@@ -386,11 +386,19 @@
             observations:'Observaciones : '
           }
         },
-        subtotal : 'Subtotal',
+        summary : {
+          subtotal : 'Subtotal',
+          shippingCosts : 'Costos de Envío',
+          VAT : '%',
+          total: 'Total de Compra',
+        },
+        discount : {
+          textCode : 'Código de Descueto',
+          applyCode : 'Aplicar Código'
+        },
         shippingCosts : 'Costos de Envio',
-        VAT : '%',
-        total: 'Total de Compra',
-        observations:'Observaciones'
+        observations : 'Observaciones',
+        customerInfo : 'Información de Cliente y envío'
       },
       form: {
         requiredField: 'Campo requerido. ',

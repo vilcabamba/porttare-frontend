@@ -17,11 +17,20 @@
         text-align: right;
       }
 
+      &.text-dark {
+        color: $dark;
+      }
+
       .button-clear.button-small {
         font-size: 12px;
         letter-spacing: -0.5px;
         min-height: 25px;
         line-height: 25px;
+      }
+
+      &.col--separator {
+        white-space: pre-line;
+        overflow: hidden;
       }
 
       &.col--elastic {
