@@ -9,8 +9,7 @@ form(
     .list.list-inset.fields-wrapper
       legend {{::pfaVm.inUpdateMode ? ("profile.addresses.formLegendUpdate"|translate) : ("profile.addresses.formLegendNew"|translate)}}
 
-      .row
-        ui-gmap-google-map(center='pfaVm.map.center' zoom='12' draggable="true" options="options")
+      maps(data="pfaVm.addressFormData")
 
       label.item.item-input.item-stacked-label(
         ng-class="{'item-error': pfaVm.messages.nombre}"

@@ -10,13 +10,6 @@
     pfaVm.addressFormData = {};
     pfaVm.messages = {};
     pfaVm.processAddress = processAddress;
-    pfaVm.map = {
-      center: {
-        latitude: -5.19707042,
-        longitude: -80.62662518
-      },
-      zoom: 18
-    };
 
     function processAddress() {
       var options = {

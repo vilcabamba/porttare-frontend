@@ -2,9 +2,14 @@
   .fields-wrapper {
     padding-bottom: 25px;
 
-    .angular-google-map-container {
-      height: 400px;
-      width: 500px;
+    .map-view {
+      height: 300px;
+      margin: 0 0 15px 0;
+      box-shadow: 0 1px 5px transparentize($base-grey, .5);
+
+      #map {
+        width: 100%;
+      }
     }
 
     &--spaced {
