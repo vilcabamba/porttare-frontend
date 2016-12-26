@@ -379,26 +379,26 @@
         total: 'Total'
       },
       order: {
-        providerProfile : {
-          quantity : 'Can',
-          price : 'Precio',
-          item : {
+        providerProfile: {
+          quantity: 'Can',
+          price: 'Precio',
+          item: {
             observations:'Observaciones : '
           }
         },
-        summary : {
-          subtotal : 'Subtotal',
-          shippingCosts : 'Costos de Envío',
-          VAT : '%',
+        summary: {
+          subtotal: 'Subtotal',
+          shippingCosts: 'Costos de Envío',
+          VAT: '%',
           total: 'Total de Compra',
         },
-        discount : {
-          textCode : 'Código de Descueto',
-          applyCode : 'Aplicar Código'
+        discount: {
+          textCode: 'Código de Descueto',
+          applyCode: 'Aplicar Código'
         },
-        shippingCosts : 'Costos de Envio',
-        observations : 'Observaciones',
-        customerInfo : 'Información de Cliente y envío'
+        shippingCosts: 'Costos de Envio',
+        observations: 'Observaciones',
+        customerInfo: 'Información de Cliente y envío'
       },
       form: {
         requiredField: 'Campo requerido. ',
