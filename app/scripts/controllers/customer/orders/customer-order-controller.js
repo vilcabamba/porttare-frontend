@@ -11,7 +11,7 @@
     customerOrderVm.customerAddress = null;
 
     function init() {
-      var customerAddressId = customerOrderVm.customerOrder.customer_address_id;
+      var customerAddressId = customerOrderVm.customerOrder.customer_address_id; // jshint ignore:line
 
       if(customerAddressId){
 
