@@ -13,7 +13,7 @@ ion-view(
         div(ng-repeat='item in providerProfile.customer_order_items')
           .item.row
             .col.col-50 {{ ::item.provider_item.titulo}}
-            .col.col-25 {{ ::('X' + item.cantidad) }}
+            .col.col-25 {{ ::( ("order.providerProfile.item.cantidadPrefix" |translate) + item.cantidad) }}
             .col.col-25 {{ ::(item.provider_item_precio_cents | priceCurrency | currency) }}
           .item.row(ng-if="item.observaciones")
             .col.col-100.col--elastic {{ ::( ("order.providerProfile.item.observations" |translate) + item.observaciones) }}
@@ -71,4 +71,3 @@ ion-view(
           .col.col-100 {{ ::( customerOrderVm.customerAddress.ciudad + ', ' + customerOrderVm.customerAddress.codigo_postal ) }}
         .row.item
           .col.col-100 {{ 'VISA ***********1234' }}
-

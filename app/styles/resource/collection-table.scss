@@ -28,15 +28,16 @@
         line-height: 25px;
       }
 
+      &.col--elastic {
+        max-height: initial;
+        text-align: justify;
+      }
+
       &.col--separator {
         white-space: pre-line;
         overflow: hidden;
       }
 
-      &.col--elastic {
-        max-height: initial;
-        text-align: justify;
-      }
     }
 
     .table-headers {
