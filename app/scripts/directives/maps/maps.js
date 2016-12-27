@@ -103,7 +103,7 @@
           var markers = [];
           var map = MapsService.renderMap('map');
           MapsService.renderAddressMarker(map, {
-            address: mapVm.data.direccion_uno,
+            address: mapVm.data.direccion_uno,//jshint ignore:line
             componentRestrictions: {
               locality: mapVm.data.ciudad
             }
