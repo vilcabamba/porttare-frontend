@@ -10,7 +10,8 @@
       restrict: 'E',
       templateUrl: 'templates/directives/maps/maps.html',
       scope: {
-        data: '='
+        data: '=',
+        modoUpdate: '='
       },
       controller: [ '$ionicPopup',
                     'GeolocationService',
@@ -30,7 +31,12 @@
     var mapVm = this;// jshint ignore:line
     mapVm.disableTap = disableTap;
 
-    showGMap();
+    if(mapVm.modoUpdate){
+      showGMapUpdate();
+    }
+    else{
+      showGMap();
+    }
 
     function showGMap() {
       MapsService.loadGMaps().then(function(){
@@ -77,6 +83,35 @@
             }
           );
       });
+    }
+
+    function showGMapUpdate(){
+      var position={
+        coords:{
+          latitude:mapVm.data.latitud,
+          longitude:mapVm.data.longitud
+        }
+      };
+      if(position.coords.latitude){
+        MapsService.loadGMaps().then(function(){
+          var map = loadMap(position, true);
+          loadPlacesSearchBox(map);
+        });
+      }
+      else{
+        MapsService.loadGMaps().then(function(){
+          var markers = [];
+          var map = MapsService.renderMap('map');
+          MapsService.renderAddressMarker(map, {
+            address: mapVm.data.direccion_uno,
+            componentRestrictions: {
+              locality: mapVm.data.ciudad
+            }
+          });
+          listenerClick(map, markers);
+        });
+      }
+
     }
 
     function showUnknownError() {
@@ -195,10 +230,10 @@
           if(status === google.maps.GeocoderStatus.OK){
             mapVm.data.direccion_uno = results[0].formatted_address;// jshint ignore:line
             mapVm.data.ciudad = results[1].formatted_address;// jshint ignore:line
-            mapVm.data.latitud = marker.getPosition().lat();
-            mapVm.data.longitud = marker.getPosition().lng();
           }
         });
+        mapVm.data.latitud = marker.getPosition().lat();
+        mapVm.data.longitud = marker.getPosition().lng();
       }
     }
 
