@@ -20,6 +20,10 @@
 .customer-order-preview {
   background-color: $light-grey;
 
+  .scroll {
+    padding-bottom: 30px;
+  }
+
   .cart-delivery-address {
     color: $grey-secondary;
     padding: 15px;
