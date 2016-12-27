@@ -14,13 +14,4 @@
   &.enable {
     opacity: 1;
   }
-  &.yellow {
-    @include action-button-color($base-yellow);
-  }
-  &.red {
-    @include action-button-color($button-red);
-  }
-  &.blue {
-    @include action-button-color($button-blue);
-  }
 }
