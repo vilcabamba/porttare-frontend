@@ -9,9 +9,14 @@
     }
 
     img {
-      margin: auto;
+      margin: auto 0 auto auto;
       max-width: 100%;
       max-height: 130px;
+    }
+
+    .delete-product-image {
+      margin-left: 0;
+      margin-top: 0;
     }
 
     .add-image-placeholder {

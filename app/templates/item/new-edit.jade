@@ -151,8 +151,10 @@ ion-modal-view.item-form
           .img-wrapper.col-33(
             ng-repeat="image in modalVm.imagesUrls"
           )
-            img(ngf-src="image")
-
+            .row
+              img(ngf-src="image")
+              button.button.button-icon.icon.ion-close-circled.delete-product-image(
+                ng-click="modalVm.deleteImage($index)")
           .img-wrapper.col-33(ng-if="modalVm.item.imagenes.length > 0")
             .add-image-placeholder(
               ngf-select="modalVm.concatImages($files)"

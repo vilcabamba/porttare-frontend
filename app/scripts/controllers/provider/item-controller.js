@@ -81,6 +81,7 @@
       modalScope.modalVm.closeModal = closeModal;
       modalScope.modalVm.submitProcess = editItem;
       modalScope.modalVm.concatImages = concatImages;
+      modalScope.modalVm.deleteImage = deleteImage;
       modalScope.modalVm.imagesUrls = loadImagesUrls();
       ModalService.showModal({
         parentScope: modalScope,
@@ -111,6 +112,11 @@
           }).then(closeModal);
         });
       }, error);
+    }
+
+    function deleteImage(index) {
+      modalScope.modalVm.item.imagenes.splice(index, 1);
+      modalScope.modalVm.imagesUrls = loadImagesUrls();
     }
 
     function error(resp){
