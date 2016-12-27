@@ -9,7 +9,12 @@ form(
     .list.list-inset.fields-wrapper
       legend {{::pfaVm.inUpdateMode ? ("profile.addresses.formLegendUpdate"|translate) : ("profile.addresses.formLegendNew"|translate)}}
 
-      maps(data="pfaVm.addressFormData" modo-update="pfaVm.inUpdateMode")
+      maps(
+        lat="pfaVm.addressFormData.latitud" lng="pfaVm.addressFormData.longitud"
+        default-in-current-geolocation="pfaVm.addressFormData.defaultInCurrentGeolocation"
+        direccion="pfaVm.addressFormData.direccion_uno" ciudad="pfaVm.addressFormData.ciudad"
+      )
+      show-error(array-messages='pfaVm.messages.coords')
 
       label.item.item-input.item-stacked-label(
         ng-class="{'item-error': pfaVm.messages.nombre}"

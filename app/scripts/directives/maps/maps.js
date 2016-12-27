@@ -10,8 +10,11 @@
       restrict: 'E',
       templateUrl: 'templates/directives/maps/maps.html',
       scope: {
-        data: '=',
-        modoUpdate: '='
+        lat: '=',
+        lng: '=',
+        defaultInCurrentGeolocation: '=',
+        direccion:'=',
+        ciudad:'='
       },
       controller: [ '$ionicPopup',
                     '$ionicLoading',
@@ -33,12 +36,7 @@
     var mapVm = this;// jshint ignore:line
     mapVm.disableTap = disableTap;
 
-    if(mapVm.modoUpdate){
-      showGMapUpdate();
-    }
-    else{
-      showGMap();
-    }
+    mapVm.defaultInCurrentGeolocation ? showGMap() : showGMapUpdate();// jshint ignore:line
 
     function showGMap() {
       $ionicLoading.show({
@@ -55,16 +53,14 @@
             function onError(err) {
               $ionicLoading.hide();
               var message = null;
-              // Use default coordinate (Loja)
               var defaultPosition = {
                 coords: {
-                  latitude: -4.0078909,
-                  longitude: -79.21127690000003
+                  latitude: null,
+                  longitude: null
                 }
               };
 
               if (!err && !err.code) {
-                // Unknown error
                 showUnknownError();
                 return;
               }
@@ -82,7 +78,6 @@
               }
 
               if (!message) {
-                // Unknown error
                 showUnknownError();
               } else {
                 handleLocationError(message, defaultPosition, false);
@@ -98,32 +93,15 @@
       });
       var position={
         coords:{
-          latitude:mapVm.data.latitud,
-          longitude:mapVm.data.longitud
+          latitude:mapVm.lat,
+          longitude:mapVm.lng
         }
       };
-      if(position.coords.latitude){
-        MapsService.loadGMaps().then(function(){
-          var map = loadMap(position, true);
-          loadPlacesSearchBox(map);
-          $ionicLoading.hide();
-        });
-      }
-      else{
-        MapsService.loadGMaps().then(function(){
-          var markers = [];
-          var map = MapsService.renderMap('map');
-          MapsService.renderAddressMarker(map, {
-            address: mapVm.data.direccion_uno,//jshint ignore:line
-            componentRestrictions: {
-              locality: mapVm.data.ciudad
-            }
-          });
-          $ionicLoading.hide();
-          listenerClick(map, markers);
-        });
-      }
-
+      MapsService.loadGMaps().then(function(){
+        var map = loadMap(position, true);
+        loadPlacesSearchBox(map);
+        $ionicLoading.hide();
+      });
     }
 
     function showUnknownError() {
@@ -132,6 +110,7 @@
         template: 'Hubo un error desconocido al cargar el mapa.'
       });
     }
+
     function handleLocationError(message, position, useMarker) {
       var map = loadMap(position, useMarker);
       loadPlacesSearchBox(map);
@@ -145,7 +124,6 @@
       // TODO use MapsService
       var lat = position.coords.latitude;
       var long = position.coords.longitude;
-
       var latLng = new google.maps.LatLng(lat, long);
 
       var mapOptions = {
@@ -240,12 +218,12 @@
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({'latLng': marker.position}, function(results, status) {
           if(status === google.maps.GeocoderStatus.OK){
-            mapVm.data.direccion_uno = results[0].formatted_address;// jshint ignore:line
-            mapVm.data.ciudad = results[1].formatted_address;// jshint ignore:line
+            mapVm.direccion = results[0].formatted_address;// jshint ignore:line
+            mapVm.ciudad = results[1].formatted_address;// jshint ignore:line
           }
         });
-        mapVm.data.latitud = marker.getPosition().lat();
-        mapVm.data.longitud = marker.getPosition().lng();
+        mapVm.lat = marker.getPosition().lat();
+        mapVm.lng = marker.getPosition().lng();
       }
     }
 
