@@ -395,7 +395,7 @@
           total: 'Total de Compra',
         },
         discount: {
-          textCode: 'Código de Descueto',
+          textCode: 'Código de Descuento',
           applyCode: 'Aplicar Código'
         },
         shippingCosts: 'Costos de Envio',

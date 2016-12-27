@@ -43,21 +43,22 @@ ion-view(
           .col.col-25
             | {{ ::( '5000' | priceCurrency | currency ) }}
 
-    .resource-collection
-      .list.list-inset.list--no-borders.resource-collection-table
-        .row.item
-          .col.col-50
-            | {{ ::("order.discount.textCode" |translate) }}
-          .col.col-50
-            button.button.button-outline.button-energized
-              | {{ ::("order.discount.applyCode" |translate) }}
+    //- not implemented yet
+      .resource-collection
+        .list.list-inset.list--no-borders.resource-collection-table
+          .row.item
+            .col.col-50
+              | {{ ::("order.discount.textCode" |translate) }}
+            .col.col-50
+              button.button.button-outline.button-energized
+                | {{ ::("order.discount.applyCode" |translate) }}
 
     .resource-collection(ng-if="customerOrderVm.customerOrder.observaciones")
       .list.list-inset.list--no-borders.resource-collection-table
         .row.table-headers
           .col.col-100 {{ ::("order.observations"|translate) }}
         .row.item
-          .col.col-100 {{ ::customerOrderVm.customerOrder.observaciones }}
+          .col.col-100.col--elastic {{ ::customerOrderVm.customerOrder.observaciones }}
           .list.list-inset.list--no-borders.resource-collection-table
 
     .resource-collection(ng-if="customerOrderVm.customerAddress")
