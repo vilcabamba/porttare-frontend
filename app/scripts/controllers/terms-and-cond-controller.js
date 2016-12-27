@@ -11,8 +11,7 @@
     terCondVm.agreeTermsOfService = agreeTermsOfService;
 
     function agreeTermsOfService() {
-      var data = $auth.user;
-      UserAuthService.agreeTermsOfService(data)
+      UserAuthService.agreeTermsOfService()
         .then(function success() {
           $auth.user.agreed_tos = true; //jshint ignore:line
           $state.go(APP.successState)

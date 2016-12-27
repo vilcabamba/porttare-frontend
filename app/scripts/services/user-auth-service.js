@@ -27,10 +27,9 @@
       });
     }
 
-    function agreeTermsOfService( data) {
+    function agreeTermsOfService() {
       return $http({
         method: 'POST',
-        data: data,
         url: ENV.apiHost + '/api/users/tos'
       });
     }

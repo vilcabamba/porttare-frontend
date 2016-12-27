@@ -22,34 +22,35 @@ ion-view(
       .list.list-inset.list--no-borders.resource-collection-table.text-right
         .row.item
           .col.col-75
-            {{ ::("order.summary.subtotal" |translate) }}
+            | {{ ::("order.summary.subtotal" |translate) }}
           .col.col-25
-            {{ ::( customerOrderVm.customerOrder.subtotal_items_cents | priceCurrency | currency ) }}
+            | {{ ::( customerOrderVm.customerOrder.subtotal_items_cents | priceCurrency | currency ) }}
         .row.item
           .col.col-75
-            {{ ::("order.summary.shippingCosts" |translate) }}
+            | {{ ::("order.summary.shippingCosts" |translate) }}
           .col.col-25
-            {{ ::( '1000' | priceCurrency | currency ) }}
+            | {{ ::( '1000' | priceCurrency | currency ) }}
         .row.item
           .col.col-75
-            {{ ::("order.summary.VAT" |translate) }}
+            | {{ ::("order.summary.VAT" |translate) }}
           .col.col-25
-            {{ ::( '500' | priceCurrency | currency ) }}
+            | {{ ::( '500' | priceCurrency | currency ) }}
         .row.table-headers
           .col.col-100
         .row.item
           .col.col-75
-            {{ ::("order.summary.total" |translate) }}
+            | {{ ::("order.summary.total" |translate) }}
           .col.col-25
-            {{ ::( '5000' | priceCurrency | currency ) }}
+            | {{ ::( '5000' | priceCurrency | currency ) }}
 
     .resource-collection
       .list.list-inset.list--no-borders.resource-collection-table
         .row.item
           .col.col-50
-            {{ ::("order.discount.textCode" |translate) }}
+            | {{ ::("order.discount.textCode" |translate) }}
           .col.col-50
-            button.button.button-outline.button-energized {{ ::("order.discount.applyCode" |translate) }}
+            button.button.button-outline.button-energized
+              | {{ ::("order.discount.applyCode" |translate) }}
 
     .resource-collection(ng-if="customerOrderVm.customerOrder.observaciones")
       .list.list-inset.list--no-borders.resource-collection-table
