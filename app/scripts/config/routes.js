@@ -586,6 +586,30 @@ function routes($stateProvider, $urlRouterProvider) {
         }
       }
     }
+  })
+  .state('app.customerorders.show', {
+    url: '/:id',
+    params: {
+      customerOrder: null
+    },
+    views: {
+      'menuContent@app': {
+        templateUrl: 'templates/customer/orders/show.html',
+        controller: 'CustomerOrderController',
+        controllerAs: 'customerOrderVm',
+        resolve: {
+          customerOrder: function ($stateParams, CustomerOrdersService) {
+            if ($stateParams.customerOrder) {
+              return $stateParams.customerOrder;
+            } else {
+              var customerOrderId = $stateParams.id;
+              return CustomerOrdersService
+                        .getCustomerOrder(customerOrderId);
+            }
+          }
+        }
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback

@@ -1,5 +1,5 @@
 ion-view(
-  view-title="{{ ::('client.myOrders' | translate) }}"
+  view-title="{{ ::('menu.client.myOrders' | translate) }}"
 )
   ion-nav-title
     .alt-logo
@@ -22,5 +22,5 @@ ion-view(
           | {{ ::(customerOrder.subtotal_items_cents | priceCurrency | currency) }}
         .col.col-20.text-right
           a.button.button-clear.button-positive.button-small(
-            ui-sref='app.customerorders.show({ id: customerOrder.id })'
+            ui-sref='app.customerorders.show({ id: customerOrder.id , customerOrder: customerOrder })'
           ) {{::("globals.seeMore"|translate)}}

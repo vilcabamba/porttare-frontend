@@ -1,0 +1,73 @@
+ion-view(
+  view-title="{{ ::('menu.client.myOrders' | translate) }}"
+)
+  ion-nav-title
+    .alt-logo
+  ion-content
+    .resource-collection(ng-repeat='providerProfile in ::customerOrderVm.customerOrder.provider_profiles track by $index')
+      .list.list-inset.list--no-borders.resource-collection-table
+        .row.table-headers
+          .col.col-50 {{ providerProfile.nombre_establecimiento || providerProfile.razon_social }}
+          .col.col-25 {{ ::("order.providerProfile.quantity" |translate) }}
+          .col.col-25 {{ ::("order.providerProfile.price" |translate) }}
+        div(ng-repeat='item in providerProfile.customer_order_items')
+          .item.row
+            .col.col-50 {{ ::item.provider_item.titulo}}
+            .col.col-25 {{ ::( ("order.providerProfile.item.cantidadPrefix" |translate) + item.cantidad) }}
+            .col.col-25 {{ ::(item.provider_item_precio_cents | priceCurrency | currency) }}
+          .item.row(ng-if="item.observaciones")
+            .col.col-100.col--elastic {{ ::( ("order.providerProfile.item.observations" |translate) + item.observaciones) }}
+
+    .resource-collection
+      .list.list-inset.list--no-borders.resource-collection-table.text-right
+        .row.item
+          .col.col-75
+            {{ ::("order.summary.subtotal" |translate) }}
+          .col.col-25
+            {{ ::( customerOrderVm.customerOrder.subtotal_items_cents | priceCurrency | currency ) }}
+        .row.item
+          .col.col-75
+            {{ ::("order.summary.shippingCosts" |translate) }}
+          .col.col-25
+            {{ ::( '1000' | priceCurrency | currency ) }}
+        .row.item
+          .col.col-75
+            {{ ::("order.summary.VAT" |translate) }}
+          .col.col-25
+            {{ ::( '500' | priceCurrency | currency ) }}
+        .row.table-headers
+          .col.col-100
+        .row.item
+          .col.col-75
+            {{ ::("order.summary.total" |translate) }}
+          .col.col-25
+            {{ ::( '5000' | priceCurrency | currency ) }}
+
+    .resource-collection
+      .list.list-inset.list--no-borders.resource-collection-table
+        .row.item
+          .col.col-50
+            {{ ::("order.discount.textCode" |translate) }}
+          .col.col-50
+            button.button.button-outline.button-energized {{ ::("order.discount.applyCode" |translate) }}
+
+    .resource-collection(ng-if="customerOrderVm.customerOrder.observaciones")
+      .list.list-inset.list--no-borders.resource-collection-table
+        .row.table-headers
+          .col.col-100 {{ ::("order.observations"|translate) }}
+        .row.item
+          .col.col-100 {{ ::customerOrderVm.customerOrder.observaciones }}
+          .list.list-inset.list--no-borders.resource-collection-table
+
+    .resource-collection(ng-if="customerOrderVm.customerAddress")
+      .list.list-inset.list--no-borders.resource-collection-table
+        .row.table-headers
+          .col.col-100 {{ ::("order.customerInfo"|translate) }}
+        .row.item
+          .col.col-100 {{ 'SEBASTIAN LOPEZ' }}
+        .row.item
+          .col.col-100 {{ ::( customerOrderVm.customerAddress.parroquia + ', ' + customerOrderVm.customerAddress.barrio ) }}
+        .row.item
+          .col.col-100 {{ ::( customerOrderVm.customerAddress.ciudad + ', ' + customerOrderVm.customerAddress.codigo_postal ) }}
+        .row.item
+          .col.col-100 {{ 'VISA ***********1234' }}
