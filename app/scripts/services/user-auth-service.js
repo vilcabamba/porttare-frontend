@@ -5,9 +5,10 @@
     .module('porttare.services')
     .factory('UserAuthService', UserAuthService);
 
-  function UserAuthService($auth, $state, $ionicLoading) {
+  function UserAuthService($auth, $state, $ionicLoading, $http, ENV) {
     var service = {
-      checkIfEnabledProvider : checkIfEnabledProvider
+      checkIfEnabledProvider : checkIfEnabledProvider,
+      agreeTermsOfService : agreeTermsOfService
     };
 
     return service;
@@ -23,6 +24,14 @@
         return;
       }, function userNotAuthorized() {
           return;
+      });
+    }
+
+    function agreeTermsOfService( data) {
+      return $http({
+        method: 'POST',
+        data: data,
+        url: ENV.apiHost + '/api/users/tos'
       });
     }
   }
