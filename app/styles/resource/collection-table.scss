@@ -17,10 +17,6 @@
         text-align: right;
       }
 
-      &.text-dark {
-        color: $dark;
-      }
-
       .button-clear.button-small {
         font-size: 12px;
         letter-spacing: -0.5px;
@@ -31,11 +27,6 @@
       &.col--elastic {
         max-height: initial;
         text-align: justify;
-      }
-
-      &.col--separator {
-        white-space: pre-line;
-        overflow: hidden;
       }
 
     }

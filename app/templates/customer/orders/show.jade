@@ -23,24 +23,24 @@ ion-view(
         .row.item
           .col.col-75
             {{ ::("order.summary.subtotal" |translate) }}
-          .col.col-25.text-dark
+          .col.col-25
             {{ ::( customerOrderVm.customerOrder.subtotal_items_cents | priceCurrency | currency ) }}
         .row.item
           .col.col-75
             {{ ::("order.summary.shippingCosts" |translate) }}
-          .col.col-25.text-dark
+          .col.col-25
             {{ ::( '1000' | priceCurrency | currency ) }}
         .row.item
           .col.col-75
             {{ ::("order.summary.VAT" |translate) }}
-          .col.col-25.text-dark
+          .col.col-25
             {{ ::( '500' | priceCurrency | currency ) }}
         .row.table-headers
           .col.col-100
         .row.item
           .col.col-75
             {{ ::("order.summary.total" |translate) }}
-          .col.col-25.text-dark
+          .col.col-25
             {{ ::( '5000' | priceCurrency | currency ) }}
 
     .resource-collection
