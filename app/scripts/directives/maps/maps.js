@@ -14,6 +14,7 @@
         modoUpdate: '='
       },
       controller: [ '$ionicPopup',
+                    '$ionicLoading',
                     'GeolocationService',
                     'MapsService', mapsController],
       controllerAs: 'mapVm',
@@ -24,6 +25,7 @@
   }
 
   function mapsController($ionicPopup,
+                          $ionicLoading,
                           GeolocationService,
                           MapsService)
   {
@@ -39,14 +41,19 @@
     }
 
     function showGMap() {
+      $ionicLoading.show({
+        template: 'cargando...'
+      });
       MapsService.loadGMaps().then(function(){
         GeolocationService.getCurrentPosition()
           .then(
             function onSuccess(position) {
               var map = loadMap(position, true);
               loadPlacesSearchBox(map);
+              $ionicLoading.hide();
             },
             function onError(err) {
+              $ionicLoading.hide();
               var message = null;
               // Use default coordinate (Loja)
               var defaultPosition = {
@@ -86,6 +93,9 @@
     }
 
     function showGMapUpdate(){
+      $ionicLoading.show({
+        template: 'cargando...'
+      });
       var position={
         coords:{
           latitude:mapVm.data.latitud,
@@ -96,6 +106,7 @@
         MapsService.loadGMaps().then(function(){
           var map = loadMap(position, true);
           loadPlacesSearchBox(map);
+          $ionicLoading.hide();
         });
       }
       else{
@@ -108,6 +119,7 @@
               locality: mapVm.data.ciudad
             }
           });
+          $ionicLoading.hide();
           listenerClick(map, markers);
         });
       }
