@@ -2,7 +2,10 @@ form(
   name="pfaVm.addressForm"
   novalidate
 )
-  ion-content.addresses-wrapper.resource-form
+  ion-content.addresses-wrapper.resource-form(
+    scroll="false"
+    locking="false"
+  )
     .list.list-inset.fields-wrapper
       legend {{::pfaVm.inUpdateMode ? ("profile.addresses.formLegendUpdate"|translate) : ("profile.addresses.formLegendNew"|translate)}}
 

@@ -1,6 +1,5 @@
 .show-profile-page {
   font-family: Montserrat-Light;
-  overflow: auto;
 
   .profile-header {
     .img-profile {
@@ -44,4 +43,12 @@
 
 .addresses-wrapper--parent {
   overflow: initial;
+
+  form {
+    position: relative;
+
+    .addresses-wrapper {
+      position: relative;
+    }
+  }
 }
