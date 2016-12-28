@@ -25,9 +25,9 @@
     span(
       ng-if="providerProfile.customer_order_delivery.deliver_at"
     )
-      | {{ ::(providerProfile.customer_order_delivery.deliver_at | formatDate:'dddd D') }}
+      | {{ (providerProfile.customer_order_delivery.deliver_at | formatDate:'dddd D') }}
       | de
-      | {{ ::(providerProfile.customer_order_delivery.deliver_at | formatDate:'MMMM - H:m A')}}
+      | {{ (providerProfile.customer_order_delivery.deliver_at | formatDate:'MMMM - H:mm A')}}
       | -
     span Departamento
     button(ng-click='cartVm.showCustomerOrderDelivery(providerProfile)').button.button-clear.button-energized.button-small

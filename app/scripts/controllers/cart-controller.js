@@ -287,8 +287,8 @@
 
     function showCustomerOrderDelivery(providerProfile){
       cartVm.providerProfile = angular.copy(providerProfile);
-      if (providerProfile.customer_order_delivery.deliver_at){
-        cartVm.providerProfile.customer_order_delivery.deliver_at = new Date(providerProfile.customer_order_delivery.deliver_at);
+      if (providerProfile.customer_order_delivery.deliver_at){ //jshint ignore:line
+        cartVm.providerProfile.customer_order_delivery.deliver_at = new Date(providerProfile.customer_order_delivery.deliver_at); //jshint ignore:line
       }
       cartVm.CustomerOrderDeliverySelect();
       ModalService.showModal({
@@ -301,10 +301,10 @@
       $ionicLoading.show({
         template: '{{::("globals.updating"|translate)}}'
       });
-      CustomerOrderDeliveryService.updateCustomerOrderDelivery(cartVm.providerProfile.customer_order_delivery)
+      CustomerOrderDeliveryService.updateCustomerOrderDelivery(cartVm.providerProfile.customer_order_delivery) //jshint ignore:line
       .then(function success(resp){
         $ionicLoading.hide().then(function(){
-          $auth.user.customer_order = resp.customer_order;
+          $auth.user.customer_order = resp.customer_order; //jshint ignore:line
           init();
           $ionicPopup.alert({
             title: 'Éxito',
