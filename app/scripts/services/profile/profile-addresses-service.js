@@ -5,7 +5,7 @@
     .module('porttare.services')
     .factory('ProfileAddressesService', ProfileAddressesService);
 
-  function ProfileAddressesService(ENV, $http, $q, $state, ErrorHandlerService, $ionicLoading) {
+  function ProfileAddressesService(ENV, $http, $q, $state, ErrorHandlerService, $ionicLoading, CommonService) {
 
     var addressListState = 'app.profile.addresses.index';
     var actions = {
@@ -63,21 +63,12 @@
     }
 
     function getAddress(id) {
-      return $q(function (resolve, reject) {
-        getAddresses().then(function success(customerAddresses) {
-          var selectedAddress = findAddress(customerAddresses, id);
-          resolve(selectedAddress);
-        }, reject);
-      });
-    }
-
-    function findAddress(customerAddresses, id) {
-      var parsedId = parseInt(id, 10);
-      if (customerAddresses) {
-        return customerAddresses.find(function(customerAddress) {
-          return customerAddress.id === parsedId;
-        });
-      }
+      return CommonService
+               .getObject('/api/customer/addresses/', id)
+               .then(function (resp){
+                 return resp.customer_address; //jshint ignore:line
+               })
+               .catch(ErrorHandlerService.handleCommonErrorGET);
     }
 
     function reditectToList() {
