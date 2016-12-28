@@ -80,8 +80,7 @@
       if ($scope.billingAddressesVm.form.$valid) {
         BillingAddressesService.createBillingAddress($scope.billingAddressesVm.billingAddress).then(function success(resp){
           cartVm.billingAddresses.push(resp.customer_billing_address); //jshint ignore:line
-          closeModal();
-          showCheckoutModal();
+          closeModal().then(showCheckoutModal);
         }, function(error){
           $scope.billingAddressesVm.messages = error.data.errors;
         });
@@ -92,10 +91,9 @@
       if ($scope.pfaVm.addressForm.$valid) {
         ProfileAddressesService.createAddresses($scope.pfaVm.addressFormData).then(function(response){
           cartVm.addresses.push(response.customer_address); //jshint ignore:line
-          closeModal();
-          showCheckoutModal();
+          closeModal().then(showCheckoutModal);
         }, function(error){
-          $scope.pfaVm.messages = error.data.errors;
+          $scope.pfaVm.messages = error.errors;
         });
       }
     }
@@ -128,10 +126,9 @@
         }
       }
     }
-
     function closeModal() {
-      ModalService.closeModal();
       clearData();
+      return ModalService.closeModal();
     }
 
     function clearData() {
