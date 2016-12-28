@@ -368,6 +368,7 @@
         deliverNow: 'Entregar inmediatamente',
         shippingCosts: '(costos de envío)',
         deliveryPlaceholder: 'Entrega:',
+        pickupPlaceholder: 'Recoger:',
         deliveryMethods: {
           pickup: 'Recoger en local',
           shipping: 'Enviar a domicilio',
