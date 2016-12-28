@@ -124,6 +124,9 @@
         birthdate: 'Fecha de nacimiento',
         license: 'Licencia de conducir',
         orders: 'Pedidos',
+        deliveryAddresses: 'Lugar de entrega',
+        ready: 'Listo',
+        customerOrderDeliveryUpdate: 'Datos de entrega actualizado éxitosamente',
         labels: {
           found: 'Encontramos',
           closeToYou: 'pedidos cerca de ti',
@@ -159,6 +162,7 @@
         email: 'Email',
         confirmTitle: '¿Estás seguro?',
         dateDelivery: 'Fecha y hora de entrega',
+        dateSelect: 'Seleccionar fecha',
         dayNames: {
           mon: 'Lunes',
           tue: 'Martes',

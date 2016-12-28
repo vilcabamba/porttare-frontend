@@ -17,7 +17,8 @@
                           ModalService,
                           BillingAddressesService,
                           ProfileAddressesService,
-                          CartService) {
+                          CartService,
+                          CustomerOrderDeliveryService) {
     var cartVm = this;
     cartVm.total = 0;
     cartVm.showCheckoutModal = showCheckoutModal;
@@ -30,6 +31,9 @@
     cartVm.clearDeliveryTime = clearDeliveryTime;
     cartVm.updateOrderItem = updateOrderItem;
     cartVm.removeOrderItem = removeOrderItem;
+    cartVm.showCustomerOrderDelivery = showCustomerOrderDelivery;
+    cartVm.submitCustomerOrderDelivery = submitCustomerOrderDelivery;
+    cartVm.CustomerOrderDeliverySelect = CustomerOrderDeliverySelect;
     cartVm.checkoutForm = {
       forma_de_pago: 'efectivo' // only method supported ATM
     };
@@ -176,7 +180,7 @@
     }
 
     function assignAddress(address) {
-      cartVm.checkoutForm.customer_address_id = address.id;
+      cartVm.providerProfile.customer_order_delivery.customer_address_id = address.id;
       selectItem(address, cartVm.addresses);
     }
 
@@ -271,5 +275,57 @@
         closeModal();
       });
     }
+
+    function CustomerOrderDeliverySelect(){
+      angular.forEach(cartVm.addresses, function (elem) {
+        if (elem.id==cartVm.providerProfile.customer_order_delivery.customer_address_id){ //jshint ignore:line
+          selectItem(elem, cartVm.addresses);
+          return;
+        }
+      });
+    }
+
+    function showCustomerOrderDelivery(providerProfile){
+      cartVm.providerProfile = angular.copy(providerProfile);
+      if (providerProfile.customer_order_delivery.deliver_at){
+        cartVm.providerProfile.customer_order_delivery.deliver_at = new Date(providerProfile.customer_order_delivery.deliver_at);
+      }
+      cartVm.CustomerOrderDeliverySelect();
+      ModalService.showModal({
+        parentScope: $scope,
+        fromTemplateUrl: 'templates/cart/courier/customer-order-delivery.html',
+      });
+    }
+
+    function submitCustomerOrderDelivery() {
+      $ionicLoading.show({
+        template: '{{::("globals.updating"|translate)}}'
+      });
+      CustomerOrderDeliveryService.updateCustomerOrderDelivery(cartVm.providerProfile.customer_order_delivery)
+      .then(function success(resp){
+        $ionicLoading.hide().then(function(){
+          $auth.user.customer_order = resp.customer_order;
+          init();
+          $ionicPopup.alert({
+            title: 'Éxito',
+            template: '{{::("courier.customerOrderDeliveryUpdate"|translate)}}'
+          }).then(function(){
+            closeModal();
+          });
+        });
+      }, function error(res) {
+        $ionicLoading.hide();
+        if (res && res.data.errors ) {
+          cartVm.messages = res.data.errors;
+        } else {
+          var message = '{{::("globals.pleaseTryAgain"|translate)}}';
+          $ionicPopup.alert({
+            title: 'Error',
+            template: message
+          });
+        }
+      });
+    }
+
   }
 })();

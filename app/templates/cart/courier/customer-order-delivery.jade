@@ -1,0 +1,54 @@
+ion-modal-view
+  ion-header-bar.bar-stable.bar.bar-header
+    .title {{cartVm.providerProfile.nombre_establecimiento|translate|uppercase}}
+    .ion-nav-buttons.buttons(side="primary")
+      button.button.button-clear.button-positive(
+        ng-click="cartVm.closeModal()"
+      ) {{::('globals.cancel'|translate)}}
+
+  form(
+    name='cartVm.formDeliveryAddresses'
+    ng-submit='cartVm.submitCustomerOrderDelivery()'
+    novalidate
+  )
+    ion-content.resource-form.checkout-form
+      .list.list-inset
+
+        label.item.item-input.item-stacked-label
+          span.input-label {{::("globals.dateDelivery"|translate)}}
+        .delivery-time-wrapper
+            ion-datetime-picker.item.item-icon-left.datetime-picker(
+              date
+              time
+              am-pm
+              only-valid="{'after': 'today', 'inclusive': true}"
+              ng-model='cartVm.providerProfile.customer_order_delivery.deliver_at'
+            )
+              i.icon.ion-ios-calendar-outline
+              span.placeholder(ng-if="!cartVm.providerProfile.customer_order_delivery.deliver_at")
+                | {{ ::('globals.dateSelect' | translate) }}
+              span(ng-if="cartVm.providerProfile.customer_order_delivery.deliver_at")
+                | {{ cartVm.providerProfile.customer_order_delivery.deliver_at | formatDate }}
+              .button.button-clear.button-positive(
+                ng-if="cartVm.providerProfile.customer_order_delivery.deliver_at"
+              ) {{ ::('globals.edit' | translate) }}
+          .errors-wrapper
+            show-error(array-messages="cartVm.messages.deliver_at")
+
+        label.item.item-input.item-input--no-borders.item-stacked-label.select-list-label(
+          ng-class="{'item-error': cartVm.messages.customer_address_id}"
+        )
+          span.input-label {{::("courier.deliveryAddresses"|translate)}}
+        ion-list
+          ion-item.select-list-item(
+              ng-repeat="address in cartVm.addresses track by $index"
+              ng-click="cartVm.assignAddress(address)"
+              ng-class="{'selected': address.selected}"
+          )
+            span {{address.nombre}} ({{ address.direccion_uno }})
+        show-error(array-messages='cartVm.messages.customer_address_id')
+
+    ion-footer-bar.bar-stable.bar-footer--tall
+      button.button.button-outline.button-energized(
+        type="submit"
+      ) {{::('courier.ready'|translate)}}
