@@ -9,8 +9,8 @@
     var siteVm = this,
         currentUser = null;
 
-    siteVm.userName = userName;
-    siteVm.getUserImageURL = getUserImageURL;
+    siteVm.userName = null;
+    siteVm.userImageURL = null;
 
     init();
 
@@ -30,6 +30,14 @@
 
     $rootScope.$on('$stateChangeError', function(){
       $ionicLoading.hide();
+    });
+
+    $rootScope.$on('auth:login-success', function(){
+      updateProperties();
+    });
+
+    $rootScope.$on('auth:validation-success', function(){
+      updateProperties();
     });
 
     function userName () {
@@ -54,6 +62,12 @@
 
     $rootScope.$on('currentUserUpdated',function(event, updatedCurrentUser){
       currentUser = updatedCurrentUser;
+      updateProperties();
     });
+
+    function updateProperties(){
+      siteVm.userName = userName();
+      siteVm.userImageURL = getUserImageURL();
+    }
   }
 })();
