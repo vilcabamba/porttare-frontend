@@ -30,7 +30,7 @@ slick-wrapper(settings="productVm.slickConfig")
   .text-center(
     toggle-expand="productVm.more"
   )
-    button.button.button-clear.button-positive.button-letter-stretched.more-label
+    button.button.button-clear.button-positive.button-letter-stretched.more-label(ng-class="{'visible':productVm.product.observaciones.length>200,'hidden':productVm.product.observaciones.length<200}")
       | {{ (productVm.more) ? ("product.less"|translate) : ("product.more"|translate) }}
 
 .list.list-inset
