@@ -10,7 +10,7 @@
     pfaVm.addressFormData = {};
     pfaVm.messages = {};
     pfaVm.processAddress = processAddress;
-    pfaVm.addressFormData.defaultInCurrentGeolocation = true;
+    pfaVm.defaultInCurrentGeolocation = true;
 
     function processAddress() {
       var options = {
