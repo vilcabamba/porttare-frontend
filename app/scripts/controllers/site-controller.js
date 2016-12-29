@@ -7,10 +7,11 @@
 
   function SiteController($rootScope, $ionicLoading, $auth, ProfileService) {// jshint ignore:line
     var siteVm = this,
-      currentUser = null;
+        currentUser = null;
 
     siteVm.userName = null;
     siteVm.userImageURL = null;
+    siteVm.providerImageURL = null;
 
     init();
 
@@ -34,10 +35,12 @@
 
     $rootScope.$on('auth:login-success', function(){
       updateProperties();
+      updatePropertiesProfileProvider();
     });
 
     $rootScope.$on('auth:validation-success', function(){
       updateProperties();
+      updatePropertiesProfileProvider();
     });
 
     function userName () {
@@ -56,6 +59,12 @@
       }
     }
 
+    function providerImageUrl (){
+      if (currentUser.provider_profile) {//jshint ignore:line
+        return currentUser.provider_profile.logotipo_url;//jshint ignore:line
+      }
+    }
+
     function getUserImageURL(){
       return ProfileService.getUserImageURL(currentUser);
     }
@@ -65,9 +74,18 @@
       updateProperties();
     });
 
+    $rootScope.$on('currentProfileProviderUpdated',function(event, updatedCurrentProfileProvider){
+      currentUser.provider_profile = updatedCurrentProfileProvider;//jshint ignore:line
+      updatePropertiesProfileProvider();
+    });
+
     function updateProperties(){
       siteVm.userName = userName();
       siteVm.userImageURL = getUserImageURL();
+    }
+
+    function updatePropertiesProfileProvider(){
+      siteVm.providerImageURL = providerImageUrl();
     }
   }
 })();

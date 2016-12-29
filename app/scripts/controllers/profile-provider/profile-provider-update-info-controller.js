@@ -20,7 +20,6 @@
     providerProfileVm.paymentMethods=[];
     providerProfileVm.profileEdit={};
     providerProfileVm.profileProvider  = $auth.user.provider_profile;// jshint ignore:line
-    $scope.$emit('providerUpdateInfo');
 
     function editProfile(profileEdit) {
       $ionicLoading.show({
@@ -33,7 +32,7 @@
         .then(function success(resp) {
           $ionicLoading.hide();
           $auth.user.provider_profile = resp.provider_profile;//jshint ignore:line
-          $scope.$emit('providerUpdateInfo');
+          $scope.$emit('currentProfileProviderUpdated', $auth.user.provider_profile);//jshint ignore:line
           $ionicPopup.alert({
             title: 'Éxito',
             template: '{{::("provider.successUpdateProfileProvider"|translate)}}'
