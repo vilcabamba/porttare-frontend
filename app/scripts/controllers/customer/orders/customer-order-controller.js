@@ -5,7 +5,10 @@
     .module('porttare.controllers')
     .controller('CustomerOrderController', CustomerOrderController);
 
-  function CustomerOrderController(customerOrder, ProfileAddressesService, BillingAddressesService) {
+  function CustomerOrderController(customerOrder,
+                                   ProfileAddressesService,
+                                   BillingAddressesService,
+                                   PusherService) {
     var customerOrderVm = this;
     customerOrderVm.VAT = 0.12;
 
@@ -15,13 +18,29 @@
     customerOrderVm.addressLine1 = null;
     customerOrderVm.addressLine2 = null;
 
+    init();
+
     function init() {
       getAddress();
       getBillingAddress();
       getSummary();
+      loadFaye();
     }
 
-    init();
+    function loadFaye() {
+      PusherService.load().then(function () {
+        var orderId = customerOrderVm.customerOrder.id;
+        PusherService.listen(
+          'private-customer_order.' + orderId,
+          'update',
+          customerOrderUpdated
+        );
+      });
+    }
+
+    function customerOrderUpdated(newCustomerOrder) {
+      console.log(newCustomerOrder);
+    }
 
     function getAddress(){
       var customerAddressId = customerOrderVm.customerOrder.customer_address_id; // jshint ignore:line
@@ -86,6 +105,5 @@
 
       return line2;
     }
-
   }
 })();
