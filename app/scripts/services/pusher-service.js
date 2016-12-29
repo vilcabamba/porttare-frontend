@@ -8,6 +8,7 @@
   function PusherService($q, $auth, ENV) {
     var serviceLoaded = false,
         loadDeferred,
+        headersDeferred,
         pusherClient,
         Authenticator;
 
@@ -44,8 +45,7 @@
 
     function loadLibrary() {
       if (serviceLoaded) {
-        updateAuthHeaders();
-        return $q.resolve();
+        return updateAuthHeaders();
       } else {
         loadDeferred = $q.defer();
         appendPusherScript();
@@ -65,25 +65,33 @@
     function pusherLoaded() {
       serviceLoaded = true;
       newPusherClient();
-      loadDeferred.resolve();
     }
 
     function updateAuthHeaders() {
-      pusherClient.config.auth = getAuthHeaders();
+      return getAuthHeaders().then(function (headers) {
+        pusherClient.config.auth = headers;
+      });
     }
 
     function newPusherClient() {
-      pusherClient = new Pusher(ENV.pusherKey, {
-        encrypted: true,
-        auth: getAuthHeaders(),
-        authEndpoint: ENV.apiHost + '/api/pusher_auth', // jshint ignore:line
+      getAuthHeaders().then(function (headers) {
+        pusherClient = new Pusher(ENV.pusherKey, {
+          encrypted: true,
+          auth: headers,
+          authEndpoint: ENV.apiHost + '/api/pusher_auth', // jshint ignore:line
+        });
+        loadDeferred.resolve();
       });
     }
 
     function getAuthHeaders() {
-      var authHeaders = $auth.retrieveData('auth_headers'); // jshint ignore:line
-      authHeaders['Accept'] = 'application/json';
-      return { headers: authHeaders };
+      headersDeferred = $q.defer();
+      $auth.validateUser().then(function () {
+        var authHeaders = $auth.retrieveData('auth_headers'); // jshint ignore:line
+        authHeaders.Accept = 'application/json';
+        headersDeferred.resolve({ headers: authHeaders });
+      });
+      return headersDeferred.promise;
     }
   }
 })();
