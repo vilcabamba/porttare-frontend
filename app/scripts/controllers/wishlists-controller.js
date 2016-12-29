@@ -7,12 +7,10 @@
 
   function WishlistsController( ModalService,
                                 $ionicLoading,
-                                $ionicScrollDelegate,
                                 $scope,
                                 $ionicPopup,
                                 data,
-                                CategoriesService,
-                                CategoryService,
+                                $state,
                                 WishlistsService) {
 
     var wishlistsVm = this;
@@ -24,7 +22,9 @@
     wishlistsVm.showEditModal = showEditModal;
     wishlistsVm.showModal = showModal;
     wishlistsVm.runAction = runAction;
+    wishlistsVm.redirectCategories=redirectCategories;
     wishlistsVm.messages = {};
+    wishlistsVm.editing=false;
     wishlistsVm.modalSettings = {
       newWishlist: {
         parentScope: $scope,
@@ -75,6 +75,7 @@
       wishlistsVm.wishlist = null;
       wishlistsVm.messages = {};
       currentIndex = null;
+      wishlistsVm.editing=false;
     }
 
     function showEditModal(wlist, index) {
@@ -84,6 +85,7 @@
         var entregar_en = moment(wlist.entregar_en, 'YYYY/MM/DD HH:mm Z');//jshint ignore: line
         wishlistsVm.wishlist.entregar_en = entregar_en.toDate(); //jshint ignore: line
       }
+      wishlistsVm.editing=true;
       wishlistsVm.showModal(wishlistsVm.modalSettings.editWishlist);
     }
 
@@ -109,6 +111,12 @@
           wishlistsVm.wishlists.push(res.customer_wishlist); //jshint ignore: line
           cancelAction();
         }, onError);
+    }
+
+    function redirectCategories(){
+      cancelAction();
+      var categoriesRoute = 'app.categories.index';
+      $state.go(categoriesRoute);
     }
 
     function cancelAction() {
