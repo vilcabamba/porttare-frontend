@@ -380,7 +380,6 @@
       },
       orders: {
         collectionTitle: 'Orden #',
-        date: 'Fecha',
         total: 'Total'
       },
       order: {
