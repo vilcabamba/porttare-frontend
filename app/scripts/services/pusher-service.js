@@ -44,6 +44,7 @@
 
     function loadLibrary() {
       if (serviceLoaded) {
+        updateAuthHeaders();
         return $q.resolve();
       } else {
         loadDeferred = $q.defer();
@@ -62,22 +63,27 @@
     }
 
     function pusherLoaded() {
-      var currentUser = $auth.user;
       serviceLoaded = true;
+      newPusherClient();
+      loadDeferred.resolve();
+    }
+
+    function updateAuthHeaders() {
+      pusherClient.config.auth = getAuthHeaders();
+    }
+
+    function newPusherClient() {
       pusherClient = new Pusher(ENV.pusherKey, {
         encrypted: true,
+        auth: getAuthHeaders(),
         authEndpoint: ENV.apiHost + '/api/pusher_auth', // jshint ignore:line
-        auth: {
-          headers: {
-            'Accept': 'application/json',
-            'token-type': 'Bearer',
-            'uid': currentUser.uid,
-            'client': currentUser.client_id, // jshint ignore:line
-            'access-token': currentUser.auth_token // jshint ignore:line
-          }
-        }
       });
-      loadDeferred.resolve();
+    }
+
+    function getAuthHeaders() {
+      var authHeaders = $auth.retrieveData('auth_headers'); // jshint ignore:line
+      authHeaders['Accept'] = 'application/json';
+      return { headers: authHeaders };
     }
   }
 })();
