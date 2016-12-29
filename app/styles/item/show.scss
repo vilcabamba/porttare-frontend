@@ -57,11 +57,24 @@
     p {
       margin-bottom: 0;
       overflow: hidden;
-      max-height: 80px;
       transition: max-height 0.2s ease-out;
+    }
 
-      &.expanded {
-        max-height: 600px;
+    .toggable-btn-wrapper {
+      display: none;
+    }
+
+    &.toggable {
+      p {
+        max-height: 80px;
+
+        &.expanded {
+          max-height: 600px;
+        }
+      }
+
+      .toggable-btn-wrapper {
+        display: block;
       }
     }
   }
