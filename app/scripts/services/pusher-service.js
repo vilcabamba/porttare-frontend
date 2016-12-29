@@ -13,13 +13,14 @@
 
     var service = {
       load: loadLibrary,
-      listen: listenChannel
+      listen: listenChannel,
+      unlisten: unlistenChannel
     };
 
     Authenticator = {
       outgoing: function (message, callback) {
         var currentUser = $auth.user;
-        message['ext'] = {
+        message.ext = {
           authorizations: {
             uid: currentUser.uid,
             auth_token: currentUser.auth_token, // jshint ignore:line
@@ -32,14 +33,17 @@
 
     return service;
 
-    function listenChannel(channel, eventName, callback) {
-      var channel = pusherClient.subscribe(channel);
+    function listenChannel(channelName, eventName, callback) {
+      var channel = pusherClient.subscribe(channelName);
       channel.bind(eventName, callback);
+    }
+
+    function unlistenChannel(channelName) {
+      pusherClient.unsubscribe(channelName);
     }
 
     function loadLibrary() {
       if (serviceLoaded) {
-        console.log('serviceLoaded!');
         return $q.resolve();
       } else {
         loadDeferred = $q.defer();

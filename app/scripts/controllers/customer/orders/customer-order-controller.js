@@ -5,7 +5,8 @@
     .module('porttare.controllers')
     .controller('CustomerOrderController', CustomerOrderController);
 
-  function CustomerOrderController(customerOrder,
+  function CustomerOrderController($scope,
+                                   customerOrder,
                                    ProfileAddressesService,
                                    BillingAddressesService,
                                    PusherService) {
@@ -25,9 +26,12 @@
       getBillingAddress();
       getSummary();
       loadFaye();
+
+      $scope.$on('$ionicView.enter', wsSubscribe);
+      $scope.$on('$ionicView.leave', wsUnsubscribe);
     }
 
-    function loadFaye() {
+    function wsSubscribe() {
       PusherService.load().then(function () {
         var orderId = customerOrderVm.customerOrder.id;
         PusherService.listen(
@@ -38,8 +42,13 @@
       });
     }
 
+    function wsUnsubscribe() {
+      var orderId = customerOrderVm.customerOrder.id;
+      PusherService.unlisten('private-customer_order.' + orderId);
+    }
+
     function customerOrderUpdated(newCustomerOrder) {
-      console.log(newCustomerOrder);
+      console.log('TODO', newCustomerOrder);
     }
 
     function getAddress(){
