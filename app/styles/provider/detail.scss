@@ -70,7 +70,7 @@ $gridBgColor: #F2F2F2;
       }
 
       .img-wrapper {
-        height: 190px;
+        height: 180px;
         width: 100%;
         justify-content: center;
         display: flex;
@@ -89,6 +89,8 @@ $gridBgColor: #F2F2F2;
       .provider-item--title {
         text-transform: uppercase;
         color: $grey-secondary;
+        max-height: 40px;
+        overflow: hidden;
       }
 
       .provider-item--subtitle {

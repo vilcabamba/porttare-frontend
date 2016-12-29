@@ -387,7 +387,7 @@
           quantity: 'Can',
           price: 'Precio',
           item: {
-            observations:'Observaciones: ',
+            observations:'Observaciones:',
             cantidadPrefix: 'x'
           }
         },
