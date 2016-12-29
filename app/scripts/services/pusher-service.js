@@ -9,27 +9,12 @@
     var serviceLoaded = false,
         loadDeferred,
         headersDeferred,
-        pusherClient,
-        Authenticator;
+        pusherClient;
 
     var service = {
       load: loadLibrary,
       listen: listenChannel,
       unlisten: unlistenChannel
-    };
-
-    Authenticator = {
-      outgoing: function (message, callback) {
-        var currentUser = $auth.user;
-        message.ext = {
-          authorizations: {
-            uid: currentUser.uid,
-            auth_token: currentUser.auth_token, // jshint ignore:line
-            client_id: currentUser.client_id // jshint ignore:line
-          }
-        };
-        callback(message);
-      }
     };
 
     return service;
