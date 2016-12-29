@@ -34,6 +34,7 @@
   {
 
     var mapVm = this;// jshint ignore:line
+    mapVm.addMarker = addMarker;
 
     mapVm.defaultInCurrentGeolocation ? showGMap() : showGMapUpdate();// jshint ignore:line
 
@@ -45,22 +46,17 @@
         GeolocationService.getCurrentPosition()
           .then(
             function onSuccess(position) {
-              loadMap(position, true);
+              loadMap(position);
+              addMarker(mapVm.latLng);
               listenerClick();
               $ionicLoading.hide();
             },
             function onError(message) {
               $ionicLoading.hide();
-              var defaultPosition = {
-                coords: {
-                  latitude: null,
-                  longitude: null
-                }
-              };
               if (!message) {
                 showUnknownError();
               } else {
-                handleLocationError(message, defaultPosition, false);
+                handleLocationError(message);
               }
             }
           );
@@ -91,8 +87,8 @@
       });
     }
 
-    function handleLocationError(message, position, useMarker) {
-      loadMap(position, useMarker);
+    function handleLocationError(message) {
+      loadMap();
       listenerClick();
       $ionicPopup.alert({
         title: 'Error',
@@ -100,14 +96,18 @@
       });
     }
 
-    function loadMap(position, useMarker) {
+    function loadMap(position) {
       // TODO use MapsService
-      var lat = position.coords.latitude;
-      var long = position.coords.longitude;
-      var latLng = new google.maps.LatLng(lat, long);
+      var lat = null;
+      var long = null;
+      if(position){
+        lat = position.coords.latitude;
+        long = position.coords.longitude;
+      }
+      mapVm.latLng = new google.maps.LatLng(lat, long);
 
       var mapOptions = {
-        center: latLng,
+        center: mapVm.latLng,
         zoom: 17,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: true,
@@ -119,13 +119,6 @@
 
       mapVm.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-      // Only when the Geolocation is active
-      if (useMarker) {
-        new google.maps.Marker({
-          position: latLng,
-          map: mapVm.map
-        });
-      }
       return mapVm.map;
     }
 
@@ -135,14 +128,7 @@
           marker.setMap(null);
         });
         mapVm.markers = [];
-        addMarker(e.latLng);
-      });
-
-      function addMarker(latLng){
-        var marker = new google.maps.Marker({
-          position: latLng,
-          map: mapVm.map
-        });
+        var marker = mapVm.addMarker(e.latLng);
         mapVm.markers.push(marker);
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({'latLng': marker.position}, function(results, status) {
@@ -153,7 +139,15 @@
         });
         mapVm.lat = marker.getPosition().lat();
         mapVm.lng = marker.getPosition().lng();
-      }
+      });
     }
+
+    function addMarker(latLng){
+      return new google.maps.Marker({
+        position: latLng,
+        map: mapVm.map
+      });
+    }
+
   }
 })();
