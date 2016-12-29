@@ -98,13 +98,14 @@
 
     function loadMap(position) {
       // TODO use MapsService
-      var lat = null;
-      var long = null;
-      if(position){
-        lat = position.coords.latitude;
-        long = position.coords.longitude;
+      if(!position){
+        mapVm.latLng = new google.maps.LatLng();
       }
-      mapVm.latLng = new google.maps.LatLng(lat, long);
+      else{
+        var lat = position.coords.latitude;
+        var long = position.coords.longitude;
+        mapVm.latLng = new google.maps.LatLng(lat, long);
+      }
 
       var mapOptions = {
         center: mapVm.latLng,
