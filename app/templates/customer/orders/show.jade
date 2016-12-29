@@ -10,7 +10,7 @@ ion-view(
           .col.col-50 {{ providerProfile.nombre_establecimiento || providerProfile.razon_social }}
           .col.col-25 {{ ::("order.providerProfile.quantity" |translate) }}
           .col.col-25 {{ ::("order.providerProfile.price" |translate) }}
-        div(ng-repeat='item in providerProfile.customer_order_items')
+        span(ng-repeat='item in providerProfile.customer_order_items')
           .item.row
             .col.col-50 {{ ::item.provider_item.titulo}}
             .col.col-25 {{ ::( ("order.providerProfile.item.cantidadPrefix" |translate) + item.cantidad) }}
