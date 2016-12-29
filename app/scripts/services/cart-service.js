@@ -43,7 +43,7 @@
       })
         .then(function success(response){
           return response.data;
-        }, ErrorHandlerService.handleCommonErrorGET);
+        }).catch(ErrorHandlerService.handleCommonErrorGET);
     }
 
     function checkout(cartData) {

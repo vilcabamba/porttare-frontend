@@ -22,15 +22,16 @@ slick-wrapper(settings="productVm.slickConfig")
 
 .list.list-inset.resource-detail-long-summary(
   ng-if="::productVm.product.observaciones"
+  ng-class="{'toggable':productVm.product.observaciones.length>200}"
 )
   p(
     ng-class="{'expanded': productVm.more}"
   ) {{ ::productVm.product.observaciones }}
 
-  .text-center(
+  .text-center.toggable-btn-wrapper(
     toggle-expand="productVm.more"
   )
-    button.button.button-clear.button-positive.button-letter-stretched.more-label(ng-class="{'visible':productVm.product.observaciones.length>200,'hidden':productVm.product.observaciones.length<200}")
+    button.button.button-clear.button-positive.button-letter-stretched.more-label
       | {{ (productVm.more) ? ("product.less"|translate) : ("product.more"|translate) }}
 
 .list.list-inset
