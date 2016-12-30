@@ -283,7 +283,7 @@
         closeModal();
 
         if( CartService.isCartEmpty(cartVm.cart) ){
-          $state.go(APP.successState)
+          $state.go(APP.successState);
         }
       });
     }
