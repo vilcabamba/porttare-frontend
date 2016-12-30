@@ -11,12 +11,13 @@
       templateUrl: 'templates/directives/maps/maps.html',
       scope: {
         lat: '=',
-        lng: '=',
+        lon: '=',
         defaultInCurrentGeolocation: '=',
         direccion:'=',
         ciudad:'='
       },
-      controller: [ '$ionicPopup',
+      controller: [ '$scope',
+                    '$ionicPopup',
                     '$ionicLoading',
                     'MapsService',
                     'GeocodingService',
@@ -29,7 +30,8 @@
     return directive;
   }
 
-  function mapsController($ionicPopup,
+  function mapsController($scope,
+                          $ionicPopup,
                           $ionicLoading,
                           MapsService,
                           GeocodingService,
@@ -56,7 +58,12 @@
                             .then(drawMakerFromGeoPosition)
                             .catch(couldntGetPosition);
         } else {
-
+          drawMakerFromGeoPosition({
+            coords: {
+              latitude: mapVm.lat,
+              longitude: mapVm.lon
+            }
+          });
         }
       });
     }
@@ -66,13 +73,15 @@
     }
 
     function drawMakerFromGeoPosition(position){
-      return new google.maps.LatLng(
+      var positionLatLng = new google.maps.LatLng(
         position.coords.latitude,
         position.coords.longitude
       );
+      return drawMarker(positionLatLng);
     }
 
     function drawMarker(positionLatLng){
+      mapVm.map.panTo(positionLatLng);
       mapVm.currentMarker = MapsService.displayMarker(
         mapVm.map,
         positionLatLng
@@ -86,84 +95,15 @@
       });
     }
 
-    function showGMap() {
-      $ionicLoading.show({
-        template: 'cargando...'
-      });
-      MapsService.loadGMaps().then(function(){
-        GeolocationService.getCurrentPosition()
-          .then(
-            function onSuccess(position) {
-              loadMap(position);
-              addMarker(mapVm.latLng);
-              listenerClick();
-              $ionicLoading.hide();
-            },
-            function onError(message) {
-              $ionicLoading.hide();
-              if (!message) {
-                showUnknownError();
-              } else {
-                handleLocationError(message);
-              }
-            }
-          );
-      });
-    }
-
-    function showGMapUpdate(){
-      $ionicLoading.show({
-        template: 'cargando...'
-      });
-      var position={
-        coords:{
-          latitude:mapVm.lat,
-          longitude:mapVm.lng
-        }
-      };
-      MapsService.loadGMaps().then(function(){
-        loadMap(position, true);
-        listenerClick();
-        $ionicLoading.hide();
-      });
-    }
-
-    function showUnknownError() {
-      $ionicPopup.alert({
-        title: 'Error',
-        template: 'Hubo un error desconocido al cargar el mapa.'
-      });
-    }
-
-    function handleLocationError(message) {
-      // loadMap();
-      // listenerClick();
-
-    }
-
-    function loadMap(position) {
-      // TODO use MapsService
-      if(!position){
-        mapVm.latLng = new google.maps.LatLng();
-      }
-      else{
-        var lat = position.coords.latitude;
-        var long = position.coords.longitude;
-        mapVm.latLng = new google.maps.LatLng(lat, long);
-      }
-
-
-
-      return mapVm.map;
-    }
-
     function listenForChange(){
       mapVm.map.addListener('click', function (changeEvent) {
         clearCurrentMarker();
         drawMarker(changeEvent.latLng);
 
-        mapVm.lat = mapVm.currentMarker.getPosition().lat();
-        mapVm.lng = mapVm.currentMarker.getPosition().lng();
+        $scope.$apply(function(){
+          mapVm.lat = mapVm.currentMarker.getPosition().lat();
+          mapVm.lon = mapVm.currentMarker.getPosition().lng();
+        });
 
         if (shouldGeocodeMarkerPosition) {
           GeocodingService
