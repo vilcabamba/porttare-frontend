@@ -8,39 +8,29 @@
   function PusherService($q, $auth, ENV) {
     var serviceLoaded = false,
         loadDeferred,
-        pusherClient,
-        Authenticator;
+        headersDeferred,
+        pusherClient;
 
     var service = {
       load: loadLibrary,
-      listen: listenChannel
-    };
-
-    Authenticator = {
-      outgoing: function (message, callback) {
-        var currentUser = $auth.user;
-        message['ext'] = {
-          authorizations: {
-            uid: currentUser.uid,
-            auth_token: currentUser.auth_token, // jshint ignore:line
-            client_id: currentUser.client_id // jshint ignore:line
-          }
-        };
-        callback(message);
-      }
+      listen: listenChannel,
+      unlisten: unlistenChannel
     };
 
     return service;
 
-    function listenChannel(channel, eventName, callback) {
-      var channel = pusherClient.subscribe(channel);
+    function listenChannel(channelName, eventName, callback) {
+      var channel = pusherClient.subscribe(channelName);
       channel.bind(eventName, callback);
+    }
+
+    function unlistenChannel(channelName) {
+      pusherClient.unsubscribe(channelName);
     }
 
     function loadLibrary() {
       if (serviceLoaded) {
-        console.log('serviceLoaded!');
-        return $q.resolve();
+        return updateAuthHeaders();
       } else {
         loadDeferred = $q.defer();
         appendPusherScript();
@@ -58,22 +48,35 @@
     }
 
     function pusherLoaded() {
-      var currentUser = $auth.user;
       serviceLoaded = true;
-      pusherClient = new Pusher(ENV.pusherKey, {
-        encrypted: true,
-        authEndpoint: ENV.apiHost + '/api/pusher_auth', // jshint ignore:line
-        auth: {
-          headers: {
-            'Accept': 'application/json',
-            'token-type': 'Bearer',
-            'uid': currentUser.uid,
-            'client': currentUser.client_id, // jshint ignore:line
-            'access-token': currentUser.auth_token // jshint ignore:line
-          }
-        }
+      newPusherClient();
+    }
+
+    function updateAuthHeaders() {
+      return getAuthHeaders().then(function (headers) {
+        pusherClient.config.auth = headers;
       });
-      loadDeferred.resolve();
+    }
+
+    function newPusherClient() {
+      getAuthHeaders().then(function (headers) {
+        pusherClient = new Pusher(ENV.pusherKey, {
+          encrypted: true,
+          auth: headers,
+          authEndpoint: ENV.apiHost + '/api/pusher_auth', // jshint ignore:line
+        });
+        loadDeferred.resolve();
+      });
+    }
+
+    function getAuthHeaders() {
+      headersDeferred = $q.defer();
+      $auth.validateUser().then(function () {
+        var authHeaders = $auth.retrieveData('auth_headers'); // jshint ignore:line
+        authHeaders.Accept = 'application/json';
+        headersDeferred.resolve({ headers: authHeaders });
+      });
+      return headersDeferred.promise;
     }
   }
 })();
