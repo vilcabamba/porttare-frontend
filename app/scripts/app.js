@@ -4,6 +4,7 @@
     'ionic',
     'porttare.fake-storage',
     'ng-token-auth',
+    'ngTouch',
     'porttare.config',
     'porttare.controllers',
     'porttare.services',
