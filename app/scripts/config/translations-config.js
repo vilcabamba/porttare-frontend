@@ -361,6 +361,7 @@
         placeOrder: 'Enviar pedido',
         observations: 'Observaciones',
         observacionesPlaceholder: 'Ej: sin cebollas',
+        addDeliveryAddress: 'Agregar dirección de envío',
         deliveryAddress: 'Dirección de entrega',
         deliveryMethod: 'Método de entrega',
         paymentMethod: 'Método de pago',

@@ -58,6 +58,14 @@ ion-modal-view
             span {{address.nombre}} ({{ address.direccion_uno }})
         show-error(array-messages='cartVm.messages.customer_address_id')
 
+        .item.item-input.item-input--no-borders.text-center(
+          ng-if="!cartVm.addresses.length > 0"
+        )
+          button.button.button-outline.button-small.button-energized(
+            type="button"
+            ng-click="cartVm.customerOrderDeliveryNewAddress()"
+          ) {{ ::("cart.addDeliveryAddress" | translate) }}
+
     ion-footer-bar.bar-stable.bar-footer--tall
       button.button.button-outline.button-energized(
         type="submit"

@@ -34,6 +34,7 @@
     cartVm.showCustomerOrderDelivery = showCustomerOrderDelivery;
     cartVm.submitCustomerOrderDelivery = submitCustomerOrderDelivery;
     cartVm.CustomerOrderDeliverySelect = CustomerOrderDeliverySelect;
+    cartVm.customerOrderDeliveryNewAddress = customerOrderDeliveryNewAddress;
     cartVm.customerOrderDeliverySelectPickup = customerOrderDeliverySelectPickup;
     cartVm.checkoutForm = {
       forma_de_pago: 'efectivo' // only method supported ATM
@@ -331,6 +332,10 @@
       selectItem(cartVm.addresses);
       cartVm.providerProfile.customer_order_delivery.customer_address_id = null;
       cartVm.providerProfile.customer_order_delivery.delivery_method = 'pickup';
+    }
+
+    function customerOrderDeliveryNewAddress(){
+      console.log('customerOrderDeliveryNewAddress');
     }
   }
 })();
