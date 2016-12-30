@@ -22,11 +22,6 @@
     function listenChannel(channelName, eventName, callback) {
       var channel = pusherClient.subscribe(channelName);
       channel.bind(eventName, callback);
-      channel.bind_all(function (eventName) {
-        if (eventName === 'pusher:subscription_succeeded') {
-          return $auth.validateUser();
-        }
-      });
     }
 
     function unlistenChannel(channelName) {

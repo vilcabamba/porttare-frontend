@@ -25,6 +25,7 @@
     "google": false,
     "airbrakeJs": false,
     "moment": false,
-    "File": false
+    "File": false,
+    "Pusher": false
   }
 }
