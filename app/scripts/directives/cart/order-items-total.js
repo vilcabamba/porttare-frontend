@@ -30,7 +30,7 @@
       if (newOrderItems) {
         calculateTotal();
       }
-    }, true)
+    }, true);
 
     function calculateTotal() {
       var orderItems = orderItemsTotalVM.orderItems;
