@@ -351,7 +351,8 @@
           name: 'Nombre',
           addAddressBtnText: 'Agregar Dirección',
           saveBtnText: 'Guardar Dirección',
-          updateBtnText: 'Actualizar Dirección'
+          updateBtnText: 'Actualizar Dirección',
+          noAddressesSaved: 'No has guardado ninguna dirección de envío'
         }
       },
       cart: {
