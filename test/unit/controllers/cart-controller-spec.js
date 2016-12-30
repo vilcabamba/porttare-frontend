@@ -20,7 +20,8 @@
       $translate,
       translateDeferred,
       billingAddresses,
-      deliveryAddresses;
+      deliveryAddresses,
+      CustomerOrderDeliveryService;
 
     beforeEach(module('porttare.controllers'));
     beforeEach(module('porttare.services', function ($provide) {
@@ -55,6 +56,9 @@
           closeModal: sinon.stub()
         };
       });
+      $provide.factory('CustomerOrderDeliveryService', function () {
+        return {};
+      });
       $provide.value('APP', {
         deliveryMethods: []
       });
@@ -83,7 +87,7 @@
 
     beforeEach(inject(function (_$q_, _$rootScope_, _$controller_,
       _CartService_, _$ionicPopup_,
-      _$state_, _ModalService_, _$ionicLoading_, _$auth_, _APP_, _$translate_) {
+      _$state_, _ModalService_, _$ionicLoading_, _$auth_, _APP_, _$translate_, _CustomerOrderDeliveryService_) {
 
       $scope = _$rootScope_.$new();
       $q = _$q_;
@@ -97,6 +101,7 @@
       $auth = _$auth_;
       $ionicPopup= _$ionicPopup_;
       $translate = _$translate_;
+      CustomerOrderDeliveryService = _CustomerOrderDeliveryService_;
 
       dependencies = {
         $scope: $scope,
@@ -106,6 +111,7 @@
         $state: $state,
         $ionicLoading: $ionicLoading,
         $auth: $auth,
+        CustomerOrderDeliveryService: CustomerOrderDeliveryService,
         deliveryAddresses: deliveryAddresses,
         billingAddresses: billingAddresses,
         APP: _APP_,
