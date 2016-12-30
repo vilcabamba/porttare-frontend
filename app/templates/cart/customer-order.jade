@@ -29,8 +29,13 @@
       | de
       | {{ (providerProfile.customer_order_delivery.deliver_at | formatDate:'MMMM - H:mm A')}}
       | -
-    span Departamento
-    button(ng-click='cartVm.showCustomerOrderDelivery(providerProfile)').button.button-clear.button-energized.button-small
+    order-delivery-nombre(
+      delivery="providerProfile.customer_order_delivery"
+      addresses="cartVm.addresses"
+    )
+    button(
+      ng-click='cartVm.showCustomerOrderDelivery(providerProfile)'
+    ).button.button-clear.button-energized.button-small
       | {{ ::("globals.edit" | translate) }}
 
   .provider-items-in-cart

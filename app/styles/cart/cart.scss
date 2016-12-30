@@ -94,12 +94,17 @@
   .delivery-time-wrapper {
     position: relative;
 
+    i, span {
+      cursor: pointer;
+    }
+
     .button {
       position: absolute;
       z-index: 2;
       right: 0;
       top: 7px;
       letter-spacing: -0.5px;
+      line-height: 36px;
     }
   }
 

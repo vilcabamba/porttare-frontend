@@ -162,7 +162,6 @@
         email: 'Email',
         confirmTitle: '¿Estás seguro?',
         dateDelivery: 'Fecha y hora de entrega',
-        dateSelect: 'Seleccionar fecha',
         dayNames: {
           mon: 'Lunes',
           tue: 'Martes',

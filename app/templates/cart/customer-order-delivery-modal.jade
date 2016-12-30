@@ -17,23 +17,27 @@ ion-modal-view
         label.item.item-input.item-stacked-label.item-input--no-borders
           span.input-label {{::("globals.dateDelivery"|translate)}}
         .delivery-time-wrapper
-            ion-datetime-picker.item.item-icon-left.datetime-picker(
-              date
-              time
-              am-pm
-              only-valid="{'after': 'today', 'inclusive': true}"
-              ng-model='cartVm.providerProfile.customer_order_delivery.deliver_at'
-            )
-              i.icon.ion-ios-calendar-outline
-              span.placeholder(ng-if="!cartVm.providerProfile.customer_order_delivery.deliver_at")
-                | {{ ::('globals.dateSelect' | translate) }}
-              span(ng-if="cartVm.providerProfile.customer_order_delivery.deliver_at")
-                | {{ cartVm.providerProfile.customer_order_delivery.deliver_at | formatDate }}
-              .button.button-clear.button-positive(
-                ng-if="cartVm.providerProfile.customer_order_delivery.deliver_at"
-              ) {{ ::('globals.edit' | translate) }}
-          .errors-wrapper
-            show-error(array-messages="cartVm.messages.deliver_at")
+          ion-datetime-picker.item.item-icon-left.datetime-picker(
+            date
+            time
+            am-pm
+            only-valid="{'after': 'today', 'inclusive': true}"
+            ng-model='cartVm.providerProfile.customer_order_delivery.deliver_at'
+          )
+            i.icon.ion-ios-calendar-outline
+            span.placeholder(ng-if="!cartVm.providerProfile.customer_order_delivery.deliver_at")
+              | {{ ::('cart.deliverNow' | translate) }}
+            span(ng-if="cartVm.providerProfile.customer_order_delivery.deliver_at")
+              | {{ cartVm.providerProfile.customer_order_delivery.deliver_at | formatDate }}
+            .button.button-clear.button-positive.button-small(
+              ng-if="!cartVm.providerProfile.customer_order_delivery.deliver_at"
+            ) {{ ::('globals.edit' | translate) }}
+          .button.button-clear.button-positive.button-small(
+            ng-if="cartVm.providerProfile.customer_order_delivery.deliver_at"
+            ng-click="cartVm.clearDeliveryTime()"
+          ) {{ ::('cart.deliverNow' | translate) }}
+        .errors-wrapper
+          show-error(array-messages="cartVm.messages.deliver_at")
 
         label.item.item-input.item-input--no-borders.item-stacked-label.select-list-label(
           ng-class="{'item-error': cartVm.messages.customer_address_id}"

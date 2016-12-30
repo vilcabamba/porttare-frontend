@@ -214,7 +214,7 @@
     }
 
     function clearDeliveryTime(){
-      cartVm.checkoutForm.deliver_at = null;
+      cartVm.providerProfile.customer_order_delivery.deliver_at = null;
     }
 
     function getDeliveryMethods(){
@@ -293,7 +293,7 @@
       cartVm.CustomerOrderDeliverySelect();
       ModalService.showModal({
         parentScope: $scope,
-        fromTemplateUrl: 'templates/cart/courier/customer-order-delivery.html',
+        fromTemplateUrl: 'templates/cart/customer-order-delivery-modal.html',
       });
     }
 
@@ -306,12 +306,7 @@
         $ionicLoading.hide().then(function(){
           $auth.user.customer_order = resp.customer_order; //jshint ignore:line
           init();
-          $ionicPopup.alert({
-            title: 'Éxito',
-            template: '{{::("courier.customerOrderDeliveryUpdate"|translate)}}'
-          }).then(function(){
-            closeModal();
-          });
+          closeModal();
         });
       }, function error(res) {
         $ionicLoading.hide();
