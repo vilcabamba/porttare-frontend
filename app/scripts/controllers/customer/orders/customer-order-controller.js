@@ -25,7 +25,6 @@
       getAddress();
       getBillingAddress();
       getSummary();
-      loadFaye();
 
       $scope.$on('$ionicView.enter', wsSubscribe);
       $scope.$on('$ionicView.leave', wsUnsubscribe);
