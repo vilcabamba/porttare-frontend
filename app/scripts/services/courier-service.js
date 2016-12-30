@@ -5,11 +5,12 @@
     .module('porttare.services')
     .factory('CourierService', CourierService);
 
-  function CourierService($http, $q, ENV) {
+  function CourierService($http, $q, ENV, ErrorHandlerService) {
 
     var service = {
       createNewCourier: createNewCourier,
-      shippingRequests: shippingRequests
+      shippingRequests: shippingRequests,
+      getObjectShippingRequests: getObjectShippingRequests
     };
 
     return service;
@@ -35,6 +36,17 @@
       }, function error(res) {
         return $q.reject(res.data);
       });
+    }
+
+    function getObjectShippingRequests(id){
+      return $http({
+        method: 'GET',
+        url: ENV.apiHost + '/api/courier/shipping_requests/'+id
+      }).then(function success(response) {
+        return response.data.shipping_request; // jshint ignore:line
+      }).catch(
+        ErrorHandlerService.handleCommonErrorGET
+      );
     }
 
   }

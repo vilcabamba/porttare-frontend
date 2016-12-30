@@ -12,7 +12,6 @@
         currentLocation;
     coVm.order = courierOrder;
     init();
-
     function init() {
       performing();
       getCurrentPosition();

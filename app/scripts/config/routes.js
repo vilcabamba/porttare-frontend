@@ -582,6 +582,7 @@ function routes($stateProvider, $urlRouterProvider) {
   })
   .state('courier.order', {
     url: '/orders/:id',
+    cache: false,
     params: {
       order: null
     },
@@ -591,11 +592,11 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'CourierOrderController',
         controllerAs: 'coVm',
         resolve: {
-          courierOrder: function ($stateParams) {
+          courierOrder: function ($stateParams, CourierService) {
             if ($stateParams.order) {
               return $stateParams.order;
             } else {
-              return $stateParams.id;
+              return CourierService.getObjectShippingRequests($stateParams.id);
             }
           }
         }
