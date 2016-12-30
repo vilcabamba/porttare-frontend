@@ -33,6 +33,8 @@
         margin-top: 5px;
         color: $grey-secondary;
         text-transform: uppercase;
+        max-height: 40px;
+        overflow: hidden;
       }
       .customer-item--value {
         font-size: 13px;
