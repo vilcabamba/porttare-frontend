@@ -43,8 +43,6 @@
 
     init();
 
-    //  ? showGMap() : showGMapUpdate();// jshint ignore:line
-
     function init(){
       shouldGeocodeMarkerPosition = angular.element.isEmptyObject(
         angular.element.trim(mapVm.direccion)
