@@ -175,8 +175,10 @@
     function validateOrderCreated(order) {
       if (!$auth.user.customer_order) { //jshint ignore:line
         $scope.$emit('order-created', order);
+
       } else {
         $auth.user.customer_order = order//jshint ignore:line
+        $scope.$emit('update-number',order);
       }
     }
 

@@ -9,7 +9,7 @@ ion-view(
     button.cart-main-button(
       ui-sref='app.cart.index'
       ng-if='menuVm.existCartActive'
-    )
+    ) {{menuVm.numberItems}}
       i.ion-ios-cart-outline
 
   ion-content.category-page(
