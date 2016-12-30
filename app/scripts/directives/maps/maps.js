@@ -18,8 +18,10 @@
       },
       controller: [ '$ionicPopup',
                     '$ionicLoading',
+                    'MapsService',
+                    'GeocodingService',
                     'GeolocationService',
-                    'MapsService', mapsController],
+                    mapsController],
       controllerAs: 'mapVm',
       bindToController: true
     };
@@ -29,14 +31,60 @@
 
   function mapsController($ionicPopup,
                           $ionicLoading,
-                          GeolocationService,
-                          MapsService)
+                          MapsService,
+                          GeocodingService,
+                          GeolocationService)
   {
 
-    var mapVm = this;// jshint ignore:line
-    mapVm.addMarker = addMarker;
+    var mapVm = this, // jshint ignore:line
+        shouldGeocodeMarkerPosition;
 
-    mapVm.defaultInCurrentGeolocation ? showGMap() : showGMapUpdate();// jshint ignore:line
+    init();
+
+    //  ? showGMap() : showGMapUpdate();// jshint ignore:line
+
+    function init(){
+      shouldGeocodeMarkerPosition = angular.element.isEmptyObject(
+        angular.element.trim(mapVm.direccion)
+      );
+
+      MapsService.loadGMaps().then(function () {
+        drawMap();
+        listenForChange();
+        if (mapVm.defaultInCurrentGeolocation) {
+          GeolocationService.getCurrentPosition()
+                            .then(drawMakerFromGeoPosition)
+                            .catch(couldntGetPosition);
+        } else {
+
+        }
+      });
+    }
+
+    function drawMap(){
+      mapVm.map = MapsService.renderMap('map-directive');
+    }
+
+    function drawMakerFromGeoPosition(position){
+      return new google.maps.LatLng(
+        position.coords.latitude,
+        position.coords.longitude
+      );
+    }
+
+    function drawMarker(positionLatLng){
+      mapVm.currentMarker = MapsService.displayMarker(
+        mapVm.map,
+        positionLatLng
+      );
+    }
+
+    function couldntGetPosition(message) {
+      $ionicPopup.alert({
+        title: 'Error',
+        template: message
+      });
+    }
 
     function showGMap() {
       $ionicLoading.show({
@@ -88,12 +136,9 @@
     }
 
     function handleLocationError(message) {
-      loadMap();
-      listenerClick();
-      $ionicPopup.alert({
-        title: 'Error',
-        template: message
-      });
+      // loadMap();
+      // listenerClick();
+
     }
 
     function loadMap(position) {
@@ -107,48 +152,35 @@
         mapVm.latLng = new google.maps.LatLng(lat, long);
       }
 
-      var mapOptions = {
-        center: mapVm.latLng,
-        zoom: 17,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControl: true,
-        mapTypeControlOptions: {
-          style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
-          position: google.maps.ControlPosition.LEFT_BOTTOM
-        }
-      };
 
-      mapVm.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
       return mapVm.map;
     }
 
-    function listenerClick(){
-      mapVm.map.addListener('click', function (e) {
-        mapVm.markers.forEach(function (marker) {
-          marker.setMap(null);
-        });
-        mapVm.markers = [];
-        var marker = mapVm.addMarker(e.latLng);
-        mapVm.markers.push(marker);
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({'latLng': marker.position}, function(results, status) {
-          if(status === google.maps.GeocoderStatus.OK){
-            mapVm.direccion = results[0].formatted_address;// jshint ignore:line
-            mapVm.ciudad = results[1].formatted_address;// jshint ignore:line
-          }
-        });
-        mapVm.lat = marker.getPosition().lat();
-        mapVm.lng = marker.getPosition().lng();
+    function listenForChange(){
+      mapVm.map.addListener('click', function (changeEvent) {
+        clearCurrentMarker();
+        drawMarker(changeEvent.latLng);
+
+        mapVm.lat = mapVm.currentMarker.getPosition().lat();
+        mapVm.lng = mapVm.currentMarker.getPosition().lng();
+
+        if (shouldGeocodeMarkerPosition) {
+          GeocodingService
+            .geocode({'latLng': mapVm.currentMarker.getPosition()})
+            .then(function(results){
+              mapVm.direccion = results[0].formatted_address; // jshint ignore:line
+              mapVm.ciudad = results[1].formatted_address; // jshint ignore:line
+            });
+        }
       });
     }
 
-    function addMarker(latLng){
-      return new google.maps.Marker({
-        position: latLng,
-        map: mapVm.map
-      });
+    function clearCurrentMarker(){
+      if (mapVm.currentMarker) {
+        mapVm.currentMarker.setMap(null);
+        mapVm.currentMarker = null;
+      }
     }
-
   }
 })();

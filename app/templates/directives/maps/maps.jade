@@ -1,6 +1,12 @@
 .map-view
-  places-search-box(ng-if="mapVm.map" map="mapVm.map" markers="mapVm.markers" data-tap-disabled="true")
+  //- not necessary in here
+    places-search-box(
+      ng-if="mapVm.map"
+      map="mapVm.map"
+      markers="mapVm.markers"
+      data-tap-disabled="true"
+    )
   div(
-    id="map"
+    id="map-directive"
     data-tap-disabled="true"
   )

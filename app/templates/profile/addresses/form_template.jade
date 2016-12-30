@@ -10,7 +10,8 @@ form(
       legend {{::pfaVm.inUpdateMode ? ("profile.addresses.formLegendUpdate"|translate) : ("profile.addresses.formLegendNew"|translate)}}
 
       maps(
-        lat="pfaVm.addressFormData.latitud" lng="pfaVm.addressFormData.longitud"
+        lat="pfaVm.addressFormData.lat"
+        lng="pfaVm.addressFormData.lon"
         default-in-current-geolocation="pfaVm.defaultInCurrentGeolocation"
         direccion="pfaVm.addressFormData.direccion_uno" ciudad="pfaVm.addressFormData.ciudad"
       )

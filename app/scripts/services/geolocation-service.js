@@ -25,7 +25,8 @@
         .then(function success(res){
           return res;
         }, function error(err) {
-          var message = null;
+          // TODO translate me?
+          var message = 'Error al obtener la ubicación.';
           switch (err.code) {
             case 1:
               message = 'Denegada la peticion de Geolocalización.';
@@ -36,9 +37,6 @@
             case 3:
               message = 'El tiempo de petición ha expirado.';
               break;
-          }
-          if (!err && !err.code){
-            return;
           }
           return $q.reject(message);
         });
