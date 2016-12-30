@@ -15,7 +15,7 @@ form(
         default-in-current-geolocation="pfaVm.defaultInCurrentGeolocation"
         direccion="pfaVm.addressFormData.direccion_uno" ciudad="pfaVm.addressFormData.ciudad"
       )
-      show-error(array-messages='pfaVm.messages.coords')
+      show-error(array-messages='pfaVm.messages.lat || pfaVm.messages.lon')
 
       label.item.item-input.item-stacked-label(
         ng-class="{'item-error': pfaVm.messages.nombre}"
