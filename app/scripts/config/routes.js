@@ -383,6 +383,21 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   })
+  .state('provider.orders', {
+    url: '/ordenes',
+    abstract: true
+  })
+  .state('provider.orders.index', {
+    url: '/',
+    cache: false,
+    views: {
+      'menuContent@provider': {
+        templateUrl: 'templates/orders/index.html',
+        controller: 'ProviderOrdersController',
+        controllerAs: 'poVm',
+      }
+    }
+  })
   .state('app.courier', {
     url: '/courier',
     abstract: true

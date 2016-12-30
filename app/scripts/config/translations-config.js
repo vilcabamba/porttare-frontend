@@ -180,7 +180,8 @@
           sat: 'Sáb',
           sun: 'Dom'
         },
-        accept:'Aceptar'
+        accept:'Aceptar',
+        notifications:'Notificaciones'
       },
       item: {
         item: 'Producto',
@@ -382,7 +383,13 @@
       },
       orders: {
         collectionTitle: 'Orden #',
-        total: 'Total'
+        total: 'Total',
+        titleFormOrders: 'Revisa todos los pedidos que los clientes hacen sobre tus productos.',
+        inProcess: 'En gestión',
+        completed: 'Completados',
+        have: 'Tienes',
+        ordersPendings: 'Pedidos pendientes',
+        ordersEmpty: 'Actualmente no existen pedidos a visualizar'
       },
       order: {
         providerProfile: {
