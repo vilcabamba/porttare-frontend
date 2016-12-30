@@ -41,6 +41,8 @@
           return address.id === customerAddressId;
         });
         orderDeliveryNombreVM.deliveryNombre = currentAddress.nombre;
+      } else {
+        orderDeliveryNombreVM.deliveryNombre = '';
       }
     }
 

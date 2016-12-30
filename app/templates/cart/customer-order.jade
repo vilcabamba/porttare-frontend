@@ -23,6 +23,9 @@
     )
       | {{ ::("cart.pickupPlaceholder" | translate) }}
     span(
+      ng-if="!providerProfile.customer_order_delivery.deliver_at"
+    ) {{ ::("cart.pickupNow" | translate) }}
+    span(
       ng-if="providerProfile.customer_order_delivery.deliver_at"
     )
       | {{ (providerProfile.customer_order_delivery.deliver_at | formatDate:'dddd D') }}

@@ -369,6 +369,7 @@
         cantidadSingular: 'unidad',
         title: 'Carrito',
         deliverNow: 'Entregar inmediatamente',
+        pickupNow: 'Inmediatamente',
         shippingCosts: '(costos de envío)',
         deliveryPlaceholder: 'Entrega:',
         pickupPlaceholder: 'Recoger:',

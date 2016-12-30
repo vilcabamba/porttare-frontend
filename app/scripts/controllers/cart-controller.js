@@ -34,6 +34,7 @@
     cartVm.showCustomerOrderDelivery = showCustomerOrderDelivery;
     cartVm.submitCustomerOrderDelivery = submitCustomerOrderDelivery;
     cartVm.CustomerOrderDeliverySelect = CustomerOrderDeliverySelect;
+    cartVm.customerOrderDeliverySelectPickup = customerOrderDeliverySelectPickup;
     cartVm.checkoutForm = {
       forma_de_pago: 'efectivo' // only method supported ATM
     };
@@ -176,19 +177,22 @@
 
     function assignBillingAddress(billingAddress) {
       cartVm.checkoutForm.customer_billing_address_id = billingAddress.id;
-      selectItem(billingAddress, cartVm.billingAddresses);
+      selectItem(cartVm.billingAddresses, billingAddress);
     }
 
     function assignAddress(address) {
+      cartVm.providerProfile.customer_order_delivery.delivery_method = 'shipping'; // jshint ignore:line
       cartVm.providerProfile.customer_order_delivery.customer_address_id = address.id;
-      selectItem(address, cartVm.addresses);
+      selectItem(cartVm.addresses, address);
     }
 
-    function selectItem(item, items) {
+    function selectItem(items, item) {
       angular.forEach(items, function (elem) {
         elem.selected = false;
       });
-      item.selected = true;
+      if (item) {
+        item.selected = true;
+      }
     }
 
     function calculateTotal() {
@@ -279,7 +283,7 @@
     function CustomerOrderDeliverySelect(){
       angular.forEach(cartVm.addresses, function (elem) {
         if (elem.id==cartVm.providerProfile.customer_order_delivery.customer_address_id){ //jshint ignore:line
-          selectItem(elem, cartVm.addresses);
+          selectItem(cartVm.addresses, elem);
           return;
         }
       });
@@ -301,8 +305,9 @@
       $ionicLoading.show({
         template: '{{::("globals.updating"|translate)}}'
       });
-      CustomerOrderDeliveryService.updateCustomerOrderDelivery(cartVm.providerProfile.customer_order_delivery) //jshint ignore:line
-      .then(function success(resp){
+      CustomerOrderDeliveryService.updateCustomerOrderDelivery(
+        cartVm.providerProfile.customer_order_delivery //jshint ignore:line
+      ).then(function success(resp){
         $ionicLoading.hide().then(function(){
           $auth.user.customer_order = resp.customer_order; //jshint ignore:line
           init();
@@ -322,5 +327,10 @@
       });
     }
 
+    function customerOrderDeliverySelectPickup(){
+      selectItem(cartVm.addresses);
+      cartVm.providerProfile.customer_order_delivery.customer_address_id = null;
+      cartVm.providerProfile.customer_order_delivery.delivery_method = 'pickup';
+    }
   }
 })();

@@ -45,6 +45,12 @@ ion-modal-view
           span.input-label {{::("courier.deliveryAddresses"|translate)}}
         ion-list
           ion-item.select-list-item(
+            ng-click="cartVm.customerOrderDeliverySelectPickup()"
+            ng-class="{'selected': cartVm.providerProfile.customer_order_delivery.delivery_method === 'pickup'}"
+          )
+            span {{ ::("cart.deliveryMethods.pickup" | translate) }}
+        ion-list
+          ion-item.select-list-item(
               ng-repeat="address in cartVm.addresses track by $index"
               ng-click="cartVm.assignAddress(address)"
               ng-class="{'selected': address.selected}"
