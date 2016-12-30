@@ -11,7 +11,8 @@
       getCart: getCart,
       checkout : checkout,
       updateOrderItem: updateOrderItem,
-      removeOrderItem:removeOrderItem
+      removeOrderItem:removeOrderItem,
+      isCartEmpty: isCartEmpty
     };
 
     return service;
@@ -70,6 +71,10 @@
         }, function error(response) {
           return $q.reject(response.data);
         });
+    }
+
+    function isCartEmpty(customerOrder){
+      return !customerOrder || !customerOrder.provider_profiles || customerOrder.provider_profiles.length == 0; //jshint ignore:line
     }
   }
 })();

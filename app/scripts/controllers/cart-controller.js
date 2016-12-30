@@ -281,6 +281,10 @@
         cartVm.total= calculateTotal();
         cartVm.slickFlag = true;
         closeModal();
+
+        if( CartService.isCartEmpty(cartVm.cart) ){
+          $state.go(APP.successState)
+        }
       });
     }
 
