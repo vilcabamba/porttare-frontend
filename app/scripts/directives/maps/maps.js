@@ -18,7 +18,6 @@
       },
       controller: [ '$scope',
                     '$ionicPopup',
-                    '$ionicLoading',
                     'MapsService',
                     'GeocodingService',
                     'GeolocationService',
@@ -32,12 +31,9 @@
 
   function mapsController($scope,
                           $ionicPopup,
-                          $ionicLoading,
                           MapsService,
                           GeocodingService,
-                          GeolocationService)
-  {
-
+                          GeolocationService) {
     var mapVm = this, // jshint ignore:line
         shouldGeocodeMarkerPosition;
 
