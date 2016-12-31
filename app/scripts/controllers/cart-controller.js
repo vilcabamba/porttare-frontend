@@ -151,9 +151,7 @@
       });
       CartService.checkout(cartVm.checkoutForm)
         .then(function success(response) {
-          $ionicHistory.nextViewOptions({
-            historyRoot: true
-          });
+          nextViewIsRoot();
           $state.go('app.customerorders.show', {
             id: response.customer_order.id,
             customerOrder: response.customer_order
@@ -281,6 +279,11 @@
         cartVm.total= calculateTotal();
         cartVm.slickFlag = true;
         closeModal();
+
+        if( CartService.isCartEmpty(cartVm.cart) ){
+          nextViewIsRoot();
+          $state.go(APP.successState);
+        }
       });
     }
 
@@ -348,6 +351,12 @@
           parentScope: $scope,
           fromTemplateUrl: 'templates/profile/addresses/modal-form.html'
         });
+      });
+    }
+
+    function nextViewIsRoot(){
+      $ionicHistory.nextViewOptions({
+        historyRoot: true
       });
     }
   }
