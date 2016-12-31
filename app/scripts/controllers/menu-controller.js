@@ -5,11 +5,7 @@
     .module('porttare.controllers')
     .controller('MenuController', MenuController);
 
-  function MenuController($auth,
-                          $scope,
-                          categories,
-                          CategoriesService,
-                          ErrorHandlerService) {
+  function MenuController(categories, $scope, CategoriesService, ErrorHandlerService) {
     var vmMenu = this;
     vmMenu.categories = categories.provider_categories;
 

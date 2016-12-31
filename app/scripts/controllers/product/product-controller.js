@@ -178,7 +178,7 @@
 
       } else {
         $auth.user.customer_order = order//jshint ignore:line
-        $scope.$emit('update-number',order);
+        $scope.$emit('update-number');
       }
     }
 

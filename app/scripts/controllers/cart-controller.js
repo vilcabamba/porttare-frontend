@@ -277,7 +277,8 @@
         cartVm.cart=resp.data.customer_order;
         cartVm.total= calculateTotal();
         cartVm.slickFlag = true;
-        $scope.$emit('update-number',resp.data.customer_order);
+        $auth.user.customer_order =resp.data.customer_order; //jshint ignore:line
+        $scope.$emit('update-number');
         closeModal();
         if( CartService.isCartEmpty(cartVm.cart) ){
           nextViewIsRoot();

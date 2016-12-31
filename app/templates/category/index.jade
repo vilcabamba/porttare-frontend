@@ -4,13 +4,8 @@ ion-view(
   ion-nav-title
     .alt-logo
 
-  //- cart
   ion-nav-buttons(side="right")
-    button.cart-main-button(
-      ui-sref='app.cart.index'
-      ng-if='menuVm.existCartActive'
-    ) {{menuVm.numberItems}}
-      i.ion-ios-cart-outline
+    cart-button
 
   ion-content
     .grid-parent

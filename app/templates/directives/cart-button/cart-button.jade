@@ -1,0 +1,5 @@
+button.cart-main-button(
+  ui-sref='app.cart.index'
+  ng-if='cartButtonVM.existCartActive'
+) {{cartButtonVM.numberItems}}
+  i.ion-ios-cart-outline
