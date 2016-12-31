@@ -11,6 +11,7 @@
       CartService,
       ModalService,
       $ionicLoading,
+      $ionicHistory,
       deferCheckout,
       deferAddress,
       deferBilling,
@@ -83,11 +84,16 @@
         translateDeferred = $q.defer();
         return sinon.stub().returns(translateDeferred.promise);
       });
+      $provide.factory('$ionicHistory', function(){
+        return {
+          nextViewOptions: sinon.stub()
+        };
+      });
     }));
 
     beforeEach(inject(function (_$q_, _$rootScope_, _$controller_,
       _CartService_, _$ionicPopup_,
-      _$state_, _ModalService_, _$ionicLoading_, _$auth_, _APP_, _$translate_, _CustomerOrderDeliveryService_) {
+      _$state_, _ModalService_, _$ionicLoading_, _$ionicHistory_, _$auth_, _APP_, _$translate_, _CustomerOrderDeliveryService_) {
 
       $scope = _$rootScope_.$new();
       $q = _$q_;
@@ -102,6 +108,7 @@
       $ionicPopup= _$ionicPopup_;
       $translate = _$translate_;
       CustomerOrderDeliveryService = _CustomerOrderDeliveryService_;
+      $ionicHistory = _$ionicHistory_;
 
       dependencies = {
         $scope: $scope,
@@ -110,6 +117,7 @@
         $ionicPopup: $ionicPopup,
         $state: $state,
         $ionicLoading: $ionicLoading,
+        $ionicHistory: $ionicHistory,
         $auth: $auth,
         CustomerOrderDeliveryService: CustomerOrderDeliveryService,
         deliveryAddresses: deliveryAddresses,
@@ -130,13 +138,13 @@
       it('Should run checkout', function () {
         sinon.spy($scope, '$emit');
         ctrl.runCheckout();
-        deferCheckout.resolve();
+        deferCheckout.resolve({customer_order: {id: null}});
         $scope.$digest();
         sinon.assert.calledOnce($state.go);
       });
       it('Should run checkout', function () {
         ctrl.runCheckout();
-        deferCheckout.resolve();
+        deferCheckout.resolve({customer_order: {id: null}});
         $scope.$digest();
         deferStateGo.resolve();
         $scope.$digest();
@@ -146,7 +154,7 @@
       it('Should emit a broadcast', function () {
         sinon.spy($scope, '$emit');
         ctrl.runCheckout();
-        deferCheckout.resolve();
+        deferCheckout.resolve({customer_order: {id: null}});
         $scope.$digest();
         deferStateGo.resolve();
         $scope.$digest();
