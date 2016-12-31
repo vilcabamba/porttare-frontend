@@ -392,7 +392,7 @@ function routes($stateProvider, $urlRouterProvider) {
     cache: false,
     views: {
       'menuContent@provider': {
-        templateUrl: 'templates/orders/index.html',
+        templateUrl: 'templates/providers/orders/index.html',
         controller: 'ProviderOrdersController',
         controllerAs: 'poVm',
       }

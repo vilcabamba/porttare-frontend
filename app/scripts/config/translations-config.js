@@ -211,7 +211,7 @@
         valorMedida: 'Valor de medida',
         stockLabel: 'Producto en stock',
         productDetails:'Detalles del producto',
-        cantidad: 'Cantidad',
+        cantidad: 'Cantidad máxima',
         cantidadPrefix: 'x',
         currency: '$ ',
         seeAsCustomer: 'Ver como cliente',

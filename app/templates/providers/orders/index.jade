@@ -35,10 +35,10 @@ ion-view(
             i.icon.ion-ios-clock-outline
               span {{order.submitted_at|formatDate: 'HH:mm'}}
         .row
-          .col Sebastian López
+          .col {{ order.customer_billing_address.razon_social }}
         .row
-          .col {{order.submitted_at|formatDate: 'DD/MM/YYYY'}}
-          .col.text-right Asignado a: Sebastian L.
+          .col {{ order.submitted_at|formatDate: 'DD/MM/YYYY' }}
+          .col.text-right Asignado a: -
 
       row(ng-if="!poVm.customerOrders.length")
         .col.text-center{{::("orders.ordersEmpty"| translate)}}
