@@ -83,7 +83,7 @@ ion-view(
           .col.col-100 {{ ::( customerOrderVm.customerOrder.forma_de_pago ) }}
         .row.item(ng-if="customerOrderVm.customerBillingAddress.direccion")
           .col.col-100
-            {{ ::( customerOrderVm.customerBillingAddress.direccion ) }}
+            | {{ ::( customerOrderVm.customerBillingAddress.direccion ) }}
         .row.item(ng-if="customerOrderVm.customerBillingAddress.ciudad")
           .col.col-100
-            {{ ::( customerOrderVm.customerBillingAddress.ciudad ) }}
+            | {{ ::( customerOrderVm.customerBillingAddress.ciudad ) }}

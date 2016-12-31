@@ -5,7 +5,7 @@
     .module('porttare.services')
     .factory('GeolocationService', GeolocationService);
 
-  function GeolocationService($cordovaGeolocation) {
+  function GeolocationService($cordovaGeolocation, $q) {
 
     var posOptions = {
       enableHighAccuracy: true,
@@ -21,7 +21,25 @@
 
     function getCurrentPosition() {
       return $cordovaGeolocation
-        .getCurrentPosition(posOptions);
+        .getCurrentPosition(posOptions)
+        .then(function success(res){
+          return res;
+        }, function error(err) {
+          // TODO translate me?
+          var message = 'Error al obtener la ubicación.';
+          switch (err.code) {
+            case 1:
+              message = 'Denegada la peticion de Geolocalización.';
+              break;
+            case 2:
+              message = 'No se ha encontrado la ubicación especificada.';
+              break;
+            case 3:
+              message = 'El tiempo de petición ha expirado.';
+              break;
+          }
+          return $q.reject(message);
+        });
     }
 
   }

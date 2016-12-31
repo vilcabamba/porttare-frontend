@@ -9,6 +9,14 @@ form(
     .list.list-inset.fields-wrapper
       legend {{::pfaVm.inUpdateMode ? ("profile.addresses.formLegendUpdate"|translate) : ("profile.addresses.formLegendNew"|translate)}}
 
+      maps(
+        lat="pfaVm.addressFormData.lat"
+        lon="pfaVm.addressFormData.lon"
+        default-in-current-geolocation="pfaVm.defaultInCurrentGeolocation"
+        direccion="pfaVm.addressFormData.direccion_uno" ciudad="pfaVm.addressFormData.ciudad"
+      )
+      show-error(array-messages='pfaVm.messages.lat || pfaVm.messages.lon')
+
       label.item.item-input.item-stacked-label(
         ng-class="{'item-error': pfaVm.messages.nombre}"
       )
@@ -26,7 +34,7 @@ form(
         span.input-label {{::("profile.addresses.city"|translate)}}
         input(
           type='text'
-          ng-model='pfaVm.addressFormData.ciudad'
+          ng-model='::pfaVm.addressFormData.ciudad'
         )
       .errors-wrapper
         show-error(array-messages='pfaVm.messages.ciudad')
@@ -59,7 +67,7 @@ form(
         span.input-label {{::("profile.addresses.addressOne"|translate)}}
         input(
           type='text'
-          ng-model='pfaVm.addressFormData.direccion_uno'
+          ng-model='::pfaVm.addressFormData.direccion_uno'
         )
       .errors-wrapper
         show-error(array-messages='pfaVm.messages.direccion_uno')
