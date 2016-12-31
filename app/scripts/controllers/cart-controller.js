@@ -10,6 +10,7 @@
                           $state,
                           $translate,
                           $ionicPopup,
+                          $ionicHistory,
                           $ionicLoading,
                           APP,
                           billingAddresses,
@@ -17,7 +18,8 @@
                           ModalService,
                           BillingAddressesService,
                           ProfileAddressesService,
-                          CartService) {
+                          CartService,
+                          CustomerOrderDeliveryService) {
     var cartVm = this;
     cartVm.total = 0;
     cartVm.showCheckoutModal = showCheckoutModal;
@@ -30,6 +32,11 @@
     cartVm.clearDeliveryTime = clearDeliveryTime;
     cartVm.updateOrderItem = updateOrderItem;
     cartVm.removeOrderItem = removeOrderItem;
+    cartVm.showCustomerOrderDelivery = showCustomerOrderDelivery;
+    cartVm.submitCustomerOrderDelivery = submitCustomerOrderDelivery;
+    cartVm.CustomerOrderDeliverySelect = CustomerOrderDeliverySelect;
+    cartVm.customerOrderDeliveryNewAddress = customerOrderDeliveryNewAddress;
+    cartVm.customerOrderDeliverySelectPickup = customerOrderDeliverySelectPickup;
     cartVm.checkoutForm = {
       forma_de_pago: 'efectivo' // only method supported ATM
     };
@@ -89,41 +96,39 @@
 
     function saveNewAddress(){
       if ($scope.pfaVm.addressForm.$valid) {
-        ProfileAddressesService.createAddresses($scope.pfaVm.addressFormData).then(function(response){
+        ProfileAddressesService.createAddresses(
+          $scope.pfaVm.addressFormData
+        ).then(function(response){
           cartVm.addresses.push(response.customer_address); //jshint ignore:line
-          closeModal().then(showCheckoutModal);
+          closeModal();
+          refreshCart(); // api will gracefully set addresses
         }, function(error){
           $scope.pfaVm.messages = error.errors;
         });
       }
     }
 
+    function refreshCart() {
+      CartService.getCart().then(function (response){
+        cartVm.cart = response.customer_order; // jshint ignore:line
+      });
+    }
+
     function showCheckoutModal() {
-      if (cartVm.addresses.length === 0) {
-        $scope.pfaVm = {
+      if (cartVm.billingAddresses.length === 0) {
+        $scope.billingAddressesVm = {
           closeModal: closeModal,
-          processAddress: saveNewAddress
+          submitModal: saveNewBillingAddress
         };
         ModalService.showModal({
           parentScope: $scope,
-          fromTemplateUrl: 'templates/profile/addresses/modal-form.html'
+          fromTemplateUrl: 'templates/billing-addresses/new-edit.html'
         });
-      }else{
-        if (cartVm.billingAddresses.length === 0) {
-          $scope.billingAddressesVm = {
-            closeModal: closeModal,
-            submitModal: saveNewBillingAddress
-          };
-          ModalService.showModal({
-            parentScope: $scope,
-            fromTemplateUrl: 'templates/billing-addresses/new-edit.html'
-          });
-        }else{
-          ModalService.showModal({
-            parentScope: $scope,
-            fromTemplateUrl: 'templates/cart/checkout.html'
-          });
-        }
+      } else {
+        ModalService.showModal({
+          parentScope: $scope,
+          fromTemplateUrl: 'templates/cart/checkout.html'
+        });
       }
     }
     function closeModal() {
@@ -145,10 +150,14 @@
         template: '{{::("globals.loading"|translate)}}'
       });
       CartService.checkout(cartVm.checkoutForm)
-        .then(function success() {
-          var categoryRoute = 'app.categories.index';
-          $state.go(categoryRoute)
-            .then(function () {
+        .then(function success(response) {
+          $ionicHistory.nextViewOptions({
+            historyRoot: true
+          });
+          $state.go('app.customerorders.show', {
+            id: response.customer_order.id,
+            customerOrder: response.customer_order
+          }).then(function () {
               $auth.user.customer_order = null;
               $ionicPopup.alert({
                 title: 'Alerta',
@@ -172,19 +181,22 @@
 
     function assignBillingAddress(billingAddress) {
       cartVm.checkoutForm.customer_billing_address_id = billingAddress.id;
-      selectItem(billingAddress, cartVm.billingAddresses);
+      selectItem(cartVm.billingAddresses, billingAddress);
     }
 
     function assignAddress(address) {
-      cartVm.checkoutForm.customer_address_id = address.id;
-      selectItem(address, cartVm.addresses);
+      cartVm.providerProfile.customer_order_delivery.delivery_method = 'shipping'; // jshint ignore:line
+      cartVm.providerProfile.customer_order_delivery.customer_address_id = address.id;
+      selectItem(cartVm.addresses, address);
     }
 
-    function selectItem(item, items) {
+    function selectItem(items, item) {
       angular.forEach(items, function (elem) {
         elem.selected = false;
       });
-      item.selected = true;
+      if (item) {
+        item.selected = true;
+      }
     }
 
     function calculateTotal() {
@@ -210,7 +222,7 @@
     }
 
     function clearDeliveryTime(){
-      cartVm.checkoutForm.deliver_at = null;
+      cartVm.providerProfile.customer_order_delivery.deliver_at = null;
     }
 
     function getDeliveryMethods(){
@@ -269,6 +281,73 @@
         cartVm.total= calculateTotal();
         cartVm.slickFlag = true;
         closeModal();
+      });
+    }
+
+    function CustomerOrderDeliverySelect(){
+      angular.forEach(cartVm.addresses, function (elem) {
+        if (elem.id==cartVm.providerProfile.customer_order_delivery.customer_address_id){ //jshint ignore:line
+          selectItem(cartVm.addresses, elem);
+          return;
+        }
+      });
+    }
+
+    function showCustomerOrderDelivery(providerProfile){
+      cartVm.providerProfile = angular.copy(providerProfile);
+      if (providerProfile.customer_order_delivery.deliver_at){ //jshint ignore:line
+        cartVm.providerProfile.customer_order_delivery.deliver_at = new Date(providerProfile.customer_order_delivery.deliver_at); //jshint ignore:line
+      }
+      cartVm.CustomerOrderDeliverySelect();
+      ModalService.showModal({
+        parentScope: $scope,
+        backdropClickToClose: true,
+        fromTemplateUrl: 'templates/cart/customer-order-delivery-modal.html',
+      });
+    }
+
+    function submitCustomerOrderDelivery() {
+      $ionicLoading.show({
+        template: '{{::("globals.updating"|translate)}}'
+      });
+      CustomerOrderDeliveryService.updateCustomerOrderDelivery(
+        cartVm.providerProfile.customer_order_delivery //jshint ignore:line
+      ).then(function success(resp){
+        $ionicLoading.hide().then(function(){
+          $auth.user.customer_order = resp.customer_order; //jshint ignore:line
+          init();
+          closeModal();
+        });
+      }, function error(res) {
+        $ionicLoading.hide();
+        if (res && res.data.errors ) {
+          cartVm.messages = res.data.errors;
+        } else {
+          var message = '{{::("globals.pleaseTryAgain"|translate)}}';
+          $ionicPopup.alert({
+            title: 'Error',
+            template: message
+          });
+        }
+      });
+    }
+
+    function customerOrderDeliverySelectPickup(){
+      selectItem(cartVm.addresses);
+      cartVm.providerProfile.customer_order_delivery.customer_address_id = null;
+      cartVm.providerProfile.customer_order_delivery.delivery_method = 'pickup';
+    }
+
+    function customerOrderDeliveryNewAddress(){
+      closeModal().then(function(){
+        $scope.pfaVm = {
+          closeModal: closeModal,
+          processAddress: saveNewAddress
+        };
+        ModalService.showModal({
+          parentScope: $scope,
+          fromTemplateUrl: 'templates/profile/addresses/modal-form.html'
+        });
       });
     }
   }

@@ -1,4 +1,4 @@
-ion-modal-view.cart-edit-item-modal
+ion-modal-view.cart-edit-item-modal.slim-modal
   ion-content(scroll="true")
     .ion-nav-buttons.buttons(side="primary")
       button.button.button-clear.button-positive.button-small(
@@ -6,7 +6,7 @@ ion-modal-view.cart-edit-item-modal
       )
         i.ion-close
 
-    .item-title {{cartVm.currentItem.provider_item.titulo}}
+    .slim-item-title {{cartVm.currentItem.provider_item.titulo}}
     .item-image
       img(
         ng-src="{{cartVm.currentItem.provider_item.imagenes[0].imagen_url}}"

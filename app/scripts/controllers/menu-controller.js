@@ -5,14 +5,17 @@
     .module('porttare.controllers')
     .controller('MenuController', MenuController);
 
-  function MenuController(categories, $scope, CategoriesService, ErrorHandlerService, $auth) {
+  function MenuController($auth,
+                          $scope,
+                          categories,
+                          CategoriesService,
+                          ErrorHandlerService) {
     var vmMenu = this;
     vmMenu.categories = categories.provider_categories;
-    vmMenu.existCartActive = false;
 
-    if ($auth.user.customer_order) {
-      vmMenu.existCartActive = true;
-    }
+    $scope.$watch(function(){
+      return $auth.user && $auth.user.customer_order;
+    }, init);
 
     $scope.$on('order-created', function(event, order) {
       $auth.user.customer_order = order;
@@ -29,5 +32,12 @@
           vmMenu.categories = res.data.provider_categories;
         }, ErrorHandlerService.handleCommonErrorGET);
     });
+
+    function init(){
+      vmMenu.existCartActive = false;
+      if ($auth.user && $auth.user.customer_order) {
+        vmMenu.existCartActive = true;
+      }
+    }
   }
 })();

@@ -5,7 +5,11 @@
     .module('porttare.controllers')
     .controller('CustomerOrderController', CustomerOrderController);
 
-  function CustomerOrderController(customerOrder, ProfileAddressesService, BillingAddressesService) {
+  function CustomerOrderController($scope,
+                                   customerOrder,
+                                   ProfileAddressesService,
+                                   BillingAddressesService,
+                                   PusherService) {
     var customerOrderVm = this;
     customerOrderVm.VAT = 0.12;
 
@@ -15,13 +19,36 @@
     customerOrderVm.addressLine1 = null;
     customerOrderVm.addressLine2 = null;
 
+    init();
+
     function init() {
       getAddress();
       getBillingAddress();
       getSummary();
+
+      $scope.$on('$ionicView.enter', wsSubscribe);
+      $scope.$on('$ionicView.leave', wsUnsubscribe);
     }
 
-    init();
+    function wsSubscribe() {
+      PusherService.load().then(function () {
+        var orderId = customerOrderVm.customerOrder.id;
+        PusherService.listen(
+          'private-customer_order.' + orderId,
+          'update',
+          customerOrderUpdated
+        );
+      });
+    }
+
+    function wsUnsubscribe() {
+      var orderId = customerOrderVm.customerOrder.id;
+      PusherService.unlisten('private-customer_order.' + orderId);
+    }
+
+    function customerOrderUpdated(newCustomerOrder) {
+      console.log('TODO', newCustomerOrder);
+    }
 
     function getAddress(){
       var customerAddressId = customerOrderVm.customerOrder.customer_address_id; // jshint ignore:line
@@ -86,6 +113,5 @@
 
       return line2;
     }
-
   }
 })();

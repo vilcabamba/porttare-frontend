@@ -29,6 +29,9 @@
         text-align: justify;
       }
 
+      &.col--wrap {
+        white-space: pre-wrap;
+      }
     }
 
     .table-headers {

@@ -124,6 +124,9 @@
         birthdate: 'Fecha de nacimiento',
         license: 'Licencia de conducir',
         orders: 'Pedidos',
+        deliveryAddresses: 'Lugar de entrega',
+        ready: 'Listo',
+        customerOrderDeliveryUpdate: 'Datos de entrega actualizado éxitosamente',
         labels: {
           found: 'Encontramos',
           closeToYou: 'pedidos cerca de ti',
@@ -348,7 +351,8 @@
           name: 'Nombre',
           addAddressBtnText: 'Agregar Dirección',
           saveBtnText: 'Guardar Dirección',
-          updateBtnText: 'Actualizar Dirección'
+          updateBtnText: 'Actualizar Dirección',
+          noAddressesSaved: 'No has guardado ninguna dirección de envío'
         }
       },
       cart: {
@@ -358,6 +362,7 @@
         placeOrder: 'Enviar pedido',
         observations: 'Observaciones',
         observacionesPlaceholder: 'Ej: sin cebollas',
+        addDeliveryAddress: 'Agregar dirección de envío',
         deliveryAddress: 'Dirección de entrega',
         deliveryMethod: 'Método de entrega',
         paymentMethod: 'Método de pago',
@@ -366,8 +371,10 @@
         cantidadSingular: 'unidad',
         title: 'Carrito',
         deliverNow: 'Entregar inmediatamente',
+        pickupNow: 'Inmediatamente.',
         shippingCosts: '(costos de envío)',
         deliveryPlaceholder: 'Entrega:',
+        pickupPlaceholder: 'Recoger:',
         deliveryMethods: {
           pickup: 'Recoger en local',
           shipping: 'Enviar a domicilio',
@@ -375,7 +382,6 @@
       },
       orders: {
         collectionTitle: 'Orden #',
-        date: 'Fecha',
         total: 'Total'
       },
       order: {
@@ -383,7 +389,7 @@
           quantity: 'Can',
           price: 'Precio',
           item: {
-            observations:'Observaciones: ',
+            observations:'Observaciones:',
             cantidadPrefix: 'x'
           }
         },

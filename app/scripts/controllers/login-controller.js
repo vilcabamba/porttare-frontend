@@ -28,6 +28,7 @@
       });
       $auth.submitLogin(loginVm.loginForm)
         .then(function () {
+          loginVm.loginForm = {};
           $state.go(successState);
         })
         .catch(function (resp) {

@@ -20,6 +20,10 @@
 .customer-order-preview {
   background-color: $light-grey;
 
+  .scroll {
+    padding-bottom: 30px;
+  }
+
   .cart-delivery-address {
     color: $grey-secondary;
     padding: 15px;
@@ -27,9 +31,10 @@
     letter-spacing: -0.5px;
     position: relative;
     padding-right: 70px; // room for btn
+    letter-spacing: -0.5px;
 
-    span {
-      margin-right: 5px;
+    span:not(:last-child) {
+      margin-right: 3px;
     }
 
     .placeholder-title {
@@ -48,29 +53,28 @@
   .provider-profile-section {
     margin-bottom: 20px;
 
-    .provider-profile--title,
-    .provider-profile--subtitle {
+    .provider-profile--title-wrapper {
       padding: 15px;
+      background-color: $white;
+      letter-spacing: -0.5px;
+      line-height: 20px;
     }
 
     .provider-profile--title {
       color: $base-yellow;
-      background-color: $white;
       text-transform: uppercase;
       font-size: 14px;
       font-family: Montserrat-Regular;
     }
 
     .provider-profile--subtitle {
-      color: $grey-secondary;
+      float: right;
+      color: $positive;
       font-family: Montserrat-Regular;
       font-size: 13px;
-      line-height: 13px;
-      padding-top: 10px;
-      padding-bottom: 10px;
 
-      span {
-        margin-right: 5px;
+      span:not(:last-child) {
+        margin-right: 3px;
       }
     }
   }
@@ -90,12 +94,17 @@
   .delivery-time-wrapper {
     position: relative;
 
+    i, span {
+      cursor: pointer;
+    }
+
     .button {
       position: absolute;
       z-index: 2;
       right: 0;
       top: 7px;
       letter-spacing: -0.5px;
+      line-height: 36px;
     }
   }
 
@@ -129,5 +138,6 @@
 .checkout-modal-form {
   .addresses-wrapper {
     top: 44px;
+    overflow: auto;
   }
 }

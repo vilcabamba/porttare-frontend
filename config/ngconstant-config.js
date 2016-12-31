@@ -13,7 +13,8 @@
       constants: {
         ENV: {
           name: 'development',
-          apiHost: 'http://localhost:3785',
+          apiHost: 'http://192.168.100.3:3785',
+          pusherKey: '287c19315060ae3bd2ec',
           gMapsKey: 'AIzaSyDbY9wkWTMUHeT_J2Uehq0-i0S1PCaybFE'
         }
       }
@@ -26,7 +27,8 @@
           airbrakeHost: 'https://pangi.shiriculapo.com',
           airbrakeProjectId: process.env.AIRBRAKE_PROJECT_ID,
           airbrakeProjectKey: process.env.AIRBRAKE_PROJECT_KEY,
-          gMapsKey: process.env.GOOGLE_MAPS_API_KEY
+          gMapsKey: process.env.GOOGLE_MAPS_API_KEY,
+          pusherKey: process.env.PUSHER_KEY
         }
       }
     },
@@ -38,7 +40,8 @@
           airbrakeHost: 'https://pangi.shiriculapo.com',
           gMapsKey: process.env.GOOGLE_MAPS_API_KEY,
           airbrakeProjectId: process.env.AIRBRAKE_PROJECT_ID,
-          airbrakeProjectKey: process.env.AIRBRAKE_PROJECT_KEY
+          airbrakeProjectKey: process.env.AIRBRAKE_PROJECT_KEY,
+          pusherKey: process.env.PUSHER_KEY
         }
       }
     },

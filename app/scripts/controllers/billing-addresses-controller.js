@@ -39,7 +39,8 @@
     function showNewEditModal(){
       ModalService.showModal({
         parentScope: $scope,
-        fromTemplateUrl: 'templates/billing-addresses/new-edit.html'
+        fromTemplateUrl: 'templates/billing-addresses/new-edit.html',
+        focusFirstInput: false
       });
     }
 

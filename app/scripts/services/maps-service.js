@@ -22,7 +22,6 @@
       } else {
         loadDefered = $q.defer();
         appendGMapsScript();
-        gmapsLoaded = true;
         return loadDefered.promise;
       }
     }
@@ -38,6 +37,7 @@
     }
 
     function gMapsCallback(){
+      gmapsLoaded = true;
       loadDefered.resolve();
       removeGMapsCallback();
     }
