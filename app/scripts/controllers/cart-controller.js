@@ -10,6 +10,7 @@
                           $state,
                           $translate,
                           $ionicPopup,
+                          $ionicHistory,
                           $ionicLoading,
                           APP,
                           billingAddresses,
@@ -149,10 +150,14 @@
         template: '{{::("globals.loading"|translate)}}'
       });
       CartService.checkout(cartVm.checkoutForm)
-        .then(function success() {
-          var categoryRoute = 'app.categories.index';
-          $state.go(categoryRoute)
-            .then(function () {
+        .then(function success(response) {
+          $ionicHistory.nextViewOptions({
+            historyRoot: true
+          });
+          $state.go('app.customerorders.show', {
+            id: response.customer_order.id,
+            customerOrder: response.customer_order
+          }).then(function () {
               $auth.user.customer_order = null;
               $ionicPopup.alert({
                 title: 'Alerta',
