@@ -42,6 +42,9 @@
       },
       wishlist: {
         onActionSelect: addToWishlist
+      },
+      buyNow: {
+        onActionSelect: buyNow
       }
     };
 
@@ -53,7 +56,7 @@
 
     function addToCart() {
       CartService.addItem(productVm.item)
-        .then(onSuccess, onError);
+        .then(onAddSuccess, onError);
     }
 
     function getWishlists() {
@@ -111,17 +114,22 @@
       productVm.wishlistName = '';
     }
 
-    function onSuccess(res) {
-      if (res && res.customer_order) {//jshint ignore:line
-        validateOrderCreated(res.customer_order);//jshint ignore:line
-      }
-
-      var providerRoute = 'app.categories.provider';
+    function onAddSuccess(res) {
+      var route = 'app.categories.provider';
       var params = {
         categoryId: $state.params.categoryId,
         providerId: $state.params.providerId
       };
-      $state.go(providerRoute, params)
+
+      onSuccess(res, route, params);
+    }
+
+    function onSuccess(res, route, params) {
+      if (res && res.customer_order) {//jshint ignore:line
+        validateOrderCreated(res.customer_order);//jshint ignore:line
+      }
+
+      $state.go(route, params)
         .then(function () {
           $ionicPopup.alert({
             title: 'Alerta',
@@ -149,8 +157,19 @@
       wishlist.provider_items_ids.push(item); //jshint ignore:line
       WishlistsService.updateWishlist(wishlist)
         .then(function success() {
-          onSuccess();
+          onAddSuccess();
         }, onError);
+    }
+
+    function buyNow() {
+      CartService.addItem(productVm.item)
+        .then(onBuyNowSuccess, onError);
+    }
+
+    function onBuyNowSuccess(res) {
+      var route = 'app.cart.index';
+      var params = null;
+      onSuccess(res, route, params);
     }
 
     function validateOrderCreated(order) {
