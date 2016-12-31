@@ -95,41 +95,39 @@
 
     function saveNewAddress(){
       if ($scope.pfaVm.addressForm.$valid) {
-        ProfileAddressesService.createAddresses($scope.pfaVm.addressFormData).then(function(response){
+        ProfileAddressesService.createAddresses(
+          $scope.pfaVm.addressFormData
+        ).then(function(response){
           cartVm.addresses.push(response.customer_address); //jshint ignore:line
-          closeModal().then(showCheckoutModal);
+          closeModal();
+          refreshCart(); // api will gracefully set addresses
         }, function(error){
           $scope.pfaVm.messages = error.errors;
         });
       }
     }
 
+    function refreshCart() {
+      CartService.getCart().then(function (response){
+        cartVm.cart = response.customer_order; // jshint ignore:line
+      });
+    }
+
     function showCheckoutModal() {
-      if (cartVm.addresses.length === 0) {
-        $scope.pfaVm = {
+      if (cartVm.billingAddresses.length === 0) {
+        $scope.billingAddressesVm = {
           closeModal: closeModal,
-          processAddress: saveNewAddress
+          submitModal: saveNewBillingAddress
         };
         ModalService.showModal({
           parentScope: $scope,
-          fromTemplateUrl: 'templates/profile/addresses/modal-form.html'
+          fromTemplateUrl: 'templates/billing-addresses/new-edit.html'
         });
-      }else{
-        if (cartVm.billingAddresses.length === 0) {
-          $scope.billingAddressesVm = {
-            closeModal: closeModal,
-            submitModal: saveNewBillingAddress
-          };
-          ModalService.showModal({
-            parentScope: $scope,
-            fromTemplateUrl: 'templates/billing-addresses/new-edit.html'
-          });
-        }else{
-          ModalService.showModal({
-            parentScope: $scope,
-            fromTemplateUrl: 'templates/cart/checkout.html'
-          });
-        }
+      } else {
+        ModalService.showModal({
+          parentScope: $scope,
+          fromTemplateUrl: 'templates/cart/checkout.html'
+        });
       }
     }
     function closeModal() {
@@ -298,6 +296,7 @@
       cartVm.CustomerOrderDeliverySelect();
       ModalService.showModal({
         parentScope: $scope,
+        backdropClickToClose: true,
         fromTemplateUrl: 'templates/cart/customer-order-delivery-modal.html',
       });
     }
@@ -335,7 +334,16 @@
     }
 
     function customerOrderDeliveryNewAddress(){
-      console.log('customerOrderDeliveryNewAddress');
+      closeModal().then(function(){
+        $scope.pfaVm = {
+          closeModal: closeModal,
+          processAddress: saveNewAddress
+        };
+        ModalService.showModal({
+          parentScope: $scope,
+          fromTemplateUrl: 'templates/profile/addresses/modal-form.html'
+        });
+      });
     }
   }
 })();

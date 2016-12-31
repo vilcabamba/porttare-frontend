@@ -40,7 +40,7 @@
         currentAddress = addresses.find(function (address) {
           return address.id === customerAddressId;
         });
-        orderDeliveryNombreVM.deliveryNombre = currentAddress.nombre;
+        orderDeliveryNombreVM.deliveryNombre = currentAddress && currentAddress.nombre;
       } else {
         orderDeliveryNombreVM.deliveryNombre = '';
       }

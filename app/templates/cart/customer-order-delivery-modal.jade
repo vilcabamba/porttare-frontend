@@ -1,19 +1,20 @@
-ion-modal-view
-  ion-header-bar.bar-stable.bar.bar-header
-    .title {{cartVm.providerProfile.nombre_establecimiento|translate|uppercase}}
-    .ion-nav-buttons.buttons(side="primary")
-      button.button.button-clear.button-positive(
-        ng-click="cartVm.closeModal()"
-      ) {{::('globals.cancel'|translate)}}
-
+ion-modal-view.slim-modal
   form(
     name='cartVm.formDeliveryAddresses'
     ng-submit='cartVm.submitCustomerOrderDelivery()'
     novalidate
   )
     ion-content.resource-form.checkout-form
-      .list.list-inset
+      .ion-nav-buttons.buttons(side="primary")
+        button.button.button-clear.button-positive.button-small(
+          ng-click="cartVm.closeModal()"
+        )
+          i.ion-close
+          
+      .slim-item-title
+        {{ ::cartVm.providerProfile.nombre_establecimiento }}
 
+      .list.list-inset
         label.item.item-input.item-stacked-label.item-input--no-borders
           span.input-label {{::("globals.dateDelivery"|translate)}}
         .delivery-time-wrapper
@@ -58,18 +59,18 @@ ion-modal-view
             span {{address.nombre}} ({{ address.direccion_uno }})
         show-error(array-messages='cartVm.messages.customer_address_id')
 
-        .text-center(
-          ng-if="!cartVm.addresses.length > 0"
-        )
-          .item.item-input.item-input--no-borders
-            p {{ ::("profile.addresses.noAddressesSaved" | translate) }}
-          .item.item-input.item-input--no-borders
-            button.button.button-outline.button-small.button-energized(
-              type="button"
-              ng-click="cartVm.customerOrderDeliveryNewAddress()"
-            ) {{ ::("cart.addDeliveryAddress" | translate) }}
+      .text-center.fields-wrapper(
+        ng-if="!cartVm.addresses.length > 0"
+      )
+        .item.item-input.item-input--no-borders
+          p {{ ::("profile.addresses.noAddressesSaved" | translate) }}
+        .item.item-input.item-input--no-borders
+          button.button.button-outline.button-small.button-energized(
+            type="button"
+            ng-click="cartVm.customerOrderDeliveryNewAddress()"
+          ) {{ ::("cart.addDeliveryAddress" | translate) }}
 
     ion-footer-bar.bar-stable.bar-footer--tall
-      button.button.button-outline.button-energized(
+      button.button.button-outline.button-positive(
         type="submit"
       ) {{::('courier.ready'|translate)}}
