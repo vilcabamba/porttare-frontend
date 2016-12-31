@@ -21,12 +21,12 @@
     init();
 
     function init(){
-      ProfileService.getProfile().then(function(res){
-        piVm.user = res;
-      });
+      piVm.user = $auth.user;
     }
 
     function showNewModal() {
+      piVm.user = $auth.user;
+
       piVm.userEdit = angular.copy(piVm.user);
       ModalService.showModal({
         parentScope: $scope,
