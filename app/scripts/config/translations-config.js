@@ -376,6 +376,7 @@
         shippingCosts: '(costos de envío)',
         deliveryPlaceholder: 'Entrega:',
         pickupPlaceholder: 'Recoger:',
+        withoutDeliveryAddress: 'Definir dirección de envío',
         deliveryMethods: {
           pickup: 'Recoger en local',
           shipping: 'Enviar a domicilio',

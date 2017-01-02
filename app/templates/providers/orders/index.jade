@@ -7,30 +7,30 @@ ion-view(
   ion-content.order-show-page
 
     .list.list-inset
-      h4{{::("globals.notifications"|translate)}}
-      h5{{::("orders.titleFormOrders"|translate)}}
+      h4 {{::("globals.notifications"|translate)}}
+      h5 {{::("orders.titleFormOrders"|translate)}}
 
     .tab-container
       .tab-item(
         ng-class="{'tab-item-active': poVm.tab==1}"
         ng-click="poVm.cambiarTab(1)"
-      ){{::("orders.inProcess"|translate)}}
+      ) {{::("orders.inProcess"|translate)}}
       .tab-item(
         ng-class="{'tab-item-active': poVm.tab==2}"
         ng-click="poVm.cambiarTab(2)"
-      ){{::("orders.completed"|translate)}}
+      ) {{::("orders.completed"|translate)}}
 
     .list.list-inset
 
       h5(ng-if="poVm.tab==1")
-        {{::("orders.have"|translate)}}
-        {{poVm.customerOrders.length}}
-        {{::("orders.ordersPendings"|translate)}}
+        | {{::("orders.have"|translate)}}
+        | {{poVm.customerOrders.length}}
+        | {{::("orders.ordersPendings"|translate)}}
 
       .order-container(ng-repeat="order in poVm.customerOrders")
         .row
           .col
-            h4{{::("orders.collectionTitle"| translate)}}{{:: order.id}}
+            h4 {{::("orders.collectionTitle"| translate)}}{{:: order.id}}
           .col.text-right
             i.icon.ion-ios-clock-outline
               span {{order.submitted_at|formatDate: 'HH:mm'}}
@@ -41,4 +41,4 @@ ion-view(
           .col.text-right Asignado a: -
 
       row(ng-if="!poVm.customerOrders.length")
-        .col.text-center{{::("orders.ordersEmpty"| translate)}}
+        .col.text-center {{::("orders.ordersEmpty"| translate)}}

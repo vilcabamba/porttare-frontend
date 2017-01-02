@@ -12,7 +12,7 @@
       controllerAs: 'orderDeliveryNombreVM',
       controller: orderDeliveryNombreController,
       link: orderDeliveryNombreLink,
-      template: '{{ orderDeliveryNombreVM.deliveryNombre }}',
+      templateUrl: 'templates/directives/cart/order-delivery-nombre.html',
       scope: {
         delivery: '=',
         addresses: '='
@@ -28,21 +28,27 @@
 
     scope.$watch('orderDeliveryNombreVM.delivery', function(newDelivery) {
       if (newDelivery) {
-        getCurrentDeliveryAddress();
+        updateDeliveryAddressName();
       }
     }, true);
 
-    function getCurrentDeliveryAddress(){
-      var customerAddressId = orderDeliveryNombreVM.delivery.customer_address_id; // jshint ignore:line
-      if (isShipping() && customerAddressId) {
-        var currentAddress,
-            addresses = orderDeliveryNombreVM.addresses;
-        currentAddress = addresses.find(function (address) {
-          return address.id === customerAddressId;
-        });
-        orderDeliveryNombreVM.deliveryNombre = currentAddress && currentAddress.nombre;
+    function updateDeliveryAddressName(){
+      if (isShipping()) {
+        orderDeliveryNombreVM.deliveryNombre = getDeliveryAddressName();
       } else {
         orderDeliveryNombreVM.deliveryNombre = '';
+      }
+    }
+
+    function getDeliveryAddressName(){
+      var currentAddress,
+          addresses = orderDeliveryNombreVM.addresses,
+          customerAddressId = orderDeliveryNombreVM.delivery.customer_address_id; // jshint ignore:line
+      currentAddress = addresses.find(function (address) {
+        return address.id === customerAddressId;
+      });
+      if (currentAddress) {
+        return currentAddress.nombre;
       }
     }
 

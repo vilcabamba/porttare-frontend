@@ -51,7 +51,10 @@
   }
 
   .provider-profile-section {
-    margin-bottom: 20px;
+    &--clear {
+      clear: both;
+      margin-bottom: 20px;
+    }
 
     .provider-profile--title-wrapper {
       padding: 15px;
