@@ -245,7 +245,8 @@
         nombres: 'Nombres',
         direccion: 'Dirección',
         telefono: 'Teléfono',
-        email: 'email',
+        ciudad: 'Ciudad',
+        email: 'E-mail',
         noClients: 'No tienes ningún cliente todavía.',
         addImage: 'Agregar fotografía'
       },
@@ -390,9 +391,14 @@
         completed: 'Completados',
         have: 'Tienes',
         ordersPendings: 'Pedidos pendientes',
-        ordersEmpty: 'Actualmente no existen pedidos a visualizar'
+        ordersEmpty: 'Actualmente no existen pedidos a visualizar',
+        orderDetails: 'Detalles de la orden'
       },
       order: {
+        submittedAt: 'Enviada',
+        shippingCosts: 'Costos de Envio',
+        observations: 'Observaciones',
+        customerInfo: 'Información de Cliente y envío',
         providerProfile: {
           quantity: 'Can',
           price: 'Precio',
@@ -411,9 +417,9 @@
           textCode: 'Código de Descuento',
           applyCode: 'Aplicar Código'
         },
-        shippingCosts: 'Costos de Envio',
-        observations: 'Observaciones',
-        customerInfo: 'Información de Cliente y envío'
+        status: {
+          submitted: 'Enviada'
+        }
       },
       form: {
         requiredField: 'Campo requerido. ',

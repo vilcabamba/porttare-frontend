@@ -1,0 +1,57 @@
+ion-view
+  ion-nav-title
+    .alt-logo
+  
+  ion-content.provider-show-customer-order.resource-collection
+    .list.list-inset.list--bottom-narrow
+      h1
+        | {{ ::("orders.collectionTitle" | translate) }}
+        | {{ ::providerOrderShowVM.customerOrder.id }}
+      h3 {{ ::("order.status." + providerOrderShowVM.customerOrder.status | translate) }}
+      h4 {{ ::("orders.orderDetails" | translate) }}
+    
+    .list.list-inset.list--no-borders.resource-details-table
+      .row
+        .col.col-label {{ ::("client.clientName" | translate ) }}
+        .col.value
+          | {{ ::providerOrderShowVM.customerBillingAddress.razon_social }}
+      .row
+        .col.col-label {{ ::("client.ruc" | translate ) }}
+        .col.value
+          | {{ ::providerOrderShowVM.customerBillingAddress.ruc }}
+      .row
+        .col.col-label {{ ::("client.email" | translate ) }}
+        .col.value
+          | {{ ::providerOrderShowVM.customerBillingAddress.email }}
+      .row
+        .col.col-label {{ ::("client.telefono" | translate ) }}
+        .col.value
+          | {{ ::providerOrderShowVM.customerBillingAddress.telefono }}
+      .row
+        .col.col-label {{ ::("client.direccion" | translate ) }}
+        .col.value
+          | {{ ::providerOrderShowVM.customerBillingAddress.direccion }}
+      .row
+        .col.col-label {{ ::("client.ciudad" | translate ) }}
+        .col.value
+          | {{ ::providerOrderShowVM.customerBillingAddress.ciudad }}
+      .row
+        .col.col-label {{ ::("order.submittedAt" | translate) }}
+        .col.value
+          | {{ ::providerOrderShowVM.customerOrder.submitted_at | formatDate }}
+      .row
+        .col.col-label {{ ::("globals.dateDelivery" | translate) }}
+        .col.value
+          span(
+            ng-if="!providerOrderShowVM.customerOrderDelivery.deliver_at"
+          ) {{ ::("cart.deliverNow" | translate) }}
+          span(
+            ng-if="providerOrderShowVM.customerOrderDelivery.deliver_at"
+          ) {{ ::(providerOrderShowVM.dateDelivery | formatDate) }}
+      .row(
+        ng-if="providerOrderShowVM.customerOrder.observaciones"
+      )
+        .col.col-label {{ ::("order.observations" | translate) }}
+        .col.value {{ ::providerOrderShowVM.customerOrder.observaciones }}
+
+    {{ providerOrderShowVM.customerOrder }}
