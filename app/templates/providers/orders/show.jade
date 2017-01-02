@@ -2,14 +2,14 @@ ion-view
   ion-nav-title
     .alt-logo
   
-  ion-content.provider-show-customer-order.resource-collection
+  ion-content.provider-show-customer-order.resource-collection.submitted-customer-order-preview
     .list.list-inset.list--bottom-narrow
       h1
         | {{ ::("orders.collectionTitle" | translate) }}
         | {{ ::providerOrderShowVM.customerOrder.id }}
-      h3 {{ ::("order.status." + providerOrderShowVM.customerOrder.status | translate) }}
+      h3 {{ ::("order.delivery.status." + providerOrderShowVM.customerOrderDelivery.status | translate) }}
       h4 {{ ::("orders.orderDetails" | translate) }}
-    
+
     .list.list-inset.list--no-borders.resource-details-table
       .row
         .col.col-label {{ ::("client.clientName" | translate ) }}
@@ -53,5 +53,15 @@ ion-view
       )
         .col.col-label {{ ::("order.observations" | translate) }}
         .col.value {{ ::providerOrderShowVM.customerOrder.observaciones }}
+
+    .list.list-inset.list--no-borders.resource-collection-table.narrow
+      .row.table-headers
+        .col.col-50 {{ ::("order.providerProfile.item.name" | translate) }}
+        .col.col-25 {{ ::("order.providerProfile.quantity" |translate) }}
+        .col.col-25 {{ ::("order.providerProfile.price" |translate) }}
+      span(ng-repeat='item in providerOrderShowVM.providerProfile.customer_order_items')
+        span(
+          ng-include="'templates/customer/orders/order-item-row.html'"
+        )
 
     {{ providerOrderShowVM.customerOrder }}

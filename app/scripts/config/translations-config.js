@@ -403,6 +403,7 @@
           quantity: 'Can',
           price: 'Precio',
           item: {
+            name: 'Producto',
             observations:'Observaciones:',
             cantidadPrefix: 'x'
           }
@@ -419,6 +420,11 @@
         },
         status: {
           submitted: 'Enviada'
+        },
+        delivery: {
+          status: {
+            pending: 'Esperando confirmación del proveedor'
+          }
         }
       },
       form: {
