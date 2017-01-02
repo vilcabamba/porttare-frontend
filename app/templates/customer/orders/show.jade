@@ -17,7 +17,7 @@ ion-view(
             ng-include="'templates/customer/orders/order-item-row.html'"
           )
 
-        .item.row.strong
+        .item.row.strong.narrow
           .col {{ ("order.delivery.status." + providerProfile.customer_order_delivery.status | translate) }}
         .item.row.strong(
           ng-if="providerProfile.customer_order_delivery.reason"
