@@ -5,7 +5,7 @@ ion-view(
     .alt-logo
   ion-content.submitted-customer-order-preview
     .resource-collection(
-      ng-repeat='providerProfile in ::customerOrderVm.customerOrder.provider_profiles track by $index'
+      ng-repeat='providerProfile in customerOrderVm.customerOrder.provider_profiles track by $index'
     )
       .list.list-inset.list--no-borders.resource-collection-table.narrow
         .row.table-headers
@@ -18,11 +18,11 @@ ion-view(
           )
 
         .item.row.strong
-          .col {{ ::("order.delivery.status." + providerProfile.customer_order_delivery.status | translate) }}
+          .col {{ ("order.delivery.status." + providerProfile.customer_order_delivery.status | translate) }}
         .item.row.strong(
           ng-if="providerProfile.customer_order_delivery.reason"
         )
-          .col {{ ::providerProfile.customer_order_delivery.reason }}
+          .col {{ providerProfile.customer_order_delivery.reason }}
 
     .resource-collection
       .list.list-inset.list--no-borders.resource-collection-table.text-right
