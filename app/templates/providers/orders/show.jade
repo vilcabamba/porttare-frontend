@@ -10,7 +10,7 @@ ion-view
       h3 {{ ::("order.delivery.status." + providerOrderShowVM.customerOrderDelivery.status | translate) }}
       h4 {{ ::("orders.orderDetails" | translate) }}
 
-    .list.list-inset.list--no-borders.resource-details-table
+    .list.list-inset.resource-details-table
       .row
         .col.col-label {{ ::("client.clientName" | translate ) }}
         .col.value
@@ -63,5 +63,28 @@ ion-view
         span(
           ng-include="'templates/customer/orders/order-item-row.html'"
         )
+
+    .list.list-inset
+      button.button.button-block.button-outline.button-energized(
+        ng-click="providerOrderShowVM.acceptOrder()"
+      ) {{ ::("provider.acceptOrder" | translate) }}
+
+      .resource-form
+        label.item.item-input.item-stacked-label
+          span.input-label {{ ::("provider.reasonToReject" | translate) }}
+          textarea(
+            msd-elastic
+            ng-model="providerOrderShowVM.customerOrderDelivery.reason"
+            placeholder='{{ ::("provider.reasonToRejectPlaceholder" | translate) }}'
+          )
+        .errors-wrapper
+          span.show-errors(
+            ng-if="providerOrderShowVM.errors.reason"
+          )
+            span.message-error
+              | {{::("provider.reasonToRejectPlaceholder"|translate)}}
+        button.button.button-block.button-outline.button-assertive(
+          ng-click="providerOrderShowVM.rejectOrder()"
+        ) {{ ::("provider.rejectOrder" | translate) }}
 
     {{ providerOrderShowVM.customerOrder }}

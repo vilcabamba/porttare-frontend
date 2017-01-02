@@ -107,7 +107,11 @@
         isRequired: 'Este campo es obligatorio',
         nextStep: 'Siguiente Paso',
         createProvider: 'Crear Proveedor',
-        noMoreItems: 'No hay más productos que mostrar'
+        noMoreItems: 'No hay más productos que mostrar',
+        acceptOrder: 'Aceptar orden',
+        rejectOrder: 'Rechazar orden',
+        reasonToReject: 'Razón',
+        reasonToRejectPlaceholder: 'Especifica una razón'
       },
       courier: {
         successCourierSave: 'Mensajero guardado éxitosamente',
