@@ -27,7 +27,10 @@ ion-view(
         | {{poVm.customerOrders.length}}
         | {{::("orders.ordersPendings"|translate)}}
 
-      .order-container(ng-repeat="order in poVm.customerOrders")
+      .order-container(
+        ng-repeat="order in poVm.customerOrders"
+        ui-sref="provider.orders.show({customerOrder: order, id: order.id})"
+      )
         .row
           .col
             h4 {{::("orders.collectionTitle"| translate)}}{{:: order.id}}

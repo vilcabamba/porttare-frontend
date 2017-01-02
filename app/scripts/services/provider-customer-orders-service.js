@@ -3,17 +3,18 @@
 
   angular
     .module('porttare.services')
-    .factory('ProviderCustomerOrders', ProviderCustomerOrders);
+    .factory('ProviderCustomerOrdersService', ProviderCustomerOrdersService);
 
-  function ProviderCustomerOrders($http, ENV) {
+  function ProviderCustomerOrdersService($http, CommonService, ENV) {
 
     var service = {
-      getProviderCustomerOrdersStatus: getProviderCustomerOrdersStatus,
+      getProviderCustomerOrdersByStatus: getProviderCustomerOrdersByStatus,
+      getCustomerOrder: getCustomerOrder
     };
 
     return service;
 
-    function getProviderCustomerOrdersStatus(status) {
+    function getProviderCustomerOrdersByStatus(status) {
       return $http({
         method: 'GET',
         url: ENV.apiHost + '/api/provider/customer_orders?status='+status
@@ -22,5 +23,11 @@
       });
     }
 
+    function getCustomerOrder(id){
+      var url = '/api/provider/customer_orders/';
+      return CommonService.getObject(url, id).then(function (response){
+        return response.customer_order; // jshint ignore:line
+      });
+    }
   }
 })();

@@ -5,7 +5,7 @@
     .module('porttare.controllers')
     .controller('ProviderOrdersController', ProviderOrdersController);
 
-  function ProviderOrdersController(ProviderCustomerOrders, ErrorHandlerService) {
+  function ProviderOrdersController(ProviderCustomerOrdersService, ErrorHandlerService) {
     var poVm = this;
     poVm.cambiarTab = cambiarTab;
     init();
@@ -15,10 +15,12 @@
     }
 
     function getProviderCustomerOrdersStatus(status, tab){
-      ProviderCustomerOrders.getProviderCustomerOrdersStatus(status).then(function success(resp){
-        poVm.customerOrders = resp.customer_orders; // jshint ignore:line
-        poVm.tab = tab;
-      }, ErrorHandlerService.handleCommonErrorGET);
+      ProviderCustomerOrdersService
+        .getProviderCustomerOrdersByStatus(status)
+        .then(function success(resp){
+          poVm.customerOrders = resp.customer_orders; // jshint ignore:line
+          poVm.tab = tab;
+        }, ErrorHandlerService.handleCommonErrorGET);
     }
 
     function cambiarTab(tab){

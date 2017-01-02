@@ -398,6 +398,30 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   })
+  .state('provider.orders.show', {
+    url: '/:id',
+    params: {
+      customerOrder: null
+    },
+    views: {
+      'menuContent@provider': {
+        templateUrl: 'templates/providers/orders/show.html',
+        controller: 'ProviderOrderShowController',
+        controllerAs: 'providerOrderShowVM',
+        resolve: {
+          customerOrder: function ($stateParams, ProviderCustomerOrdersService) {
+            if ($stateParams.customerOrder) {
+              return $stateParams.customerOrder;
+            } else {
+              var customerOrderId = $stateParams.id;
+              return ProviderCustomerOrdersService
+                       .getCustomerOrder(customerOrderId);
+            }
+          }
+        }
+      }
+    }
+  })
   .state('app.courier', {
     url: '/courier',
     abstract: true
