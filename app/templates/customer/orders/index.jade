@@ -11,6 +11,9 @@ ion-view(
           | {{ ::("orders.total"|translate) }}
         .col.col-15
 
+      .col.without-items(ng-if="!customerOrdersVm.customerOrders.length")
+        p {{::("orders.ordersEmpty"|translate)}}
+
       .item.row(
         ng-repeat='customerOrder in ::customerOrdersVm.customerOrders track by $index'
       )

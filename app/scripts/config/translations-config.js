@@ -395,7 +395,7 @@
         completed: 'Completados',
         have: 'Tienes',
         ordersPendings: 'Pedidos pendientes',
-        ordersEmpty: 'Actualmente no existen pedidos a visualizar',
+        ordersEmpty: 'No hay pedidos',
         orderDetails: 'Detalles de la orden'
       },
       order: {
