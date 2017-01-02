@@ -7,40 +7,40 @@ ion-view
       h1
         | {{ ::("orders.collectionTitle" | translate) }}
         | {{ ::providerOrderShowVM.customerOrder.id }}
-      h3 {{ ::("order.delivery.status." + providerOrderShowVM.customerOrderDelivery.status | translate) }}
+      h3 {{ ("order.delivery.status." + providerOrderShowVM.customerOrderDelivery.status | translate) }}
       h4 {{ ::("orders.orderDetails" | translate) }}
 
     .list.list-inset.resource-details-table
       .row
-        .col.col-label {{ ::("client.clientName" | translate ) }}
+        .col.col.label {{ ::("client.clientName" | translate ) }}
         .col.value
           | {{ ::providerOrderShowVM.customerBillingAddress.razon_social }}
       .row
-        .col.col-label {{ ::("client.ruc" | translate ) }}
+        .col.col.label {{ ::("client.ruc" | translate ) }}
         .col.value
           | {{ ::providerOrderShowVM.customerBillingAddress.ruc }}
       .row
-        .col.col-label {{ ::("client.email" | translate ) }}
+        .col.col.label {{ ::("client.email" | translate ) }}
         .col.value
           | {{ ::providerOrderShowVM.customerBillingAddress.email }}
       .row
-        .col.col-label {{ ::("client.telefono" | translate ) }}
+        .col.col.label {{ ::("client.telefono" | translate ) }}
         .col.value
           | {{ ::providerOrderShowVM.customerBillingAddress.telefono }}
       .row
-        .col.col-label {{ ::("client.direccion" | translate ) }}
+        .col.col.label {{ ::("client.direccion" | translate ) }}
         .col.value
           | {{ ::providerOrderShowVM.customerBillingAddress.direccion }}
       .row
-        .col.col-label {{ ::("client.ciudad" | translate ) }}
+        .col.col.label {{ ::("client.ciudad" | translate ) }}
         .col.value
           | {{ ::providerOrderShowVM.customerBillingAddress.ciudad }}
       .row
-        .col.col-label {{ ::("order.submittedAt" | translate) }}
+        .col.col.label {{ ::("order.submittedAt" | translate) }}
         .col.value
           | {{ ::providerOrderShowVM.customerOrder.submitted_at | formatDate }}
       .row
-        .col.col-label {{ ::("globals.dateDelivery" | translate) }}
+        .col.col.label {{ ::("globals.dateDelivery" | translate) }}
         .col.value
           span(
             ng-if="!providerOrderShowVM.customerOrderDelivery.deliver_at"
@@ -51,8 +51,13 @@ ion-view
       .row(
         ng-if="providerOrderShowVM.customerOrder.observaciones"
       )
-        .col.col-label {{ ::("order.observations" | translate) }}
+        .col.col.label {{ ::("order.observations" | translate) }}
         .col.value {{ ::providerOrderShowVM.customerOrder.observaciones }}
+      .row(
+        ng-if="!providerOrderShowVM.shouldDisplayProviderAnswerForm && providerOrderShowVM.customerOrderDelivery.reason"
+      )
+        .col.col.label {{ ::("provider.reasonToReject" | translate) }}
+        .col.value {{ ::providerOrderShowVM.customerOrderDelivery.reason }}
 
     .list.list-inset.list--no-borders.resource-collection-table.narrow
       .row.table-headers
@@ -64,7 +69,9 @@ ion-view
           ng-include="'templates/customer/orders/order-item-row.html'"
         )
 
-    .list.list-inset
+    .list.list-inset(
+      ng-if="providerOrderShowVM.shouldDisplayProviderAnswerForm"
+    )
       button.button.button-block.button-outline.button-energized(
         ng-click="providerOrderShowVM.acceptOrder()"
       ) {{ ::("provider.acceptOrder" | translate) }}
@@ -86,5 +93,3 @@ ion-view
         button.button.button-block.button-outline.button-assertive(
           ng-click="providerOrderShowVM.rejectOrder()"
         ) {{ ::("provider.rejectOrder" | translate) }}
-
-    {{ providerOrderShowVM.customerOrder }}

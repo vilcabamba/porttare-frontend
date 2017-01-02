@@ -18,7 +18,11 @@ ion-view(
           )
 
         .item.row.strong
-          .col.col-100 {{ ::("order.delivery.status." + providerProfile.customer_order_delivery.status | translate) }}
+          .col {{ ::("order.delivery.status." + providerProfile.customer_order_delivery.status | translate) }}
+        .item.row.strong(
+          ng-if="providerProfile.customer_order_delivery.reason"
+        )
+          .col {{ ::providerProfile.customer_order_delivery.reason }}
 
     .resource-collection
       .list.list-inset.list--no-borders.resource-collection-table.text-right

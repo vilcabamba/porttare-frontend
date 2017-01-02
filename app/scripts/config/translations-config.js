@@ -427,7 +427,9 @@
         },
         delivery: {
           status: {
-            pending: 'Esperando confirmación del proveedor'
+            pending: 'Esperando confirmación del proveedor',
+            accepted: 'Aceptada',
+            rejected: 'Rechazada'
           }
         }
       },
