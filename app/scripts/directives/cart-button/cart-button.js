@@ -26,7 +26,7 @@
 
     function getNumberItems(){
       var povider_profiles=$auth.user.customer_order.provider_profiles;//jshint ignore:line
-      var cantidadItem=povider_profiles.reduce(function(total,provider){
+      var cantidadItem=povider_profiles.reduce(function(total,provider){//jshint ignore:line
         return total+getTotalItems(provider);
       }, 0);
       cartButtonVM.numberItems=cantidadItem;
