@@ -46,8 +46,10 @@
       PusherService.unlisten('private-customer_order.' + orderId);
     }
 
-    function customerOrderUpdated(newCustomerOrder) {
-      console.log('TODO', newCustomerOrder);
+    function customerOrderUpdated(response) {
+      $scope.$apply(function(){
+        customerOrderVm.customerOrder = response.customer_order; // jshint ignore:line
+      });
     }
 
     function getAddress(){

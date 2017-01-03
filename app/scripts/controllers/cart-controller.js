@@ -115,7 +115,9 @@
     }
 
     function showCheckoutModal() {
-      if (cartVm.billingAddresses.length === 0) {
+      if (needsToAddDeliveryAddress()) {
+        customerOrderDeliveryNewAddress();
+      } else if (cartVm.billingAddresses.length === 0) {
         $scope.billingAddressesVm = {
           closeModal: closeModal,
           submitModal: saveNewBillingAddress
@@ -345,7 +347,8 @@
       closeModal().then(function(){
         $scope.pfaVm = {
           closeModal: closeModal,
-          processAddress: saveNewAddress
+          processAddress: saveNewAddress,
+          defaultInCurrentGeolocation: true
         };
         ModalService.showModal({
           parentScope: $scope,
@@ -358,6 +361,16 @@
       $ionicHistory.nextViewOptions({
         historyRoot: true
       });
+    }
+
+    function anyDeliveryIsShipping(){
+      return cartVm.cart.provider_profiles.some(function (providerProfile){
+        return providerProfile.customer_order_delivery.delivery_method === 'shipping'; // jshint ignore:line
+      });
+    }
+
+    function needsToAddDeliveryAddress(){
+      return cartVm.addresses.length === 0 && anyDeliveryIsShipping();
     }
   }
 })();

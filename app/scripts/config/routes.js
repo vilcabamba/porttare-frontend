@@ -383,6 +383,53 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   })
+  .state('provider.orders', {
+    url: '/customer-orders',
+    abstract: true
+  })
+  .state('provider.orders.index', {
+    url: '/:status',
+    cache: false,
+    params: {
+      status: 'submitted'
+    },
+    views: {
+      'menuContent@provider': {
+        templateUrl: 'templates/providers/orders/index.html',
+        controller: 'ProviderOrdersController',
+        controllerAs: 'poVm',
+        resolve: {
+          status: function ($stateParams){
+            return $stateParams.status;
+          }
+        }
+      }
+    }
+  })
+  .state('provider.orders.show', {
+    url: '/:id',
+    params: {
+      customerOrder: null
+    },
+    views: {
+      'menuContent@provider': {
+        templateUrl: 'templates/providers/orders/show.html',
+        controller: 'ProviderOrderShowController',
+        controllerAs: 'providerOrderShowVM',
+        resolve: {
+          customerOrder: function ($stateParams, ProviderCustomerOrdersService) {
+            if ($stateParams.customerOrder) {
+              return $stateParams.customerOrder;
+            } else {
+              var customerOrderId = $stateParams.id;
+              return ProviderCustomerOrdersService
+                       .getCustomerOrder(customerOrderId);
+            }
+          }
+        }
+      }
+    }
+  })
   .state('app.courier', {
     url: '/courier',
     abstract: true

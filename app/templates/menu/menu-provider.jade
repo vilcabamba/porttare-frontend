@@ -15,7 +15,11 @@ ion-side-menus(enable-menu-with-back-views='false')
           ui-sref='provider.profile-provider.info'
         )
           | {{::("menu.provider.profile"|translate)}}
-        ion-item
+        ion-item(
+          menu-close
+          nav-clear
+          ui-sref='provider.orders.index'
+        )
           | {{::("menu.provider.orders"|translate)}}
         ion-item(
           menu-close

@@ -107,7 +107,11 @@
         isRequired: 'Este campo es obligatorio',
         nextStep: 'Siguiente Paso',
         createProvider: 'Crear Proveedor',
-        noMoreItems: 'No hay más productos que mostrar'
+        noMoreItems: 'No hay más productos que mostrar',
+        acceptOrder: 'Aceptar orden',
+        rejectOrder: 'Rechazar orden',
+        reasonToReject: 'Razón',
+        reasonToRejectPlaceholder: 'Especifica una razón'
       },
       courier: {
         successCourierSave: 'Mensajero guardado éxitosamente',
@@ -180,7 +184,8 @@
           sat: 'Sáb',
           sun: 'Dom'
         },
-        accept:'Aceptar'
+        accept:'Aceptar',
+        notifications:'Notificaciones'
       },
       item: {
         item: 'Producto',
@@ -210,7 +215,7 @@
         valorMedida: 'Valor de medida',
         stockLabel: 'Producto en stock',
         productDetails:'Detalles del producto',
-        cantidad: 'Cantidad',
+        cantidad: 'Cantidad máxima',
         cantidadPrefix: 'x',
         currency: '$ ',
         seeAsCustomer: 'Ver como cliente',
@@ -244,7 +249,8 @@
         nombres: 'Nombres',
         direccion: 'Dirección',
         telefono: 'Teléfono',
-        email: 'email',
+        ciudad: 'Ciudad',
+        email: 'E-mail',
         noClients: 'No tienes ningún cliente todavía.',
         addImage: 'Agregar fotografía'
       },
@@ -375,6 +381,7 @@
         shippingCosts: '(costos de envío)',
         deliveryPlaceholder: 'Entrega:',
         pickupPlaceholder: 'Recoger:',
+        withoutDeliveryAddress: 'Definir dirección de envío',
         deliveryMethods: {
           pickup: 'Recoger en local',
           shipping: 'Enviar a domicilio',
@@ -382,13 +389,25 @@
       },
       orders: {
         collectionTitle: 'Orden #',
-        total: 'Total'
+        total: 'Total',
+        titleFormOrders: 'Revisa todos los pedidos que los clientes hacen sobre tus productos.',
+        inProcess: 'En gestión',
+        completed: 'Completados',
+        have: 'Tienes',
+        ordersPendings: 'Pedidos pendientes',
+        ordersEmpty: 'No hay pedidos',
+        orderDetails: 'Detalles de la orden'
       },
       order: {
+        submittedAt: 'Enviada',
+        shippingCosts: 'Costos de Envio',
+        observations: 'Observaciones',
+        customerInfo: 'Información de Cliente y envío',
         providerProfile: {
           quantity: 'Can',
           price: 'Precio',
           item: {
+            name: 'Producto',
             observations:'Observaciones:',
             cantidadPrefix: 'x'
           }
@@ -403,9 +422,16 @@
           textCode: 'Código de Descuento',
           applyCode: 'Aplicar Código'
         },
-        shippingCosts: 'Costos de Envio',
-        observations: 'Observaciones',
-        customerInfo: 'Información de Cliente y envío'
+        status: {
+          submitted: 'Enviada'
+        },
+        delivery: {
+          status: {
+            pending: 'Esperando confirmación del proveedor',
+            accepted: 'Aceptada',
+            rejected: 'Rechazada'
+          }
+        }
       },
       form: {
         requiredField: 'Campo requerido. ',

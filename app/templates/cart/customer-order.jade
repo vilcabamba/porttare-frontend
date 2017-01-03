@@ -14,24 +14,6 @@
       | {{ ::providerProfile.nombre_establecimiento }}
 
   .cart-delivery-address
-    span.placeholder-title(
-      ng-if="providerProfile.customer_order_delivery.delivery_method !== 'pickup'"
-    )
-      | {{ ::("cart.deliveryPlaceholder" | translate) }}
-    span.placeholder-title(
-      ng-if="providerProfile.customer_order_delivery.delivery_method === 'pickup'"
-    )
-      | {{ ::("cart.pickupPlaceholder" | translate) }}
-    span(
-      ng-if="!providerProfile.customer_order_delivery.deliver_at"
-    ) {{ ::("cart.pickupNow" | translate) }}
-    span(
-      ng-if="providerProfile.customer_order_delivery.deliver_at"
-    )
-      | {{ (providerProfile.customer_order_delivery.deliver_at | formatDate:'dddd D') }}
-      | de
-      | {{ (providerProfile.customer_order_delivery.deliver_at | formatDate:'MMMM - H:mm A')}}
-      | -
     order-delivery-nombre(
       delivery="providerProfile.customer_order_delivery"
       addresses="cartVm.addresses"
@@ -45,4 +27,6 @@
     slick-item(settings="cartVm.slickSettings"
                data="providerProfile"
                on-click="cartVm.openEditModal"
-               ng-if="cartVm.slickFlag")
+               slick-flag="cartVm.slickFlag")
+
+  .provider-profile-section--clear

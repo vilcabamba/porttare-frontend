@@ -12,7 +12,8 @@
       scope: {
         settings: '=',
         data: '=',
-        onClick: '&'
+        onClick: '&',
+        slickFlag: '='
       },
       controller: slickItemController,
       controllerAs: 'sicVm',

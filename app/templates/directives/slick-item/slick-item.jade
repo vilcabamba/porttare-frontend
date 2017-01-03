@@ -1,8 +1,10 @@
 slick-wrapper(
   settings="sicVm.settings"
+  ng-if="sicVm.slickFlag"
 )
   .slick-container(
     ng-repeat="providerItem in sicVm.data.customer_order_items track by $index"
+    ng-if="sicVm.slickFlag"
   )
     .slick-content(ng-click="sicVm.onClick()(providerItem)" class="clickeable")
       .img-wrapper

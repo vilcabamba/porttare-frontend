@@ -14,7 +14,8 @@
         lon: '=',
         defaultInCurrentGeolocation: '=',
         direccion:'=',
-        ciudad:'='
+        direccionDos: '=',
+        ciudad: '='
       },
       controller: [ '$scope',
                     '$ionicPopup',
@@ -104,7 +105,8 @@
             .geocode({'latLng': mapVm.currentMarker.getPosition()})
             .then(function(results){
               mapVm.direccion = results[0].formatted_address; // jshint ignore:line
-              mapVm.ciudad = results[1].formatted_address; // jshint ignore:line
+              mapVm.direccionDos = results[1].formatted_address; // jshint ignore:line
+              mapVm.ciudad = getCiudad(results[0]);
             });
         }
       });
@@ -115,6 +117,14 @@
         mapVm.currentMarker.setMap(null);
         mapVm.currentMarker = null;
       }
+    }
+
+    function getCiudad(geolocationResult){
+      var components = geolocationResult.address_components; //jshint ignore:line
+      var cityComponent = components.find(function(component){
+        return component.types.includes('political');
+      });
+      return cityComponent && cityComponent.long_name; // jshint ignore:line
     }
   }
 })();
