@@ -19,8 +19,8 @@
     function getProviderCustomerOrdersStatus(status){
       ProviderCustomerOrdersService
         .getProviderCustomerOrdersByStatus(status)
-        .then(function success(resp){
-          poVm.customerOrders = resp.customer_orders; // jshint ignore:line
+        .then(function success(customerOrders){
+          poVm.customerOrders = customerOrders;
         }, ErrorHandlerService.handleCommonErrorGET);
     }
   }

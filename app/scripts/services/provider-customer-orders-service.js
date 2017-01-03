@@ -17,11 +17,10 @@
     return service;
 
     function getProviderCustomerOrdersByStatus(status) {
-      return $http({
-        method: 'GET',
-        url: ENV.apiHost + '/api/provider/customer_orders?status='+status
-      }).then(function success(resp) {
-          return resp.data;
+      return CommonService.getObjects(
+        '/api/provider/customer_orders?status=' + status
+      ).then(function (response){
+        return response.customer_orders; // jshint ignore:line
       });
     }
 
