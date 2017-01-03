@@ -19,20 +19,16 @@
   function cartButtonController($auth,$scope) {
     // jshint validthis:true
     var cartButtonVM = this;
-    cartButtonVM.getNumberItems=getNumberItems;
-    cartButtonVM.getTotalItems=getTotalItems;
-    cartButtonVM.existCartActive = false;
 
     if ($auth.user.customer_order) {//jshint ignore:line
-      cartButtonVM.existCartActive = true;
       getNumberItems();
     }
 
     function getNumberItems(){
-      var cantidadItem=0;
-      angular.forEach($auth.user.customer_order.provider_profiles, function (provider) {//jshint ignore:line
-        cantidadItem =cantidadItem+ getTotalItems(provider);
-      });
+      var povider_profiles=$auth.user.customer_order.provider_profiles;//jshint ignore:line
+      var cantidadItem=povider_profiles.reduce(function(total,provider){
+        return total+getTotalItems(provider);
+      }, 0);
       cartButtonVM.numberItems=cantidadItem;
     }
 
@@ -43,10 +39,6 @@
       }
       return total;
     }
-
-    $scope.$on('order-finished', function() {
-      cartButtonVM.existCartActive = false;
-    });
 
     $scope.$on('update-number', function() {
       getNumberItems();

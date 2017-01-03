@@ -156,7 +156,6 @@
                 title: 'Alerta',
                 template: '{{::("cart.successfullyOrder"|translate)}}'
               }).then(closeModal);
-              $scope.$emit('order-finished');
             });
         }, function error(res) {
           $ionicLoading.hide();
