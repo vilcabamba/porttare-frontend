@@ -21,12 +21,12 @@
     init();
 
     function init(){
-      ProfileService.getProfile().then(function(res){
-        piVm.user = res;
-      });
+      piVm.user = $auth.user;
     }
 
     function showNewModal() {
+      piVm.user = $auth.user;
+
       piVm.userEdit = angular.copy(piVm.user);
       ModalService.showModal({
         parentScope: $scope,
@@ -47,7 +47,7 @@
         .then(function(resp) {
           piVm.user = resp.data.data;
           $scope.$emit('currentUserUpdated', piVm.user);
-          
+
           $ionicPopup.alert({
             title: 'Éxito',
             template: '{{::("user.successUpdateProfile"|translate)}}'

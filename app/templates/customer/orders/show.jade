@@ -1,0 +1,87 @@
+ion-view(
+  view-title="{{ ::('menu.client.myOrders' | translate) }}"
+)
+  ion-nav-title
+    .alt-logo
+  ion-content.submitted-customer-order-preview
+    .resource-collection(
+      ng-repeat='providerProfile in customerOrderVm.customerOrder.provider_profiles track by $index'
+    )
+      .list.list-inset.list--no-borders.resource-collection-table.narrow
+        .row.table-headers
+          .col.col-50 {{ providerProfile.nombre_establecimiento || providerProfile.razon_social }}
+          .col.col-25 {{ ::("order.providerProfile.quantity" |translate) }}
+          .col.col-25 {{ ::("order.providerProfile.price" |translate) }}
+        span(ng-repeat='item in providerProfile.customer_order_items')
+          span(
+            ng-include="'templates/customer/orders/order-item-row.html'"
+          )
+
+        .item.row.strong.narrow
+          .col {{ ("order.delivery.status." + providerProfile.customer_order_delivery.status | translate) }}
+        .item.row.strong(
+          ng-if="providerProfile.customer_order_delivery.reason"
+        )
+          .col {{ providerProfile.customer_order_delivery.reason }}
+
+    .resource-collection
+      .list.list-inset.list--no-borders.resource-collection-table.text-right
+        .row.item
+          .col.col-75
+            | {{ ::("order.summary.subtotal" |translate) }}
+          .col.col-25.strong
+            | {{ ::( customerOrderVm.customerOrder.subtotal_items_cents | priceCurrency | currency ) }}
+        .row.item
+          .col.col-75
+            | {{ ::("order.summary.shippingCosts" |translate) }}
+          .col.col-25.strong
+            | {{ ::( '0' | priceCurrency | currency ) }}
+        .row.item
+          .col.col-75
+            | {{ ::( (customerOrderVm.VAT*100) + ("order.summary.VAT" |translate) ) }}
+          .col.col-25.strong
+            | {{ ::( customerOrderVm.customerOrder.subtotalVATCents | priceCurrency | currency ) }}
+        .row.table-headers
+          .col.col-100
+        .row.item
+          .col.col-75
+            | {{ ::("order.summary.total" |translate) }}
+          .col.col-25.strong
+            | {{ ::( customerOrderVm.customerOrder.totalCents | priceCurrency | currency ) }}
+
+    //- not implemented yet
+      .resource-collection
+        .list.list-inset.list--no-borders.resource-collection-table
+          .row.item
+            .col.col-50
+              | {{ ::("order.discount.textCode" |translate) }}
+            .col.col-50
+              button.button.button-outline.button-energized
+                | {{ ::("order.discount.applyCode" |translate) }}
+
+    .resource-collection(ng-if="customerOrderVm.customerOrder.observaciones")
+      .list.list-inset.list--no-borders.resource-collection-table
+        .row.table-headers
+          .col.col-100 {{ ::("order.observations"|translate) }}
+        .row.item
+          .col.col-100.col--elastic {{ ::customerOrderVm.customerOrder.observaciones }}
+          .list.list-inset.list--no-borders.resource-collection-table
+
+    .resource-collection
+      .list.list-inset.list--no-borders.resource-collection-table
+        .row.table-headers
+          .col.col-100 {{ ::("order.customerInfo"|translate) }}
+        .row.item(ng-if="customerOrderVm.customerAddress.nombre")
+          .col.col-100 {{ ::( customerOrderVm.customerAddress.nombre ) }}
+        .row.item(ng-if="customerOrderVm.addressLine1")
+          .col.col-100 {{ ::( customerOrderVm.addressLine1 ) }}
+        .row.item(ng-if="customerOrderVm.addressLine2")
+          .col.col-100 {{ ::( customerOrderVm.addressLine2 ) }}
+        .row.item(ng-if="customerOrderVm.customerOrder.forma_de_pago")
+          .col.col-100 {{ ::( customerOrderVm.customerOrder.forma_de_pago ) }}
+        .row.item(ng-if="customerOrderVm.customerBillingAddress.direccion")
+          .col.col-100
+            | {{ ::( customerOrderVm.customerBillingAddress.direccion ) }}
+        .row.item(ng-if="customerOrderVm.customerBillingAddress.ciudad")
+          .col.col-100
+            | {{ ::( customerOrderVm.customerBillingAddress.ciudad ) }}

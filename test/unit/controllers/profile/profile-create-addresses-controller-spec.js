@@ -10,9 +10,9 @@
 
     beforeEach(module('porttare.controllers'));
     beforeEach(angular.mock.module(function ($provide) {
-      $provide.factory('ProfileAddressesService', function () {
+      $provide.factory('ProfileAddressesService', function ($q) {
         return {
-          runAction: sinon.stub(),
+          runAction: sinon.stub().returns($q.defer().promise),
         };
       });
     }));

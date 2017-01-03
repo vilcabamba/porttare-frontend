@@ -11,6 +11,7 @@
       bindToController: true,
       controllerAs: 'orderItemsTotalVM',
       controller: orderItemsTotalController,
+      link: orderItemsTotalLink,
       template: '{{ orderItemsTotalVM.totalCents | priceCurrency | currency }}',
       scope: {
         orderItems: '='
@@ -19,15 +20,25 @@
     return directive;
   }
 
-  function orderItemsTotalController() {
+  function orderItemsTotalController() {}
+
+  function orderItemsTotalLink(scope){
     // jshint validthis:true
-    var totalCents,
-        orderItemsTotalVM = this,
-        orderItems = orderItemsTotalVM.orderItems;
-    totalCents = orderItems.reduce(function(totalMemo, orderItem) {
-      var subtotalCents = orderItem.provider_item_precio_cents * orderItem.cantidad; // jshint ignore:line
-      return totalMemo + subtotalCents;
-    }, 0);
-    orderItemsTotalVM.totalCents = totalCents;
+    var orderItemsTotalVM = scope.orderItemsTotalVM;
+
+    scope.$watch('orderItemsTotalVM.orderItems', function (newOrderItems){
+      if (newOrderItems) {
+        calculateTotal();
+      }
+    }, true);
+
+    function calculateTotal() {
+      var orderItems = orderItemsTotalVM.orderItems;
+      var totalCents = orderItems.reduce(function(totalMemo, orderItem) {
+        var subtotalCents = orderItem.provider_item_precio_cents * orderItem.cantidad; // jshint ignore:line
+        return totalMemo + subtotalCents;
+      }, 0);
+      orderItemsTotalVM.totalCents = totalCents;
+    }
   }
 })();

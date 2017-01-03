@@ -10,13 +10,20 @@
     pfaVm.addressFormData = {};
     pfaVm.messages = {};
     pfaVm.processAddress = processAddress;
+    pfaVm.defaultInCurrentGeolocation = true;
 
     function processAddress() {
       var options = {
         acionName: 'create',
         data: pfaVm.addressFormData
       };
-      ProfileAddressesService.runAction(options);
+      return ProfileAddressesService
+        .runAction(options)
+        .catch(function (response){
+          if (response.errors) {
+            pfaVm.messages = response.errors;
+          }
+      });
     }
   }
 })();

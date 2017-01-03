@@ -1,6 +1,5 @@
 .show-profile-page {
   font-family: Montserrat-Light;
-  overflow: auto;
 
   .profile-header {
     .img-profile {
@@ -14,6 +13,7 @@
     .user-name {
       text-align: center;
       font-size: 26px;
+      line-height: 30px;
       margin: 15px 0;
       color: $dark;
     }
@@ -25,15 +25,30 @@
 }
 
 .addresses-wrapper {
-  // fix scrolling
-  height: auto;
-  bottom: initial;
-  padding-bottom: 20px;
+  top: 0;
+
+  &--fix-scroll {
+    height: auto;
+    bottom: initial;
+    padding-bottom: 15px;
+  }
 
   .address-wrapper {
     .resource-detail-title {
       font-size: 18px;
       margin-bottom: 5px;
+    }
+  }
+}
+
+.addresses-wrapper--parent {
+  overflow: initial;
+
+  form {
+    position: relative;
+
+    .addresses-wrapper {
+      position: relative;
     }
   }
 }

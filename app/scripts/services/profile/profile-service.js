@@ -31,16 +31,26 @@
     }
 
     function updateProfileProvider(providerData){
-      return $http({
+      var promise;
+      var options = {
         method: 'PUT',
         url: ENV.apiHost + '/api/provider/profile',
-        data: providerData
+        data: providerData,
+        arrayKey: '[]'
+      };
 
-      }).then(function success(res) {
-        return res.data;
-      }, function error(res) {
-        return $q.reject(res.data);
-      });
+      if(providerData.logotipo){
+        promise = Upload.upload(options);
+      }
+      else{
+        promise = $http(options);
+      }
+      return promise
+        .then(function success(res){
+          return res.data;
+        }, function error(res) {
+          return $q.reject(res.data);
+        });
     }
 
     function editProfile(user){
@@ -61,10 +71,11 @@
 
     function getUserImageURL(user){ //jshint ignore: line
       /* jshint ignore:start */
-      return user.custom_image_url 
-              || ( user.custom_image && user.custom_image.url ) 
-              || user.image 
-              || APP.defaultProfileImage;
+      return user && (
+              user.custom_image_url
+              || ( user.custom_image && user.custom_image.url )
+              || user.image
+              || APP.defaultProfileImage );
       /* jshint ignore:end */
     }
 

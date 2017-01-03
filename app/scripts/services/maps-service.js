@@ -5,10 +5,16 @@
     .module('porttare.services')
     .factory('MapsService', MapsService);
 
-  function MapsService($window, ENV, $q, $ionicPopup) {
+  function MapsService($q,
+                       $auth,
+                       $window,
+                       $ionicPopup,
+                       GeocodingService,
+                       ENV) {
     var service = {
       loadGMaps: loadGMaps,
       renderMap: renderMap,
+      displayMarker: displayMarker,
       renderAddressMarker: renderAddressMarker
     };
     var loadDefered,
@@ -22,7 +28,6 @@
       } else {
         loadDefered = $q.defer();
         appendGMapsScript();
-        gmapsLoaded = true;
         return loadDefered.promise;
       }
     }
@@ -38,6 +43,7 @@
     }
 
     function gMapsCallback(){
+      gmapsLoaded = true;
       loadDefered.resolve();
       removeGMapsCallback();
     }
@@ -54,24 +60,23 @@
     }
 
     function renderAddressMarker(map, options) {
-      var geocoder = new google.maps.Geocoder();
-      geocoder.geocode(options, function(results, status) {
-        if (status === 'OK') {
+      GeocodingService
+        .geocode(options)
+        .then(function (results) {
           map.setCenter(results[0].geometry.location);
           displayMarker(map, results[0].geometry.location);
-        } else {
+        }).catch(function () {
           var positionDefault = mapPositionDefault();
           map.setCenter(positionDefault);
           $ionicPopup.alert({
             title: 'Error',
             template: '{{::("office.locationNotFound"|translate)}}' + options.address
           });
-        }
-      });
+        });
     }
 
     function displayMarker(map, marker){
-      new google.maps.Marker({
+      return new google.maps.Marker({
         map: map,
         position: marker
       });
@@ -88,9 +93,8 @@
     }
 
     function mapPositionDefault(){
-      var latitude = -3.996704;
-      var longitude = -79.201699;
-      return new google.maps.LatLng(latitude, longitude);
+      var currentPlace = $auth.user.current_place; // jshint ignore:line
+      return new google.maps.LatLng(currentPlace.lat, currentPlace.lon);
     }
 
   }

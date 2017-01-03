@@ -31,7 +31,8 @@
       ProfileService.updateProfileProvider(profileEdit)
         .then(function success(resp) {
           $ionicLoading.hide();
-          providerProfileVm.profileProvider = resp.provider_profile;//jshint ignore:line
+          $auth.user.provider_profile = resp.provider_profile;//jshint ignore:line
+          $scope.$emit('currentProfileProviderUpdated', $auth.user.provider_profile);//jshint ignore:line
           $ionicPopup.alert({
             title: 'Éxito',
             template: '{{::("provider.successUpdateProfileProvider"|translate)}}'

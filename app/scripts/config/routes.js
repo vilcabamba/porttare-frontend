@@ -88,6 +88,12 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   })
+  .state('termsAndCond', {
+    url: '/terms-and-conditions',
+    templateUrl: 'templates/terms-and-cond/terms-and-cond.html',
+    controller: 'TermsAndCondController',
+    controllerAs: 'terCondVm'
+  })
   .state('app.cart', {
     url: '/cart',
     abstract: true
@@ -377,6 +383,53 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   })
+  .state('provider.orders', {
+    url: '/customer-orders',
+    abstract: true
+  })
+  .state('provider.orders.index', {
+    url: '/:status',
+    cache: false,
+    params: {
+      status: 'submitted'
+    },
+    views: {
+      'menuContent@provider': {
+        templateUrl: 'templates/providers/orders/index.html',
+        controller: 'ProviderOrdersController',
+        controllerAs: 'poVm',
+        resolve: {
+          status: function ($stateParams){
+            return $stateParams.status;
+          }
+        }
+      }
+    }
+  })
+  .state('provider.orders.show', {
+    url: '/:id',
+    params: {
+      customerOrder: null
+    },
+    views: {
+      'menuContent@provider': {
+        templateUrl: 'templates/providers/orders/show.html',
+        controller: 'ProviderOrderShowController',
+        controllerAs: 'providerOrderShowVM',
+        resolve: {
+          customerOrder: function ($stateParams, ProviderCustomerOrdersService) {
+            if ($stateParams.customerOrder) {
+              return $stateParams.customerOrder;
+            } else {
+              var customerOrderId = $stateParams.id;
+              return ProviderCustomerOrdersService
+                       .getCustomerOrder(customerOrderId);
+            }
+          }
+        }
+      }
+    }
+  })
   .state('app.courier', {
     url: '/courier',
     abstract: true
@@ -586,6 +639,30 @@ function routes($stateProvider, $urlRouterProvider) {
         }
       }
     }
+  })
+  .state('app.customerorders.show', {
+    url: '/:id',
+    params: {
+      customerOrder: null
+    },
+    views: {
+      'menuContent@app': {
+        templateUrl: 'templates/customer/orders/show.html',
+        controller: 'CustomerOrderController',
+        controllerAs: 'customerOrderVm',
+        resolve: {
+          customerOrder: function ($stateParams, CustomerOrdersService) {
+            if ($stateParams.customerOrder) {
+              return $stateParams.customerOrder;
+            } else {
+              var customerOrderId = $stateParams.id;
+              return CustomerOrdersService
+                        .getCustomerOrder(customerOrderId);
+            }
+          }
+        }
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
@@ -613,17 +690,19 @@ function routes($stateProvider, $urlRouterProvider) {
       });
   }
 
-  function accessIfUserAuth($auth, $state, $ionicLoading, APP, CartService) {
+  function accessIfUserAuth($auth, $state, APP, UserAuthService, CartService) {
     return $auth.validateUser()
       .then(function userAuthorized(user) {
-        return CartService.getCart().then(function(response){
-          user.customer_order = response.customer_order; //jshint ignore:line
-          return user;
-        });
+          if (user.agreed_tos) { //jshint ignore:line
+            return CartService.getCart().then(function(response){
+              user.customer_order = response.customer_order; //jshint ignore:line
+              return user;
+            });
+          } else {
+            $state.go('termsAndCond');
+          }
       }, function userNotAuthorized() {
-        $state.go(APP.preloginState).then(function () {
-          $ionicLoading.hide();
-        });
+        $state.go(APP.preloginState);
       });
   }
 }

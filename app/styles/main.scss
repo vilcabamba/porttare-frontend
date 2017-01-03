@@ -12,6 +12,7 @@
 
 @import "fonts/fonts";
 @import "common/rows";
+@import "common/text";
 @import "common/mixins";
 @import "common/buttons";
 @import "common/footer-stripes";
@@ -20,6 +21,7 @@
 @import "common/tabs-striped";
 @import "common/grid";
 @import "common/slick";
+@import "common/modal";
 @import "forms/general";
 @import "forms/inputs";
 @import "forms/resource-form";
@@ -39,14 +41,16 @@
 @import "directives/link-button";
 @import "directives/providers-carousel";
 @import "directives/slick-item";
+@import "resource/details-table";
+@import "resource/collection-table";
 @import "categories/index";
 @import "categories/show";
 @import "customer/show";
+@import "customer/order";
+@import "customer/profile-form";
 @import "item/index";
 @import "item/form";
 @import "item/show";
-@import "resource/details-table";
-@import "resource/collection-table";
 @import "clients/index";
 @import "wishlist/wishlist";
 @import "error/error";
@@ -59,3 +63,5 @@
 @import "dispatchers/show";
 @import "cart/cart";
 @import "cart/edit-item";
+@import "orders/index";
+@import "orders/provider-show";

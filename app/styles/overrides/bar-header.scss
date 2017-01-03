@@ -1,6 +1,17 @@
 .bar-header {
   .back-button {
     margin-left: 0;
+
+    .back-text {
+      display: none;
+    }
+  }
+
+  .cart-main-button {
+    font-size: 28px;
+    color: $white;
+    border: 0;
+    background: 0;
   }
 }
 

@@ -107,7 +107,11 @@
         isRequired: 'Este campo es obligatorio',
         nextStep: 'Siguiente Paso',
         createProvider: 'Crear Proveedor',
-        noMoreItems: 'No hay más productos que mostrar'
+        noMoreItems: 'No hay más productos que mostrar',
+        acceptOrder: 'Aceptar orden',
+        rejectOrder: 'Rechazar orden',
+        reasonToReject: 'Razón',
+        reasonToRejectPlaceholder: 'Especifica una razón'
       },
       courier: {
         successCourierSave: 'Mensajero guardado éxitosamente',
@@ -124,6 +128,9 @@
         birthdate: 'Fecha de nacimiento',
         license: 'Licencia de conducir',
         orders: 'Pedidos',
+        deliveryAddresses: 'Lugar de entrega',
+        ready: 'Listo',
+        customerOrderDeliveryUpdate: 'Datos de entrega actualizado éxitosamente',
         labels: {
           found: 'Encontramos',
           closeToYou: 'pedidos cerca de ti',
@@ -176,7 +183,9 @@
           fri: 'Vie',
           sat: 'Sáb',
           sun: 'Dom'
-        }
+        },
+        accept:'Aceptar',
+        notifications:'Notificaciones'
       },
       item: {
         item: 'Producto',
@@ -206,7 +215,7 @@
         valorMedida: 'Valor de medida',
         stockLabel: 'Producto en stock',
         productDetails:'Detalles del producto',
-        cantidad: 'Cantidad',
+        cantidad: 'Cantidad máxima',
         cantidadPrefix: 'x',
         currency: '$ ',
         seeAsCustomer: 'Ver como cliente',
@@ -240,7 +249,8 @@
         nombres: 'Nombres',
         direccion: 'Dirección',
         telefono: 'Teléfono',
-        email: 'email',
+        ciudad: 'Ciudad',
+        email: 'E-mail',
         noClients: 'No tienes ningún cliente todavía.',
         addImage: 'Agregar fotografía'
       },
@@ -261,8 +271,7 @@
         buttonAddItems: 'Agregar ítems +',
         buttonAddDate: 'Agregar hora y fecha +',
         buttonShare: 'Escoger usuario +',
-        titleSelectItems: 'Seleccionar Items',
-        noItems: 'No se han cargado items al wishlist'
+        titleSelectItems: 'Seleccionar Items'
       },
       office: {
         office: 'Establecimiento',
@@ -348,7 +357,8 @@
           name: 'Nombre',
           addAddressBtnText: 'Agregar Dirección',
           saveBtnText: 'Guardar Dirección',
-          updateBtnText: 'Actualizar Dirección'
+          updateBtnText: 'Actualizar Dirección',
+          noAddressesSaved: 'No has guardado ninguna dirección de envío'
         }
       },
       cart: {
@@ -358,6 +368,7 @@
         placeOrder: 'Enviar pedido',
         observations: 'Observaciones',
         observacionesPlaceholder: 'Ej: sin cebollas',
+        addDeliveryAddress: 'Agregar dirección de envío',
         deliveryAddress: 'Dirección de entrega',
         deliveryMethod: 'Método de entrega',
         paymentMethod: 'Método de pago',
@@ -366,8 +377,11 @@
         cantidadSingular: 'unidad',
         title: 'Carrito',
         deliverNow: 'Entregar inmediatamente',
+        pickupNow: 'Inmediatamente.',
         shippingCosts: '(costos de envío)',
         deliveryPlaceholder: 'Entrega:',
+        pickupPlaceholder: 'Recoger:',
+        withoutDeliveryAddress: 'Definir dirección de envío',
         deliveryMethods: {
           pickup: 'Recoger en local',
           shipping: 'Enviar a domicilio',
@@ -375,8 +389,49 @@
       },
       orders: {
         collectionTitle: 'Orden #',
-        date: 'Fecha',
-        total: 'Total'
+        total: 'Total',
+        titleFormOrders: 'Revisa todos los pedidos que los clientes hacen sobre tus productos.',
+        inProcess: 'En gestión',
+        completed: 'Completados',
+        have: 'Tienes',
+        ordersPendings: 'Pedidos pendientes',
+        ordersEmpty: 'No hay pedidos',
+        orderDetails: 'Detalles de la orden'
+      },
+      order: {
+        submittedAt: 'Enviada',
+        shippingCosts: 'Costos de Envio',
+        observations: 'Observaciones',
+        customerInfo: 'Información de Cliente y envío',
+        providerProfile: {
+          quantity: 'Can',
+          price: 'Precio',
+          item: {
+            name: 'Producto',
+            observations:'Observaciones:',
+            cantidadPrefix: 'x'
+          }
+        },
+        summary: {
+          subtotal: 'Subtotal',
+          shippingCosts: 'Costos de Envío',
+          VAT: '%',
+          total: 'Total de Compra',
+        },
+        discount: {
+          textCode: 'Código de Descuento',
+          applyCode: 'Aplicar Código'
+        },
+        status: {
+          submitted: 'Enviada'
+        },
+        delivery: {
+          status: {
+            pending: 'Esperando confirmación del proveedor',
+            accepted: 'Aceptada',
+            rejected: 'Rechazada'
+          }
+        }
       },
       form: {
         requiredField: 'Campo requerido. ',
@@ -401,6 +456,10 @@
         dispatchersDelete: 'El Despachador ha sido eliminado éxitosamente',
         dispatchersData: 'Datos del Despachador',
         notAccepted: 'Esta invitación no ha sido aceptada todavía.'
+      },
+      termsAndConditions: {
+        termsAndConditions: 'Términos y Condiciones',
+        description: '¿Usted acepta los términos y condiciones?'
       }
     });
 
