@@ -1,6 +1,15 @@
 .order-show-page{
+  font-family: Montserrat-Light;
 
-  color: #444;
+  .page-title {
+    font-family: Montserrat-Regular;
+
+    h2 {
+      color: $dark;
+      font-size: 22px;
+      line-height: 24px;
+    }
+  }
 
   .order-container{
     border-radius: 10px;

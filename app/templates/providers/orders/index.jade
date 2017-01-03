@@ -5,10 +5,9 @@ ion-view(
     .alt-logo
 
   ion-content.order-show-page
-
-    .list.list-inset
-      h4 {{::("globals.notifications"|translate)}}
-      h5 {{::("orders.titleFormOrders"|translate)}}
+    .list.list-inset.page-title
+      h2 {{::("globals.notifications"|translate)}}
+      p {{::("orders.titleFormOrders"|translate)}}
 
     .tab-container
       .tab-item(
@@ -23,8 +22,7 @@ ion-view(
       ) {{::("orders.completed"|translate)}}
 
     .list.list-inset
-
-      h5(ng-if="poVm.tab==1")
+      p(ng-if="poVm.tab==='submitted'")
         | {{::("orders.have"|translate)}}
         | {{poVm.customerOrders.length}}
         | {{::("orders.ordersPendings"|translate)}}
