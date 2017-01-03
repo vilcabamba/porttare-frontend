@@ -384,17 +384,25 @@ function routes($stateProvider, $urlRouterProvider) {
     }
   })
   .state('provider.orders', {
-    url: '/ordenes',
+    url: '/customer-orders',
     abstract: true
   })
   .state('provider.orders.index', {
-    url: '/',
+    url: '/:status',
     cache: false,
+    params: {
+      status: 'submitted'
+    },
     views: {
       'menuContent@provider': {
         templateUrl: 'templates/providers/orders/index.html',
         controller: 'ProviderOrdersController',
         controllerAs: 'poVm',
+        resolve: {
+          status: function ($stateParams){
+            return $stateParams.status;
+          }
+        }
       }
     }
   })

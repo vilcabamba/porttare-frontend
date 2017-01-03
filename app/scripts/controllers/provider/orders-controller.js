@@ -5,29 +5,23 @@
     .module('porttare.controllers')
     .controller('ProviderOrdersController', ProviderOrdersController);
 
-  function ProviderOrdersController(ProviderCustomerOrdersService, ErrorHandlerService) {
+  function ProviderOrdersController(status,
+                                    ProviderCustomerOrdersService,
+                                    ErrorHandlerService) {
     var poVm = this;
-    poVm.cambiarTab = cambiarTab;
+    poVm.tab = status;
     init();
 
     function init(){
-      getProviderCustomerOrdersStatus('submitted', 1);
+      getProviderCustomerOrdersStatus(poVm.tab);
     }
 
-    function getProviderCustomerOrdersStatus(status, tab){
+    function getProviderCustomerOrdersStatus(status){
       ProviderCustomerOrdersService
         .getProviderCustomerOrdersByStatus(status)
         .then(function success(resp){
           poVm.customerOrders = resp.customer_orders; // jshint ignore:line
-          poVm.tab = tab;
         }, ErrorHandlerService.handleCommonErrorGET);
     }
-
-    function cambiarTab(tab){
-      var status = tab===1 ? 'submitted': 'completed';
-      getProviderCustomerOrdersStatus(status, tab);
-
-    }
-
   }
 })();

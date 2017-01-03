@@ -12,12 +12,14 @@ ion-view(
 
     .tab-container
       .tab-item(
-        ng-class="{'tab-item-active': poVm.tab==1}"
-        ng-click="poVm.cambiarTab(1)"
+        menu-close
+        ng-class="{'tab-item-active': poVm.tab==='submitted'}"
+        ui-sref="provider.orders.index({status: 'submitted'})"
       ) {{::("orders.inProcess"|translate)}}
       .tab-item(
-        ng-class="{'tab-item-active': poVm.tab==2}"
-        ng-click="poVm.cambiarTab(2)"
+        menu-close
+        ng-class="{'tab-item-active': poVm.tab==='completed'}"
+        ui-sref="provider.orders.index({status: 'completed'})"
       ) {{::("orders.completed"|translate)}}
 
     .list.list-inset
