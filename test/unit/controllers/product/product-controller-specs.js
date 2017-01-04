@@ -38,7 +38,7 @@
         };
       });
       $provide.factory('$auth', function () {
-        return {};
+        return { user: {} };
       });
       $provide.factory('ErrorHandlerService', function () {
         return {};
