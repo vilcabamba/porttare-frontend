@@ -241,9 +241,9 @@ function routes($stateProvider, $urlRouterProvider) {
             return CategoriesService
                      .getCategories()
                      .then(function (response){
-                       return response.data.provider_categories;
+                       return response.data.provider_categories; // jshing ignore:line
                      })
-                     .catch(ErrorHandlerService.handleCommonErrorGET)
+                     .catch(ErrorHandlerService.handleCommonErrorGET);
           }
         }
       }
