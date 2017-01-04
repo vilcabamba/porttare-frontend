@@ -42,6 +42,30 @@ form(
         show-error(array-messages='pfaVm.messages.ciudad')
 
       label.item.item-input.item-stacked-label(
+        ng-class="{'item-error': pfaVm.messages.direccion_uno}"
+      )
+        span.input-label
+          | {{::("profile.addresses.addressOne"|translate)}} *
+        input(
+          type='text'
+          ng-model='::pfaVm.addressFormData.direccion_uno'
+          required
+        )
+      .errors-wrapper
+        show-error(array-messages='pfaVm.messages.direccion_uno')
+
+      label.item.item-input.item-stacked-label(
+        ng-class="{'item-error': pfaVm.messages.direccion_dos}"
+      )
+        span.input-label {{::("profile.addresses.addressTwo"|translate)}}
+        input(
+          type='text'
+          ng-model='pfaVm.addressFormData.direccion_dos'
+        )
+      .errors-wrapper
+        show-error(array-messages='pfaVm.messages.direccion_dos')
+      
+      label.item.item-input.item-stacked-label(
         ng-class="{'item-error': pfaVm.messages.parroquia}"
       )
         span.input-label {{::("profile.addresses.parish"|translate)}}
@@ -62,28 +86,6 @@ form(
         )
       .errors-wrapper
         show-error(array-messages='pfaVm.messages.barrio')
-
-      label.item.item-input.item-stacked-label(
-        ng-class="{'item-error': pfaVm.messages.direccion_uno}"
-      )
-        span.input-label {{::("profile.addresses.addressOne"|translate)}}
-        input(
-          type='text'
-          ng-model='::pfaVm.addressFormData.direccion_uno'
-        )
-      .errors-wrapper
-        show-error(array-messages='pfaVm.messages.direccion_uno')
-
-      label.item.item-input.item-stacked-label(
-        ng-class="{'item-error': pfaVm.messages.direccion_dos}"
-      )
-        span.input-label {{::("profile.addresses.addressTwo"|translate)}}
-        input(
-          type='text'
-          ng-model='pfaVm.addressFormData.direccion_dos'
-        )
-      .errors-wrapper
-        show-error(array-messages='pfaVm.messages.direccion_dos')
 
       label.item.item-input.item-stacked-label(
         ng-class="{'item-error': pfaVm.messages.codigo_postal}"
@@ -121,4 +123,5 @@ form(
   .bar.bar-footer.bar-stable
     button.button.button-small.button-outline.button-energized(
       ng-click="pfaVm.processAddress()"
+      ng-disabled="pfaVm.addressFormData.$invalid"
     ) {{ ::pfaVm.inUpdateMode ? ("profile.addresses.updateBtnText"|translate) : ("profile.addresses.saveBtnText"|translate) }}

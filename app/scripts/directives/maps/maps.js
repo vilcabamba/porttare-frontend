@@ -87,7 +87,7 @@
 
     function listenForChange(){
       mapVm.map.addListener('click', function (changeEvent) {
-        mapVm.mapError = null;
+        clearErrorMessages();
         clearCurrentMarker();
         drawMarker(changeEvent.latLng);
 
@@ -106,6 +106,10 @@
             });
         }
       });
+    }
+
+    function clearErrorMessages(){
+      mapVm.mapError = null;
     }
 
     function clearCurrentMarker(){

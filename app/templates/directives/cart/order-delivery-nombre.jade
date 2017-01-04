@@ -13,9 +13,9 @@ span(
 span(
   ng-if="orderDeliveryNombreVM.delivery.deliver_at"
 )
-  | {{ (providerProfile.customer_order_delivery.deliver_at | formatDate:'dddd D') }}
+  | {{ (orderDeliveryNombreVM.delivery.deliver_at | formatDate:'dddd D') }}
   | de
-  | {{ (providerProfile.customer_order_delivery.deliver_at | formatDate:'MMMM - H:mm A')}}
+  | {{ (orderDeliveryNombreVM.delivery.deliver_at | formatDate:'MMMM - H:mm A')}}
   | -
 
 span.text-assertive(
