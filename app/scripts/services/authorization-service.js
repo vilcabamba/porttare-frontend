@@ -7,7 +7,8 @@
 
   function AuthorizationService($auth, $state, $ionicLoading, APP) {
     var service = {
-      accessIfUserNotAuth: accessIfUserNotAuth
+      accessIfUserNotAuth: accessIfUserNotAuth,
+      notShowWelcomeProvider: notShowWelcomeProvider
     };
 
     return service;
@@ -18,6 +19,21 @@
           $state.go(APP.successState).then(function () {
             $ionicLoading.hide();
           });
+        }, function userNotAuthorized() {
+          return;
+        });
+    }
+
+    function notShowWelcomeProvider() {
+      return $auth.validateUser()
+        .then(function userAuthorized(user) {
+          if (!user.provider_profile) { //jshint ignore:line
+            return;
+          }else{
+            $state.go('provider.items.index').then(function () {
+              $ionicLoading.hide();
+            });
+          }
         }, function userNotAuthorized() {
           return;
         });

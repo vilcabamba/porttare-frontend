@@ -235,6 +235,11 @@ function routes($stateProvider, $urlRouterProvider) {
         cache: false,
         templateUrl: 'templates/provider/welcome.html'
       }
+    },
+    resolve: {
+      auth: function(AuthorizationService){
+        return AuthorizationService.notShowWelcomeProvider();
+      }
     }
   })
   .state('app.provider.new', {
@@ -246,6 +251,9 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'ProviderController',
         controllerAs: 'providerVm',
         resolve: {
+          auth: function(AuthorizationService){
+            return AuthorizationService.notShowWelcomeProvider();
+          },
           providerCategories: function (CategoriesService,
                                         ErrorHandlerService){
             return CategoriesService
@@ -691,7 +699,7 @@ function routes($stateProvider, $urlRouterProvider) {
     if (isResetPassword($location.absUrl())) {
       return '/reset';
     } else {
-      return '/prelogin';
+      return '/app/categories/';
     }
   });
 
