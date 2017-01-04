@@ -19,7 +19,9 @@
     beforeEach(module('porttare.controllers'));
     beforeEach(module('porttare.services', function ($provide) {
       $provide.factory('CartService', function () {
-        return {};
+        return {
+          findCartItem : sinon.stub()
+        };
       });
       $provide.factory('WishlistsService', function ($q) {
         deferGetWishlist = $q.defer();
