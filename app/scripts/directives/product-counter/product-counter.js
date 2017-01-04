@@ -34,6 +34,7 @@
     init();
 
     pcVm.itemsCount = options.cantidad;
+    pcVm.canIndrement = options.canIndrement;
     pcVm.priceTotalCents = getTotal();
 
     function processData(option) {
