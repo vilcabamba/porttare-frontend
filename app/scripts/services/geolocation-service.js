@@ -26,7 +26,7 @@
           return res;
         }, function error(err) {
           // TODO translate me?
-          var message = 'Hubo un problema al geolocalizar.';
+          var message = 'Imposible acceder a la geolocalización.';
           switch (err.code) {
             case 1:
               message += ' Denegada la peticion de Geolocalización.';

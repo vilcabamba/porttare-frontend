@@ -10,3 +10,7 @@
     id="map-directive"
     data-tap-disabled="true"
   )
+
+.message-error(
+  ng-if="mapVm.mapError"
+) {{ mapVm.mapError }}

@@ -18,7 +18,6 @@
         ciudad: '='
       },
       controller: [ '$scope',
-                    '$ionicPopup',
                     'MapsService',
                     'GeocodingService',
                     'GeolocationService',
@@ -31,7 +30,6 @@
   }
 
   function mapsController($scope,
-                          $ionicPopup,
                           MapsService,
                           GeocodingService,
                           GeolocationService) {
@@ -84,14 +82,12 @@
     }
 
     function couldntGetPosition(message) {
-      $ionicPopup.alert({
-        title: 'Error',
-        template: message
-      });
+      mapVm.mapError = message;
     }
 
     function listenForChange(){
       mapVm.map.addListener('click', function (changeEvent) {
+        mapVm.mapError = null;
         clearCurrentMarker();
         drawMarker(changeEvent.latLng);
 
