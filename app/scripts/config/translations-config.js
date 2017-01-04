@@ -112,7 +112,8 @@
         acceptOrder: 'Aceptar orden',
         rejectOrder: 'Rechazar orden',
         reasonToReject: 'Razón',
-        reasonToRejectPlaceholder: 'Especifica una razón'
+        reasonToRejectPlaceholder: 'Especifica una razón',
+        ruc: 'RUC'
       },
       courier: {
         successCourierSave: 'Mensajero guardado éxitosamente',
