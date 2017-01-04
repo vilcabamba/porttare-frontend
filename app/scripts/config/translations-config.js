@@ -28,6 +28,7 @@
         account: 'Cuenta',
         invite: 'Invitar',
         history: 'Historial',
+        locations: 'Localidades',
         user:{
           courier: 'Mensajero',
           buyer: 'Comprador',

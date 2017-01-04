@@ -98,6 +98,20 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   })
+  .state('app.locations', {
+    url: '/locations',
+    abstract: true
+  })
+  .state('app.locations.index', {
+    url: '/',
+    views: {
+      'menuContent@app': {
+        templateUrl: 'templates/locations/index.html',
+        controller: 'LocationsController',
+        controllerAs: 'locationsVm'
+      }
+    }
+  })
   .state('termsAndCond', {
     url: '/terms-and-conditions',
     templateUrl: 'templates/terms-and-cond/terms-and-cond.html',
