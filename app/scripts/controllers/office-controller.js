@@ -58,7 +58,7 @@
     }
 
     function scheduleToDate(schedule) {
-      var toTime    = $filter('timeSchedule')(schedule),
+      var toTime    = $filter('toDate')(schedule, 'timeSchedule'),
           toDateStr = $filter('formatDate')(
             toTime,
             'YYYY/MM/DD HH:mm Z'
