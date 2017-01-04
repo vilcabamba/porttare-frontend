@@ -84,6 +84,7 @@
         twitter:'Twitter',
         instagram:'Instagram',
         methodPayment: 'Forma de pago',
+        category: 'Categoría',
         methods: {
           cash: 'Efectivo',
           creditCard: 'Tarjeta de crédito'

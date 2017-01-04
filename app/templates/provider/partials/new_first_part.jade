@@ -68,6 +68,14 @@
       required
     )
   .errors-wrapper
-    span.show-errors(ng-messages="providerVm.providerForm.representante.$error" ng-if="providerVm.providerForm.representante.$touched")
+    span.show-errors(ng-messages="providerVm.providerForm.representante_legal.$error" ng-if="providerVm.providerForm.representante_legal.$touched")
       span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
     show-error(array-messages="providerVm.errors.representante_legal")
+
+  label.item.item-input.item-select
+    span.input-label {{::("provider.category"|translate)}}
+    select(
+      ng-model='providerVm.providerForm.provider_category_id'
+      ng-options="providerCategory.id as providerCategory.titulo for providerCategory in providerVm.providerCategories")
+  .errors-wrapper
+    show-error(array-messages='providerVm.errors.provider_category_id')

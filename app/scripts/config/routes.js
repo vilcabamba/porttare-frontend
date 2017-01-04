@@ -222,9 +222,8 @@ function routes($stateProvider, $urlRouterProvider) {
     url: '/welcome',
     views: {
       'menuContent@app': {
-        templateUrl: 'templates/provider/welcome.html',
-        controller: 'ProviderController',
-        controllerAs: 'providerVm1'
+        cache: false,
+        templateUrl: 'templates/provider/welcome.html'
       }
     }
   })
@@ -232,9 +231,21 @@ function routes($stateProvider, $urlRouterProvider) {
     url: '/new',
     views: {
       'menuContent@app': {
+        cache: false,
         templateUrl: 'templates/provider/new.html',
         controller: 'ProviderController',
-        controllerAs: 'providerVm'
+        controllerAs: 'providerVm',
+        resolve: {
+          providerCategories: function (CategoriesService,
+                                        ErrorHandlerService){
+            return CategoriesService
+                     .getCategories()
+                     .then(function (response){
+                       return response.data.provider_categories;
+                     })
+                     .catch(ErrorHandlerService.handleCommonErrorGET)
+          }
+        }
       }
     }
   })

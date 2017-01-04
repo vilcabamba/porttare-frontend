@@ -5,7 +5,8 @@
     .module('porttare.controllers')
     .controller('ProviderController', ProviderController);
 
-  function ProviderController(ProviderService,
+  function ProviderController(providerCategories,
+                              ProviderService,
                               $ionicPopup,
                               $state,
                               $auth,
@@ -22,6 +23,7 @@
     providerVm.matrizProvider = {};
     providerVm.touchedPayments = false;
     providerVm.removeImage = removeImage;
+    providerVm.providerCategories = providerCategories;
     // TODO translate:
     providerVm.laborDays = [{
       label: 'Lunes',

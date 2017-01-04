@@ -17,7 +17,8 @@
       $ionicScrollDelegate,
       $translate,
       stateRedirect,
-      deferTranslate;
+      deferTranslate,
+      providerCategories;
 
     beforeEach(module('porttare.controllers'));
     beforeEach(module('porttare.filters'));
@@ -54,6 +55,7 @@
         $auth = {
           user: {name:'', email:''}
         };
+        providerCategories = [];
         stateRedirect = 'provider.items.index';
       })
     );
@@ -69,7 +71,8 @@
           $auth: $auth,
           $filter: $filter,
           $translate: $translate,
-          $ionicScrollDelegate: $ionicScrollDelegate
+          $ionicScrollDelegate: $ionicScrollDelegate,
+          providerCategories: providerCategories
         };
 
         ctrl = $controller('ProviderController', dependencies);
