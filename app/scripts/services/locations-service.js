@@ -8,7 +8,7 @@
   function LocationsService(CommonService) {
     var service = {
       getLocations: getLocations
-    }
+    };
     return service;
 
     function getLocations() {
