@@ -14,29 +14,6 @@ ion-modal-view.cart-page
   )
     ion-content.resource-form.checkout-form
       .list.list-inset
-        //- not here anymore
-          label.item.item-input.item-input--no-borders.item-stacked-label
-            span.input-label {{::("globals.dateDelivery"|translate)}}
-          .delivery-time-wrapper
-            ion-datetime-picker.item.item-icon-left.datetime-picker(
-              date
-              time
-              am-pm
-              only-valid="{'after': 'today', 'inclusive': true}"
-              ng-model='cartVm.checkoutForm.deliver_at'
-            )
-              i.icon.ion-ios-calendar-outline
-              span.placeholder(ng-if="!cartVm.checkoutForm.deliver_at")
-                | {{ ::('cart.deliverNow' | translate) }}
-              span(ng-if="cartVm.checkoutForm.deliver_at")
-                | {{ cartVm.checkoutForm.deliver_at | formatDate }}
-            .button.button-clear.button-positive.button-small(
-              ng-if="cartVm.checkoutForm.deliver_at"
-              ng-click="cartVm.clearDeliveryTime()"
-            ) {{ ::('cart.deliverNow' | translate) }}
-          .errors-wrapper
-            show-error(array-messages="cartVm.messages.deliver_at")
-
         label.item.item-input.item-stacked-label
           span.input-label {{::("cart.observations"|translate)}}
           textarea(

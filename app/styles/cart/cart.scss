@@ -96,6 +96,8 @@
 .checkout-form {
   .delivery-time-wrapper {
     position: relative;
+    border-bottom: 1px solid $button-light-border;
+    margin-bottom: 30px;
 
     i, span {
       cursor: pointer;
@@ -108,6 +110,18 @@
       top: 7px;
       letter-spacing: -0.5px;
       line-height: 36px;
+      background-color: $white;
+
+      &--floating {
+        float: right;
+        position: relative;
+      }
+    }
+
+    .datetime-picker {
+      border-bottom: 0;
+      margin-bottom: 0;
+      padding-right: 0;
     }
   }
 
