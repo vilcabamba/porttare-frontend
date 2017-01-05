@@ -98,17 +98,22 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   })
-  .state('app.locations', {
-    url: '/locations',
+  .state('app.places', {
+    url: '/places',
     abstract: true
   })
-  .state('app.locations.index', {
+  .state('app.places.index', {
     url: '/',
     views: {
       'menuContent@app': {
-        templateUrl: 'templates/locations/index.html',
-        controller: 'LocationsController',
-        controllerAs: 'locationsVm'
+        templateUrl: 'templates/places/index.html',
+        controller: 'PlacesController',
+        controllerAs: 'placesVm',
+        resolve: {
+          places: function (PlacesService){
+            return PlacesService.getPlaces();
+          }
+        }
       }
     }
   })
