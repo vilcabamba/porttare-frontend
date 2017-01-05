@@ -86,7 +86,7 @@
         for(var i = 0; i < customerOrder.provider_profiles.length && !orderItem; i++){ //jshint ignore:line
           var providerProfile = customerOrder.provider_profiles[i]; //jshint ignore:line
 
-          for(var j=0; providerProfile.customer_order_items &&  i< providerProfile.customer_order_items.length && !orderItem; j++){ //jshint ignore:line
+          for(var j=0; providerProfile.customer_order_items &&  j< providerProfile.customer_order_items.length && !orderItem; j++){ //jshint ignore:line
             var customerOrderItem = providerProfile.customer_order_items[j]; //jshint ignore:line
 
             if(customerOrderItem.id === itemId ){

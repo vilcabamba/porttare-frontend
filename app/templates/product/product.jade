@@ -13,7 +13,7 @@ slick-wrapper(settings="productVm.slickConfig")
   .buttons-width-constraint
     button.button.button-outline.button-energized.button-stretched(
       ng-click="productVm.runAction(productVm.actions.cart)"
-      ng-disabled="!productVm.item.cantidad || productVm.disableInputs || !productVm.canAdd()"
+      ng-disabled="!productVm.item.cantidad || productVm.disableInputs || !productVm.canAdd"
     ) {{::('product.addCar' | translate)}}
     button.button.button-outline.button-positive.button-stretched.button-letter-stretched(
       ng-click="productVm.runAction(productVm.actions.wishlist)"
