@@ -34,8 +34,8 @@
     init();
 
     pcVm.itemsCount = options.cantidad;
-    pcVm.canIndrement = canIndrement();
-    pcVm.disableButtons = disableButtons();
+    pcVm.canIncrement = getCanIncrement();
+    pcVm.disableButtons = getDisableButtons();
     pcVm.priceTotalCents = getTotal();
 
     function processData(option) {
@@ -57,7 +57,7 @@
         pcVm.itemsCount--;
       }
       pcVm.priceTotalCents = getTotal();
-      pcVm.canIndrement = canIndrement();
+      pcVm.canIncrement = getCanIncrement();
       if (options.onChangeValue && angular.isFunction(options.onChangeValue)) {
         var data = {
           itemsCount: pcVm.itemsCount,
@@ -112,12 +112,12 @@
       return pcVm.itemsCount * (options.priceCents);
     }
 
-    function disableButtons(){
+    function getDisableButtons(){
       return !CartService.canAddItem(options.cartItem, 1, options.product);
     }
 
 
-    function canIndrement() {
+    function getCanIncrement() {
       return CartService.canAddItem(options.cartItem, pcVm.itemsCount + 1, options.product);
     }
 

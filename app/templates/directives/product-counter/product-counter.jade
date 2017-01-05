@@ -9,7 +9,7 @@
       | {{ ::('item.cantidadPrefix' | translate) }}{{pcVm.itemsCount}}
     .button-plus-container
       button.button-icon.icon.ion-ios-plus-outline.button-plus(
-        ng-disabled="pcVm.disableButtons || !pcVm.canIndrement"
+        ng-disabled="pcVm.disableButtons || !pcVm.canIncrement"
         ng-click="pcVm.handleClickPlus()"
       )
 

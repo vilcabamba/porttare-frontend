@@ -18,7 +18,7 @@
     productVm.item.cantidad = 1;
     productVm.wishlists = [];
     productVm.cartItem = CartService.findCartItem($auth.user.customer_order, productVm.product.id); //jshint ignore:line
-    productVm.canAdd = canAdd();
+    productVm.canAdd = getCanAdd();
     productVm.onWishlistSelect = onWishlistSelect;
     productVm.createNewWishlist = createNewWishlist;
     productVm.showNewWishlistInput = false;
@@ -32,7 +32,7 @@
       product: productVm.product,
       onChangeValue: function (data) {
         productVm.item.cantidad = data.itemsCount;
-        productVm.canAdd = canAdd();
+        productVm.canAdd = getCanAdd();
       }
     };
 
@@ -198,7 +198,7 @@
     }
     //jshint ignore:end
 
-    function canAdd(){
+    function getCanAdd(){
       return CartService.canAddItem(productVm.cartItem, productVm.item.cantidad , productVm.product);
     }
 
