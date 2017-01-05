@@ -5,7 +5,7 @@ ion-view(
     .alt-logo
   ion-content
     ion-list
-      ion-item.wishlist-item(ng-repeat="location in ::locationsVm.locations track by $index")
+      ion-item(ng-repeat="location in ::locationsVm.locations track by $index")
         .text {{location.nombre}} - {{location.country}}
 
 
