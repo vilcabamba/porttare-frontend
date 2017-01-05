@@ -20,7 +20,8 @@
     beforeEach(module('porttare.services', function ($provide) {
       $provide.factory('CartService', function () {
         return {
-          findCartItem : sinon.stub()
+          findCartItem: sinon.stub(),
+          canAddItem: sinon.stub()
         };
       });
       $provide.factory('WishlistsService', function ($q) {
