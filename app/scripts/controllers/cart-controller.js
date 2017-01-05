@@ -104,19 +104,15 @@
         ProfileAddressesService.createAddresses(
           $scope.pfaVm.addressFormData
         ).then(function(response){
-          cartVm.addresses.push(response.customer_address); //jshint ignore:line
+          var newCustomerAddress = response.customer_address; //jshint ignore:line
+          cartVm.addresses.push(newCustomerAddress);
+          assignAddress(newCustomerAddress);
+          submitCustomerOrderDelivery().then(clearCurrentOrderDelivery);
           closeModal();
-          refreshCart(); // api will gracefully set addresses
         }, function(error){
           $scope.pfaVm.messages = error.errors;
         });
       }
-    }
-
-    function refreshCart() {
-      CartService.getCart().then(function (response){
-        cartVm.cart = response.customer_order; // jshint ignore:line
-      });
     }
 
     function showCheckoutModal() {
@@ -129,6 +125,7 @@
         });
       }
     }
+
     function closeModal() {
       clearData();
       return ModalService.closeModal();
@@ -314,7 +311,7 @@
       $ionicLoading.show({
         template: '{{::("globals.updating"|translate)}}'
       });
-      CustomerOrderDeliveryService.updateCustomerOrderDelivery(
+      return CustomerOrderDeliveryService.updateCustomerOrderDelivery(
         cartVm.providerProfile.customer_order_delivery //jshint ignore:line
       ).then(function success(resp){
         $ionicLoading.hide().then(function(){
@@ -388,6 +385,10 @@
           fromTemplateUrl: 'templates/billing-addresses/new-edit.html'
         });
       });
+    }
+
+    function clearCurrentOrderDelivery(){
+      cartVm.providerProfile = null;
     }
 
     function editCustomerOrderDeliveryAddress(customerAddress) {
