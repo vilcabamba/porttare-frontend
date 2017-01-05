@@ -79,18 +79,21 @@
       return !customerOrder || !customerOrder.provider_profiles || customerOrder.provider_profiles.length == 0; //jshint ignore:line
     }
 
-    function findCartItem(customerOrder, itemId){
+    function findCartItem(customerOrder, producto){
       var orderItem = null;
 
       if( !isCartEmpty(customerOrder) ){
-        var providerProfiles = customerOrder.provider_profiles //jshint ignore:line
-        var totalOrderItems = providerProfiles
-                                .reduce(function(customerOrderItems, providerProfile){
-                                  return customerOrderItems.concat(providerProfile.customer_order_items); //jshint ignore:line
-                                },[]);
-        orderItem = totalOrderItems
-                      .find(function(order){
-                        return order.id === itemId;
+        var orderItems = [];
+        var providerProfile = customerOrder.provider_profiles //jshint ignore:line
+                                              .find(function(profile){
+                                                return profile.id === producto.provider_profile_id; //jshint ignore:line
+                                              });
+        if(providerProfile){
+          orderItems = providerProfile.customer_order_items; //jshint ignore:line
+        }
+        orderItem = orderItems
+                      .find(function(itrem){
+                        return itrem.id === producto.id;
                       });
       }
       return orderItem;

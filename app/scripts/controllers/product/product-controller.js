@@ -17,7 +17,7 @@
     productVm.item.provider_item_id = productVm.product.id; //jshint ignore:line
     productVm.item.cantidad = 1;
     productVm.wishlists = [];
-    productVm.cartItem = CartService.findCartItem($auth.user.customer_order, productVm.product.id); //jshint ignore:line
+    productVm.cartItem = CartService.findCartItem($auth.user.customer_order, productVm.product); //jshint ignore:line
     productVm.canAdd = getCanAdd();
     productVm.onWishlistSelect = onWishlistSelect;
     productVm.createNewWishlist = createNewWishlist;
