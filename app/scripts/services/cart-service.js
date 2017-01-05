@@ -83,19 +83,16 @@
       var orderItem = null;
 
       if( !isCartEmpty(customerOrder) ){
-        for(var i = 0; i < customerOrder.provider_profiles.length && !orderItem; i++){ //jshint ignore:line
-          var providerProfile = customerOrder.provider_profiles[i]; //jshint ignore:line
-
-          for(var j=0; providerProfile.customer_order_items &&  j< providerProfile.customer_order_items.length && !orderItem; j++){ //jshint ignore:line
-            var customerOrderItem = providerProfile.customer_order_items[j]; //jshint ignore:line
-
-            if(customerOrderItem.id === itemId ){
-              orderItem = customerOrderItem;
-            }
-          }
-        }
+        var providerProfiles = customerOrder.provider_profiles //jshint ignore:line
+        var totalOrderItems = providerProfiles
+                                .reduce(function(customerOrderItems, providerProfile){
+                                  return customerOrderItems.concat(providerProfile.customer_order_items); //jshint ignore:line
+                                },[]);
+        orderItem = totalOrderItems
+                      .find(function(order){
+                        return order.id === itemId;
+                      });
       }
-
       return orderItem;
     }
 
