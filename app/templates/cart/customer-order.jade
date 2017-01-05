@@ -7,8 +7,11 @@
         order-items-total(
           order-items="providerProfile.customer_order_items"
         )
-      span + $1.50
-      span {{ ::('cart.shippingCosts' | translate) }}
+      span(
+        ng-if="providerProfile.customer_order_delivery.delivery_method === 'shipping'"
+      )
+        span + $1.50
+        span {{ ::('cart.shippingCosts' | translate) }}
 
     .provider-profile--title
       | {{ ::providerProfile.nombre_establecimiento }}
