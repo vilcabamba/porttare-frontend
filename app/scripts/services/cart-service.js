@@ -79,29 +79,29 @@
       return !customerOrder || !customerOrder.provider_profiles || customerOrder.provider_profiles.length == 0; //jshint ignore:line
     }
 
-    function findCartItem(customerOrder, producto){
+    function findCartItem(customerOrder, providerItem){
       var orderItem = null;
 
       if( !isCartEmpty(customerOrder) ){
         var orderItems = [];
         var providerProfile = customerOrder.provider_profiles //jshint ignore:line
                                               .find(function(profile){
-                                                return profile.id === producto.provider_profile_id; //jshint ignore:line
+                                                return profile.id === providerItem.provider_profile_id; //jshint ignore:line
                                               });
         if(providerProfile){
           orderItems = providerProfile.customer_order_items; //jshint ignore:line
         }
         orderItem = orderItems
-                      .find(function(itrem){
-                        return itrem.id === producto.id;
+                      .find(function(item){
+                        return item.id === providerItem.id;
                       });
       }
       return orderItem;
     }
 
-    function canAddItem(orderItem, addCount, item){
+    function canAddItem(orderItem, addCount, providerItem){
       var currentCount = orderItem ? orderItem.cantidad : 0;
-      var canAdd = ( currentCount + addCount <= item.cantidad);
+      var canAdd = ( currentCount + addCount <= providerItem.cantidad);
       return canAdd;
     }
   }
