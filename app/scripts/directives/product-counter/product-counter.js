@@ -20,7 +20,7 @@
     return directive;
   }
 
-  function productCounterController() {
+  function productCounterController(CartService) {
     var pcVm = this,
       options = {},
       actions = {
@@ -34,7 +34,8 @@
     init();
 
     pcVm.itemsCount = options.cantidad;
-    pcVm.canIndrement = options.canIndrement;
+    pcVm.canIndrement = canIndrement();
+    pcVm.disableButtons = disableButtons();
     pcVm.priceTotalCents = getTotal();
 
     function processData(option) {
@@ -56,6 +57,7 @@
         pcVm.itemsCount--;
       }
       pcVm.priceTotalCents = getTotal();
+      pcVm.canIndrement = canIndrement();
       if (options.onChangeValue && angular.isFunction(options.onChangeValue)) {
         var data = {
           itemsCount: pcVm.itemsCount,
@@ -109,5 +111,15 @@
     function getTotal() {
       return pcVm.itemsCount * (options.priceCents);
     }
+
+    function disableButtons(){
+      return !CartService.canAddItem(options.cartItem, 1, options.product);
+    }
+
+
+    function canIndrement() {
+      return CartService.canAddItem(options.cartItem, pcVm.itemsCount + 1, options.product);
+    }
+
   }
 })();

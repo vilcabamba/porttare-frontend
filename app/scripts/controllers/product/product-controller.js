@@ -18,8 +18,7 @@
     productVm.item.cantidad = 1;
     productVm.wishlists = [];
     productVm.cartItem = CartService.findCartItem($auth.user.customer_order, productVm.product.id); //jshint ignore:line
-    productVm.canAdd = canAdd;
-    productVm.canIndrement = canIndrement;
+    productVm.canAdd = canAdd();
     productVm.onWishlistSelect = onWishlistSelect;
     productVm.createNewWishlist = createNewWishlist;
     productVm.showNewWishlistInput = false;
@@ -27,11 +26,13 @@
     productVm.wishlistName = '';
     productVm.clearData = clearData;
     productVm.options = {
-      canIndrement: productVm.canIndrement,
       cantidad: productVm.item.cantidad,
       priceCents: providerItem.precio_cents, // jshint ignore:line
+      cartItem: productVm.cartItem,
+      product: productVm.product,
       onChangeValue: function (data) {
         productVm.item.cantidad = data.itemsCount;
+        productVm.canAdd = canAdd();
       }
     };
 
@@ -198,10 +199,6 @@
 
     function canAdd(){
       return CartService.canAddItem(productVm.cartItem, productVm.item.cantidad , productVm.product);
-    }
-
-    function canIndrement() {
-      return CartService.canAddItem(productVm.cartItem, productVm.item.cantidad + 1 , productVm.product);
     }
 
   }
