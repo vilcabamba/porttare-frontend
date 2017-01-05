@@ -384,6 +384,7 @@
         deliveryPlaceholder: 'Entrega:',
         pickupPlaceholder: 'Recoger:',
         withoutDeliveryAddress: 'Definir dirección de envío',
+        anonBillingAddress: 'Consumidor final',
         deliveryMethods: {
           pickup: 'Recoger en local',
           shipping: 'Enviar a domicilio',
@@ -444,7 +445,8 @@
         newBillingAddress: 'Nueva dirección de facturación',
         anyBillingAddress: 'No dispone de ninguna dirección de facturación.',
         successSave: 'La dirección de facturación ha sido guardado éxitosamente',
-        successUpdate: 'La dirección de facturación ha sido actualizado éxitosamente'
+        successUpdate: 'La dirección de facturación ha sido actualizado éxitosamente',
+        noAddressesSaved: 'No has registrado ninguna dirección de facturación'
       },
       dispatchers:{
         dispatchers: 'Despachadores',

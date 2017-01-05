@@ -32,9 +32,11 @@
     cartVm.clearDeliveryTime = clearDeliveryTime;
     cartVm.updateOrderItem = updateOrderItem;
     cartVm.removeOrderItem = removeOrderItem;
+    cartVm.chooseAnonBillingAddress = chooseAnonBillingAddress;
     cartVm.showCustomerOrderDelivery = showCustomerOrderDelivery;
     cartVm.submitCustomerOrderDelivery = submitCustomerOrderDelivery;
     cartVm.CustomerOrderDeliverySelect = CustomerOrderDeliverySelect;
+    cartVm.checkoutFormAddBillingAddress = checkoutFormAddBillingAddress;
     cartVm.customerOrderDeliveryNewAddress = customerOrderDeliveryNewAddress;
     cartVm.customerOrderDeliverySelectPickup = customerOrderDeliverySelectPickup;
     cartVm.checkoutForm = {
@@ -85,7 +87,9 @@
 
     function saveNewBillingAddress(){
       if ($scope.billingAddressesVm.form.$valid) {
-        BillingAddressesService.createBillingAddress($scope.billingAddressesVm.billingAddress).then(function success(resp){
+        BillingAddressesService.createBillingAddress(
+          $scope.billingAddressesVm.billingAddress
+        ).then(function success(resp){
           cartVm.billingAddresses.push(resp.customer_billing_address); //jshint ignore:line
           closeModal().then(showCheckoutModal);
         }, function(error){
@@ -117,15 +121,6 @@
     function showCheckoutModal() {
       if (needsToAddDeliveryAddress()) {
         customerOrderDeliveryNewAddress();
-      } else if (cartVm.billingAddresses.length === 0) {
-        $scope.billingAddressesVm = {
-          closeModal: closeModal,
-          submitModal: saveNewBillingAddress
-        };
-        ModalService.showModal({
-          parentScope: $scope,
-          fromTemplateUrl: 'templates/billing-addresses/new-edit.html'
-        });
       } else {
         ModalService.showModal({
           parentScope: $scope,
@@ -180,8 +175,11 @@
     }
 
     function assignBillingAddress(billingAddress) {
-      cartVm.checkoutForm.customer_billing_address_id = billingAddress.id;
       selectItem(cartVm.billingAddresses, billingAddress);
+      if (billingAddress) {
+        cartVm.checkoutForm.anon_billing_address = null;
+        cartVm.checkoutForm.customer_billing_address_id = billingAddress.id;
+      }
     }
 
     function assignAddress(address) {
@@ -371,6 +369,24 @@
 
     function needsToAddDeliveryAddress(){
       return cartVm.addresses.length === 0 && anyDeliveryIsShipping();
+    }
+
+    function chooseAnonBillingAddress(){
+      cartVm.checkoutForm.anon_billing_address = true;
+      assignBillingAddress(null);
+    }
+
+    function checkoutFormAddBillingAddress(){
+      closeModal().then(function(){
+        $scope.billingAddressesVm = {
+          closeModal: closeModal,
+          submitModal: saveNewBillingAddress
+        };
+        ModalService.showModal({
+          parentScope: $scope,
+          fromTemplateUrl: 'templates/billing-addresses/new-edit.html'
+        });
+      });
     }
   }
 })();

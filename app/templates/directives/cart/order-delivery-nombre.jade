@@ -16,7 +16,10 @@ span(
   | {{ (orderDeliveryNombreVM.delivery.deliver_at | formatDate:'dddd D') }}
   | de
   | {{ (orderDeliveryNombreVM.delivery.deliver_at | formatDate:'MMMM - H:mm A')}}
-  | -
+
+span(
+  ng-if="orderDeliveryNombreVM.delivery.delivery_method !== 'pickup'"
+) -
 
 span.text-assertive(
   ng-if="orderDeliveryNombreVM.delivery.delivery_method !== 'pickup' && !orderDeliveryNombreVM.delivery.customer_address_id"

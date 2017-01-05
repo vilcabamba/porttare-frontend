@@ -18,7 +18,7 @@ ion-modal-view.slim-modal
         label.item.item-input.item-stacked-label.item-input--no-borders
           span.input-label {{::("globals.dateDelivery"|translate)}}
         .delivery-time-wrapper
-          ion-datetime-picker.item.item-icon-left.datetime-picker(
+          ion-datetime-picker.item.item-icon-left.datetime-picker.datetime-picker--with-button(
             date
             time
             am-pm
@@ -49,6 +49,7 @@ ion-modal-view.slim-modal
             ng-click="cartVm.customerOrderDeliverySelectPickup()"
             ng-class="{'selected': cartVm.providerProfile.customer_order_delivery.delivery_method === 'pickup'}"
           )
+            i.ion-android-checkmark-circle
             span {{ ::("cart.deliveryMethods.pickup" | translate) }}
         ion-list
           ion-item.select-list-item(
@@ -56,6 +57,7 @@ ion-modal-view.slim-modal
               ng-click="cartVm.assignAddress(address)"
               ng-class="{'selected': address.selected}"
           )
+            i.ion-android-checkmark-circle
             span {{address.nombre}} ({{ address.direccion_uno }})
         show-error(array-messages='cartVm.messages.customer_address_id')
 
@@ -65,7 +67,7 @@ ion-modal-view.slim-modal
         .item.item-input.item-input--no-borders
           p {{ ::("profile.addresses.noAddressesSaved" | translate) }}
         .item.item-input.item-input--no-borders
-          button.button.button-outline.button-small.button-energized(
+          .button.button-outline.button-small.button-energized(
             type="button"
             ng-click="cartVm.customerOrderDeliveryNewAddress()"
           ) {{ ::("cart.addDeliveryAddress" | translate) }}
