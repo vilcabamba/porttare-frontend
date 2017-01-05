@@ -527,9 +527,12 @@ function routes($stateProvider, $urlRouterProvider) {
   .state('app.profile', {
     url: '/profile',
     abstract: true,
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/profile/profile.html',
+        controller: 'ProfileController',
+        controllerAs: 'pVm'
       }
     }
   })
