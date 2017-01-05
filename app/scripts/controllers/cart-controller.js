@@ -275,11 +275,11 @@
     function removeOrderItem(item){
       cartVm.slickFlag = false;
       CartService.removeOrderItem(item).then(function success(resp){
+        $auth.user.customer_order=resp.data.customer_order;
         cartVm.cart=resp.data.customer_order;
         cartVm.total= calculateTotal();
         cartVm.slickFlag = true;
         closeModal();
-
         if( CartService.isCartEmpty(cartVm.cart) ){
           nextViewIsRoot();
           $state.go(APP.successState);
