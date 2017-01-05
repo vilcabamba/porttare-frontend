@@ -18,6 +18,10 @@ ion-modal-view.slim-modal
         label.item.item-input.item-stacked-label.item-input--no-borders
           span.input-label {{::("globals.dateDelivery"|translate)}}
         .delivery-time-wrapper
+          .button.button-clear.button-positive.button-small.button--floating(
+            ng-if="cartVm.providerProfile.customer_order_delivery.deliver_at"
+            ng-click="cartVm.clearDeliveryTime()"
+          ) {{ ::('cart.deliverNow' | translate) }}
           ion-datetime-picker.item.item-icon-left.datetime-picker.datetime-picker--with-button(
             date
             time
@@ -33,10 +37,6 @@ ion-modal-view.slim-modal
             .button.button-clear.button-positive.button-small(
               ng-if="!cartVm.providerProfile.customer_order_delivery.deliver_at"
             ) {{ ::('globals.edit' | translate) }}
-          .button.button-clear.button-positive.button-small(
-            ng-if="cartVm.providerProfile.customer_order_delivery.deliver_at"
-            ng-click="cartVm.clearDeliveryTime()"
-          ) {{ ::('cart.deliverNow' | translate) }}
         .errors-wrapper
           show-error(array-messages="cartVm.messages.deliver_at")
 
