@@ -38,6 +38,7 @@
     cartVm.CustomerOrderDeliverySelect = CustomerOrderDeliverySelect;
     cartVm.checkoutFormAddBillingAddress = checkoutFormAddBillingAddress;
     cartVm.customerOrderDeliveryNewAddress = customerOrderDeliveryNewAddress;
+    cartVm.editCustomerOrderDeliveryAddress = editCustomerOrderDeliveryAddress;
     cartVm.customerOrderDeliverySelectPickup = customerOrderDeliverySelectPickup;
     cartVm.checkoutForm = {
       forma_de_pago: 'efectivo' // only method supported ATM
@@ -387,6 +388,10 @@
           fromTemplateUrl: 'templates/billing-addresses/new-edit.html'
         });
       });
+    }
+
+    function editCustomerOrderDeliveryAddress(customerAddress) {
+      console.log(customerAddress);
     }
   }
 })();

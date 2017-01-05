@@ -122,6 +122,10 @@
     padding: 15px 15px 10px 15px;
     font-family: Montserrat-Light;
 
+    &--with-button {
+      padding-right: 40px;
+    }
+
     &.selected {
       color: $base-yellow;
       font-family: Montserrat-Regular;
@@ -142,5 +146,18 @@
   .addresses-wrapper {
     top: 44px;
     overflow: auto;
+  }
+}
+
+.editable-list-item-wrapper {
+  position: relative;
+
+  .edit-list-item {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    max-height: 46px;
+    line-height: 46px;
   }
 }
