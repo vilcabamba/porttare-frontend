@@ -25,7 +25,10 @@ function InterceptorsService($injector, $q) {
       title: 'Ups!',
       template: 'No tienes permisos para realizar eso!'
     });
-    currentAlert.then(unsetCurrentAlert);
+    currentAlert.then(function(){
+      unsetCurrentAlert();
+      $injector.get('$state').go('app.categories.index');
+    });
   }
 
   function unsetCurrentAlert() {
