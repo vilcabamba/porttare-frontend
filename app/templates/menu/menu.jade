@@ -19,7 +19,8 @@ ion-side-menus(enable-menu-with-back-views='false')
           | {{::("menu.client.category"|translate)}}
         ion-item.gray-item(ng-repeat='categorie in menuVm.categories'
                            ui-sref='app.categories.show({id: categorie.id})'
-                           menu-close='')
+                           menu-close=''
+                           nav-clear)
           li {{::categorie.titulo}}
         ion-item
           | {{::("menu.account"|translate)}}
