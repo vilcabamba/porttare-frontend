@@ -115,6 +115,18 @@
       }
     }
 
+    function updateAddress(){
+      if ($scope.pfaVm.addressForm.$valid) {
+        ProfileAddressesService.updateAddresses(
+          $scope.pfaVm.addressFormData
+        ).then(function(){
+          closeModal();
+        }, function(error){
+          $scope.pfaVm.messages = error.errors;
+        });
+      }
+    }
+
     function showCheckoutModal() {
       if (needsToAddDeliveryAddress()) {
         customerOrderDeliveryNewAddress();
@@ -392,7 +404,18 @@
     }
 
     function editCustomerOrderDeliveryAddress(customerAddress) {
-      console.log(customerAddress);
+      closeModal().then(function(){
+        $scope.pfaVm = {
+          closeModal: closeModal,
+          processAddress: updateAddress,
+          addressFormData:customerAddress,
+          defaultInCurrentGeolocation: true
+        };
+        ModalService.showModal({
+          parentScope: $scope,
+          fromTemplateUrl: 'templates/profile/addresses/modal-form.html'
+        });
+      });
     }
   }
 })();
