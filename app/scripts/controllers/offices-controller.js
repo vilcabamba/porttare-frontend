@@ -35,7 +35,7 @@
 
     function buildNewOffice(){
       var newOffice = {
-        weekdays_attributes: []
+        weekdays_attributes: buildWeekdays() // jshint ignore:line
       };
       angular.forEach(APP.weekdays, function (wday){
         newOffice.weekdays_attributes.push({
@@ -58,8 +58,9 @@
         $ionicLoading.show({
           template: '{{::("globals.saving"|translate)}}'
         });
-        formatWeekdayHours();
-        OfficesService.createOffice(officesVm.office).then(function success(resp){
+        OfficesService.createOffice(
+          officesVm.office
+        ).then(function success(resp){
           $ionicLoading.hide().then(function(){
             officesVm.offices.push(resp.provider_office); //jshint ignore:line
             $ionicPopup.alert({
