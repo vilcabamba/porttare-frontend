@@ -116,7 +116,12 @@
     }
 
     function updateOfficeState() {
-      console.log('updateOfficeState!' + officesVm.officeDetail.enabled);
+      OfficesService.updateOffice({
+        id: officesVm.officeDetail.id,
+        enabled: officesVm.officeDetail.enabled
+      }).then(function (response) {
+        officesVm.officeDetail = response.data.provider_office; // jshint ignore:line
+      });
     }
   }
 })();
