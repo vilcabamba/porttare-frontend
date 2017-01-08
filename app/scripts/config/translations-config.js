@@ -467,7 +467,7 @@
         description: '¿Usted acepta los términos y condiciones?'
       },
       places:{
-        place:'Localidades'
+        places: 'Localidades'
       }
     });
 
