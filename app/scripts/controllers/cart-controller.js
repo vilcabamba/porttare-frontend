@@ -119,7 +119,12 @@
       if ($scope.pfaVm.addressForm.$valid) {
         ProfileAddressesService.updateAddresses(
           $scope.pfaVm.addressFormData
-        ).then(function(){
+        ).then(function (response){
+          var newAddress = response.customer_address,
+              oldAddress = cartVm.addresses.find(function (address){
+            return address.id === newAddress.id;
+          });
+          angular.merge(oldAddress, newAddress);
           closeModal();
         }, function(error){
           $scope.pfaVm.messages = error.errors;
@@ -408,7 +413,7 @@
         $scope.pfaVm = {
           closeModal: closeModal,
           processAddress: updateAddress,
-          addressFormData: customerAddress
+          addressFormData: angular.copy(customerAddress)
         };
         ModalService.showModal({
           parentScope: $scope,
