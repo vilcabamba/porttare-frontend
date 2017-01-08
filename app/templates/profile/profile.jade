@@ -14,15 +14,22 @@ ion-view(
         )
         .user-name {{ siteVm.userName }}
 
+    .tab-container
+      .tab-item(
+        menu-close
+        ng-click = "pVm.tab='info'"
+        ng-class="{'tab-item-active': pVm.tab==='info'}"
+        ui-sref="app.profile.info"
+      ) {{::('profile.tabs.info'|translate)}}
+      .tab-item(
+        menu-close
+        ng-click = "pVm.tab='addresses'"
+        ng-class="{'tab-item-active': pVm.tab==='addresses'}"
+        ui-sref="app.profile.addresses.index"
+      ) {{::('profile.tabs.addresses'|translate)}}
+
     .profile-body
-      ion-tabs.tabs-top.tabs-striped
-        ion-tab(
-          title="{{::('profile.tabs.info'|translate)}}"
-          ui-sref="app.profile.info.index"
-        )
-          ion-nav-view(name='menuContent@profileInfo')
-        ion-tab(
-          title="{{::('profile.tabs.addresses'|translate)}}"
-          ui-sref="app.profile.addresses.index"
-        )
-          ion-nav-view(name='menuContent@addressesIndex')
+      row(ng-if="pVm.tab==='info'")
+        ion-nav-view(name='menuContent@profileInfo')
+      row(ng-if="pVm.tab==='addresses'")
+        ion-nav-view(name='menuContent@addressesIndex')
