@@ -223,7 +223,12 @@
         currency: '$ ',
         seeAsCustomer: 'Ver como cliente',
         unregisterItem: 'Dar de baja',
-        confirmUnregisterItem: '¿Estás seguro de querer dar de baja este producto?'
+        confirmUnregisterItem: '¿Estás seguro de querer dar de baja este producto?',
+        sortBy: {
+          createdAt: 'Antigüedad',
+          precio: 'Precio',
+          titulo: 'Nombre'
+        }
       },
       actions: {
         showCategory: 'Lista de Categorías',

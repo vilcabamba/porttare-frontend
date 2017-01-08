@@ -18,6 +18,7 @@
     clientsVm.closeModal = closeModal;
     clientsVm.submitProcess = submitProcess;
     clientsVm.askToDeleteClient = askToDeleteClient;
+    // TODO translate these keys?
     clientsVm.listOptions = [
       {name: 'Nombres', filterField: 'nombres'},
       {name: 'Antigüedad', filterField: 'created_at'}

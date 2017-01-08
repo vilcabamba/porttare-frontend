@@ -17,6 +17,11 @@
     var itemsVm = this,
         modalScope;
     itemsVm.newItemModal = launchModal;
+    itemsVm.sortingOptions = [
+      { tkey: 'item.sortBy.titulo', filterField: 'titulo' },
+      { tkey: 'item.sortBy.createdAt', filterField: 'created_at' },
+      { tkey: 'item.sortBy.precio', filterField: 'precio_cents' }
+    ];
     itemsVm.submitProcess = newItem; // NB currently here only to honour specs. wipe me?
     itemsVm.query = '';
     init();

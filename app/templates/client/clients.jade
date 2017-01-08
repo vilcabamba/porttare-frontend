@@ -23,7 +23,7 @@ ion-view(
       .row.table-headers
         .col.col-60 {{::("client.clientName"|translate)}}
         .col
-          .item.item-input.item-select
+          .item.item-input.item-select.filter-select
             select(
               ng-model="selectedOption"
               ng-options="option.name for option in clientsVm.listOptions"
