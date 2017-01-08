@@ -408,8 +408,7 @@
         $scope.pfaVm = {
           closeModal: closeModal,
           processAddress: updateAddress,
-          addressFormData:customerAddress,
-          defaultInCurrentGeolocation: true
+          addressFormData: customerAddress
         };
         ModalService.showModal({
           parentScope: $scope,
