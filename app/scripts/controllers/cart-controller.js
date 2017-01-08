@@ -156,7 +156,6 @@
                 title: 'Alerta',
                 template: '{{::("cart.successfullyOrder"|translate)}}'
               }).then(closeModal);
-              $scope.$emit('order-finished');
             });
         }, function error(res) {
           $ionicLoading.hide();
@@ -277,6 +276,8 @@
         cartVm.cart=resp.data.customer_order;
         cartVm.total= calculateTotal();
         cartVm.slickFlag = true;
+        $auth.user.customer_order = resp.data.customer_order; //jshint ignore:line
+        $scope.$emit('update-number');
         closeModal();
         if( CartService.isCartEmpty(cartVm.cart) ){
           nextViewIsRoot();
