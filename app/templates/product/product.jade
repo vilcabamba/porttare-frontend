@@ -3,7 +3,7 @@ slick-wrapper(settings="productVm.slickConfig")
     ng-repeat="image in ::productVm.product.imagenes track by $index"
   )
     .slick-content
-      img(data-lazy="{{ ::image.imagen_url }}")
+      img.img-circle(data-lazy="{{ ::image.imagen_url }}")
 
 .list.list-inset.resource-detail-summary
   h2 {{productVm.product.titulo}}
