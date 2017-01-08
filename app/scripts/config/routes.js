@@ -13,7 +13,9 @@ function routes($stateProvider, $urlRouterProvider) {
     controllerAs: 'loginVm',
     templateUrl: 'templates/login/login.html',
     resolve: {
-      auth: accessIfUserNotAuth
+      auth: function(AuthorizationService){
+        return AuthorizationService.accessIfUserNotAuth();
+      }
     }
   })
   .state('register', {
@@ -22,7 +24,9 @@ function routes($stateProvider, $urlRouterProvider) {
     controllerAs: 'registerVm',
     templateUrl: 'templates/register/register.html',
     resolve: {
-      auth: accessIfUserNotAuth
+      auth: function(AuthorizationService){
+        return AuthorizationService.accessIfUserNotAuth();
+      }
     }
   })
   .state('reset', {
@@ -40,7 +44,9 @@ function routes($stateProvider, $urlRouterProvider) {
     controllerAs: 'resetVm',
     templateUrl: 'templates/reset/send.html',
     resolve: {
-      auth: accessIfUserNotAuth
+      auth: function(AuthorizationService){
+        return AuthorizationService.accessIfUserNotAuth();
+      }
     }
   })
   .state('intro', {
@@ -49,7 +55,9 @@ function routes($stateProvider, $urlRouterProvider) {
     controller: 'IntroController',
     controllerAs: 'introVm',
     resolve: {
-      auth: accessIfUserNotAuth
+      auth: function(AuthorizationService){
+        return AuthorizationService.accessIfUserNotAuth();
+      }
     }
   })
   .state('prelogin', {
@@ -58,7 +66,9 @@ function routes($stateProvider, $urlRouterProvider) {
     controller: 'PreController',
     controllerAs: 'preVm',
     resolve: {
-      auth: accessIfUserNotAuth
+      auth: function(AuthorizationService){
+        return AuthorizationService.accessIfUserNotAuth();
+      }
     }
   })
   .state('error', {
@@ -225,6 +235,11 @@ function routes($stateProvider, $urlRouterProvider) {
         cache: false,
         templateUrl: 'templates/provider/welcome.html'
       }
+    },
+    resolve: {
+      auth: function(AuthorizationService){
+        return AuthorizationService.notShowWelcomeProvider();
+      }
     }
   })
   .state('app.provider.new', {
@@ -236,6 +251,9 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'ProviderController',
         controllerAs: 'providerVm',
         resolve: {
+          auth: function(AuthorizationService){
+            return AuthorizationService.notShowWelcomeProvider();
+          },
           providerCategories: function (CategoriesService,
                                         ErrorHandlerService){
             return CategoriesService
@@ -681,24 +699,13 @@ function routes($stateProvider, $urlRouterProvider) {
     if (isResetPassword($location.absUrl())) {
       return '/reset';
     } else {
-      return '/prelogin';
+      return '/app/categories/';
     }
   });
 
   function isResetPassword(href) {
     var param = href.match(/reset_password=([^&]+)/);
     return (param && param[1] === 'true') ? true : false;
-  }
-
-  function accessIfUserNotAuth($auth, $state, $ionicLoading, APP) {
-    return $auth.validateUser()
-      .then(function userAuthorized() {
-        $state.go(APP.successState).then(function () {
-          $ionicLoading.hide();
-        });
-      }, function userNotAuthorized() {
-        return;
-      });
   }
 
   function accessIfUserAuth($auth, $state, APP, UserAuthService, CartService) {
