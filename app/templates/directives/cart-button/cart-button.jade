@@ -1,4 +1,7 @@
-button.cart-main-button(
+.button.cart-main-button(
   ui-sref='app.cart.index'
-) {{cartButtonVM.numberItems!==0?cartButtonVM.numberItems:''}}
+)
+  span.badge.badge-light.number-of-items(
+    ng-if="cartButtonVM.numberItems > 0"
+  ) {{ cartButtonVM.numberItems }}
   i.ion-ios-cart-outline
