@@ -115,6 +115,23 @@
       }
     }
 
+    function updateAddress(){
+      if ($scope.pfaVm.addressForm.$valid) {
+        ProfileAddressesService.updateAddresses(
+          $scope.pfaVm.addressFormData
+        ).then(function (response){
+          var newAddress = response.customer_address,
+              oldAddress = cartVm.addresses.find(function (address){
+            return address.id === newAddress.id;
+          });
+          angular.merge(oldAddress, newAddress);
+          closeModal();
+        }, function(error){
+          $scope.pfaVm.messages = error.errors;
+        });
+      }
+    }
+
     function showCheckoutModal() {
       if (needsToAddDeliveryAddress()) {
         customerOrderDeliveryNewAddress();
@@ -393,7 +410,17 @@
     }
 
     function editCustomerOrderDeliveryAddress(customerAddress) {
-      console.log(customerAddress);
+      closeModal().then(function(){
+        $scope.pfaVm = {
+          closeModal: closeModal,
+          processAddress: updateAddress,
+          addressFormData: angular.copy(customerAddress)
+        };
+        ModalService.showModal({
+          parentScope: $scope,
+          fromTemplateUrl: 'templates/profile/addresses/modal-form.html'
+        });
+      });
     }
   }
 })();
