@@ -41,8 +41,8 @@
         var data = convertDateToString(office);
         return CommonService.editObject(data, '/api/provider/offices/');
       }else{
-        return $http({
-          method: 'PUT',
+       return $http({
+          method: 'PATCH',
           url: ENV.apiHost + '/api/provider/offices/' + office.id,
           data: office
         });

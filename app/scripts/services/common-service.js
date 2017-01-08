@@ -44,7 +44,7 @@
 
     function editObject(data, url) {
       return $http({
-        method: 'PUT',
+        method: 'PATCH',
         url: ENV.apiHost + url + data.id,
         data: data
       })
