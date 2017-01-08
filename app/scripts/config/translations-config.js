@@ -28,6 +28,7 @@
         account: 'Cuenta',
         invite: 'Invitar',
         history: 'Historial',
+        locations: 'Localidades',
         user:{
           courier: 'Mensajero',
           buyer: 'Comprador',
@@ -464,6 +465,9 @@
       termsAndConditions: {
         termsAndConditions: 'Términos y Condiciones',
         description: '¿Usted acepta los términos y condiciones?'
+      },
+      places:{
+        place:'Localidades'
       }
     });
 

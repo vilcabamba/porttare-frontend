@@ -1,0 +1,11 @@
+ion-view(
+  view-title='{{::("places.place"|translate)}}'
+)
+  ion-nav-title
+    .alt-logo
+  ion-content
+    ion-list
+      ion-item(ng-repeat="place in ::placesVm.places.places track by $index")
+        .text {{place.nombre}} - {{place.country}}
+
+

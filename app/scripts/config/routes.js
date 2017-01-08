@@ -98,6 +98,25 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   })
+  .state('app.places', {
+    url: '/places',
+    abstract: true
+  })
+  .state('app.places.index', {
+    url: '/',
+    views: {
+      'menuContent@app': {
+        templateUrl: 'templates/places/index.html',
+        controller: 'PlacesController',
+        controllerAs: 'placesVm',
+        resolve: {
+          places: function (PlacesService){
+            return PlacesService.getPlaces();
+          }
+        }
+      }
+    }
+  })
   .state('termsAndCond', {
     url: '/terms-and-conditions',
     templateUrl: 'templates/terms-and-cond/terms-and-cond.html',

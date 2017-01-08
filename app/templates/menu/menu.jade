@@ -15,6 +15,8 @@ ion-side-menus(enable-menu-with-back-views='false')
           | {{::("menu.profile"|translate)}}
         ion-item(menu-close='' ui-sref='app.cart.index')
           | {{::("menu.client.cart"|translate)}}
+        ion-item(menu-close='' ui-sref='app.places.index')
+          | {{::("menu.locations"|translate)}}
         ion-item(menu-close='' ui-sref='app.categories.index')
           | {{::("menu.client.category"|translate)}}
         ion-item.gray-item(ng-repeat='categorie in menuVm.categories'
