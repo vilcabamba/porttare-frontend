@@ -19,10 +19,7 @@
     beforeEach(module('porttare.controllers'));
     beforeEach(module('porttare.services', function ($provide) {
       $provide.factory('CartService', function () {
-        return {
-          findCartItem: sinon.stub(),
-          canAddItem: sinon.stub()
-        };
+        return {};
       });
       $provide.factory('WishlistsService', function ($q) {
         deferGetWishlist = $q.defer();
@@ -41,7 +38,7 @@
         };
       });
       $provide.factory('$auth', function () {
-        return { user: {} };
+        return {};
       });
       $provide.factory('ErrorHandlerService', function () {
         return {};

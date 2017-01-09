@@ -12,9 +12,7 @@
       checkout : checkout,
       updateOrderItem: updateOrderItem,
       removeOrderItem:removeOrderItem,
-      isCartEmpty: isCartEmpty,
-      findCartItem: findCartItem,
-      canAddItem: canAddItem
+      isCartEmpty: isCartEmpty
     };
 
     return service;
@@ -77,32 +75,6 @@
 
     function isCartEmpty(customerOrder){
       return !customerOrder || !customerOrder.provider_profiles || customerOrder.provider_profiles.length == 0; //jshint ignore:line
-    }
-
-    function findCartItem(customerOrder, providerItem){
-      var orderItem = null;
-
-      if( !isCartEmpty(customerOrder) ){
-        var orderItems = [];
-        var providerProfile = customerOrder.provider_profiles //jshint ignore:line
-                                              .find(function(profile){
-                                                return profile.id === providerItem.provider_profile_id; //jshint ignore:line
-                                              });
-        if(providerProfile){
-          orderItems = providerProfile.customer_order_items; //jshint ignore:line
-        }
-        orderItem = orderItems
-                      .find(function(item){
-                        return item.id === providerItem.id;
-                      });
-      }
-      return orderItem;
-    }
-
-    function canAddItem(orderItem, addCount, providerItem){
-      var currentCount = orderItem ? orderItem.cantidad : 0;
-      var canAdd = ( currentCount + addCount <= providerItem.cantidad);
-      return canAdd;
     }
   }
 })();
