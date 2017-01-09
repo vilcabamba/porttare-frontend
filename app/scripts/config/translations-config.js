@@ -330,6 +330,7 @@
         changeImagen: 'Cambiar Imagen',
         successUpdateProfile: 'Perfil actualizado éxitosamente',
         password: 'Contraseña',
+        repeatPassword: 'Repita contraseña',
         birthdate:  'Fecha de Nacimiento'
       },
       product: {
@@ -444,7 +445,9 @@
       },
       form: {
         requiredField: 'Campo requerido. ',
-        wrongEmail: 'Email incorrecto. '
+        wrongEmail: 'Email incorrecto. ',
+        dontMatch: 'Contraseñas no coinciden. ',
+        leaveBlank: 'Dejar en blanco si no desea actualizar'
       },
       billingAddress: {
         legendForm: 'Dirección de facturación',
