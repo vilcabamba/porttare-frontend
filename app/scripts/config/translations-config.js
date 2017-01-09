@@ -43,7 +43,6 @@
           payments: 'Pagos',
           provider: 'Proveedor',
           cart: 'Mi carro',
-          wishlist: 'Wishlist',
           billingAddresses : 'Direcciones de facturación'
         },
         provider: {

@@ -27,14 +27,12 @@ ion-side-menus(enable-menu-with-back-views='false')
           | {{::("menu.account"|translate)}}
         ion-item.gray-item(menu-close='' ui-sref='app.customerorders.index')
           li {{::("menu.client.myOrders"|translate)}}
-        ion-item.gray-item
+        ion-item.gray-item(menu-close='' ui-sref='app.wishlist.index')
           li {{::("menu.client.myLists"|translate)}}
         ion-item.gray-item
           li {{::("menu.client.coupon"|translate)}}
         ion-item.gray-item
           li {{::("menu.client.payments"|translate)}}
-        ion-item.gray-item(menu-close='' ui-sref='app.wishlist.index')
-          li {{::("menu.client.wishlist"|translate)}}
         ion-item.gray-item(menu-close='' ui-sref='app.billing.addresses')
           li {{::("menu.client.billingAddresses"|translate)}}
         ion-item
