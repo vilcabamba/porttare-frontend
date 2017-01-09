@@ -6,11 +6,10 @@ ion-side-menus(enable-menu-with-back-views='false')
         button.button.button-icon.button-clear.ion-navicon(menu-toggle='left')
     ion-nav-view(name='menuContent')
   ion-side-menu(side='left')
-    ion-header-bar.bar-stable
     ion-content
       ion-list
-        ion-item(menu-close='' class='menu-header')
-          | {{ siteVm.userName }}
+        ion-item(menu-close='')
+          sidebar-header-current-user
         ion-item(menu-close='' ui-sref='app.profile.info')
           | {{::("menu.profile"|translate)}}
         ion-item(menu-close='' ui-sref='app.cart.index')

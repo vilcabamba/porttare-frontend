@@ -5,8 +5,9 @@
     .module('porttare.controllers')
     .controller('ProfileController', ProfileController);
 
-  function ProfileController() {
-    var pVm = this;
-    pVm.tab = 'info';
+  function ProfileController($location) {
+    var pVm = this,
+        currentTab = $location.path().split("/")[3];
+    pVm.tab = currentTab;
   }
 })();

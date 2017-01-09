@@ -1,0 +1,10 @@
+.sidebar-header-current-user
+  .avatar-wrapper
+    img.img-circle(
+      ng-src="{{ siteVm.userImageURL }}"
+    )
+  .username-wrapper {{ siteVm.userName }}
+  .current-user-actions
+    a.button.button-clear.button-positive.button-small(
+      ui-sref='app.profile.info'
+    ) {{ ::("menu.profile" | translate) }}

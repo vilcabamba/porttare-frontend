@@ -22,7 +22,8 @@ ion-view(
     .list.list-inset.list--no-borders.resource-collection-table
       .row.table-headers
         .col.col-50 {{::("item.productName"|translate)}}
-        .col.col-25 {{::("item.price"|translate)}}
+        .col.col-25.text-right
+          | {{::("item.price"|translate)}}
         .col.col-25
           .item.item-input.item-select.filter-select
             select(
@@ -39,7 +40,8 @@ ion-view(
         ng-repeat="item in itemsVm.items | filter:itemsVm.query | orderBy:sortingOption.filterField"
       )  
         .col.col-50.provider-item-title {{ ::item.titulo }}
-        .col.col-25 {{ ::(item.precio_cents | priceCurrency | currency) }}
+        .col.col-25.text-right
+          | {{ ::(item.precio_cents | priceCurrency | currency) }}
         .col.col-25.text-right
           a.button.button-clear.button-positive.button-small(
             ui-sref="provider.items.show({id: item.id})"
