@@ -7,7 +7,7 @@
 
   function ProfileController($location) {
     var pVm = this,
-        currentTab = $location.path().split("/")[3];
+        currentTab = $location.path().split('/')[3];
     pVm.tab = currentTab;
   }
 })();
