@@ -423,11 +423,25 @@ function routes($stateProvider, $urlRouterProvider) {
   })
   .state('provider.office', {
     url: '/office/:id',
+    params: {
+      office: null
+    },
     views: {
       'menuContent@provider': {
         templateUrl: 'templates/offices/detail.html',
         controller: 'OfficeController',
-        controllerAs: 'officesVm'
+        controllerAs: 'officesVm',
+        resolve: {
+          office: function ($stateParams, OfficesService, ErrorHandlerService) {
+            if ($stateParams.office) {
+              return $stateParams.office;
+            } else {
+              return OfficesService.getOffice($stateParams.id).then(function (res) {
+                return res.provider_office; // jshint ignore:line
+              },ErrorHandlerService.handleCommonErrorGET);
+            }
+          }
+        }
       }
     }
   })

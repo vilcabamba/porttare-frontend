@@ -5,13 +5,12 @@
     .module('porttare.controllers')
     .controller('OfficeController', OfficeController);
 
-  function OfficeController(OfficesService,
+  function OfficeController(office,
+                            OfficesService,
                             ModalService,
-                            ErrorHandlerService,
                             $ionicLoading,
                             $ionicPopup,
                             $scope,
-                            $stateParams,
                             $filter,
                             MapsService) {
 
@@ -22,15 +21,8 @@
     officesVm.submitOffice = submitOffice;
     officesVm.submitOfficeDelete = submitOfficeDelete;
     officesVm.updateOfficeState = updateOfficeState;
-    getOffice();
-
-    function getOffice(){
-      loading('globals.loading');
-      OfficesService.getOffice($stateParams.id).then(function success(resp){
-        officesVm.officeDetail = resp.provider_office; //jshint ignore:line
-        loadOffice();
-      }, ErrorHandlerService.handleCommonErrorGET);
-    }
+    officesVm.officeDetail = office;
+    loadOffice();
 
     function loadOffice(){
       convertStringToDate();

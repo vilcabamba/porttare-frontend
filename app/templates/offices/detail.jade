@@ -1,5 +1,5 @@
 ion-view(
-  view-title="{{::('office.officeTitle'|translate)}}"
+  view-title="{{::('office.office'|translate)}}"
 )
   ion-nav-title
     .alt-logo
@@ -28,7 +28,7 @@ ion-view(
           ng-click="officesVm.showDeleteOffice()"
         ) {{::("globals.delete"|translate)}}
 
-    
+
     .list.list-inset.list--no-borders.resource-details-table
       .row
         .col.col-50.label {{::("office.officeNumber"|translate)}}
