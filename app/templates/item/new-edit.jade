@@ -60,22 +60,11 @@ ion-modal-view.item-form
             | {{::("item.unidadMedida"|translate)}}
             abbr *
           select(ng-model='modalVm.item.unidad_medida' name='unidad_medida' required)
-            option(value='volumen') Volumen
             option(value='unidades') Unidades
-            option(value='longitud') Longitud
         .errors-wrapper
           span.show-errors(ng-messages="modalVm.itemForm.unidad_medida.$error" ng-if="modalVm.itemForm.unidad_medida.$touched")
             span(ng-message="required" class="message-error") {{::("globals.isRequired"|translate)}}
           show-error(array-messages='modalVm.messages.unidad_medida')
-
-        label.item.item-input.item-stacked-label
-          span.input-label {{::("item.volumen"|translate)}}
-          input(
-            type='text'
-            ng-model='modalVm.item.volumen'
-          )
-        .errors-wrapper
-          show-error(array-messages='modalVm.messages.volumen')
 
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': modalVm.itemForm.precio.$touched && modalVm.itemForm.precio.$invalid}"
@@ -96,15 +85,6 @@ ion-modal-view.item-form
             span.message-error(ng-message="required")
               | {{::("globals.isRequired"|translate)}}
           show-error(array-messages='modalVm.messages.precio')
-
-        label.item.item-input.item-stacked-label
-          span.input-label {{::("item.peso"|translate)}}
-          input(
-            type='text'
-            ng-model='modalVm.item.peso'
-          )
-        .errors-wrapper
-          show-error(array-messages='modalVm.messages.peso')
 
         label.item.item-input.item-stacked-label
           span.input-label {{::("item.cantidad"|translate)}}
