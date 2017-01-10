@@ -392,6 +392,8 @@
         pickupPlaceholder: 'Recoger:',
         withoutDeliveryAddress: 'Definir dirección de envío',
         anonBillingAddress: 'Consumidor final',
+        titleWithoutItems: 'Tu carrito de compras está vacío',
+        subtitleWithoutItems: 'Agrega ítems a tu carrito para comprarlos',
         deliveryMethods: {
           pickup: 'Recoger en local',
           shipping: 'Enviar a domicilio',

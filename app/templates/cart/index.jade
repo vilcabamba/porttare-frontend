@@ -7,6 +7,13 @@ ion-view(
       src="'templates/cart/customer-order.html'"
     )
 
+    .resource-collection
+      .without-items(
+        ng-if="!cartVm.cart.provider_profiles.length"
+      )
+        p {{::("cart.titleWithoutItems"|translate)}}
+        p {{::("cart.subtitleWithoutItems"|translate)}}
+
   ion-footer-bar.bar-light.cart-page-footer.bar-footer--tall
     button.button.button-small.button-outline.button-energized.button-letter-stretched(
       ng-click="cartVm.showCheckoutModal()"
