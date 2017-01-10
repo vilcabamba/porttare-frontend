@@ -37,6 +37,7 @@
       $ionicLoading     = { show: sinon.stub(), hide: sinon.stub()};
       $state            = { go: sinon.stub() };
       $auth             = {
+        user: {current_place: {}}, //jshint ignore:line
         submitLogin: sinon.stub()
                           .returns(deferredLogin.promise),
         validateUser: sinon.stub()
@@ -90,7 +91,7 @@
           deferredLogin.resolve();
           $rootScope.$digest();
 
-          sinon.assert.alwaysCalledWithExactly($state.go, successState);
+          sinon.assert.alwaysCalledWithExactly($state.go, $auth.user.current_place ? successState:'app.places.index'); //jshint ignore:line
         });
 
         it('if unsuccessful, should show a popup', function() {
