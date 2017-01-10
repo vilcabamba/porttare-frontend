@@ -18,7 +18,7 @@
         if (status === google.maps.GeocoderStatus.OK) {
           deferredGeocode.resolve(results);
         } else {
-          deferredGeocode.reject(results);
+          deferredGeocode.reject(status);
         }
       });
       return deferredGeocode.promise;

@@ -16,8 +16,10 @@ form(
         direccion="pfaVm.addressFormData.direccion_uno"
         direccion-dos="pfaVm.addressFormData.direccion_dos"
         ciudad="pfaVm.addressFormData.ciudad"
+        geolocation-message-key="pfaVm.geolocationMessageKey"
       )
       show-error(array-messages='pfaVm.messages.lat || pfaVm.messages.lon')
+      .text-stable {{ pfaVm.geolocationMessageKey | translate }}
 
       label.item.item-input.item-stacked-label(
         ng-class="{'item-error': pfaVm.messages.nombre}"

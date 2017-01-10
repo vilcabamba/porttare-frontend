@@ -12,10 +12,11 @@
       scope: {
         lat: '=',
         lon: '=',
-        defaultInCurrentGeolocation: '=',
+        ciudad: '=',
         direccion:'=',
         direccionDos: '=',
-        ciudad: '='
+        geolocationMessageKey: '=',
+        defaultInCurrentGeolocation: '@'
       },
       controller: [ '$scope',
                     'MapsService',
@@ -43,7 +44,10 @@
         angular.element.trim(mapVm.direccion)
       );
 
+      mapVm.geolocationMessageKey = 'maps.loading';
+
       MapsService.loadGMaps().then(function () {
+        mapVm.geolocationMessageKey = null;
         drawMap();
         listenForChange();
         if (mapVm.defaultInCurrentGeolocation) {
@@ -97,12 +101,24 @@
         });
 
         if (shouldGeocodeMarkerPosition) {
+          mapVm.geolocationMessageKey = 'maps.geocoding';
           GeocodingService
             .geocode({'latLng': mapVm.currentMarker.getPosition()})
             .then(function(results){
-              mapVm.direccion = results[0].formatted_address; // jshint ignore:line
-              mapVm.direccionDos = results[1].formatted_address; // jshint ignore:line
+              mapVm.geolocationMessageKey = 'maps.geocoded';
+              // jshint ignore:start
+              mapVm.direccion = results[0].formatted_address;
+              mapVm.direccionDos = results[1].formatted_address;
+              // jshint ignore:end
               mapVm.ciudad = getCiudad(results[0]);
+            })
+            .catch(function(error){
+              if (error === "OVER_QUERY_LIMIT") {
+                mapVm.geolocationMessageKey = 'maps.overGeocodeLimit';
+              } else {
+                mapVm.geolocationMessageKey = 'maps.wontGeocode';
+                console.error(error);
+              }
             });
         }
       });

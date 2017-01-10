@@ -478,6 +478,13 @@
       },
       places:{
         places: 'Localidades'
+      },
+      maps: {
+        loading: 'Cargando mapa...',
+        geocoding: 'Buscando direcciones...',
+        geocoded: 'Las direcciones fueron llenadas con el resultado más acertado posible. Asegúrate de revisarlas',
+        wontGeocode: 'No ha sido posible encontrar direcciones para esa ubicación',
+        overGeocodeLimit: 'El número de búsquedas de direcciones excedió el límite, por favor prueba de nuevo en unos segundos'
       }
     });
 
