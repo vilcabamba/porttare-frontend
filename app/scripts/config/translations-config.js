@@ -477,7 +477,8 @@
         description: '¿Usted acepta los términos y condiciones?'
       },
       places:{
-        places: 'Localidades'
+        places: 'Localidades',
+        placeAssignedUser: 'La Localidad ha sido asignada al Usuario éxitosamente'
       },
       maps: {
         loading: 'Cargando mapa...',

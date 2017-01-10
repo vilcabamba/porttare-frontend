@@ -29,7 +29,7 @@
       $auth.submitLogin(loginVm.loginForm)
         .then(function () {
           loginVm.loginForm = {};
-          $state.go(successState);
+          $auth.user.current_place ? $state.go(successState):$state.go('app.places.index'); //jshint ignore:line
         })
         .catch(function (resp) {
           loginVm.loginForm.password = null;

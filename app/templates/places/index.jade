@@ -9,6 +9,7 @@ ion-view(
 
       ion-item.place-item.item-icon-left.item-icon-right(
         ng-repeat="place in ::placesVm.places.places track by $index"
+        ng-click="placesVm.selectPlace(place.id)"
       )
         .icon
           img(ng-src="{{ ::place.flag_image_url }}")
