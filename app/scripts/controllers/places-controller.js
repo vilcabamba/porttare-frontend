@@ -18,7 +18,7 @@
     placesVm.selectPlace = selectPlace;
 
     function selectPlace(placeId){
-      var user = {'current_place_id' : placeId} //jshint ignore:line
+      var user = { 'current_place_id' : placeId }; //jshint ignore:line
       $ionicLoading.show({template: '{{::("globals.updating"|translate)}}'});
       UserAccountService.updateUser(user).then(function success(resp){
         $ionicLoading.hide().then(function(){
