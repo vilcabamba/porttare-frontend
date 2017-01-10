@@ -22,6 +22,7 @@
 
     function init(){
       piVm.user = $auth.user;
+      piVm.canChangePassword = piVm.user.provider === 'email';
     }
 
     function showNewModal() {

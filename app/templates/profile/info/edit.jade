@@ -20,11 +20,11 @@ ion-modal-view
           span.input-label {{::("user.image"|translate)}}
         .row.image-preview
           .img-wrapper
-            img( ng-if="piVm.hasImageFile(piVm.userEdit)" 
+            img( ng-if="piVm.hasImageFile(piVm.userEdit)"
                   ngf-src="piVm.userEdit.custom_image"
                   style="max-width: 70px; max-height: 70px;border-radius: 50%;"
             )
-            user-image( user="piVm.userEdit" ng-if="!piVm.hasImageFile(piVm.userEdit)" 
+            user-image( user="piVm.userEdit" ng-if="!piVm.hasImageFile(piVm.userEdit)"
                   style="max-width: 70px; max-height: 70px;border-radius: 50%;"
             )
         .uploader(
@@ -39,7 +39,7 @@ ion-modal-view
             .button.button-clear.button-positive.button-small
               | {{::("user.changeImagen"|translate)}}
 
-        show-error(array-messages='piVm.user.custom_image')
+        show-error(array-messages='piVm.messages.custom_image')
 
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': piVm.updateProfileForm.email.$touched && piVm.updateProfileForm.email.$invalid}"
@@ -65,7 +65,12 @@ ion-modal-view
           ng-model='piVm.userEdit.fecha_nacimiento'
         )
           i.icon.ion-ios-calendar-outline
-          | {{ piVm.userEdit.fecha_nacimiento| date: "yyyy-MM-dd" }}
+          span(
+            ng-if="piVm.userEdit.fecha_nacimiento"
+          ) {{ piVm.userEdit.fecha_nacimiento| date: "yyyy-MM-dd" }}
+          span(
+            ng-if="!piVm.userEdit.fecha_nacimiento"
+          ) {{ "user.selectDatePlaceholder"|translate }}
         show-error(array-messages="piVm.messages.fecha_nacimiento")
 
         label.item.item-input.item-stacked-label(
@@ -76,7 +81,8 @@ ion-modal-view
             type="text"
             ng-model="piVm.userEdit.name"
           )
-        show-error(array-messages="piVm.messages.name")
+        .errors-wrapper
+          show-error(array-messages="piVm.messages.name")
 
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': piVm.messages.ciudad}"
@@ -86,7 +92,37 @@ ion-modal-view
             type="text"
             ng-model="piVm.userEdit.ciudad"
           )
-        show-error(array-messages="piVm.messages.ciudad")
+        .errors-wrapper
+          show-error(array-messages="piVm.messages.ciudad")
+
+        span(ng-if="::piVm.canChangePassword")
+          label.item.item-input.item-stacked-label(
+            ng-class="{'item-error': piVm.messages.password}"
+          )
+            span.input-label {{::("user.password"|translate)}}
+            input(
+              type="password"
+              ng-model="piVm.userEdit.password"
+              placeholder="{{::('form.leaveBlank'|translate)}}"
+            )
+          .errors-wrapper
+            show-error(array-messages="piVm.messages.password")
+
+        span(ng-if="::piVm.canChangePassword")
+          label.item.item-input.item-stacked-label(
+            ng-class="{'item-error': piVm.updateProfileForm.passwordMatch.$invalid && piVm.updateProfileForm.passwordMatch.$touched}"
+          )
+            span.input-label {{::("user.repeatPassword"|translate)}}
+            input(
+              type="password"
+              match="piVm.userEdit.password"
+              ng-model="piVm.userEdit.passwordMatch"
+              name="passwordMatch"
+              placeholder="{{::('form.leaveBlank'|translate)}}"
+            )
+          .errors-wrapper
+            span.show-errors.ng-active(ng-messages="piVm.updateProfileForm.passwordMatch.$error")
+              span.message-error(ng-message="match") {{::("form.dontMatch"|translate)}}
 
     ion-footer-bar.bar.bar-footer.bar-stable
         button.button.button-outline.button-energized.button-small(

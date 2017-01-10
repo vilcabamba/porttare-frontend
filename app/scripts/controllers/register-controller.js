@@ -22,6 +22,7 @@
         });
         $auth.submitRegistration(registerVm.user)
           .then(function() {
+            registerVm.user = {};
             $state.go('login').then(function(){
               $ionicPopup.alert({
                 title: 'Alerta',
