@@ -104,11 +104,12 @@ function routes($stateProvider, $urlRouterProvider) {
   })
   .state('app.places.index', {
     url: '/',
+    cache: false,
     views: {
       'menuContent@app': {
-        templateUrl: 'templates/places/index.html',
-        controller: 'PlacesController',
         controllerAs: 'placesVm',
+        controller: 'PlacesController',
+        templateUrl: 'templates/places/index.html',
         resolve: {
           places: function (PlacesService){
             return PlacesService.getPlaces();

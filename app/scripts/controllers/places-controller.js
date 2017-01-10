@@ -7,30 +7,62 @@
 
   function PlacesController(places,
                             $state,
-                            APP,
-                            $ionicLoading,
-                            $ionicPopup,
                             $auth,
+                            $ionicLoading,
+                            $ionicHistory,
+                            APP,
+                            CartService,
                             UserAccountService,
                             ErrorHandlerService) {
     var placesVm = this;
-    placesVm.places=places;
+    placesVm.places = places;
     placesVm.selectPlace = selectPlace;
+    placesVm.currentPlaceId = getCurrentPlaceId();
 
     function selectPlace(placeId){
-      var user = { 'current_place_id' : placeId }; //jshint ignore:line
-      $ionicLoading.show({template: '{{::("globals.updating"|translate)}}'});
-      UserAccountService.updateUser(user).then(function success(resp){
-        $ionicLoading.hide().then(function(){
-          $auth.user.current_place = resp.data.current_place; //jshint ignore:line
-          $ionicPopup.alert({
-            title: 'Éxito',
-            template: '{{::("places.placeAssignedUser"|translate)}}'
-          }).then(function(){
-            $state.go(APP.successState);
-          });
+      var attributes = { 'current_place_id' : placeId }; //jshint ignore:line
+      performing();
+      updateUser(attributes).then(function(){
+        updateCart().then(finishedPerforming).then(function(){
+          nextViewIsRootView();
+          $state.go(APP.successState);
         });
-      }, ErrorHandlerService.handleCommonErrorGET);
+      });
+    }
+
+    function performing(){
+      $ionicLoading.show({
+        template: '{{::("globals.updating"|translate)}}'
+      });
+    }
+
+    function finishedPerforming(){
+      return $ionicLoading.hide();
+    }
+
+    function getCurrentPlaceId(){
+      return $auth.user.current_place && $auth.user.current_place.id; // jshint ignore:line
+    }
+
+    function updateUser(attributes){
+      return UserAccountService
+               .updateUser(attributes)
+               .then(function (resp) {
+                 $auth.user = resp.data;
+               })
+               .catch(ErrorHandlerService.handleCommonErrorGET);
+    }
+
+    function updateCart(){
+      return CartService.getCart().then(function(resp){
+        $auth.user.customer_order = resp.customer_order; // jshint ignore:line
+      });
+    }
+
+    function nextViewIsRootView(){
+      $ionicHistory.nextViewOptions({
+        historyRoot: true
+      });
     }
   }
 })();

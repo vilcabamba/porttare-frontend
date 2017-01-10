@@ -15,5 +15,5 @@ ion-view(
           img(ng-src="{{ ::place.flag_image_url }}")
         .text {{ ::place.nombre }} - {{ ::place.country }}
         i(
-          ng-if="$index === 0"
+          ng-if="place.id === placesVm.currentPlaceId"
         ).icon.ion-ios-checkmark-outline
