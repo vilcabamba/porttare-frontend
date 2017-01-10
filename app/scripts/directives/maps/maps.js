@@ -113,7 +113,7 @@
               mapVm.ciudad = getCiudad(results[0]);
             })
             .catch(function(error){
-              if (error === "OVER_QUERY_LIMIT") {
+              if (error === 'OVER_QUERY_LIMIT') {
                 mapVm.geolocationMessageKey = 'maps.overGeocodeLimit';
               } else {
                 mapVm.geolocationMessageKey = 'maps.wontGeocode';
