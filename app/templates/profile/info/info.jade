@@ -20,7 +20,9 @@ ion-view(
       .row
         .col.col-50.label {{::("user.email"|translate)}}
         .col.col-50.value {{piVm.user.email}}
-      .row
+      .row(
+        ng-if="piVm.user.fecha_nacimiento"
+      )
         .col.col-50.label {{::("user.age"|translate)}}
         .col.col-50.value {{piVm.user.fecha_nacimiento | age}}
       .row

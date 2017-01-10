@@ -331,7 +331,8 @@
         successUpdateProfile: 'Perfil actualizado éxitosamente',
         password: 'Contraseña',
         repeatPassword: 'Repita contraseña',
-        birthdate:  'Fecha de Nacimiento'
+        birthdate:  'Fecha de Nacimiento',
+        selectDatePlaceholder: 'Seleccionar fecha'
       },
       product: {
         more: 'mostrar más',
@@ -447,7 +448,7 @@
         requiredField: 'Campo requerido. ',
         wrongEmail: 'Email incorrecto. ',
         dontMatch: 'Contraseñas no coinciden. ',
-        leaveBlank: 'Dejar en blanco si no desea actualizar'
+        leaveBlank: 'Dejar en blanco si no desea cambiar'
       },
       billingAddress: {
         legendForm: 'Dirección de facturación',

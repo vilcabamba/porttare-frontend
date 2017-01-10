@@ -39,7 +39,7 @@ ion-modal-view
             .button.button-clear.button-positive.button-small
               | {{::("user.changeImagen"|translate)}}
 
-        show-error(array-messages='piVm.user.custom_image')
+        show-error(array-messages='piVm.messages.custom_image')
 
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': piVm.updateProfileForm.email.$touched && piVm.updateProfileForm.email.$invalid}"
@@ -65,7 +65,12 @@ ion-modal-view
           ng-model='piVm.userEdit.fecha_nacimiento'
         )
           i.icon.ion-ios-calendar-outline
-          | {{ piVm.userEdit.fecha_nacimiento| date: "yyyy-MM-dd" }}
+          span(
+            ng-if="piVm.userEdit.fecha_nacimiento"
+          ) {{ piVm.userEdit.fecha_nacimiento| date: "yyyy-MM-dd" }}
+          span(
+            ng-if="!piVm.userEdit.fecha_nacimiento"
+          ) {{ "user.selectDatePlaceholder"|translate }}
         show-error(array-messages="piVm.messages.fecha_nacimiento")
 
         label.item.item-input.item-stacked-label(
@@ -76,7 +81,8 @@ ion-modal-view
             type="text"
             ng-model="piVm.userEdit.name"
           )
-        show-error(array-messages="piVm.messages.name")
+        .errors-wrapper
+          show-error(array-messages="piVm.messages.name")
 
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': piVm.messages.ciudad}"
@@ -86,7 +92,8 @@ ion-modal-view
             type="text"
             ng-model="piVm.userEdit.ciudad"
           )
-        show-error(array-messages="piVm.messages.ciudad")
+        .errors-wrapper
+          show-error(array-messages="piVm.messages.ciudad")
 
         span(ng-if="::piVm.canChangePassword")
           label.item.item-input.item-stacked-label(
@@ -98,7 +105,8 @@ ion-modal-view
               ng-model="piVm.userEdit.password"
               placeholder="{{::('form.leaveBlank'|translate)}}"
             )
-          show-error(array-messages="piVm.messages.password")
+          .errors-wrapper
+            show-error(array-messages="piVm.messages.password")
 
         span(ng-if="::piVm.canChangePassword")
           label.item.item-input.item-stacked-label(
