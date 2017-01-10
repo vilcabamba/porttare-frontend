@@ -17,13 +17,17 @@
 
     return service;
 
-    function getObjects(url) {
+    function getObjects(url, modelName) {
       return $http({
         method: 'GET',
         url: ENV.apiHost + url
       })
         .then(function success(resp) {
-          return resp.data;
+          var collection = resp.data;
+          if (modelName) {
+            collection = collection[modelName];
+          }
+          return collection;
         });
     }
 

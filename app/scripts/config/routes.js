@@ -419,7 +419,14 @@ function routes($stateProvider, $urlRouterProvider) {
       'menuContent@provider': {
         templateUrl: 'templates/offices/offices.html',
         controller: 'OfficesController',
-        controllerAs: 'officesVm'
+        controllerAs: 'officesVm',
+        resolve: {
+          places: function(PlacesService, ErrorHandlerService){
+            return PlacesService
+                     .getPlaces()
+                     .catch(ErrorHandlerService.handleCommonErrorGET);
+          }
+        }
       }
     }
   })
@@ -434,6 +441,11 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'OfficeController',
         controllerAs: 'officesVm',
         resolve: {
+          places: function(PlacesService, ErrorHandlerService){
+            return PlacesService
+                     .getPlaces()
+                     .catch(ErrorHandlerService.handleCommonErrorGET);
+          },
           office: function ($stateParams, OfficesService, ErrorHandlerService) {
             if ($stateParams.office) {
               return $stateParams.office;
@@ -605,11 +617,10 @@ function routes($stateProvider, $urlRouterProvider) {
           id: null
         },
         resolve: {
-          data: function ($ionicLoading, $stateParams, ProfileAddressesService, ErrorHandlerService) {
+          data: function ($stateParams, ProfileAddressesService, ErrorHandlerService) {
             if ($stateParams.id) {
               return ProfileAddressesService.getAddress($stateParams.id)
               .then(function success(res) {
-                $ionicLoading.hide();
                 return res;
               }, ErrorHandlerService.handleCommonErrorGET);
             }

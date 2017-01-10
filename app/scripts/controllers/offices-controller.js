@@ -5,7 +5,8 @@
     .module('porttare.controllers')
     .controller('OfficesController', OfficesController);
 
-  function OfficesController($scope,
+  function OfficesController(places,
+                             $scope,
                              $ionicPopup,
                              $ionicLoading,
                              APP,
@@ -14,6 +15,7 @@
                              ErrorHandlerService) {
 
     var officesVm = this;
+    officesVm.places = places;
     officesVm.showNewOffice = showNewOffice;
     officesVm.closeModal = closeModal;
     officesVm.submitOffice = submitOffice;
