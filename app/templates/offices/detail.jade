@@ -3,6 +3,10 @@ ion-view(
 )
   ion-nav-title
     .alt-logo
+
+  ion-nav-buttons(side="right")
+    provider-notifications
+
   ion-content.office-show-page(
     ng-class="{'content-office-disabled': officesVm.officeDetail.enabled==false}"
   )

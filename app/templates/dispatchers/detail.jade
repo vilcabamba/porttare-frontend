@@ -3,6 +3,10 @@ ion-view(
 )
   ion-nav-title
     .alt-logo
+
+  ion-nav-buttons(side="right")
+    provider-notifications
+
   ion-content.dispatcher-show-page
     .list.list-inset.list--no-borders.user-img-wrapper
       img(
@@ -12,18 +16,18 @@ ion-view(
       i.icon.ion-paper-airplane(
         ng-if="!dispatchersVm.dispatcherDetail.user"
       )
-    
+
     .list.list-inset.list--no-borders.resource-detail-summary.text-center(
       ng-if="!dispatchersVm.dispatcherDetail.user"
     )
       p {{::("dispatchers.notAccepted"|translate)}}
-  
+
     .list.list-inset.list--no-borders.resource-detail-summary
       h2(
         ng-if="dispatchersVm.dispatcherDetail.user"
       ) {{dispatchersVm.dispatcherDetail.user.to_s}}
       h3 {{dispatchersVm.dispatcherDetail.email}}
-      
+
     .row.details-table-header
       .col.col-60 {{::("dispatchers.dispatchersData"|translate)}}
       .col.col-40.text-right

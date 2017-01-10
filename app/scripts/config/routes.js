@@ -315,12 +315,22 @@ function routes($stateProvider, $urlRouterProvider) {
   .state('provider', {
     url: '/provider',
     abstract: true,
+    cache: false,
     templateUrl: 'templates/menu/menu-provider.html',
     resolve: {
       auth: function ( UserAuthService) {
               return UserAuthService.checkIfEnabledProvider();
-            }
-    }
+            },
+      providerOrders: function(ProviderCustomerOrdersService, ErrorHandlerService){
+        return ProviderCustomerOrdersService
+          .getProviderCustomerOrdersByStatus('submitted')
+          .then(function success(customerOrders){
+            return customerOrders;
+          }, ErrorHandlerService.handleCommonErrorGET);
+      }
+    },
+    controller: 'ProviderMainController',
+    controllerAs: 'providerMainVm'
   })
   .state('provider.profile-provider', {
     url: '/profile',

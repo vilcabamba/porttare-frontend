@@ -7,13 +7,26 @@
 
   function ProviderOrdersController(status,
                                     ProviderCustomerOrdersService,
-                                    ErrorHandlerService) {
+                                    ErrorHandlerService,
+                                    $scope) {
     var poVm = this;
     poVm.tab = status;
-    init();
+
+    $scope.$on('$ionicView.enter', function() {
+      if (status === 'submitted') {
+        $scope.$emit('update-orders-submitted');
+      }
+      init();
+    });
+
+    $scope.$watch('$parent.providerMainVm.providerOrders', function(newValue){
+      poVm.customerOrders = newValue;
+    });
 
     function init(){
-      getProviderCustomerOrdersStatus(poVm.tab);
+      if (status !== 'submitted') {
+        getProviderCustomerOrdersStatus(poVm.tab);
+      }
     }
 
     function getProviderCustomerOrdersStatus(status){

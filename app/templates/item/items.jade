@@ -3,6 +3,10 @@ ion-view(
 )
   ion-nav-title
     .alt-logo
+
+  ion-nav-buttons(side="right")
+    provider-notifications
+
   ion-content.item-index-page.resource-collection
     .row
       label.item.search-input
@@ -38,7 +42,7 @@ ion-view(
 
       .item.row(
         ng-repeat="item in itemsVm.items | filter:itemsVm.query | orderBy:sortingOption.filterField"
-      )  
+      )
         .col.col-50.provider-item-title {{ ::item.titulo }}
         .col.col-25.text-right
           span
