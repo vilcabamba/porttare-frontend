@@ -6,7 +6,8 @@
     .controller('ItemsController', ItemsController);
 
 
-  function ItemsController($ionicLoading,
+  function ItemsController($auth,
+                           $ionicLoading,
                            $ionicPopup,
                            $scope,
                            apiResources,
@@ -68,7 +69,10 @@
       modalScope = $scope.$new(true); // isolated
       modalScope.modalVm = itemsVm;
       // unfortunately item is the providerItem we'll edit
-      modalScope.modalVm.item = { imagenes: [] };
+      modalScope.modalVm.item = {
+        imagenes: [],
+        precio_currency: getUserCurrency()
+      };
       modalScope.modalVm.closeModal = closeModal;
       modalScope.modalVm.submitProcess = newItem;
       modalScope.modalVm.concatImages = concatImages;
@@ -83,6 +87,10 @@
       ModalService.closeModal();
       modalScope.modalVm.messages = {};
       modalScope.modalVm.item = null;
+    }
+
+    function getUserCurrency(){
+      return $auth.user.current_place.currency_iso_code; // jshint ignore:line
     }
   }
 })();

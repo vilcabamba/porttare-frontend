@@ -30,24 +30,36 @@ ion-view(
           .col.col-75
             | {{ ::("order.summary.subtotal" |translate) }}
           .col.col-25.strong
-            | {{ ::( customerOrderVm.customerOrder.subtotal_items_cents | priceCurrency | currency ) }}
+            span
+              | {{ ::("item.currency."+customerOrderVm.customerOrder.subtotal_items_currency | translate) }}
+            span
+              | {{ ::( customerOrderVm.customerOrder.subtotal_items_cents | priceCurrency | currency:'' ) }}
         .row.item
           .col.col-75
             | {{ ::("order.summary.shippingCosts" |translate) }}
           .col.col-25.strong
-            | {{ ::( '0' | priceCurrency | currency ) }}
+            span
+              | {{ ::("item.currency."+customerOrderVm.customerOrder.subtotal_items_currency | translate) }}
+            span
+              | {{ ::( '0' | priceCurrency | currency:'' ) }}
         .row.item
           .col.col-75
             | {{ ::( (customerOrderVm.VAT*100) + ("order.summary.VAT" |translate) ) }}
           .col.col-25.strong
-            | {{ ::( customerOrderVm.customerOrder.subtotalVATCents | priceCurrency | currency ) }}
+            span
+              | {{ ::("item.currency."+customerOrderVm.customerOrder.subtotal_items_currency | translate) }}
+            span
+              | {{ ::( customerOrderVm.customerOrder.subtotalVATCents | priceCurrency | currency:'' ) }}
         .row.table-headers
           .col.col-100
         .row.item
           .col.col-75
             | {{ ::("order.summary.total" |translate) }}
           .col.col-25.strong
-            | {{ ::( customerOrderVm.customerOrder.totalCents | priceCurrency | currency ) }}
+            span
+              | {{ ::("item.currency."+customerOrderVm.customerOrder.subtotal_items_currency | translate) }}
+            span
+              | {{ ::( customerOrderVm.customerOrder.totalCents | priceCurrency | currency:'' ) }}
 
     //- not implemented yet
       .resource-collection
