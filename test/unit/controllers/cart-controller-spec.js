@@ -47,7 +47,8 @@
       $provide.factory('$auth', function () {
         return {
           user: {
-            customer_order: []
+            customer_order: [],
+            current_place: { currency_iso_code: 'USD' }
           }
         };
       });

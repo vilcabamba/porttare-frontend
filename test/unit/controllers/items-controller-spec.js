@@ -11,6 +11,7 @@
       ModalService,
       $ionicLoading,
       $ionicPopup,
+      $auth,
       $scope,
       $rootScope,
       $timeout,
@@ -62,12 +63,20 @@
           getProviderItemCategories: sinon.stub().returns($q.defer().promise)
         };
       });
+      $provide.factory('$auth', function(){
+        return {
+          user: {
+            current_place: {} // jshint ignore:line
+          }
+        };
+      });
     }));
 
     beforeEach(inject(
       function (_$q_,
         _$rootScope_,
         _$controller_,
+        _$auth_,
         _ItemsService_,
         _ModalService_,
         _ErrorHandlerService_,
@@ -90,6 +99,7 @@
         $ionicPopup = {
           alert: sinon.stub().returns(deferIonic.promise)
         };
+        $auth = _$auth_;
         $timeout = sinon.stub();
       })
     );
@@ -97,6 +107,7 @@
     describe('All functions', function () {
       beforeEach(function () {
         dependencies = {
+          $auth: $auth,
           $scope: $scope,
           ItemsService: ItemsService,
           ModalService: ModalService,
