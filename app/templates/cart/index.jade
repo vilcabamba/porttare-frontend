@@ -21,5 +21,5 @@ ion-view(
     ) {{ ::('cart.buyItems'|translate) }}
 
     .total
-      span.value {{ ::("item.currency."+cartVm.cart.subtotal_items_currency | translate) }}
+      span.value {{ ::("item.currency."+cartVm.currentCurrency | translate) }}
       span.value {{ cartVm.total | currency:'' }}

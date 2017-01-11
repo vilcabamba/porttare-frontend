@@ -41,6 +41,7 @@
     cartVm.customerOrderDeliveryNewAddress = customerOrderDeliveryNewAddress;
     cartVm.editCustomerOrderDeliveryAddress = editCustomerOrderDeliveryAddress;
     cartVm.customerOrderDeliverySelectPickup = customerOrderDeliverySelectPickup;
+    cartVm.currentCurrency = getCurrentCurrency();
     cartVm.checkoutForm = {
       forma_de_pago: 'efectivo' // only method supported ATM
     };
@@ -430,6 +431,16 @@
           fromTemplateUrl: 'templates/profile/addresses/modal-form.html'
         });
       });
+    }
+
+    function getCurrentCurrency(){
+      // jshint ignore:start
+      if (cartVm.cart && cartVm.cart.subtotal_items_currency) {
+        return cartVm.cart.subtotal_items_currency;
+      } else {
+        return $auth.user.current_place.currency_iso_code;
+      }
+      // jshint ignore:end
     }
   }
 })();
