@@ -76,11 +76,10 @@ ion-modal-view.item-form
             .item-select
               select(
                 ng-model='modalVm.item.precio_currency'
+                ng-options="'item.currency.'+currency|translate for currency in modalVm.availableCurrencies"
                 name='precio_currency'
                 required
               )
-                option(value='USD') {{ ::("item.currency.USD" | translate) }}
-                option(value='PEN') {{ ::("item.currency.PEN" | translate) }}
             .input-wrapper
               input(
                 min='0'
@@ -95,6 +94,7 @@ ion-modal-view.item-form
             span.message-error(ng-message="required")
               | {{::("globals.isRequired"|translate)}}
           show-error(array-messages='modalVm.messages.precio')
+          show-error(array-messages='modalVm.messages.precio_currency')
 
         label.item.item-input.item-stacked-label
           span.input-label {{::("item.cantidad"|translate)}}

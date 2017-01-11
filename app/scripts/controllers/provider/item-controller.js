@@ -82,6 +82,7 @@
       modalScope.modalVm.submitProcess = editItem;
       modalScope.modalVm.concatImages = concatImages;
       modalScope.modalVm.imagesUrls = loadImagesUrls();
+      modalScope.modalVm.availableCurrencies = [providerItemVm.providerItem.precio_currency];
       ModalService.showModal({
         parentScope: modalScope,
         fromTemplateUrl: 'templates/item/new-edit.html'

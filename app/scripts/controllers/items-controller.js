@@ -69,9 +69,10 @@
       modalScope = $scope.$new(true); // isolated
       modalScope.modalVm = itemsVm;
       // unfortunately item is the providerItem we'll edit
+      modalScope.modalVm.availableCurrencies = getProviderCurrencies();
       modalScope.modalVm.item = {
         imagenes: [],
-        precio_currency: getUserCurrency() //jshint ignore:line
+        precio_currency: getProviderCurrencies()[0] //jshint ignore:line
       };
       modalScope.modalVm.closeModal = closeModal;
       modalScope.modalVm.submitProcess = newItem;
@@ -89,8 +90,8 @@
       modalScope.modalVm.item = null;
     }
 
-    function getUserCurrency(){
-      return $auth.user.current_place.currency_iso_code; // jshint ignore:line
+    function getProviderCurrencies(){
+      return $auth.user.provider_profile.allowed_currency_iso_codes; // jshint ignore:line
     }
   }
 })();
