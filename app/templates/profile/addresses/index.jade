@@ -20,6 +20,9 @@ ion-view.addresses-wrapper--parent(
       ) {{::('globals.edit'|translate)}}
       .list.list-inset.list--no-borders.resource-details-table
         p.resource-detail-title {{ address.nombre || address.direccion_uno }}
+        img.static-map-preview(
+          ng-src="{{address.static_map_image}}"
+        )
         .row
           .col.col-50.label {{::('profile.addresses.city'|translate)}}
           .col.col-50.value {{address.ciudad}}
