@@ -31,8 +31,10 @@ ion-view(
       .row
         .col.col-50.label {{"item.price"|translate}}
         .col.col-50.value
-          | {{::("item.currency"|translate)}}
-          | {{providerItemVm.providerItem.precio}}
+          span
+            | {{::("item.currency."+providerItemVm.providerItem.precio_currency|translate)}}
+          span
+            | {{providerItemVm.providerItem.precio}}
       .row
         .col.col-50.label {{::("item.unidadMedida"|translate)}}
         .col.col-50.value {{providerItemVm.providerItem.unidad_medida}}

@@ -14,4 +14,8 @@
       )
 
   .price-panel
-    .price {{ pcVm.priceTotalCents | priceCurrency | currency }}
+    .price
+      span
+        | {{ ::("item.currency."+pcVm.priceCurrency | translate) }}
+      span
+        | {{ pcVm.priceTotalCents | priceCurrency | currency:'' }}

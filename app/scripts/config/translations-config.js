@@ -222,6 +222,10 @@
           createdAt: 'Antigüedad',
           precio: 'Precio',
           titulo: 'Nombre'
+        },
+        currency: {
+          USD: '$',
+          PEN: 'S/.'
         }
       },
       actions: {
