@@ -71,7 +71,7 @@
       // unfortunately item is the providerItem we'll edit
       modalScope.modalVm.item = {
         imagenes: [],
-        precio_currency: getUserCurrency()
+        precio_currency: getUserCurrency() //jshint ignore:line
       };
       modalScope.modalVm.closeModal = closeModal;
       modalScope.modalVm.submitProcess = newItem;
