@@ -60,7 +60,7 @@ ion-modal-view.item-form
             | {{::("item.unidadMedida"|translate)}}
             abbr *
           select(ng-model='modalVm.item.unidad_medida' name='unidad_medida' required)
-            option(value='unidades') Unidades
+            option(value='unidades' ng-selected="true") Unidades
         .errors-wrapper
           span.show-errors(ng-messages="modalVm.itemForm.unidad_medida.$error" ng-if="modalVm.itemForm.unidad_medida.$touched")
             span(ng-message="required" class="message-error") {{::("globals.isRequired"|translate)}}
