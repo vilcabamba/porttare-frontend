@@ -25,11 +25,11 @@
     productVm.showNewWishlist = showNewWishlist;
     productVm.wishlistName = '';
     productVm.clearData = clearData;
-    productVm.options = {
+    productVm.counterOptions = {
       cantidad: productVm.item.cantidad,
       priceCents: providerItem.precio_cents, // jshint ignore:line
       cartItem: productVm.cartItem,
-      product: productVm.product,
+      providerItem: productVm.product,
       onChangeValue: function (data) {
         productVm.item.cantidad = data.itemsCount;
         productVm.canAdd = getCanAdd();

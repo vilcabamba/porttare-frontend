@@ -113,12 +113,12 @@
     }
 
     function getDisableButtons(){
-      return !CartService.canAddItem(options.cartItem, 1, options.product);
+      return !CartService.canAddItem(options.cartItem, 1, options.providerItem);
     }
 
 
     function getCanIncrement() {
-      return CartService.canAddItem(options.cartItem, pcVm.itemsCount + 1, options.product);
+      return CartService.canAddItem(options.cartItem, pcVm.itemsCount + 1, options.providerItem);
     }
 
   }
