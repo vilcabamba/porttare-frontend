@@ -6,7 +6,6 @@
     .controller('LoginController', LoginController);
 
   function LoginController( $rootScope,
-                            $scope,
                             $state,
                             $ionicLoading,
                             $ionicPopup,
@@ -26,22 +25,28 @@
       $ionicLoading.show({
         template: 'cargando...'
       });
+      $rootScope.$on('auth:login-error', cantLogin);
       $auth.submitLogin(loginVm.loginForm)
-        .then(function () {
-          loginVm.loginForm = {};
-          $auth.user.current_place ? $state.go(successState):$state.go('app.places.index'); //jshint ignore:line
-        })
-        .catch(function (resp) {
-          loginVm.loginForm.password = null;
+        .then(loggedIn)
+        .finally($ionicLoading.hide);
+    }
 
-          $ionicPopup.alert({
-            title: 'Error',
-            template: resp.errors[0]
-          });
-        })
-        .finally(function(){
-          $ionicLoading.hide();
-        });
+    function loggedIn() {
+      loginVm.loginForm = {};
+      if ($auth.user.current_place) { //jshint ignore:line
+        $state.go(successState);
+      } else {
+        $state.go('app.places.index')
+      }
+    }
+
+    function cantLogin(ev, resp) {
+      loginVm.loginForm.password = null;
+
+      $ionicPopup.alert({
+        title: 'Error',
+        template: resp.errors[0]
+      });
     }
 
     function logout() {
