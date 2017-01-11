@@ -172,6 +172,7 @@ function routes($stateProvider, $urlRouterProvider) {
   })
   .state('app.categories.show', {
     url: '/:id',
+    cache: false,
     views: {
       'menuContent@app': {
         templateUrl: 'templates/category/show.html',

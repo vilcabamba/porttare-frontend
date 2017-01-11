@@ -1,5 +1,6 @@
 form(
   name="pfaVm.addressForm"
+  ng-submit="pfaVm.processAddress()"
   novalidate
 )
   ion-content.addresses-wrapper.resource-form(
@@ -124,6 +125,6 @@ form(
 
   .bar.bar-footer.bar-stable
     button.button.button-small.button-outline.button-energized(
-      ng-click="pfaVm.processAddress()"
+      type="submit"
       ng-disabled="pfaVm.addressFormData.$invalid"
     ) {{ ::pfaVm.inUpdateMode ? ("profile.addresses.updateBtnText"|translate) : ("profile.addresses.saveBtnText"|translate) }}

@@ -20,7 +20,8 @@
                           ProfileAddressesService,
                           CartService,
                           CustomerOrderDeliveryService) {
-    var cartVm = this;
+    var cartVm = this,
+        performingPost = false;
     cartVm.total = 0;
     cartVm.showCheckoutModal = showCheckoutModal;
     cartVm.closeModal = closeModal;
@@ -100,7 +101,8 @@
     }
 
     function saveNewAddress(){
-      if ($scope.pfaVm.addressForm.$valid) {
+      if (!performingPost && $scope.pfaVm.addressForm.$valid) {
+        performingPost = true;
         ProfileAddressesService.createAddresses(
           $scope.pfaVm.addressFormData
         ).then(function(response){
@@ -108,7 +110,9 @@
           cartVm.addresses.push(newCustomerAddress);
           assignAddress(newCustomerAddress);
           submitCustomerOrderDelivery().then(clearCurrentOrderDelivery);
-          closeModal();
+          closeModal().then(function (){
+            performingPost = false;
+          });
         }, function(error){
           $scope.pfaVm.messages = error.errors;
         });
