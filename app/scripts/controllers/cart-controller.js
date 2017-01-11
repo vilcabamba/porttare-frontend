@@ -266,6 +266,8 @@
         limit: 1,
         cantidad: cartVm.currentItem.cantidad,
         priceCents: cartVm.currentItem.provider_item_precio_cents, // jshint ignore:line
+        cartItem: cartVm.currentItem,
+        providerItem: cartVm.currentItem.provider_item,
         onChangeValue: function (data) {
           cartVm.currentItem.cantidad = data.itemsCount;
         }
