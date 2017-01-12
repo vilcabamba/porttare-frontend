@@ -270,7 +270,7 @@
         cartItem: cartVm.currentItem,
         providerItem: cartVm.currentItem.provider_item,
         priceCents: cartVm.currentItem.provider_item_precio_cents,
-        priceCurrency: cartVm.currentItem.provider_item_precio_currency,
+        currencyCode: cartVm.currentItem.provider_item_precio_currency,
         onChangeValue: function (data) {
           cartVm.currentItem.cantidad = data.itemsCount;
         }

@@ -64,11 +64,16 @@
         };
       });
       $provide.factory('$auth', function(){
+        // jshint ignore:start
         return {
           user: {
-            current_place: {} // jshint ignore:line
+            current_place: {},
+            provider_profile: {
+              allowed_currency_iso_codes: []
+            }
           }
         };
+        // jshint ignore:end
       });
     }));
 

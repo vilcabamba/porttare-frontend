@@ -31,7 +31,7 @@
       cartItem: productVm.cartItem,
       providerItem: productVm.product,
       priceCents: providerItem.precio_cents,
-      priceCurrency: providerItem.precio_currency,
+      currencyCode: providerItem.precio_currency,
       onChangeValue: function (data) {
         productVm.item.cantidad = data.itemsCount;
         productVm.canAdd = getCanAdd();

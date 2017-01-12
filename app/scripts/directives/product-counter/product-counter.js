@@ -92,7 +92,7 @@
         onChangeValue: null,
         cantidad: 0,
         limit: 0,
-        priceCurrency: 'USD'
+        currencyCode: 'USD'
       };
 
       if (!isValidNumber(pcVm.options.priceCents)) {
