@@ -5,10 +5,10 @@
     .module('porttare.directives')
     .directive('providerProfileSchedule', providerProfileSchedule);
 
-  function providerProfileSchedule($filter) {
+  function providerProfileSchedule() {
     var directive = {
       restrict: 'EA',
-      controller: providerProfileScheduleController,
+      controller: ['$filter', providerProfileScheduleController],
       controllerAs: 'ppSVm',
       bindToController: true,
       scope: {
@@ -19,7 +19,7 @@
 
     return directive;
 
-    function providerProfileScheduleController() {
+    function providerProfileScheduleController($filter) {
       // jshint validthis:true
       var ppSVm = this,
           providerOffices = ppSVm.providerProfile.provider_offices,
