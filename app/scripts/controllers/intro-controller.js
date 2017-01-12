@@ -6,6 +6,7 @@
     .controller('IntroController', IntroController);
 
   function IntroController($state,
+                           $rootScope,
                            $localStorage,
                            $ionicSlideBoxDelegate) {
     var introVm = this;
@@ -25,7 +26,7 @@
     }
 
     function normalStatusBar() {
-      window.styleDefaultStatusBar();
+      $rootScope.$emit('porttare:styleDefaultStatusBar');
     }
 
     function startApp() {
