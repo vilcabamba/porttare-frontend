@@ -20,6 +20,7 @@
     function traslucentStatusBar() {
       // this view is dark. make status bar visible
       if (window.StatusBar) {
+        window.StatusBar.backgroundColorByName('black');
         window.StatusBar.styleBlackTranslucent();
       }
     }
