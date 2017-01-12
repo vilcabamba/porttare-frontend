@@ -7,7 +7,6 @@
 
   function IntroController($state,
                            $localStorage,
-                           $ionicPlatform,
                            $ionicSlideBoxDelegate) {
     var introVm = this;
     introVm.startApp = startApp;
@@ -15,7 +14,7 @@
     introVm.previous = previous;
     introVm.slideChanged = slideChanged;
 
-    $ionicPlatform.ready(traslucentStatusBar);
+    document.addEventListener('deviceready', traslucentStatusBar, false);
 
     function traslucentStatusBar() {
       // this view is dark. make status bar visible
@@ -26,16 +25,12 @@
     }
 
     function normalStatusBar() {
-      // return to default status bar style for the rest of the app
-      if (window.StatusBar) {
-        window.StatusBar.styleDefault();
-      }
+      window.styleDefaultStatusBar();
     }
 
     function startApp() {
-      normalStatusBar();
       $localStorage.setItem('hasViewedTutorial','true');
-      $state.go('prelogin');
+      $state.go('prelogin').then(normalStatusBar);
     }
 
     function next() {

@@ -11,7 +11,7 @@
     $ionicConfigProvider.backButton.icon(backButtonIcon());
     $ionicConfigProvider.backButton.text(false);
 
-    document.addEventListener('deviceready', styleStatusBar, false);
+    document.addEventListener('deviceready', styleDefaultStatusBar, false);
 
     function backButtonIcon() {
       if (window.ionic.Platform.isIOS()) {
@@ -21,11 +21,16 @@
       }
     }
 
-    function styleStatusBar() {
+    // HACK
+    // we'll call this same method later on
+    window.styleDefaultStatusBar = styleDefaultStatusBar;
+
+    function styleDefaultStatusBar() {
       if (!window.cordova) { return; }
       if (cordova.platformId === 'android') {
         window.StatusBar.backgroundColorByHexString('#FDC30D');
       } else {
+        window.StatusBar.styleDefault();
         window.StatusBar.styleLightContent();
       }
     }
