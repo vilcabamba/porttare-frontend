@@ -49,7 +49,7 @@
 
     function getIsOpen(officeWeekday) {
       var horaActual = moment();
-      var respuesta=horaActual.isBetween(convertDate(officeWeekday.hora_de_apertura),convertDate(officeWeekday.hora_de_cierre));
+      var respuesta=horaActual.isBetween(convertDate(officeWeekday.hora_de_apertura),convertDate(officeWeekday.hora_de_cierre));// jshint ignore:line
 
       if(officeWeekday.abierto && respuesta){
         return true;
