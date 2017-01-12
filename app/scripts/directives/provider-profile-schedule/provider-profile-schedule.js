@@ -8,7 +8,7 @@
   function providerProfileSchedule() {
     var directive = {
       restrict: 'EA',
-      controller: providerProfileScheduleController,
+      controller: ['$filter', providerProfileScheduleController],
       controllerAs: 'ppSVm',
       bindToController: true,
       scope: {
@@ -19,38 +19,65 @@
 
     return directive;
 
-    function providerProfileScheduleController() {
+    function providerProfileScheduleController($filter) {
       // jshint validthis:true
       var ppSVm = this,
-          providerOffices = ppSVm.providerProfile.provider_offices; // jshint ignore:line
+          providerOffices = ppSVm.providerProfile.provider_offices, // jshint ignore:line
+          mainOffice = providerOffices[0];
 
       ppSVm.isOpen = false;
 
-      if (providerOffices.length > 0) {
-        var mainOffice = providerOffices[0];
-        var dia = getCurrentDay();
+      if (mainOffice) {
+        showScheduleFor(mainOffice);
+      }
 
-        var officeWeekday = mainOffice.weekdays.find(function(wday){
+      function showScheduleFor(office){
+        var dia = getTodayStr();
+
+        var officeWeekday = office.weekdays.find(function(wday){
           return wday.day === dia;
         });
 
         if (officeWeekday) {
+          ppSVm.openingTime = convertToDate(
+            officeWeekday.hora_de_apertura // jshint ignore:line
+          );
+          ppSVm.closingTime = convertToDate(
+            officeWeekday.hora_de_cierre // jshint ignore:line
+          );
           ppSVm.isOpen = getIsOpen(officeWeekday);
-          // jshint ignore:start
-          ppSVm.openingTime = officeWeekday.hora_de_apertura;
-          ppSVm.closingTime = officeWeekday.hora_de_cierre;
-          // jshint ignore:end
         }
       }
-    }
 
-    function getCurrentDay(){
-      return moment().locale('en').format('ddd').toLowerCase();
-    }
+      function getIsOpen(officeWeekday) {
+        if (angular.element.isEmptyObject(ppSVm.openingTime)) {
+          return;
+        }
+        if (angular.element.isEmptyObject(ppSVm.closingTime)) {
+          return;
+        }
 
-    function getIsOpen(officeWeekday) {
-      // TODO it's open if right now it's open
-      return officeWeekday.abierto;
+        var horaActual = moment(),
+            isInRange = horaActual.isBetween(
+          ppSVm.openingTime,
+          ppSVm.closingTime
+        );
+
+        if (officeWeekday.abierto && isInRange) {
+          return true;
+        }
+        return false;
+      }
+
+      function getTodayStr(){
+        return moment().locale('en').format('ddd').toLowerCase();
+      }
+
+      function convertToDate(horaStr){
+        if (!angular.element.isEmptyObject(horaStr)) {
+          return $filter('toDate')(horaStr, 'timeSchedule');
+        }
+      }
     }
   }
 })();

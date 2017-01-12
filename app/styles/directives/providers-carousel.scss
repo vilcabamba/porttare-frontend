@@ -49,7 +49,7 @@
             .office-status-text {
               display: none;
 
-              &.closed {
+              &.closed--no-hours {
                 display: block;
 
                 .i {
