@@ -22,58 +22,62 @@
     function providerProfileScheduleController() {
       // jshint validthis:true
       var ppSVm = this,
-          providerOffices = ppSVm.providerProfile.provider_offices; // jshint ignore:line
+          providerOffices = ppSVm.providerProfile.provider_offices,
+          mainOffice = providerOffices[0]; // jshint ignore:line
 
       ppSVm.isOpen = false;
 
-      if (providerOffices.length > 0) {
-        var mainOffice = providerOffices[0];
-        var dia = getCurrentDay();
+      if (mainOffice) {
+        showScheduleFor(mainOffice);
+      }
 
-        var officeWeekday = mainOffice.weekdays.find(function(wday){
+      function showScheduleFor(office){
+        var dia = getTodayStr();
+
+        var officeWeekday = office.weekdays.find(function(wday){
           return wday.day === dia;
         });
 
         if (officeWeekday) {
+          ppSVm.openingTime = convertToDate(
+            officeWeekday.hora_de_apertura // jshint ignore:line
+          );
+          ppSVm.closingTime = convertToDate(
+            officeWeekday.hora_de_cierre // jshint ignore:line
+          );
           ppSVm.isOpen = getIsOpen(officeWeekday);
-
-          if(ppSVm.isOpen){
-            // jshint ignore:start
-            ppSVm.openingTime = officeWeekday.hora_de_apertura;
-            ppSVm.closingTime = officeWeekday.hora_de_cierre;
-            // jshint ignore:end
-          }
         }
       }
-    }
 
-    function getIsOpen(officeWeekday) {//jshint ignore:line
-      // jshint ignore:start
-      if(!isEmpty(officeWeekday.hora_de_cierre) && !isEmpty(officeWeekday.hora_de_cierre)){
-        var horaActual = moment();
-        var isInRange=horaActual.isBetween(
-          convertDate(
-            officeWeekday.hora_de_apertura
-          ),
-          convertDate(
-            officeWeekday.hora_de_cierre
-          )
+      function getIsOpen(officeWeekday) {
+        if (angular.element.isEmptyObject(ppSVm.openingTime)) {
+          return;
+        }
+        if (angular.element.isEmptyObject(ppSVm.closingTime)) {
+          return;
+        }
+
+        var horaActual = moment(),
+            isInRange = horaActual.isBetween(
+          ppSVm.openingTime,
+          ppSVm.closingTime
         );
 
-        if(officeWeekday.abierto && isInRange) {
+        if (officeWeekday.abierto && isInRange) {
           return true;
         }
+        return false;
       }
-      // jshint ignore:end
-      return false;
-    }
 
-    function getCurrentDay(){//jshint ignore:line
-      return moment().locale('en').format('ddd').toLowerCase();
-    }
+      function getTodayStr(){
+        return moment().locale('en').format('ddd').toLowerCase();
+      }
 
-    function convertDate(hora){//jshint ignore:line
-      return $filter('toDate')(hora, 'timeSchedule');
+      function convertToDate(horaStr){
+        if (!angular.element.isEmptyObject(horaStr)) {
+          return $filter('toDate')(horaStr, 'timeSchedule');
+        }
+      }
     }
   }
 })();

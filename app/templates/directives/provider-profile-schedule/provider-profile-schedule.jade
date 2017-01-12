@@ -1,10 +1,10 @@
 .office-schedule(
-  ng-if="::(ppSVm.openingTime && ppSVm.isOpen)"
+  ng-if="::(ppSVm.openingTime && ppSVm.closingTime)"
 )
   span.i.icon.ion-clock
-  | {{ ::ppSVm.openingTime | toDate:'timeSchedule' | formatDate:'HH:mm' }}
+  | {{ ::ppSVm.openingTime | formatDate:'HH:mm' }}
   | -
-  | {{ ::ppSVm.closingTime | toDate:'timeSchedule' | formatDate:'HH:mm' }}
+  | {{ ::ppSVm.closingTime | formatDate:'HH:mm' }}
 
 .office-status-text(
   ng-if="::ppSVm.isOpen"
