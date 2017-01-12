@@ -6,14 +6,23 @@
 
     beforeEach(module('porttare.controllers'));
 
+    beforeEach(angular.mock.module(function($provide){
+      $provide.factory('$state', function($q){
+        return {
+          go: sinon.stub().returns($q.defer().promise)
+        };
+      });
+    }));
+
     beforeEach(inject(
-      function (_$controller_, _$window_) {
+      function (_$controller_, _$window_, _$state_) {
         $controller = _$controller_;
         $window = _$window_;
+        $state = _$state_;
         $localStorage = {};
         $localStorage.setItem = sinon.stub();
         $localStorage.getItem = sinon.stub();
-        $state = { go: sinon.stub()};
+
         $ionicSlideBoxDelegate = { previous: sinon.stub(), next: sinon.stub()};
         $ionicPlatform = { ready: sinon.stub() };
       })
