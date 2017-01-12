@@ -12,7 +12,7 @@
     return service;
 
     function getPlaces() {
-      return CommonService.getObjects('/api/users/places/');
+      return CommonService.getObjects('/api/users/places/', 'places');
     }
   }
 })();

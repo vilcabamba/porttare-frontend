@@ -282,7 +282,7 @@
         officeSuccessSave: 'Establecimiento guardado éxitosamente',
         officeSuccessUpdate: 'Establecimiento actualizado éxitosamente',
         officeLegend: 'Datos del Establecimiento',
-        ciudad: 'Ciudad',
+        place: 'Localidad',
         direccion: 'Dirección',
         telefono: 'Teléfono',
         officeNumber: 'Sucursal número',

@@ -5,7 +5,8 @@
     .module('porttare.controllers')
     .controller('OfficeController', OfficeController);
 
-  function OfficeController(office,
+  function OfficeController(places,
+                            office,
                             OfficesService,
                             ModalService,
                             $ionicLoading,
@@ -15,6 +16,7 @@
                             MapsService) {
 
     var officesVm = this;
+    officesVm.places = places;
     officesVm.showEditOffice = showEditOffice;
     officesVm.showDeleteOffice = showDeleteOffice;
     officesVm.closeModal = closeModal;
