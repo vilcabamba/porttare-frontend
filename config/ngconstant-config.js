@@ -13,7 +13,7 @@
       constants: {
         ENV: {
           name: 'development',
-          apiHost: 'https://porttare-backend.herokuapp.com',
+          apiHost: 'http://localhost:3785',
           pusherKey: '287c19315060ae3bd2ec',
           gMapsKey: 'AIzaSyDbY9wkWTMUHeT_J2Uehq0-i0S1PCaybFE'
         }
