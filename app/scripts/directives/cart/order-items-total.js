@@ -12,7 +12,7 @@
       controllerAs: 'orderItemsTotalVM',
       controller: orderItemsTotalController,
       link: orderItemsTotalLink,
-      template: '{{ orderItemsTotalVM.totalCents | priceCurrency | currency }}',
+      templateUrl: 'templates/directives/cart/order-items-total.html',
       scope: {
         orderItems: '='
       }

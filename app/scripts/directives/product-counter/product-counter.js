@@ -34,6 +34,7 @@
     init();
 
     pcVm.itemsCount = options.cantidad;
+    pcVm.priceCurrency = options.priceCurrency;
     pcVm.canIncrement = getCanIncrement();
     pcVm.disableButtons = getDisableButtons();
     pcVm.priceTotalCents = getTotal();
@@ -90,7 +91,8 @@
         onClickPlus: null,
         onChangeValue: null,
         cantidad: 0,
-        limit: 0
+        limit: 0,
+        currencyCode: 'USD'
       };
 
       if (!isValidNumber(pcVm.options.priceCents)) {

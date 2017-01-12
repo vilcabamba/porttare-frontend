@@ -41,6 +41,7 @@
     cartVm.customerOrderDeliveryNewAddress = customerOrderDeliveryNewAddress;
     cartVm.editCustomerOrderDeliveryAddress = editCustomerOrderDeliveryAddress;
     cartVm.customerOrderDeliverySelectPickup = customerOrderDeliverySelectPickup;
+    cartVm.currentCurrency = getCurrentCurrency();
     cartVm.checkoutForm = {
       forma_de_pago: 'efectivo' // only method supported ATM
     };
@@ -262,16 +263,19 @@
 
     function openEditModal(item){
       cartVm.currentItem = angular.copy(item);
+      // jshint ignore:start
       cartVm.counterOptions = {
         limit: 1,
         cantidad: cartVm.currentItem.cantidad,
-        priceCents: cartVm.currentItem.provider_item_precio_cents, // jshint ignore:line
         cartItem: cartVm.currentItem,
         providerItem: cartVm.currentItem.provider_item,
+        priceCents: cartVm.currentItem.provider_item_precio_cents,
+        currencyCode: cartVm.currentItem.provider_item_precio_currency,
         onChangeValue: function (data) {
           cartVm.currentItem.cantidad = data.itemsCount;
         }
       };
+      // jshint ignore:end
       ModalService.showModal({
         parentScope: $scope,
         fromTemplateUrl: 'templates/cart/order-item.html',
@@ -427,6 +431,16 @@
           fromTemplateUrl: 'templates/profile/addresses/modal-form.html'
         });
       });
+    }
+
+    function getCurrentCurrency(){
+      // jshint ignore:start
+      if (cartVm.cart && cartVm.cart.subtotal_items_currency) {
+        return cartVm.cart.subtotal_items_currency;
+      } else {
+        return $auth.user.current_place.currency_iso_code;
+      }
+      // jshint ignore:end
     }
   }
 })();

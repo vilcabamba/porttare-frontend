@@ -41,7 +41,10 @@ ion-view(
       )  
         .col.col-50.provider-item-title {{ ::item.titulo }}
         .col.col-25.text-right
-          | {{ ::(item.precio_cents | priceCurrency | currency) }}
+          span
+            | {{ ::("item.currency."+item.precio_currency | translate) }}
+          span
+            | {{ ::(item.precio_cents | priceCurrency | currency:'') }}
         .col.col-25.text-right
           a.button.button-clear.button-positive.button-small(
             ui-sref="provider.items.show({id: item.id})"

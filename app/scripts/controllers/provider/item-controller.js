@@ -82,6 +82,7 @@
       modalScope.modalVm.submitProcess = editItem;
       modalScope.modalVm.concatImages = concatImages;
       modalScope.modalVm.imagesUrls = loadImagesUrls();
+      modalScope.modalVm.availableCurrencies = getAvailableCurrencies();
       ModalService.showModal({
         parentScope: modalScope,
         fromTemplateUrl: 'templates/item/new-edit.html'
@@ -133,6 +134,10 @@
         focusFirstInput: false,
         fromTemplateUrl: 'templates/item/as-customer.html'
       });
+    }
+
+    function getAvailableCurrencies(){
+      return [providerItemVm.providerItem.precio_currency]; // jshint ignore:line
     }
 
     function getProviderItemCategoryName() {

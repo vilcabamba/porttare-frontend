@@ -214,7 +214,6 @@
         productDetails:'Detalles del producto',
         cantidad: 'Cantidad máxima',
         cantidadPrefix: 'x',
-        currency: '$ ',
         seeAsCustomer: 'Ver como cliente',
         unregisterItem: 'Dar de baja',
         confirmUnregisterItem: '¿Estás seguro de querer dar de baja este producto?',
@@ -222,6 +221,10 @@
           createdAt: 'Antigüedad',
           precio: 'Precio',
           titulo: 'Nombre'
+        },
+        currency: {
+          USD: '$',
+          PEN: 'S/.'
         }
       },
       actions: {

@@ -16,4 +16,7 @@ slick-wrapper(
         .customer-item--title
           | {{ ::providerItem.provider_item.titulo }}
         .customer-item--value
-          | {{ (providerItem.provider_item_precio_cents * providerItem.cantidad) | priceCurrency | currency }} / {{ providerItem.cantidad }} {{ (providerItem.cantidad > 1) ? ('cart.cantidadPlural' | translate) : ('cart.cantidadSingular' | translate) }}
+          span 
+            | {{ ::("item.currency."+providerItem.provider_item_precio_currency | translate) }}
+          span
+            | {{ (providerItem.provider_item_precio_cents * providerItem.cantidad) | priceCurrency | currency:'' }} / {{ providerItem.cantidad }} {{ (providerItem.cantidad > 1) ? ('cart.cantidadPlural' | translate) : ('cart.cantidadSingular' | translate) }}

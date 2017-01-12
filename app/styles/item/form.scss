@@ -35,6 +35,22 @@
       }
     }
   }
+
+  .price-wrapper {
+    .item-select, .input-wrapper {
+      display: inline-block;
+    }
+
+    .item-select {
+      select {
+        position: relative;
+        min-width: 65px;
+        padding-right: 30px;
+        padding-left: 10px;
+        direction: ltr;
+      }
+    }
+  }
 }
 
 .item-selectize{

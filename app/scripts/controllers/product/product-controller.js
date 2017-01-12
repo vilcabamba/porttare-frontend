@@ -25,16 +25,19 @@
     productVm.showNewWishlist = showNewWishlist;
     productVm.wishlistName = '';
     productVm.clearData = clearData;
+    // jshint ignore:start
     productVm.counterOptions = {
       cantidad: productVm.item.cantidad,
-      priceCents: providerItem.precio_cents, // jshint ignore:line
       cartItem: productVm.cartItem,
       providerItem: productVm.product,
+      priceCents: providerItem.precio_cents,
+      currencyCode: providerItem.precio_currency,
       onChangeValue: function (data) {
         productVm.item.cantidad = data.itemsCount;
         productVm.canAdd = getCanAdd();
       }
     };
+    // jshint ignore:end
 
     productVm.slickConfig = {
       arrows: false,
