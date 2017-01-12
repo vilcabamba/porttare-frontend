@@ -113,7 +113,11 @@
         rejectOrder: 'Rechazar orden',
         reasonToReject: 'Razón',
         reasonToRejectPlaceholder: 'Especifica una razón',
-        ruc: 'RUC'
+        ruc: 'RUC',
+        schedule: {
+          closed: 'Cerrado',
+          open: 'Abierto'
+        }
       },
       courier: {
         successCourierSave: 'Mensajero guardado éxitosamente',
@@ -176,15 +180,6 @@
           fri: 'Viernes',
           sat: 'Sábado',
           sun: 'Domingo'
-        },
-        shortDayNames: {
-          mon: 'Lun',
-          tue: 'Mar',
-          wed: 'Mié',
-          thu: 'Jue',
-          fri: 'Vie',
-          sat: 'Sáb',
-          sun: 'Dom'
         },
         accept:'Aceptar',
         notifications:'Notificaciones'
@@ -290,12 +285,7 @@
         ciudad: 'Ciudad',
         direccion: 'Dirección',
         telefono: 'Teléfono',
-        horaApertura: 'Hora de apertura',
-        horaCierre: 'Hora de cierre',
         officeNumber: 'Sucursal número',
-        officeAttention:'Horario de atención',
-        officeStart:'Inicio de labores',
-        officeFinish: 'Final de Labores',
         officeDelete: '¿Seguro quieres eliminar este establecimiento?',
         officeDeleteReasons: 'Cuéntanos las razones',
         officeDeleteMotive: 'Motivo del cierre',
@@ -307,10 +297,16 @@
         officesAny: 'No dispone de ningún Establecimiento o Sucursal',
         locationNotFound: 'No he encontrado la dirección: ',
         taskInProgress: 'Tarea en progreso',
-        selectHourPlaceholder: 'Seleccionar hora',
         yes: 'Si',
         not: 'No',
-        officeEnabled: 'Establecimiento activo'
+        officeEnabled: 'Establecimiento activo',
+        weekdays: {
+          cerrado: 'Cerrado',
+          selectHourPlaceholder: 'HH:MM',
+          collectionTitle: 'Días laborables',
+          openFromPlaceholder: 'de',
+          openUntilPlaceholder: 'a'
+        }
       },
       password: {
         updatePassword: 'Actualizar contraseña',

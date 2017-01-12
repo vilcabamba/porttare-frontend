@@ -25,44 +25,45 @@
     loadOffice();
 
     function loadOffice(){
-      convertStringToDate();
       MapsService.loadGMaps().then(function(){
         $ionicLoading.hide();
         var map = MapsService.renderMap('office-map');
         MapsService.renderAddressMarker(map, {
           address: officesVm.officeDetail.direccion,
           componentRestrictions: {
-            country: 'EC',
             locality: officesVm.officeDetail.ciudad
           }
         });
       });
     }
 
-    function convertStringToDate(){
-      var officeDetail = officesVm.officeDetail;
-      officeDetail.hora_de_apertura = scheduleToDate( // jshint ignore:line
-        officeDetail.hora_de_apertura // jshint ignore:line
-      );
-      officeDetail.hora_de_cierre = scheduleToDate( // jshint ignore:line
-        officeDetail.hora_de_cierre // jshint ignore:line
-      );
-    }
-
-    function scheduleToDate(schedule) {
-      var toTime    = $filter('toDate')(schedule, 'timeSchedule'),
-          toDateStr = $filter('formatDate')(
-            toTime,
-            'YYYY/MM/DD HH:mm Z'
-          );
-      return new Date(toDateStr);
-    }
-
     function showEditOffice() {
       officesVm.office = angular.copy(officesVm.officeDetail);
+      officesVm.office.weekdays_attributes = weekdaysAttributesForEdit();  // jshint ignore:line
       ModalService.showModal({
         parentScope: $scope,
         fromTemplateUrl: 'templates/offices/new-edit.html'
+      });
+    }
+
+    function weekdaysAttributesForEdit() {
+      return officesVm.office.weekdays.map(function (weekday){
+        var newWeekday = angular.copy(weekday);
+        // jshint ignore:start
+        if (weekday.hora_de_apertura) {
+          newWeekday.hora_de_apertura = $filter('toDate')(
+            weekday.hora_de_apertura,
+            'timeSchedule'
+          ).toDate();
+        }
+        if (weekday.hora_de_cierre) {
+          newWeekday.hora_de_cierre = $filter('toDate')(
+            weekday.hora_de_cierre,
+            'timeSchedule'
+          ).toDate();
+        }
+        // jshint ignore:end
+        return newWeekday;
       });
     }
 
@@ -82,16 +83,13 @@
     function submitOffice(){
       if(officesVm.form.$valid){
         loading('globals.updating');
-        OfficesService.updateOffice(officesVm.office).then(function success(resp){
+        OfficesService.updateOffice(
+          officesVm.office
+        ).then(function success(resp){
           $ionicLoading.hide().then(function(){
             officesVm.officeDetail = resp.provider_office; //jshint ignore:line
             loadOffice();
-            closeModal().then(function () {
-              $ionicPopup.alert({
-                title: 'Éxito',
-                template: '{{::("office.officeSuccessUpdate"|translate)}}'
-              });
-            });
+            closeModal();
           });
         }, function(rpta){
           officesVm.messages = rpta.status===422 ? rpta.data.errors:undefined;

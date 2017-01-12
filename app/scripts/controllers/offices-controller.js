@@ -5,12 +5,13 @@
     .module('porttare.controllers')
     .controller('OfficesController', OfficesController);
 
-  function OfficesController(OfficesService,
-                              ModalService,
-                              ErrorHandlerService,
-                              $ionicLoading,
-                              $ionicPopup,
-                              $scope) {
+  function OfficesController($scope,
+                             $ionicPopup,
+                             $ionicLoading,
+                             APP,
+                             OfficesService,
+                             ModalService,
+                             ErrorHandlerService) {
 
     var officesVm = this;
     officesVm.showNewOffice = showNewOffice;
@@ -25,13 +26,25 @@
     }
 
     function showNewOffice() {
-      officesVm.office = {};
-      officesVm.office.enabled = false;
+      officesVm.office = buildNewOffice();
       ModalService.showModal({
         parentScope: $scope,
         fromTemplateUrl: 'templates/offices/new-edit.html'
       });
     }
+
+    function buildNewOffice(){
+      var newOffice = {
+        weekdays_attributes: buildWeekdays() // jshint ignore:line
+      };
+      return newOffice;
+    }
+
+    function buildWeekdays(){
+       return APP.weekdays.map(function (wday){
+         return { day: wday };
+       });
+     }
 
     function closeModal() {
       ModalService.closeModal();
@@ -43,7 +56,9 @@
         $ionicLoading.show({
           template: '{{::("globals.saving"|translate)}}'
         });
-        OfficesService.createOffice(officesVm.office).then(function success(resp){
+        OfficesService.createOffice(
+          officesVm.office
+        ).then(function success(resp){
           $ionicLoading.hide().then(function(){
             officesVm.offices.push(resp.provider_office); //jshint ignore:line
             $ionicPopup.alert({

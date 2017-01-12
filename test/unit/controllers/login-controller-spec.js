@@ -95,7 +95,7 @@
         });
 
         it('if unsuccessful, should show a popup', function() {
-          deferredLogin.reject({ errors: [] });
+          $rootScope.$emit('auth:login-error', { errors: [] });
           $rootScope.$digest();
 
           sinon.assert.calledOnce($ionicPopup.alert);
