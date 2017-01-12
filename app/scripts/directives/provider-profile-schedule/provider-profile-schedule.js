@@ -22,8 +22,8 @@
     function providerProfileScheduleController($filter) {
       // jshint validthis:true
       var ppSVm = this,
-          providerOffices = ppSVm.providerProfile.provider_offices,
-          mainOffice = providerOffices[0]; // jshint ignore:line
+          providerOffices = ppSVm.providerProfile.provider_offices, // jshint ignore:line
+          mainOffice = providerOffices[0];
 
       ppSVm.isOpen = false;
 
