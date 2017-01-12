@@ -37,16 +37,14 @@
       var newOffice = {
         weekdays_attributes: buildWeekdays() // jshint ignore:line
       };
-      angular.forEach(APP.weekdays, function (wday){
-        newOffice.weekdays_attributes.push({
-          day: wday
-        });
-      });
-      console.log(newOffice);
-      // TODO why was this here?
-      // newOffice.enabled = false;
       return newOffice;
     }
+
+    function buildWeekdays(){
+       return APP.weekdays.map(function (wday){
+         return { day: wday };
+       });
+     }
 
     function closeModal() {
       ModalService.closeModal();
