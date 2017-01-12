@@ -36,7 +36,7 @@
       if ($auth.user.current_place) { //jshint ignore:line
         $state.go(successState);
       } else {
-        $state.go('app.places.index')
+        $state.go('app.places.index');
       }
     }
 
