@@ -126,7 +126,12 @@ function routes($stateProvider, $urlRouterProvider) {
   })
   .state('app.cart', {
     url: '/cart',
-    abstract: true
+    abstract: true,
+    resolve: {
+      auth: function (AuthorizationService) {
+        return AuthorizationService.choosePlaceIfNotPresent();
+      }
+    }
   })
   .state('app.cart.index', {
     url: '/',
@@ -157,7 +162,12 @@ function routes($stateProvider, $urlRouterProvider) {
   })
   .state('app.categories', {
     url: '/categories',
-    abstract: true
+    abstract: true,
+    resolve: {
+      auth: function(AuthorizationService){
+        return AuthorizationService.choosePlaceIfNotPresent();
+      }
+    }
   })
   .state('app.categories.index', {
     url: '/',
@@ -561,6 +571,11 @@ function routes($stateProvider, $urlRouterProvider) {
         templateUrl: 'templates/profile/profile.html',
         controller: 'ProfileController',
         controllerAs: 'pVm'
+      }
+    },
+    resolve: {
+      auth: function (AuthorizationService) {
+        return AuthorizationService.choosePlaceIfNotPresent();
       }
     }
   })

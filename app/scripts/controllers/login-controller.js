@@ -18,14 +18,16 @@
     loginVm.logout = logout;
     loginVm.loginWithFB = SessionService.loginWithFB;
     loginVm.loginForm = {};
-    var successState = APP.successState;
-    var preloginState = APP.preloginState;
+    var successState = APP.successState,
+        preloginState = APP.preloginState,
+        placesState = APP.placesState;
+
+    $rootScope.$on('auth:login-error', cantLogin);
 
     function login() {
       $ionicLoading.show({
         template: 'cargando...'
       });
-      $rootScope.$on('auth:login-error', cantLogin);
       $auth.submitLogin(loginVm.loginForm)
         .then(loggedIn)
         .finally($ionicLoading.hide);
@@ -36,7 +38,7 @@
       if ($auth.user.current_place) { //jshint ignore:line
         $state.go(successState);
       } else {
-        $state.go('app.places.index');
+        $state.go(placesState);
       }
     }
 

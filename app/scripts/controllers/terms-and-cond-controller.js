@@ -14,8 +14,7 @@
       UserAuthService.agreeTermsOfService()
         .then(function success() {
           $auth.user.agreed_tos = true; //jshint ignore:line
-          var path = $auth.user.current_place ? APP.successState:'app.places.index'; //jshint ignore:line
-          $state.go(path)
+          $state.go(APP.successState)
             .then( function (){
               $ionicLoading.hide();
             });

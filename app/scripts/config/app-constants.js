@@ -4,6 +4,7 @@
  angular
   .module('porttare.config')
   .constant('APP', {
+    placesState: 'app.places.index',
     successState: 'app.categories.index',
     preloginState: 'prelogin',
     defaultImage: '../images/404.png',
