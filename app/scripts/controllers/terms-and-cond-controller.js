@@ -5,9 +5,16 @@
     .module('porttare.controllers')
     .controller('TermsAndCondController', TermsAndCondController);
 
-  function TermsAndCondController($auth, APP, UserAuthService, $state, $ionicLoading, $ionicPopup){
+  function TermsAndCondController(tosHTML,
+                                  $auth,
+                                  APP,
+                                  UserAuthService,
+                                  $state,
+                                  $ionicLoading,
+                                  $ionicPopup){
 
     var terCondVm = this;
+    terCondVm.tosHTML = tosHTML;
     terCondVm.agreeTermsOfService = agreeTermsOfService;
 
     function agreeTermsOfService() {

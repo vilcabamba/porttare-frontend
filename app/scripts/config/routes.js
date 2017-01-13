@@ -122,7 +122,12 @@ function routes($stateProvider, $urlRouterProvider) {
     url: '/terms-and-conditions',
     templateUrl: 'templates/terms-and-cond/terms-and-cond.html',
     controller: 'TermsAndCondController',
-    controllerAs: 'terCondVm'
+    controllerAs: 'terCondVm',
+    resolve: {
+      tosHTML: function (TosService) {
+        return TosService.getTOSContent();
+      }
+    }
   })
   .state('app.cart', {
     url: '/cart',

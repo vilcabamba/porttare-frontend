@@ -3,15 +3,17 @@ ion-view(
 )
   .bar.bar-stable.bar-header
     .alt-logo
-  ion-content.pre-application-form.has-header
-    .row
-      .moviggo-logo-2.branding-logo
+  ion-content.pre-application-form.has-header.tos-show-page
+    //- without top logo
+      .row
+        .moviggo-logo-2.branding-logo
     .row
       .list.list-inset.common-text
-        h1.title {{::("termsAndConditions.termsAndConditions"|translate)}}
-        p {{::("termsAndConditions.description"|translate)}}
+        .tos-contents.text-left(
+          ng-bind-html="terCondVm.tosHTML"
+        )
     .row
       .list.list-inset.list--centered
         button.button.button-outline.button-energized(
           ng-click="terCondVm.agreeTermsOfService()"
-        ) {{::("globals.accept"|translate)}}
+        ) {{::("termsAndConditions.agreeTOS"|translate)}}

@@ -472,8 +472,7 @@
         notAccepted: 'Esta invitación no ha sido aceptada todavía.'
       },
       termsAndConditions: {
-        termsAndConditions: 'Términos y Condiciones',
-        description: '¿Usted acepta los términos y condiciones?'
+        agreeTOS: 'Aceptar términos y condiciones'
       },
       places:{
         places: 'Localidades'
