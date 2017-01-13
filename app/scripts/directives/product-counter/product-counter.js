@@ -34,7 +34,7 @@
     init();
 
     pcVm.itemsCount = options.cantidad;
-    pcVm.priceCurrency = options.priceCurrency;
+    pcVm.currencyCode = options.currencyCode;
     pcVm.canIncrement = getCanIncrement();
     pcVm.disableButtons = getDisableButtons();
     pcVm.priceTotalCents = getTotal();
