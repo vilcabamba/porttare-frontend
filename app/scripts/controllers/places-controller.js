@@ -23,7 +23,7 @@
     geolocalizacion();
 
     function geolocalizacion(){
-      if (!$auth.user.current_place && placesVm.places.length>1) { //jshint ignore:line
+      if (!$auth.user.current_place) { //jshint ignore:line
         $ionicLoading.show({
           template: '{{::("globals.geolocation"|translate)}}'
         });
@@ -42,14 +42,15 @@
     }
 
     function selectPlaceDistanciaCorta(position){
-      var puntos = [];
-      for (var i=0; i<placesVm.places.length; i++){
-        var objeto = {latitude: placesVm.places[i].lat,
-                      longitude: placesVm.places[i].lon};
-        puntos.push(objeto);
-      }
-      var distancia = geolib.findNearest(position, puntos, 1); //jshint ignore:line
-      var attributes = { 'current_place_id' : placesVm.places[distancia.key].id};
+      var objeto = placesVm.places.reduce(function (objeto, item){
+        item.latitude = item.lat;
+        item.longitude = item.lon;
+        objeto[item.id]=item;
+        return objeto;
+      }, {});
+      var limit = placesVm.places.length===1 ? 0:1;
+      var distancia = geolib.findNearest(position, objeto, limit);
+      var attributes = { 'current_place_id' : distancia.key};
       updateUser(attributes).then(function(){
         placesVm.currentPlaceId = getCurrentPlaceId();
         $ionicLoading.hide();
@@ -57,14 +58,19 @@
     }
 
     function selectPlace(placeId){
-      var attributes = { 'current_place_id' : placeId }; //jshint ignore:line
-      performing();
-      updateUser(attributes).then(function(){
-        updateCart().then(finishedPerforming).then(function(){
-          nextViewIsRootView();
-          $state.go(APP.successState);
+      if (placeId !== placesVm.currentPlaceId){
+        var attributes = { 'current_place_id' : placeId }; //jshint ignore:line
+        performing();
+        updateUser(attributes).then(function(){
+          updateCart().then(finishedPerforming).then(function(){
+            nextViewIsRootView();
+            $state.go(APP.successState);
+          });
         });
-      });
+      }else{
+        nextViewIsRootView();
+        $state.go(APP.successState);
+      }
     }
 
     function performing(){
