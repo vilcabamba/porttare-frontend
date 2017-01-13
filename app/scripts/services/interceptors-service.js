@@ -14,6 +14,7 @@ function InterceptorsService($injector, $q) {
 
   function responseError(rejection) {
     if (rejection.status === 401 && !rejection.config.url.match('api/auth/user/sign_in')) {
+      clearHistory();
       closeCurrentAlert();
       createAlert();
     }
@@ -25,14 +26,7 @@ function InterceptorsService($injector, $q) {
       title: 'Ups!',
       template: 'No tienes permisos para realizar eso!'
     });
-    currentAlert.then(function(){
-      unsetCurrentAlert();
-      $injector.get('$auth').validateUser().then(function(){
-        $injector.get('$state').go('app.categories.index');
-      }).catch(function(){
-        $injector.get('$state').go('prelogin');
-      });
-    });
+    currentAlert.then(dismissedAlert);
   }
 
   function unsetCurrentAlert() {
@@ -43,5 +37,18 @@ function InterceptorsService($injector, $q) {
     if (currentAlert) {
       currentAlert.close();
     }
+  }
+
+  function clearHistory(){
+    $injector.get('$ionicHistory').clearHistory();
+  }
+
+  function dismissedAlert(){
+    unsetCurrentAlert();
+    $injector.get('$auth').validateUser().then(function(){
+      $injector.get('$state').go('app.categories.index');
+    }).catch(function(){
+      $injector.get('$state').go('prelogin');
+    });
   }
 }
