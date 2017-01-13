@@ -20,8 +20,12 @@ function providerNotifications() {
 
 function providerNotificationsController($scope){
   var pnVm = this; //jshint ignore:line
-  $scope.$watch('$parent.providerMainVm.providerOrders', function(newValue){
-    pnVm.orders = newValue.length;
-  }, true);
+  $scope.$watch(
+    '$parent.providerMainVm.submittedProviderOrders',
+    function(submittedProviderOrders){
+      pnVm.orders = submittedProviderOrders.length;
+    },
+    true
+  );
 }
 })();

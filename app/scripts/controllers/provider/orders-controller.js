@@ -14,14 +14,19 @@
 
     $scope.$on('$ionicView.enter', function() {
       if (status === 'submitted') {
-        $scope.$emit('update-orders-submitted');
+        $scope.$emit('update-submitted-provider-orders');
       }
       init();
     });
 
-    $scope.$watch('$parent.providerMainVm.providerOrders', function(newValue){
-      poVm.customerOrders = newValue;
-    });
+    $scope.$watch(
+      '$parent.providerMainVm.submittedProviderOrders',
+      function(submittedProviderOrders){
+        if (poVm.tab === 'submitted') {
+          poVm.customerOrders = submittedProviderOrders;
+        }
+      }
+    );
 
     function init(){
       if (status !== 'submitted') {

@@ -324,9 +324,7 @@ function routes($stateProvider, $urlRouterProvider) {
       providerOrders: function(ProviderCustomerOrdersService, ErrorHandlerService){
         return ProviderCustomerOrdersService
           .getProviderCustomerOrdersByStatus('submitted')
-          .then(function success(customerOrders){
-            return customerOrders;
-          }, ErrorHandlerService.handleCommonErrorGET);
+          .catch(ErrorHandlerService.handleCommonErrorGET);
       }
     },
     controller: 'ProviderMainController',
