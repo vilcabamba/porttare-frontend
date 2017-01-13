@@ -37,16 +37,8 @@
     }
 
     function updateOffice(office) {
-      if(office.hora_de_apertura && office.hora_de_cierre){ // jshint ignore:line
-        var data = convertDateToString(office);
-        return CommonService.editObject(data, '/api/provider/offices/');
-      }else{
-       return $http({
-          method: 'PATCH',
-          url: ENV.apiHost + '/api/provider/offices/' + office.id,
-          data: office
-        });
-      }
+      var formattedOffice = formatOffice(office);
+      return CommonService.editObject(formattedOffice, '/api/provider/offices/');
     }
 
     function formatOffice(office) {
