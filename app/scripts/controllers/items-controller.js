@@ -72,6 +72,7 @@
       modalScope.modalVm.availableCurrencies = getProviderCurrencies();
       modalScope.modalVm.item = {
         imagenes: [],
+        unidad_medida: 'unidades', // jshint ignore:line
         precio_currency: getProviderCurrencies()[0] //jshint ignore:line
       };
       modalScope.modalVm.closeModal = closeModal;
@@ -92,7 +93,7 @@
 
     function getProviderCurrencies(){
       var providerAllowedCodes = $auth.user.provider_profile.allowed_currency_iso_codes; // jshint ignore:line
-      if (true || providerAllowedCodes.length === 0) {
+      if (providerAllowedCodes.length === 0) {
         providerAllowedCodes = [$auth.user.current_place.currency_iso_code]; // jshint ignore:line
       }
       return providerAllowedCodes;
