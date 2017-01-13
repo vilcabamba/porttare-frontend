@@ -28,7 +28,9 @@
           template: '{{::("globals.geolocation"|translate)}}'
         });
         GeolocationService.getCurrentPosition().then(function success(resp) {
-          selectPlaceDistanciaCorta(resp.coords);
+          var position = {latitude: resp.coords.latitude,
+                          longitude: resp.coords.longitude};
+          selectPlaceDistanciaCorta(position);
         },function (error) {
           $ionicLoading.hide();
           $ionicPopup.alert({
