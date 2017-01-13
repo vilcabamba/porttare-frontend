@@ -405,6 +405,7 @@
     function checkoutFormAddBillingAddress(){
       closeModal().then(function(){
         $scope.billingAddressesVm = {
+          billingAddress: initBillingAddress(),
           closeModal: closeModal,
           submitModal: saveNewBillingAddress
         };
@@ -413,6 +414,18 @@
           fromTemplateUrl: 'templates/billing-addresses/new-edit.html'
         });
       });
+    }
+
+    function initBillingAddress() {
+      var billingAddress = {};
+      billingAddress.email = $auth.user.email;
+      billingAddress.ciudad = $auth.user.ciudad;
+      if ($auth.user.provider_profile){ // jshint ignore:line
+        billingAddress.ruc = $auth.user.provider_profile.ruc;// jshint ignore:line
+        billingAddress.razon_social = $auth.user.provider_profile.razon_social;// jshint ignore:line
+        billingAddress.telefono = $auth.user.provider_profile.telefono;// jshint ignore:line
+      }
+      return billingAddress;
     }
 
     function clearCurrentOrderDelivery(){
