@@ -13,6 +13,7 @@
     fbAuthScope: ['public_profile', 'email', 'user_birthday'],
     paymentMethods: ['efectivo'],
     deliveryMethods: ['shipping', 'pickup'],
-    weekdays: ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+    weekdays: ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'],
+    timeoutDefault: 5*60*1000
   });
 })();

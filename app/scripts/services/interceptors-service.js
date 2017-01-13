@@ -27,7 +27,11 @@ function InterceptorsService($injector, $q) {
     });
     currentAlert.then(function(){
       unsetCurrentAlert();
-      $injector.get('$state').go('app.categories.index');
+      $injector.get('$auth').validateUser().then(function(){
+        $injector.get('$state').go('app.categories.index');
+      }).catch(function(){
+        $injector.get('$state').go('prelogin');
+      });
     });
   }
 
