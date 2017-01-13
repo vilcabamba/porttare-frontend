@@ -45,9 +45,14 @@
     function cantLogin(ev, resp) {
       loginVm.loginForm.password = null;
 
+      var errMessage;
+      if (resp) {
+        errMessage = resp.errors[0];
+      }
+
       $ionicPopup.alert({
         title: 'Error',
-        template: resp.errors[0]
+        template: (errMessage || 'Ups, algo salió mal')
       });
     }
 

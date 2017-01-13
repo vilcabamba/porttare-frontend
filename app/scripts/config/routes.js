@@ -776,7 +776,7 @@ function routes($stateProvider, $urlRouterProvider) {
     if (isResetPassword($location.absUrl())) {
       return '/reset';
     } else {
-      return '/app/categories/';
+      return '/prelogin';
     }
   });
 
