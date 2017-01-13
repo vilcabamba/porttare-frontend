@@ -3,7 +3,9 @@ ion-view(
 )
   .bar.bar-stable.bar-header
     .alt-logo
-  ion-content.pre-application-form.has-header.tos-show-page
+  ion-content.pre-application-form.has-header.tos-show-page(
+    locking="false"
+  )
     //- without top logo
       .row
         .moviggo-logo-2.branding-logo
@@ -14,6 +16,6 @@ ion-view(
         )
     .row
       .list.list-inset.list--centered
-        button.button.button-outline.button-energized(
+        button.button.button-outline.button-energized.primary-button(
           ng-click="terCondVm.agreeTermsOfService()"
         ) {{::("termsAndConditions.agreeTOS"|translate)}}

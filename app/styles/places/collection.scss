@@ -1,6 +1,12 @@
 .places-collection {
+  .item-divider {
+    font-family: Montserrat-Regular;
+  }
+
   .place-item {
     cursor: pointer;
+    font-family: Montserrat-Light;
+
     .icon {
       padding-top: 13px;
       padding-bottom: 13px;
