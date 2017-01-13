@@ -70,11 +70,14 @@
       modalScope.modalVm = itemsVm;
       // unfortunately item is the providerItem we'll edit
       modalScope.modalVm.availableCurrencies = getProviderCurrencies();
+      // jshint ignore:start
       modalScope.modalVm.item = {
         imagenes: [],
-        unidad_medida: 'unidades', // jshint ignore:line
-        precio_currency: getProviderCurrencies()[0] //jshint ignore:line
+        en_stock: true,
+        unidad_medida: 'unidades',
+        precio_currency: getProviderCurrencies()[0]
       };
+      // jshint ignore:end
       modalScope.modalVm.closeModal = closeModal;
       modalScope.modalVm.submitProcess = newItem;
       modalScope.modalVm.concatImages = concatImages;
