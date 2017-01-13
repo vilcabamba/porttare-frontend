@@ -9,15 +9,50 @@
                             $state,
                             $auth,
                             $ionicLoading,
+                            $ionicPopup,
                             $ionicHistory,
                             APP,
                             CartService,
                             UserAccountService,
+                            GeolocationService,
                             ErrorHandlerService) {
     var placesVm = this;
     placesVm.places = places;
     placesVm.selectPlace = selectPlace;
     placesVm.currentPlaceId = getCurrentPlaceId();
+    geolocalizacion();
+
+    function geolocalizacion(){
+      if (!$auth.user.current_place && placesVm.places.length>1) { //jshint ignore:line
+        $ionicLoading.show({
+          template: '{{::("globals.geolocation"|translate)}}'
+        });
+        GeolocationService.getCurrentPosition().then(function success(resp) {
+          selectPlaceDistanciaCorta(resp.coords);
+        },function (error) {
+          $ionicLoading.hide();
+          $ionicPopup.alert({
+            title: 'Error',
+            template: error
+          });
+        });
+      }
+    }
+
+    function selectPlaceDistanciaCorta(position){
+      var puntos = [];
+      for (var i=0; i<placesVm.places.length; i++){
+        var objeto = {latitude: placesVm.places[i].lat,
+                      longitude: placesVm.places[i].lon};
+        puntos.push(objeto);
+      }
+      var distancia = geolib.findNearest(position, puntos, 1); //jshint ignore:line
+      var attributes = { 'current_place_id' : placesVm.places[distancia.key].id};
+      updateUser(attributes).then(function(){
+        placesVm.currentPlaceId = getCurrentPlaceId();
+        $ionicLoading.hide();
+      });
+    }
 
     function selectPlace(placeId){
       var attributes = { 'current_place_id' : placeId }; //jshint ignore:line
