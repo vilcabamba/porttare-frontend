@@ -16,7 +16,7 @@
         direccion:'=',
         direccionDos: '=',
         geolocationMessageKey: '=',
-        defaultInCurrentGeolocation: '@'
+        defaultInCurrentGeolocation: '='
       },
       controller: [ '$scope',
                     'MapsService',
