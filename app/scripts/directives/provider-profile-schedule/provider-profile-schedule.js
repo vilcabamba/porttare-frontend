@@ -35,31 +35,34 @@
         });
 
         if (officeWeekday) {
-          // jshint ignore:start
-          ppSVm.openingTime = officeWeekday.hora_de_apertura;
-          ppSVm.closingTime = officeWeekday.hora_de_cierre;
-          // jshint ignore:end
-          ppSVm.isOpen = getIsOpen(officeWeekday,ppSVm.openingTime,ppSVm.closingTime);
+          ppSVm.isOpen = getIsOpen(officeWeekday);
+
+          if(ppSVm.isOpen){
+            // jshint ignore:start
+            ppSVm.openingTime = officeWeekday.hora_de_apertura;
+            ppSVm.closingTime = officeWeekday.hora_de_cierre;
+            // jshint ignore:end
+          }
         }
       }
+    }
+
+    function getIsOpen(officeWeekday) {
+      var horaActual = moment();
+      var respuesta=horaActual.isBetween(convertDate(officeWeekday.hora_de_apertura),convertDate(officeWeekday.hora_de_cierre));
+
+      if(officeWeekday.abierto && respuesta){
+        return true;
+      }
+      return false;
     }
 
     function getCurrentDay(){
       return moment().locale('en').format('ddd').toLowerCase();
     }
 
-    function getIsOpen(officeWeekday,openingTime,closingTime) {
-      var horaActual = getHour();
-      // TODO it's open if right now it's open
-      if(officeWeekday.abierto && openingTime<=horaActual && horaActual<=closingTime){
-        return true;
-      }
-      return false;
-    }
-
-    function getHour() {
-      // TODO it's open if right now it's open
-      return moment().format('LT');
+    function convertDate(hora){
+      return moment(hora,'HH:mm');
     }
   }
 })();
