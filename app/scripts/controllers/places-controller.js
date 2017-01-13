@@ -24,15 +24,13 @@
 
     function geolocalizacion(){
       if (!$auth.user.current_place) { //jshint ignore:line
-        $ionicLoading.show({
-          template: '{{::("globals.geolocation"|translate)}}'
-        });
+        performing('globals.geolocation');
         GeolocationService.getCurrentPosition().then(function success(resp) {
           var position = {latitude: resp.coords.latitude,
                           longitude: resp.coords.longitude};
           selectPlaceDistanciaCorta(position);
         },function (error) {
-          $ionicLoading.hide();
+          finishedPerforming();
           $ionicPopup.alert({
             title: 'Error',
             template: error
@@ -42,40 +40,45 @@
     }
 
     function selectPlaceDistanciaCorta(position){
-      var objeto = placesVm.places.reduce(function (objeto, item){
-        item.latitude = item.lat;
-        item.longitude = item.lon;
-        objeto[item.id]=item;
-        return objeto;
+      var placesByIds = placesVm.places.reduce(function (placesByIds, place){
+        place.latitude = place.lat;
+        place.longitude = place.lon;
+        placesByIds[place.id]=place;
+        return placesByIds;
       }, {});
       var limit = placesVm.places.length===1 ? 0:1;
-      var distancia = geolib.findNearest(position, objeto, limit);
+      var distancia = geolib.findNearest(position, placesByIds, limit);
       var attributes = { 'current_place_id' : distancia.key};
-      updateUser(attributes).then(function(){
-        placesVm.currentPlaceId = getCurrentPlaceId();
-        $ionicLoading.hide();
-      });
+      updateUserCart(attributes, 'selectPlaceDistancia');
     }
 
     function selectPlace(placeId){
       if (placeId !== placesVm.currentPlaceId){
         var attributes = { 'current_place_id' : placeId }; //jshint ignore:line
-        performing();
-        updateUser(attributes).then(function(){
-          updateCart().then(finishedPerforming).then(function(){
-            nextViewIsRootView();
-            $state.go(APP.successState);
-          });
-        });
+        performing('globals.updating');
+        updateUserCart(attributes, 'selectPlace');
       }else{
         nextViewIsRootView();
         $state.go(APP.successState);
       }
     }
 
-    function performing(){
+    function updateUserCart(attributes, accionEjecutar){
+      updateUser(attributes).then(function(){
+        updateCart().then(finishedPerforming).then(function(){
+          if(accionEjecutar==='selectPlace'){
+            nextViewIsRootView();
+            $state.go(APP.successState);
+          }else{
+            placesVm.currentPlaceId = getCurrentPlaceId();
+          }
+        });
+      });
+    }
+
+    function performing(template){
       $ionicLoading.show({
-        template: '{{::("globals.updating"|translate)}}'
+        template: '{{::("'+template+'"|translate)}}'
       });
     }
 
