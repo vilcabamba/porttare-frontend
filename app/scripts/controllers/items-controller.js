@@ -91,7 +91,11 @@
     }
 
     function getProviderCurrencies(){
-      return $auth.user.provider_profile.allowed_currency_iso_codes; // jshint ignore:line
+      var providerAllowedCodes = $auth.user.provider_profile.allowed_currency_iso_codes; // jshint ignore:line
+      if (true || providerAllowedCodes.length === 0) {
+        providerAllowedCodes = [$auth.user.current_place.currency_iso_code]; // jshint ignore:line
+      }
+      return providerAllowedCodes;
     }
   }
 })();
