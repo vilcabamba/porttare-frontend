@@ -5,7 +5,7 @@
     .module('porttare.directives')
     .directive('providerProfileSchedule', providerProfileSchedule);
 
-  function providerProfileSchedule() {
+  function providerProfileSchedule($filter) {
     var directive = {
       restrict: 'EA',
       controller: providerProfileScheduleController,
@@ -47,22 +47,33 @@
       }
     }
 
-    function getIsOpen(officeWeekday) {
-      var horaActual = moment();
-      var respuesta=horaActual.isBetween(convertDate(officeWeekday.hora_de_apertura),convertDate(officeWeekday.hora_de_cierre));// jshint ignore:line
+    function getIsOpen(officeWeekday) {//jshint ignore:line
+      // jshint ignore:start
+      if(!isEmpty(officeWeekday.hora_de_cierre) && !isEmpty(officeWeekday.hora_de_cierre)){
+        var horaActual = moment();
+        var isInRange=horaActual.isBetween(
+          convertDate(
+            officeWeekday.hora_de_apertura
+          ),
+          convertDate(
+            officeWeekday.hora_de_cierre
+          )
+        );
 
-      if(officeWeekday.abierto && respuesta){
-        return true;
+        if(officeWeekday.abierto && isInRange) {
+          return true;
+        }
       }
+      // jshint ignore:end
       return false;
     }
 
-    function getCurrentDay(){
+    function getCurrentDay(){//jshint ignore:line
       return moment().locale('en').format('ddd').toLowerCase();
     }
 
-    function convertDate(hora){
-      return moment(hora,'HH:mm');
+    function convertDate(hora){//jshint ignore:line
+      return $filter('toDate')(hora, 'timeSchedule');
     }
   }
 })();
