@@ -37,9 +37,8 @@
     }
 
     function updateOffice(office) {
-      var uri = '/api/provider/offices/',
-          formattedOffice = formatOffice(office);
-      return CommonService.editObject(formattedOffice, uri);
+      var formattedOffice = formatOffice(office);
+      return CommonService.editObject(formattedOffice, '/api/provider/offices/');
     }
 
     function formatOffice(office) {

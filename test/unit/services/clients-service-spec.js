@@ -76,7 +76,7 @@
                       'email':'karelle@luettgenlueilwitz.name'
                       };
 
-        $httpBackend.expectPUT(expectedUrl)
+        $httpBackend.expectPATCH(expectedUrl)
           .respond(objectToRespond);
 
         service.editClient(client).then(function(response){
