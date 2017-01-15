@@ -63,16 +63,18 @@ ion-side-menus(enable-menu-with-back-views='false')
         ion-item(menu-close='' ui-sref='app.places.index')
           | {{::("menu.locations"|translate)}}
 
-        ion-item
-          | {{::("menu.invite"|translate)}}
-        ion-item(
+        //- not built yet
+          ion-item
+            | {{::("menu.invite"|translate)}}
+        ion-item.item-complex(
           menu-close
           ng-controller='LoginController as loginVm'
           ng-click='loginVm.logout()'
         )
-          | {{::("menu.logout"|translate)}}
-        ion-item.gray-item
-          | {{::("menu.changeTo"|translate)}}
+          .item-content {{::("menu.logout"|translate)}}
+
+        ion-item.item-complex.switch-user-role
+          .item-content {{::("menu.changeTo"|translate)}}
         ion-item.user-type(menu-close=''  ui-sref='app.provider.welcome', ng-if='!user.provider_profile')
           | {{::("menu.user.provider"|translate)}}
         ion-item.user-type(menu-close='' ui-sref='provider.items.index', ng-if='user.provider_profile')

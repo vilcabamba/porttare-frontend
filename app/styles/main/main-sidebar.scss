@@ -9,6 +9,11 @@
     cursor: pointer;
     font-family: Montserrat-Regular;
 
+    &.item-complex:not(.gray-item) {
+      padding-top: 5px;
+      padding-bottom: 15px;
+    }
+
     &.gray-item .item-content {
       background-color: $light-grey;
     }
@@ -38,6 +43,10 @@
     a {
       background: $base-yellow;
     }
+  }
+
+  .switch-user-role.item.item-complex {
+    padding-bottom: 0;
   }
 }
 
