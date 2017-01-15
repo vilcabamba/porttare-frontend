@@ -39,11 +39,11 @@ ion-view(
             h4 {{::("orders.collectionTitle"| translate)}}{{:: order.id}}
           .col.text-right
             i.icon.ion-ios-clock-outline
-              span {{order.submitted_at|formatDate: 'HH:mm'}}
+              span {{ order.submitted_at | toDate | formatDate: 'HH:mm' }}
         .row
           .col {{ order.customer_billing_address.razon_social }}
         .row
-          .col {{ order.submitted_at|formatDate: 'DD/MM/YYYY' }}
+          .col {{ order.submitted_at | toDate |formatDate: 'DD/MM/YYYY' }}
           .col.text-right Asignado a: -
 
       row(ng-if="!poVm.customerOrders.length")

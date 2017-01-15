@@ -7,8 +7,7 @@
 
   function formatDate() {
     return function (currentValue, formatStr) {
-      var _date = new Date(currentValue),
-          defaultFormat = 'DD/MM/YYYY HH:mm',
+      var defaultFormat = 'DD/MM/YYYY HH:mm',
           timeScheduleFormat = 'HH:mm Z';
 
       if (formatStr === undefined) {
@@ -17,7 +16,7 @@
         formatStr = timeScheduleFormat;
       }
 
-      return moment(_date).format(formatStr);
+      return moment(currentValue).format(formatStr);
     };
   }
 
