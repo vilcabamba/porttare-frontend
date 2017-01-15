@@ -19,7 +19,7 @@
 
   function sidebarOnlyOnCategoriesController($location,
                                              $rootScope){
-    var sidebarOnlyVM = this;
+    var sidebarOnlyVM = this; // jshint validthis:true
 
     $rootScope.$on('$stateChangeSuccess', initialize);
 
