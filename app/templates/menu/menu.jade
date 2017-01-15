@@ -10,6 +10,7 @@ ion-side-menus(enable-menu-with-back-views='false')
       ion-list
         ion-item.sidebar-header-current-user--wrapper(menu-close='')
           sidebar-header-current-user
+
         ion-item(
           menu-close=''
           ui-sref='app.categories.index'
@@ -22,6 +23,7 @@ ion-side-menus(enable-menu-with-back-views='false')
           )
             li
               .inner-content {{::categorie.titulo}}
+
         ion-item(menu-close='' ui-sref='app.cart.index')
           | {{::("menu.client.cart"|translate)}}
         ion-item(menu-close='' ui-sref='app.places.index')

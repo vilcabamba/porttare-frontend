@@ -5,6 +5,13 @@
     border: 0;
     padding-bottom: 10px;
     background-color: $light-grey;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: Montserrat-Regular;
+
+    &.gray-item .item-content {
+      background-color: $light-grey;
+    }
 
     .item-content {
       padding-top: 10px;
@@ -22,6 +29,14 @@
           left: 45px;
         }
       }
+    }
+  }
+
+  .user-type{
+    background: $base-yellow;
+    color: white;
+    a {
+      background: $base-yellow;
     }
   }
 }
