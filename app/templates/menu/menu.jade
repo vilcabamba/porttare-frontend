@@ -6,22 +6,26 @@ ion-side-menus(enable-menu-with-back-views='false')
         button.button.button-icon.button-clear.ion-navicon(menu-toggle='left')
     ion-nav-view(name='menuContent')
   ion-side-menu(side='left')
-    ion-content
+    ion-content.main-sidebar
       ion-list
-        ion-item(menu-close='')
+        ion-item.sidebar-header-current-user--wrapper(menu-close='')
           sidebar-header-current-user
-        ion-item(menu-close='' ui-sref='app.profile.info')
-          | {{::("menu.profile"|translate)}}
+        ion-item(
+          menu-close=''
+          ui-sref='app.categories.index'
+        ) {{::("menu.client.category"|translate)}}
+        sidebar-only-on-categories
+          ion-item.gray-item(
+            ng-repeat='categorie in menuVm.categories'
+            ui-sref='app.categories.show({id: categorie.id})'
+            menu-close=''
+          )
+            li
+              .inner-content {{::categorie.titulo}}
         ion-item(menu-close='' ui-sref='app.cart.index')
           | {{::("menu.client.cart"|translate)}}
         ion-item(menu-close='' ui-sref='app.places.index')
           | {{::("menu.locations"|translate)}}
-        ion-item(menu-close='' ui-sref='app.categories.index')
-          | {{::("menu.client.category"|translate)}}
-        ion-item.gray-item(ng-repeat='categorie in menuVm.categories'
-                           ui-sref='app.categories.show({id: categorie.id})'
-                           menu-close='')
-          li {{::categorie.titulo}}
         ion-item
           | {{::("menu.account"|translate)}}
         ion-item.gray-item(menu-close='' ui-sref='app.customerorders.index')

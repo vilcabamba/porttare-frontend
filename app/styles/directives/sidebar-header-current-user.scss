@@ -1,5 +1,11 @@
+.item.sidebar-header-current-user--wrapper {
+  padding-bottom: 0;
+  margin-bottom: 40px;
+  background-color: $white;
+}
+
 .sidebar-header-current-user {
-  padding-top: 30px;
+  padding-top: 15px;
 
   .avatar-wrapper {
     height: 80px;
@@ -15,10 +21,14 @@
     margin-top: 5px;
     text-align: center;
     white-space: pre-line;
-    margin: 5px 0 15px 0;
+    margin: 5px 0 10px 0;
   }
 
   .current-user-actions {
     text-align: center;
+
+    a {
+      line-height: 24px;
+    }
   }
 }
