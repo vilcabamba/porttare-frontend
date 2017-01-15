@@ -26,20 +26,43 @@ ion-side-menus(enable-menu-with-back-views='false')
 
         ion-item(menu-close='' ui-sref='app.cart.index')
           | {{::("menu.client.cart"|translate)}}
+
+        ion-item.item-complex
+          .item-content {{::("menu.account"|translate)}}
+        ion-item.gray-item(
+          menu-close=''
+          ui-sref='app.customerorders.index'
+        )
+          li
+            .inner-content
+              | {{ ::("menu.client.myOrders" | translate) }}
+        ion-item.gray-item(
+          menu-close=''
+          ui-sref='app.wishlist.index'
+        )
+          li
+            .inner-content
+              | {{::("menu.client.myLists"|translate)}}
+        ion-item.gray-item(
+          menu-close=''
+          ui-sref='app.billing.addresses'
+        )
+          li
+            .inner-content
+              | {{::("menu.client.billingAddresses"|translate)}}
+        //- not built yet
+          ion-item.gray-item
+            li
+              .inner-content
+                | {{::("menu.client.coupon"|translate)}}
+          ion-item.gray-item
+            li
+              .inner-content
+                | {{::("menu.client.payments"|translate)}}
+
         ion-item(menu-close='' ui-sref='app.places.index')
           | {{::("menu.locations"|translate)}}
-        ion-item
-          | {{::("menu.account"|translate)}}
-        ion-item.gray-item(menu-close='' ui-sref='app.customerorders.index')
-          li {{::("menu.client.myOrders"|translate)}}
-        ion-item.gray-item(menu-close='' ui-sref='app.wishlist.index')
-          li {{::("menu.client.myLists"|translate)}}
-        ion-item.gray-item
-          li {{::("menu.client.coupon"|translate)}}
-        ion-item.gray-item
-          li {{::("menu.client.payments"|translate)}}
-        ion-item.gray-item(menu-close='' ui-sref='app.billing.addresses')
-          li {{::("menu.client.billingAddresses"|translate)}}
+
         ion-item
           | {{::("menu.invite"|translate)}}
         ion-item(

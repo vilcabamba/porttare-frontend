@@ -43,7 +43,7 @@
           payments: 'Pagos',
           provider: 'Proveedor',
           cart: 'Mi carro',
-          billingAddresses : 'Direcciones de facturación'
+          billingAddresses: 'Facturación'
         },
         provider: {
           profile:'Perfil de Proveedor',
