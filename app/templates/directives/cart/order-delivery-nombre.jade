@@ -1,11 +1,7 @@
-span.placeholder-title(
-  ng-if="orderDeliveryNombreVM.delivery.delivery_method !== 'pickup'"
-)
-  | {{ ::("cart.deliveryPlaceholder" | translate) }}
-span.placeholder-title(
-  ng-if="orderDeliveryNombreVM.delivery.delivery_method === 'pickup'"
-)
-  | {{ ::("cart.pickupPlaceholder" | translate) }}
+span.placeholder-title
+  order-delivery-method(
+    delivery-method="orderDeliveryNombreVM.delivery.delivery_method"
+  )
 
 span(
   ng-if="!orderDeliveryNombreVM.delivery.deliver_at"
@@ -13,9 +9,9 @@ span(
 span(
   ng-if="orderDeliveryNombreVM.delivery.deliver_at"
 )
-  | {{ (orderDeliveryNombreVM.delivery.deliver_at | formatDate:'dddd D') }}
-  | de
-  | {{ (orderDeliveryNombreVM.delivery.deliver_at | formatDate:'MMMM - H:mm A')}}
+  order-delivery-schedule-date(
+    deliver-at="orderDeliveryNombreVM.delivery.deliver_at"
+  )
 
 span(
   ng-if="orderDeliveryNombreVM.delivery.delivery_method !== 'pickup'"

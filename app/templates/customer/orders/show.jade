@@ -17,6 +17,26 @@ ion-view(
             ng-include="'templates/customer/orders/order-item-row.html'"
           )
 
+        .item.row.customer-order-delivery
+          .col
+            span
+              order-delivery-method(
+                delivery-method="providerProfile.customer_order_delivery.delivery_method"
+              )
+            span(
+              ng-if="providerProfile.customer_order_delivery.delivery_method !== 'pickup'"
+            )
+              | {{ ::providerProfile.customer_order_delivery.customer_address_attributes.direccion_uno }}
+            .future-delivery-time(
+              ng-if="providerProfile.customer_order_delivery.deliver_at"
+            )
+              order-delivery-schedule-date(
+                deliver-at="providerProfile.customer_order_delivery.deliver_at"
+              )
+
+        span
+        //- some spacing
+
         .item.row.strong.narrow
           .col {{ ("order.delivery.status." + providerProfile.customer_order_delivery.status | translate) }}
         .item.row.strong(
@@ -82,18 +102,33 @@ ion-view(
     .resource-collection
       .list.list-inset.list--no-borders.resource-collection-table
         .row.table-headers
-          .col.col-100 {{ ::("order.customerInfo"|translate) }}
-        .row.item(ng-if="customerOrderVm.customerAddress.nombre")
-          .col.col-100 {{ ::( customerOrderVm.customerAddress.nombre ) }}
-        .row.item(ng-if="customerOrderVm.addressLine1")
-          .col.col-100 {{ ::( customerOrderVm.addressLine1 ) }}
-        .row.item(ng-if="customerOrderVm.addressLine2")
-          .col.col-100 {{ ::( customerOrderVm.addressLine2 ) }}
-        .row.item(ng-if="customerOrderVm.customerOrder.forma_de_pago")
-          .col.col-100 {{ ::( customerOrderVm.customerOrder.forma_de_pago ) }}
-        .row.item(ng-if="customerOrderVm.customerBillingAddress.direccion")
-          .col.col-100
-            | {{ ::( customerOrderVm.customerBillingAddress.direccion ) }}
-        .row.item(ng-if="customerOrderVm.customerBillingAddress.ciudad")
-          .col.col-100
-            | {{ ::( customerOrderVm.customerBillingAddress.ciudad ) }}
+          .col {{ ::("order.customerInfo"|translate) }}
+        span(
+          ng-if="!customerOrderVm.customerOrder.anon_billing_address"
+        )
+          .row.item.narrow
+            .col {{ ::(customerOrderVm.customerBillingAddress.razon_social) }}
+          .row.item.narrow
+            .col {{ ::(customerOrderVm.customerBillingAddress.ruc) }}
+          .row.item.narrow
+            .col {{ ::(customerOrderVm.customerBillingAddress.direccion) }}
+          .row.item.narrow(
+            ng-if="customerOrderVm.customerBillingAddress.ciudad"
+          )
+            .col {{ ::( customerOrderVm.customerBillingAddress.ciudad ) }}
+          .row.item.narrow
+            .col {{ ::(customerOrderVm.customerBillingAddress.telefono) }}
+          .row.item.narrow
+            .col {{ ::(customerOrderVm.customerBillingAddress.email) }}
+        span(
+          ng-if="customerOrderVm.customerOrder.anon_billing_address"
+        )
+          .row.item.narrow
+            .col {{ ::("cart.anonBillingAddress"| translate) }}
+
+        .row.item(
+          ng-if="customerOrderVm.customerOrder.forma_de_pago"
+        )
+          .col
+            strong {{ ::("provider.methodPayment" | translate) }}:
+            span  {{ ::( customerOrderVm.customerOrder.forma_de_pago ) }}

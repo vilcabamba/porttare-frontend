@@ -388,7 +388,7 @@
         pickupNow: 'Inmediatamente',
         shippingCosts: '(costos de envío)',
         deliveryPlaceholder: 'Entrega:',
-        pickupPlaceholder: 'Recoger:',
+        pickupPlaceholder: 'Recoger',
         withoutDeliveryAddress: 'Definir dirección de envío',
         anonBillingAddress: 'Consumidor final',
         titleWithoutItems: 'Tu carrito de compras está vacío',
@@ -413,7 +413,7 @@
         submittedAt: 'Enviada',
         shippingCosts: 'Costos de Envio',
         observations: 'Observaciones',
-        customerInfo: 'Información de Cliente y envío',
+        customerInfo: 'Información de Cliente',
         providerProfile: {
           quantity: 'Can',
           price: 'Precio',
