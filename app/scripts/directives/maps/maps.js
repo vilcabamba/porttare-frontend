@@ -12,7 +12,7 @@
       scope: {
         lat: '=',
         lon: '=',
-        ciudad: '=',
+        referencia: '=',
         direccion:'=',
         direccionDos: '=',
         geolocationMessageKey: '=',
@@ -51,9 +51,12 @@
         drawMap();
         listenForChange();
         if (mapVm.defaultInCurrentGeolocation) {
-          GeolocationService.getCurrentPosition()
-                            .then(drawMakerFromGeoPosition)
-                            .catch(couldntGetPosition);
+          GeolocationService
+            .getCurrentPosition()
+            .then(function (position){
+              drawMakerFromGeoPosition(position);
+              geocodeCurrentPosition();
+            }).catch(couldntGetPosition);
         } else {
           drawMakerFromGeoPosition({
             coords: {
@@ -101,27 +104,31 @@
         });
 
         if (shouldGeocodeMarkerPosition) {
-          mapVm.geolocationMessageKey = 'maps.geocoding';
-          GeocodingService
-            .geocode({'latLng': mapVm.currentMarker.getPosition()})
-            .then(function(results){
-              mapVm.geolocationMessageKey = 'maps.geocoded';
-              // jshint ignore:start
-              mapVm.direccion = results[0].formatted_address;
-              mapVm.direccionDos = results[1].formatted_address;
-              // jshint ignore:end
-              mapVm.ciudad = getCiudad(results[0]);
-            })
-            .catch(function(error){
-              if (error === 'OVER_QUERY_LIMIT') {
-                mapVm.geolocationMessageKey = 'maps.overGeocodeLimit';
-              } else {
-                mapVm.geolocationMessageKey = 'maps.wontGeocode';
-                console.error(error);
-              }
-            });
+          geocodeCurrentPosition();
         }
       });
+    }
+
+    function geocodeCurrentPosition(){
+      mapVm.geolocationMessageKey = 'maps.geocoding';
+      GeocodingService
+        .geocode({'latLng': mapVm.currentMarker.getPosition()})
+        .then(function(results){
+          mapVm.geolocationMessageKey = 'maps.geocoded';
+          // jshint ignore:start
+          mapVm.direccion = results[0].formatted_address;
+          mapVm.direccionDos = results[1].formatted_address;
+          // jshint ignore:end
+          mapVm.referencia = getReferencia(results[0]);
+        })
+        .catch(function(error){
+          if (error === 'OVER_QUERY_LIMIT') {
+            mapVm.geolocationMessageKey = 'maps.overGeocodeLimit';
+          } else {
+            mapVm.geolocationMessageKey = 'maps.wontGeocode';
+            console.error(error);
+          }
+        });
     }
 
     function clearErrorMessages(){
@@ -135,7 +142,7 @@
       }
     }
 
-    function getCiudad(geolocationResult){
+    function getReferencia(geolocationResult){
       var components = geolocationResult.address_components; //jshint ignore:line
       var cityComponent = components.find(function(component){
         return component.types.includes('political');
