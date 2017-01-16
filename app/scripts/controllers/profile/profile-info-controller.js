@@ -10,8 +10,11 @@
                                  ProfileService,
                                  $ionicLoading,
                                  $ionicPopup,
-                                 $scope) {
-    var piVm = this;
+                                 $scope,
+                                 $location) {
+    var piVm = this,
+      currentTab = $location.path().split('/')[3];
+    piVm.tab = currentTab;
     piVm.showNewModal = showNewModal;
     piVm.closeModal = closeModal;
     piVm.submitProcess = submitProcess;
