@@ -24,6 +24,7 @@
     officesVm.submitOfficeDelete = submitOfficeDelete;
     officesVm.updateOfficeState = updateOfficeState;
     officesVm.officeDetail = office;
+    officesVm.mapDefaultInCurrentGeolocation = false;
     loadOffice();
 
     function loadOffice(){
@@ -90,8 +91,7 @@
         ).then(function success(resp){
           $ionicLoading.hide().then(function(){
             officesVm.officeDetail = resp.provider_office; //jshint ignore:line
-            loadOffice();
-            closeModal();
+            closeModal().then(loadOffice);
           });
         }, function(rpta){
           officesVm.messages = rpta.status===422 ? rpta.data.errors:undefined;
