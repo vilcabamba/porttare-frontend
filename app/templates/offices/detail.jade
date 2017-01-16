@@ -17,7 +17,9 @@ ion-view(
     ) {{::("office.officeEnabled"|translate)}}
 
     .office-map
-      #office-map(data-tap-disabled="true")
+      img#office-map(
+        ng-src="{{ officesVm.officeDetail.static_map_image }}"
+      )
 
     .list.list-inset.list--no-borders.resource-detail-summary
       h2 {{officesVm.officeDetail.direccion}}
@@ -38,8 +40,9 @@ ion-view(
         .col.col-50.label {{::("office.officeNumber"|translate)}}
         .col.col-50.value {{::officesVm.officeDetail.id}}
       .row
-        .col.col-50.label {{::("office.ciudad"|translate)}}
-        .col.col-50.value {{officesVm.officeDetail.ciudad}}
+        .col.col-50.label {{::("office.place"|translate)}}
+        .col.col-50.value
+          | {{ officesVm.officeDetail.place.full_str }}
       .row
         .col.col-50.label {{::("office.telefono"|translate)}}
         .col.col-50.value {{officesVm.officeDetail.telefono}}

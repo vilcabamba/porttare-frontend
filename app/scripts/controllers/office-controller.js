@@ -12,8 +12,7 @@
                             $ionicLoading,
                             $ionicPopup,
                             $scope,
-                            $filter,
-                            MapsService) {
+                            $filter) {
 
     var officesVm = this;
     officesVm.places = places;
@@ -28,15 +27,12 @@
     loadOffice();
 
     function loadOffice(){
-      MapsService.loadGMaps().then(function(){
-        $ionicLoading.hide();
-        var map = MapsService.renderMap('office-map');
-        MapsService.renderAddressMarker(map, {
-          address: officesVm.officeDetail.direccion,
-          componentRestrictions: {
-            locality: officesVm.officeDetail.ciudad
-          }
-        });
+      officesVm.officeDetail.place = getCurrentPlace();
+    }
+
+    function getCurrentPlace(){
+      return places.find(function(place){
+        return place.id === officesVm.officeDetail.place_id;
       });
     }
 
