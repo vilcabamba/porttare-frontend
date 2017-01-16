@@ -46,7 +46,7 @@
           billingAddresses: 'Facturación'
         },
         provider: {
-          profile:'Perfil de Proveedor',
+          profile: 'Cuenta',
           orders: 'Pedidos',
           products: 'Productos',
           clients: 'Clientes',

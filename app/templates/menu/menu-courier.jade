@@ -6,8 +6,7 @@ ion-side-menus(enable-menu-with-back-views='false')
         button.button.button-icon.button-clear.ion-navicon(menu-toggle='left')
     ion-nav-view(name='menuContent')
   ion-side-menu(side='left')
-    ion-header-bar.bar-stable
-    ion-content
+    ion-content.main-sidebar
       ion-list
         ion-item(menu-close='' ui-sref='courier.orders')
           | {{::("menu.courier.orders"|translate)}}

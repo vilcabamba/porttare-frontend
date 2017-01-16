@@ -8,8 +8,12 @@ ion-side-menus(enable-menu-with-back-views='false')
   ion-side-menu(side='left')
     ion-content.main-sidebar
       ion-list
-        ion-item.sidebar-header-current-user--wrapper(menu-close='')
-          sidebar-header-current-user
+        ion-item.sidebar-header-current-user--wrapper(
+          menu-close=''
+        )
+          sidebar-header-current-user(
+            show-profile-link="true"
+          )
 
         ion-item(
           menu-close=''
