@@ -46,8 +46,7 @@
         placesByIds[place.id]=place;
         return placesByIds;
       }, {});
-      var limit = placesVm.places.length===1 ? 0:1;
-      var distancia = geolib.findNearest(position, placesByIds, limit);
+      var distancia = geolib.findNearest(position, placesByIds);
       var attributes = { 'current_place_id' : distancia.key};
       updateUserCart(attributes, 'selectPlaceDistancia');
     }
