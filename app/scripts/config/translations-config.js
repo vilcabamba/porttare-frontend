@@ -182,7 +182,8 @@
           sun: 'Domingo'
         },
         accept:'Aceptar',
-        notifications:'Notificaciones'
+        notifications:'Notificaciones',
+        geolocation: 'Geolocalizando...'
       },
       item: {
         item: 'Producto',

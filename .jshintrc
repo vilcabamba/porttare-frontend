@@ -26,6 +26,7 @@
     "airbrakeJs": false,
     "moment": false,
     "File": false,
-    "Pusher": false
+    "Pusher": false,
+    "geolib": false
   }
 }
