@@ -32,7 +32,7 @@
 
     function getCurrentPlace(){
       return places.find(function(place){
-        return place.id === officesVm.officeDetail.place_id;
+        return place.id === officesVm.officeDetail.place_id; // jshint ignore:line
       });
     }
 
@@ -48,20 +48,12 @@
     function weekdaysAttributesForEdit() {
       return officesVm.office.weekdays.map(function (weekday){
         var newWeekday = angular.copy(weekday);
-        // jshint ignore:start
-        if (weekday.hora_de_apertura) {
-          newWeekday.hora_de_apertura = $filter('toDate')(
-            weekday.hora_de_apertura,
-            'timeSchedule'
-          ).toDate();
+        if (weekday.hora_de_apertura) { // jshint ignore:line
+          newWeekday.hora_de_apertura = toTimeSchedule(weekday.hora_de_apertura); // jshint ignore:line
         }
-        if (weekday.hora_de_cierre) {
-          newWeekday.hora_de_cierre = $filter('toDate')(
-            weekday.hora_de_cierre,
-            'timeSchedule'
-          ).toDate();
+        if (weekday.hora_de_cierre) { // jshint ignore:line
+          newWeekday.hora_de_cierre = toTimeSchedule(weekday.hora_de_cierre); // jshint ignore:line
         }
-        // jshint ignore:end
         return newWeekday;
       });
     }
@@ -118,6 +110,10 @@
       }).then(function (response) {
         officesVm.officeDetail = response.provider_office; // jshint ignore:line
       });
+    }
+
+    function toTimeSchedule(timeStr){
+      $filter('toDate')(timeStr, 'timeSchedule').toDate();
     }
   }
 })();
