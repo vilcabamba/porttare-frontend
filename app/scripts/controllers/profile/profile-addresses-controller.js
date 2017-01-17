@@ -5,10 +5,9 @@
     .module('porttare.controllers')
     .controller('ProfileAddressesController', ProfileAddressesController);
 
-  function ProfileAddressesController(customerAddresses, $state, $location) {
-    var pfaVm = this,
-      currentTab = $location.path().split('/')[3];
-    pfaVm.tab = currentTab;
+  function ProfileAddressesController(customerAddresses, $state) {
+    var pfaVm = this;
+    pfaVm.tab = 'addresses';
     pfaVm.addresses = customerAddresses || [];
     pfaVm.redirectToUpdateAddressView = redirectToUpdateAddressView;
     pfaVm.redirectToNewAddressView = redirectToNewAddressView;

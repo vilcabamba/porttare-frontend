@@ -582,7 +582,12 @@ function routes($stateProvider, $urlRouterProvider) {
   })
   .state('app.profile', {
     url: '/profile',
-    abstract: true
+    abstract: true,
+    resolve: {
+      auth: function (AuthorizationService) {
+        return AuthorizationService.choosePlaceIfNotPresent();
+      }
+    }
   })
   .state('app.profile.info', {
     url: '/info',
