@@ -6,6 +6,7 @@
     .controller('OfficesController', OfficesController);
 
   function OfficesController(places,
+                             $auth,
                              $scope,
                              $ionicPopup,
                              $ionicLoading,
@@ -19,6 +20,7 @@
     officesVm.showNewOffice = showNewOffice;
     officesVm.closeModal = closeModal;
     officesVm.submitOffice = submitOffice;
+    officesVm.mapDefaultInCurrentGeolocation = true;
     getOffices();
 
     function getOffices() {
@@ -37,16 +39,21 @@
 
     function buildNewOffice(){
       var newOffice = {
+        place_id: getDefaultPlaceId(), // jshint ignore:line
         weekdays_attributes: buildWeekdays() // jshint ignore:line
       };
       return newOffice;
     }
 
     function buildWeekdays(){
-       return APP.weekdays.map(function (wday){
-         return { day: wday };
-       });
-     }
+      return APP.weekdays.map(function (wday){
+        return { day: wday };
+      });
+    }
+
+    function getDefaultPlaceId(){
+      return $auth.user.current_place_id; // jshint ignore:line
+    }
 
     function closeModal() {
       ModalService.closeModal();
