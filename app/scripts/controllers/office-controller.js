@@ -12,8 +12,7 @@
                             $ionicLoading,
                             $ionicPopup,
                             $scope,
-                            $filter,
-                            MapsService) {
+                            $filter) {
 
     var officesVm = this;
     officesVm.places = places;
@@ -24,18 +23,16 @@
     officesVm.submitOfficeDelete = submitOfficeDelete;
     officesVm.updateOfficeState = updateOfficeState;
     officesVm.officeDetail = office;
+    officesVm.mapDefaultInCurrentGeolocation = false;
     loadOffice();
 
     function loadOffice(){
-      MapsService.loadGMaps().then(function(){
-        $ionicLoading.hide();
-        var map = MapsService.renderMap('office-map');
-        MapsService.renderAddressMarker(map, {
-          address: officesVm.officeDetail.direccion,
-          componentRestrictions: {
-            locality: officesVm.officeDetail.ciudad
-          }
-        });
+      officesVm.officeDetail.place = getCurrentPlace();
+    }
+
+    function getCurrentPlace(){
+      return places.find(function(place){
+        return place.id === officesVm.officeDetail.place_id;
       });
     }
 
@@ -90,8 +87,7 @@
         ).then(function success(resp){
           $ionicLoading.hide().then(function(){
             officesVm.officeDetail = resp.provider_office; //jshint ignore:line
-            loadOffice();
-            closeModal();
+            closeModal().then(loadOffice);
           });
         }, function(rpta){
           officesVm.messages = rpta.status===422 ? rpta.data.errors:undefined;

@@ -87,7 +87,7 @@
     }
 
     function getCurrentPlaceId(){
-      return $auth.user.current_place && $auth.user.current_place.id; // jshint ignore:line
+      return $auth.user.current_place_id; // jshint ignore:line
     }
 
     function updateUser(attributes){

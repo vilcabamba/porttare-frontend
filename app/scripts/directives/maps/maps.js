@@ -12,10 +12,10 @@
       scope: {
         lat: '=',
         lon: '=',
-        referencia: '=',
-        direccion:'=',
-        direccionDos: '=',
-        geolocationMessageKey: '=',
+        direccion:'=?',
+        referencia: '=?',
+        direccionDos: '=?',
+        geolocationMessageKey: '=?',
         defaultInCurrentGeolocation: '='
       },
       controller: [ '$scope',
