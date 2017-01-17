@@ -9,30 +9,75 @@
                             $state,
                             $auth,
                             $ionicLoading,
+                            $ionicPopup,
                             $ionicHistory,
                             APP,
                             CartService,
                             UserAccountService,
+                            GeolocationService,
                             ErrorHandlerService) {
     var placesVm = this;
     placesVm.places = places;
     placesVm.selectPlace = selectPlace;
     placesVm.currentPlaceId = getCurrentPlaceId();
+    geolocalizacion();
+
+    function geolocalizacion(){
+      if (!$auth.user.current_place) { //jshint ignore:line
+        performing('globals.geolocation');
+        GeolocationService.getCurrentPosition().then(function success(resp) {
+          var position = {latitude: resp.coords.latitude,
+                          longitude: resp.coords.longitude};
+          selectPlaceDistanciaCorta(position);
+        },function (error) {
+          finishedPerforming();
+          $ionicPopup.alert({
+            title: 'Error',
+            template: error
+          });
+        });
+      }
+    }
+
+    function selectPlaceDistanciaCorta(position){
+      var placesByIds = placesVm.places.reduce(function (placesByIds, place){
+        place.latitude = place.lat;
+        place.longitude = place.lon;
+        placesByIds[place.id]=place;
+        return placesByIds;
+      }, {});
+      var distancia = geolib.findNearest(position, placesByIds);
+      var attributes = { 'current_place_id' : distancia.key};
+      updateUserCart(attributes, 'selectPlaceDistancia');
+    }
 
     function selectPlace(placeId){
-      var attributes = { 'current_place_id' : placeId }; //jshint ignore:line
-      performing();
+      if (placeId !== placesVm.currentPlaceId){
+        var attributes = { 'current_place_id' : placeId }; //jshint ignore:line
+        performing('globals.updating');
+        updateUserCart(attributes, 'selectPlace');
+      }else{
+        nextViewIsRootView();
+        $state.go(APP.successState);
+      }
+    }
+
+    function updateUserCart(attributes, accionEjecutar){
       updateUser(attributes).then(function(){
         updateCart().then(finishedPerforming).then(function(){
-          nextViewIsRootView();
-          $state.go(APP.successState);
+          if(accionEjecutar==='selectPlace'){
+            nextViewIsRootView();
+            $state.go(APP.successState);
+          }else{
+            placesVm.currentPlaceId = getCurrentPlaceId();
+          }
         });
       });
     }
 
-    function performing(){
+    function performing(template){
       $ionicLoading.show({
-        template: '{{::("globals.updating"|translate)}}'
+        template: '{{::("'+template+'"|translate)}}'
       });
     }
 
