@@ -26,9 +26,10 @@
       if (!$auth.user.current_place) { //jshint ignore:line
         performing('globals.geolocation');
         GeolocationService.getCurrentPosition().then(function success(resp) {
-          var position = {latitude: resp.coords.latitude,
-                          longitude: resp.coords.longitude};
-          selectPlaceDistanciaCorta(position);
+          selectPlaceDistanciaCorta({
+            latitude: resp.coords.latitude,
+            longitude: resp.coords.longitude
+          });
         },function (error) {
           finishedPerforming();
           $ionicPopup.alert({
@@ -43,7 +44,7 @@
       var placesByIds = placesVm.places.reduce(function (placesByIds, place){
         place.latitude = place.lat;
         place.longitude = place.lon;
-        placesByIds[place.id]=place;
+        placesByIds[place.id] = place;
         return placesByIds;
       }, {});
       var distancia = geolib.findNearest(position, placesByIds);
