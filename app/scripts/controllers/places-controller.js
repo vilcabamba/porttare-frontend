@@ -30,7 +30,7 @@
             latitude: resp.coords.latitude,
             longitude: resp.coords.longitude
           });
-        },function (error) {
+        }).catch(function (error) {
           finishedPerforming();
           $ionicPopup.alert({
             title: 'Error',
