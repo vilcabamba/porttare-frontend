@@ -44,37 +44,26 @@ ion-view(
         )
           .col {{ providerProfile.customer_order_delivery.reason }}
 
-    .resource-collection
       .list.list-inset.list--no-borders.resource-collection-table.text-right
         .row.item
           .col.col-75
             | {{ ::("order.summary.subtotal" |translate) }}
           .col.col-25.strong
-            span
-              price(amount="{{customerOrderVm.customerOrder.subtotal_items_cents}}"
+            price(amount="{{ ::providerProfile.subTotalCentsOrderProvider }}"
                     currency="{{customerOrderVm.customerOrder.subtotal_items_currency}}")
         .row.item
           .col.col-75
             | {{ ::("order.summary.shippingCosts" |translate) }}
           .col.col-25.strong
             span
-              price(amount="0"
+              price(amount="{{ ::providerProfile.customer_order_delivery.shipping_fare_price_cents }}"
                     currency="{{customerOrderVm.customerOrder.subtotal_items_currency}}")
         .row.item
-          .col.col-75
-            | {{ ::( (customerOrderVm.VAT*100) + ("order.summary.VAT" |translate) ) }}
-          .col.col-25.strong
-            span
-              price(amount="{{customerOrderVm.customerOrder.subtotalVATCents}}"
-                    currency="{{customerOrderVm.customerOrder.subtotal_items_currency}}")
-        .row.table-headers
-          .col.col-100
-        .row.item
-          .col.col-75
+          .col.col-75.strong
             | {{ ::("order.summary.total" |translate) }}
           .col.col-25.strong
             span
-              price(amount="{{customerOrderVm.customerOrder.totalCents}}"
+              price(amount="{{ ::providerProfile.total }}"
                     currency="{{customerOrderVm.customerOrder.subtotal_items_currency}}")
 
     //- not implemented yet
