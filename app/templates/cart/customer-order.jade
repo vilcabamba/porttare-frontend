@@ -11,7 +11,10 @@
       span(
         ng-if="providerProfile.customer_order_delivery.delivery_method === 'shipping'"
       )
-        span + $1.50
+        span
+          | {{ ::("item.currency."+cartVm.cart.subtotal_items_currency | translate )}}
+        span
+          | {{ providerProfile.customer_order_delivery.shipping_fare_price_cents | priceCurrency | currency:''}}
         span {{ ::('cart.shippingCosts' | translate) }}
 
     .provider-profile--title
