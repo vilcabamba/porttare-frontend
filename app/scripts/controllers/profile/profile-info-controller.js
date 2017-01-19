@@ -12,6 +12,7 @@
                                  $ionicPopup,
                                  $scope) {
     var piVm = this;
+    piVm.tab = 'info';
     piVm.showNewModal = showNewModal;
     piVm.closeModal = closeModal;
     piVm.submitProcess = submitProcess;

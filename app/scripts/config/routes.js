@@ -583,14 +583,6 @@ function routes($stateProvider, $urlRouterProvider) {
   .state('app.profile', {
     url: '/profile',
     abstract: true,
-    cache: false,
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/profile/profile.html',
-        controller: 'ProfileController',
-        controllerAs: 'pVm'
-      }
-    },
     resolve: {
       auth: function (AuthorizationService) {
         return AuthorizationService.choosePlaceIfNotPresent();
@@ -600,7 +592,7 @@ function routes($stateProvider, $urlRouterProvider) {
   .state('app.profile.info', {
     url: '/info',
     views: {
-      'menuContent@profileInfo': {
+      'menuContent@app': {
         templateUrl: 'templates/profile/info/info.html',
         controller: 'ProfileInfoController',
         controllerAs: 'piVm'
@@ -615,7 +607,7 @@ function routes($stateProvider, $urlRouterProvider) {
     url: '/',
     cache: false,
     views: {
-      'menuContent@addressesIndex': {
+      'menuContent@app': {
         templateUrl: 'templates/profile/addresses/index.html',
         controller: 'ProfileAddressesController',
         controllerAs: 'pfaVm',
@@ -632,7 +624,7 @@ function routes($stateProvider, $urlRouterProvider) {
   .state('app.profile.addresses.new', {
     url: '/new',
     views: {
-      'menuContent@addressesIndex': {
+      'menuContent@app': {
         templateUrl: 'templates/profile/addresses/actions.html',
         controller: 'ProfileCreateAddressesController',
         controllerAs: 'pfaVm'
@@ -642,7 +634,7 @@ function routes($stateProvider, $urlRouterProvider) {
   .state('app.profile.addresses.update', {
     url: '/update/:id',
     views: {
-      'menuContent@addressesIndex': {
+      'menuContent@app': {
         templateUrl: 'templates/profile/addresses/actions.html',
         controller: 'ProfileUpdateAddressesController',
         controllerAs: 'pfaVm',
