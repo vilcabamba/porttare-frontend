@@ -14,7 +14,8 @@
     var service = {
       loadGMaps: loadGMaps,
       renderMap: renderMap,
-      displayMarker: displayMarker
+      displayMarker: displayMarker,
+      renderRoute: renderRoute
     };
     var loadDefered,
         gmapsLoaded;
@@ -77,26 +78,33 @@
     //   return defered.promise;
     // }
 
-    function renderPosicionActualDestinoMarker(map, destinoOptions){
-      var origen;
-      var destino;
-      GeolocationService.getCurrentPosition().then(function onSuccess(respuesta) {
-            origen = respuesta;
-            getGeocoderLocation(destinoOptions).then(function success(respuesta){
-              destino = respuesta;
-              renderOrigenDestinoMarker(map, origen, destino);
-            });
-          }, function onError(err) {
-            origen =  mapPositionDefault();
-            getGeocoderLocation(destinoOptions).then(function success(respuesta){
-              destino = respuesta;
-              renderOrigenDestinoMarker(map, origen, destino);
-            });
-            $ionicPopup.alert({
-              title: 'Error',
-              template: 'No se ha encontrado su ubicación actual: ' + err.message
-            });
-      });
+    // function renderPosicionActualDestinoMarker(map, destinoOptions){
+    //   var origen;
+    //   var destino;
+    //   GeolocationService.getCurrentPosition().then(function onSuccess(respuesta) {
+    //         origen = respuesta;
+    //         getGeocoderLocation(destinoOptions).then(function success(respuesta){
+    //           destino = respuesta;
+    //           renderOrigenDestinoMarker(map, origen, destino);
+    //         });
+    //       }, function onError(err) {
+    //         origen =  mapPositionDefault();
+    //         getGeocoderLocation(destinoOptions).then(function success(respuesta){
+    //           destino = respuesta;
+    //           renderOrigenDestinoMarker(map, origen, destino);
+    //         });
+    //         $ionicPopup.alert({
+    //           title: 'Error',
+    //           template: 'No se ha encontrado su ubicación actual: ' + err.message
+    //         });
+    //   });
+    // }
+
+    function renderRoute(options){
+      var map = options.map,
+          origin = options.origin,
+          target = options.target;
+      renderOrigenDestinoMarker(map, origin, target);
     }
 
     function renderOrigenDestinoMarker(map, origen, destino){
@@ -110,6 +118,7 @@
         provideRouteAlternatives: true
       }, function(response, status) {
         if (status === 'OK') {
+          console.log(response);
           directionsDisplay.setDirections(response);
           var myRoute = response.routes[0].legs[0];
           for (var i = 0; i < myRoute.steps.length; i++) {
@@ -132,24 +141,23 @@
       });
     }
 
-    function renderAddressMarker(map, options) {
-      var geocoder = new google.maps.Geocoder();
-      geocoder.geocode(options, function(results, status) {
-        if (status === 'OK') {
-          map.setCenter(results[0].geometry.location);
-          displayMarker(map, results[0].geometry.location);
-        } else {
-          var positionDefault = mapPositionDefault();
-          map.setCenter(positionDefault);
-          $ionicPopup.alert({
-            title: 'Error',
-            template: '{{::("office.locationNotFound"|translate)}}' + options.address
-          });
-        }
-      });
-    }
+    // function renderAddressMarker(map, options) {
+    //   var geocoder = new google.maps.Geocoder();
+    //   geocoder.geocode(options, function(results, status) {
+    //     if (status === 'OK') {
+    //       map.setCenter(results[0].geometry.location);
+    //       displayMarker(map, results[0].geometry.location);
+    //     } else {
+    //       var positionDefault = mapPositionDefault();
+    //       map.setCenter(positionDefault);
+    //       $ionicPopup.alert({
+    //         title: 'Error',
+    //         template: '{{::("office.locationNotFound"|translate)}}' + options.address
+    //       });
+    //     }
+    //   });
+    // }
 
-// >>>>>>> Vista de un pedido
     function displayMarker(map, marker){
       return new google.maps.Marker({
         map: map,

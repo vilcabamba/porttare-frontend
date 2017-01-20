@@ -5,31 +5,52 @@
     .controller('CourierOrderController', CourierOrderController);
 
   function CourierOrderController(courierOrder,
+                                  $q,
                                   $ionicLoading,
+                                  $ionicPopup,
                                   MapsService,
                                   GeolocationService) {
     var coVm = this,
         currentLocation;
     coVm.order = courierOrder;
     init();
+
     function init() {
       performing();
-      getCurrentPosition();
-      MapsService.loadGMaps().then(function(){
-        var destino = { address: 'Calle sucre y mercadillo',
-                        componentRestrictions: {
-                          country: 'EC',
-                          locality: 'loja'
-                          }
-                      };
+      $q.all([
+        getCurrentPosition(),
+        loadMaps()
+      ]).then(function(){
         var map = MapsService.renderMap('order-map');
-        MapsService.renderPosicionActualDestinoMarker(map, destino);
+        MapsService.renderRoute({
+          map: map,
+          origin: getOrigin(),
+          target: getTarget()
+        });
         finishedPerforming();
       });
     }
 
+    function getOrigin(){
+      return new google.maps.LatLng(
+        currentLocation.coords.latitude,
+        currentLocation.coords.longitude
+      );
+    }
+
+    function getTarget(){
+      return new google.maps.LatLng(
+        coVm.order.address_attributes.lat, // jshint ignore:line
+        coVm.order.address_attributes.lon // jshint ignore:line
+      );
+    }
+
+    function loadMaps(){
+      return MapsService.loadGMaps();
+    }
+
     function getCurrentPosition(){
-      GeolocationService
+      return GeolocationService
         .getCurrentPosition()
         .then(function(resp){
           currentLocation = resp;
@@ -39,6 +60,7 @@
             title: 'Error',
             template: error
           });
+          return $q.reject(error);
         });
     }
 
