@@ -55,16 +55,14 @@ ion-view(
           .col.col-75
             | {{ ::("order.summary.shippingCosts" |translate) }}
           .col.col-25.strong
-            span
-              price(amount="{{ ::providerProfile.customer_order_delivery.shipping_fare_price_cents }}"
-                    currency="{{customerOrderVm.customerOrder.subtotal_items_currency}}")
+            price(amount="{{ ::providerProfile.customer_order_delivery.shipping_fare_price_cents }}"
+                  currency="{{customerOrderVm.customerOrder.subtotal_items_currency}}")
         .row.item
           .col.col-75.strong
             | {{ ::("order.summary.total" |translate) }}
           .col.col-25.strong
-            span
-              price(amount="{{ ::providerProfile.total }}"
-                    currency="{{customerOrderVm.customerOrder.subtotal_items_currency}}")
+            price(amount="{{ ::providerProfile.total }}"
+                  currency="{{customerOrderVm.customerOrder.subtotal_items_currency}}")
 
     //- not implemented yet
       .resource-collection

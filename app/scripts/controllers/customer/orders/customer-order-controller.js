@@ -11,10 +11,7 @@
                                    BillingAddressesService,
                                    PusherService) {
     var customerOrderVm = this;
-    customerOrderVm.VAT = 0.12;
-
     customerOrderVm.customerOrder = customerOrder;
-
     init();
 
     function init() {
@@ -54,8 +51,7 @@
     function getSumaryProvider(){
       angular.forEach(customerOrderVm.customerOrder.provider_profiles, function (provider) {// jshint ignore:line
         provider.subtotal = getTotalCentsProviderItems(provider);
-        provider.subtotalVAT = Math.round(provider.subtotal*customerOrderVm.VAT);
-        provider.total = provider.subtotal+provider.subtotalVAT+ provider.customer_order_delivery.shipping_fare_price_cents;// jshint ignore:line
+        provider.total = provider.subtotal+ provider.customer_order_delivery.shipping_fare_price_cents;// jshint ignore:line
       });
     }
 
