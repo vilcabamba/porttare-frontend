@@ -55,6 +55,7 @@
             .getCurrentPosition()
             .then(function (position){
               drawMakerFromGeoPosition(position);
+              assignLatAndLon();
               geocodeCurrentPosition();
             }).catch(couldntGetPosition);
         } else {
@@ -72,7 +73,13 @@
       mapVm.map = MapsService.renderMap('map-directive');
     }
 
+    function assignLatAndLon(){
+      mapVm.lat = mapVm.currentMarker.getPosition().lat();
+      mapVm.lon = mapVm.currentMarker.getPosition().lng();
+    }
+
     function drawMakerFromGeoPosition(position){
+      if (mapVm.currentMarker) { return; }
       var positionLatLng = new google.maps.LatLng(
         position.coords.latitude,
         position.coords.longitude
@@ -98,10 +105,7 @@
         clearCurrentMarker();
         drawMarker(changeEvent.latLng);
 
-        $scope.$apply(function(){
-          mapVm.lat = mapVm.currentMarker.getPosition().lat();
-          mapVm.lon = mapVm.currentMarker.getPosition().lng();
-        });
+        $scope.$apply(assignLatAndLon);
 
         if (shouldGeocodeMarkerPosition) {
           geocodeCurrentPosition();

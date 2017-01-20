@@ -10,10 +10,8 @@ ion-view(
     .list.list-inset.list--no-borders.resource-detail-summary
       h2 {{::("courier.order"|translate)}}{{ ::coVm.order.id }}
 
-    .row.details-table-header
-      .col {{::("dispatchers.dispatchersData"|translate)}}
-
     .list.list-inset.list--no-borders.resource-details-table
+      p.resource-detail-title {{::("dispatchers.dispatchersData"|translate)}}
       .row
         .col.col-50.label {{::("courier.ordersNumber"|translate)}}
         .col.col-50.value {{coVm.order.id}}

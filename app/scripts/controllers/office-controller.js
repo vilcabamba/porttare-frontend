@@ -24,9 +24,9 @@
     officesVm.updateOfficeState = updateOfficeState;
     officesVm.officeDetail = office;
     officesVm.mapDefaultInCurrentGeolocation = false;
-    loadOffice();
+    initializeOffice();
 
-    function loadOffice(){
+    function initializeOffice(){
       officesVm.officeDetail.place = getCurrentPlace();
     }
 
@@ -79,7 +79,7 @@
         ).then(function success(resp){
           $ionicLoading.hide().then(function(){
             officesVm.officeDetail = resp.provider_office; //jshint ignore:line
-            closeModal().then(loadOffice);
+            closeModal().then(initializeOffice);
           });
         }, function(rpta){
           officesVm.messages = rpta.status===422 ? rpta.data.errors:undefined;
@@ -109,6 +109,7 @@
         enabled: officesVm.officeDetail.enabled
       }).then(function (response) {
         officesVm.officeDetail = response.provider_office; // jshint ignore:line
+        initializeOffice();
       });
     }
 
