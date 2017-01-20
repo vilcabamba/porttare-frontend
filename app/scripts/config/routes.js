@@ -511,7 +511,7 @@ function routes($stateProvider, $urlRouterProvider) {
     }
   })
   .state('provider.orders.show', {
-    url: '/:id',
+    url: '/show/:id',
     params: {
       customerOrder: null
     },
