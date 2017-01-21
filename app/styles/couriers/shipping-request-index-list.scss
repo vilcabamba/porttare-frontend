@@ -2,20 +2,6 @@
   font-family: Montserrat-Light;
   color: $base-grey;
 
-  .map-view {
-    height: 270px;
-    width: 100%;
-    box-shadow: 0 1px 5px transparentize($base-grey, .5);
-
-    @media (min-height: $grid-responsive-sm-break) {
-      height: 320px;
-    }
-
-    @media (min-height: $grid-responsive-md-break) {
-      height: 400px;
-    }
-  }
-
   .shipping-request-container {
     padding-top: 5px;
     padding-bottom: 5px;
