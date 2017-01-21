@@ -53,8 +53,14 @@
         });
     }
 
-    function getObject(url, objectId) {
-      return getObjects(url + objectId);
+    function getObject(url, objectId, modelName) {
+      return getObjects(url + objectId).then(function(resp){
+        var resource = resp;
+        if (modelName) {
+          resource = resource[modelName];
+        }
+        return resource;
+      });
     }
 
     function deleteObject(objectId, url){

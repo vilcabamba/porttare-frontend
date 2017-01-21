@@ -4,28 +4,36 @@ ion-view(
   ion-nav-title
     .alt-logo
   ion-content.shipping-request-show-page.courier-shipping-request-common
-    .map-view
+    .map-view(ng-hide="coVm.mapIsHidden")
       #order-map(data-tap-disabled="true")
 
     .list.list-inset.list--no-borders.resource-detail-summary
       h2 {{::("courier.order"|translate)}}{{ ::coVm.order.id }}
 
     .list.list-inset.list--no-borders.resource-details-table
-      p.resource-detail-title {{::("dispatchers.dispatchersData"|translate)}}
+      p.resource-detail-title
+        | {{ coVm.order.status_text }}
       .row
         .col.col-50.label {{::("courier.ordersNumber"|translate)}}
         .col.col-50.value {{coVm.order.id}}
       .row
         .col.col-50.label {{::("provider.address"|translate)}}
-        .col.col-50.value Calle sucre y mercadillo
-      .row
-        .col.col-50.label {{::("courier.dateDispatcher"|translate)}}
-        .col.col-50.value 10:00 AM
-      .row
-        .col.col-50.label {{::("courier.nameDispatcher"|translate)}}
-        .col.col-50.value Manuel López
+        .col.col-50.value
+          //- direccion for validate_provider
+          //- direccion_uno for shipping req
+          | {{ ::coVm.address.direccion }}
+          | {{ ::coVm.address.direccion_uno }}
+      //- TODO
+        .row
+          .col.col-50.label {{::("courier.dateDispatcher"|translate)}}
+          .col.col-50.value 10:00 AM
+        .row
+          .col.col-50.label {{::("courier.nameDispatcher"|translate)}}
+          .col.col-50.value Manuel López
 
-    .row
-      .list.list--centered
-        button.button.button-outline.button-energized
-          {{::("courier.orderDispatcher"|translate|uppercase)}}
+  ion-footer-bar.bar-stable.text-center
+    button.button.button-outline.button-energized.button-small(
+      ng-if="coVm.order.status === 'new'"
+      ng-click="coVm.showTakeRequestModal()"
+    )
+      | {{ ::("shippingRequest.takeRequest" | translate) }}

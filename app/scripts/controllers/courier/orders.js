@@ -5,15 +5,15 @@
     .module('porttare.controllers')
     .controller('OrdersController', OrdersController);
 
-  function OrdersController(orders) {
+  function OrdersController(shippingRequests) {
     var orVm = this;
-    orVm.totalOrders = 0
+    orVm.totalOrders = 0;
     orVm.mapRendered = mapRendered;
 
     init();
 
     function init() {
-      orVm.orders = orders.shipping_requests;
+      orVm.orders = shippingRequests;
       orVm.totalOrders = orVm.orders.length;
     }
 

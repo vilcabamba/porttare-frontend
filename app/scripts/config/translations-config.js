@@ -140,7 +140,6 @@
         ordersNumber: 'Pedido número',
         dateDispatcher: 'Hora del despacho',
         nameDispatcher: 'Nombre despachador',
-        orderDispatcher: 'Tomar pedido',
         labels: {
           found: 'Encontramos',
           closeToYou: 'pedidos cerca de ti',
@@ -489,7 +488,8 @@
         overGeocodeLimit: 'El número de búsquedas de direcciones excedió el límite, por favor prueba de nuevo en unos segundos'
       },
       shippingRequest: {
-        noMoreItems: 'No hay más pedidos que mostrar'
+        noMoreItems: 'No hay más pedidos que mostrar',
+        takeRequest: 'Tomar pedido'
       }
     });
 

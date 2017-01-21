@@ -571,8 +571,8 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'OrdersController',
         controllerAs: 'orVm',
         resolve: {
-          orders: function (CourierService) {
-            return CourierService.shippingRequests();
+          shippingRequests: function (ShippingRequestService) {
+            return ShippingRequestService.getShippingRequests();
           }
         }
       }
@@ -590,11 +590,11 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'CourierOrderController',
         controllerAs: 'coVm',
         resolve: {
-          courierOrder: function ($stateParams, CourierService) {
+          courierOrder: function ($stateParams, ShippingRequestService) {
             if ($stateParams.order) {
               return $stateParams.order;
             } else {
-              return CourierService.getObjectShippingRequests($stateParams.id);
+              return ShippingRequestService.getShippingRequest($stateParams.id);
             }
           }
         }
