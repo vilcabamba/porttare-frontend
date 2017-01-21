@@ -10,10 +10,12 @@
       restrict: 'E',
       templateUrl: 'templates/directives/maps/maps.html',
       scope: {
-        lat: '=',
-        lon: '=',
+        lat: '=?',
+        lon: '=?',
+        onRender: '&',
         direccion:'=?',
         referencia: '=?',
+        disableEdit: '=?',
         direccionDos: '=?',
         geolocationMessageKey: '=?',
         defaultInCurrentGeolocation: '='
@@ -50,6 +52,9 @@
         mapVm.geolocationMessageKey = null;
         drawMap();
         listenForChange();
+        if (mapVm.onRender) {
+          mapVm.onRender({map: mapVm.map});
+        }
         if (mapVm.defaultInCurrentGeolocation) {
           GeolocationService
             .getCurrentPosition()
@@ -100,6 +105,7 @@
     }
 
     function listenForChange(){
+      if (mapVm.disableEdit) { return; }
       mapVm.map.addListener('click', function (changeEvent) {
         clearErrorMessages();
         clearCurrentMarker();

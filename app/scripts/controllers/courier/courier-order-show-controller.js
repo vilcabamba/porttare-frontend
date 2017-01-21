@@ -25,9 +25,24 @@
         MapsService.renderRoute({
           map: map,
           origin: getOrigin(),
-          target: getTarget()
+          target: getTarget(),
+          waypoints: getWaypoints(),
         });
         finishedPerforming();
+      });
+    }
+
+    function getWaypoints(){
+      if (!coVm.order.waypoints) { return; }
+      return coVm.order.waypoints.map(function(waypoint){
+        var location = new google.maps.LatLng(
+          waypoint.lat,
+          waypoint.lon
+        );
+        return {
+          stopover: true,
+          location: location
+        };
       });
     }
 

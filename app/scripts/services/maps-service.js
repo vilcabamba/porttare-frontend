@@ -103,18 +103,20 @@
     function renderRoute(options){
       var map = options.map,
           origin = options.origin,
-          target = options.target;
-      renderOrigenDestinoMarker(map, origin, target);
+          target = options.target,
+          waypoints = options.waypoints;
+      renderOrigenDestinoMarker(map, origin, target, waypoints);
     }
 
-    function renderOrigenDestinoMarker(map, origen, destino){
+    function renderOrigenDestinoMarker(map, origen, destino, waypoints){
       var directionsDisplay = new google.maps.DirectionsRenderer();
       var directionsService = new google.maps.DirectionsService();
       directionsDisplay.setMap(map);
       directionsService.route({
         origin: origen,
         destination: destino,
-        travelMode: google.maps.TravelMode.WALKING,
+        waypoints: waypoints,
+        travelMode: google.maps.TravelMode.DRIVING,
         provideRouteAlternatives: true
       }, function(response, status) {
         if (status === 'OK') {

@@ -46,6 +46,7 @@
 @import "directives/sidebar-header-current-user";
 @import "resource/details-table";
 @import "resource/collection-table";
+@import "resource/collection-rounded-containers";
 @import "categories/index";
 @import "categories/show";
 @import "customer/show";
@@ -66,7 +67,7 @@
 @import "dispatchers/show";
 @import "cart/cart";
 @import "cart/edit-item";
-@import "orders/index";
+@import "orders/provider-orders-index-page";
 @import "orders/provider-show";
 @import "tabs/index";
 @import "places/collection";

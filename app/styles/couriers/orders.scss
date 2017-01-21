@@ -1,65 +1,102 @@
-.orders-container {
+.courier-shipping-request-index-list {
+  font-family: Montserrat-Light;
+  color: $base-grey;
 
-  .total-orders {
-    opacity: 0.5;
-    padding: 15px;
-  }
-
-  .orders {
-    display: flex;
-    flex-direction: column;
+  .map-view {
+    height: 270px;
     width: 100%;
+    box-shadow: 0 1px 5px transparentize($base-grey, .5);
 
-    .order {
-      display: flex;
-      margin-bottom: 10px;
+    @media (min-height: $grid-responsive-sm-break) {
+      height: 320px;
+    }
 
-      .distance-circle {
-        display: flex;
-        padding: 15px;
-
-        .range {
-          border-radius: 100%;
-          border: 1px solid #e7e7e7;
-          background-color: #e3e3e3;
-          font-weight: bold;
-        }
-      }
-
-      .establishment {
-        cursor:pointer;
-        padding: 5px;
-        border-radius: 5px;
-        border: 1px solid $base-yellow;
-        width: 100%;
-
-        .name {
-          display: flex;
-          justify-content: space-between;
-
-          .text {
-            font-weight: bold;
-          }
-        }
-
-        .location {
-          opacity: 0.5;
-        }
-
-        .time {
-          opacity: 0.5;
-        }
-      }
+    @media (min-height: $grid-responsive-md-break) {
+      height: 400px;
     }
   }
 
-  .order-map {
-    height: 300px;
-    margin: 0 0 15px 0;
-    box-shadow: 0 1px 5px transparentize($base-grey, .5);
+  .shipping-request-container {
+    padding-top: 5px;
+    padding-bottom: 5px;
 
-    #order-map {
-      height: 100%;
+    &:first-child {
+      .distance-circle .fake-vertical-line.top {
+        background: 0;
+      }
+    }
+
+    &:last-child {
+      .distance-circle .fake-vertical-line.bottom {
+        background: 0;
+      }
+    }
+
+    .distance-circle,
+    .shipping-request {
+      display: table-cell;;
+    }
+
+    .distance-circle {
+      position: relative;
+
+      .fake-vertical-line {
+        display: block;
+        position: absolute;
+        left: 20px;
+        background-color: $button-light-border;
+        width: 1px;
+
+        &.top {
+          height: 15px;
+        }
+
+        &.bottom {
+          height: 80px;
+        }
+      }
+
+      .range {
+        margin-top: 15px;
+        border-radius: 50%;
+        margin-right: 9px;
+        margin-left: 1px;
+        background-color: $light-grey;
+        border: 1px solid transparentize($base-grey, .9);
+        font-family: Montserrat-Regular;
+        color: $dark;
+        padding: 5px 10px;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+
+        span {
+          margin: auto;
+        }
+      }
+    }
+
+    .shipping-request {
+      width: 100%;
+      vertical-align: top;
+
+      .col {
+        padding-bottom: 0;
+      }
+
+      .location {
+        font-size: 16px;
+      }
+
+      .icon-location {
+        float: right;
+        border-radius: 50%;
+        border: 1px solid $button-light-active-border;
+        padding: 3px 5px 3px 3px;
+        color: $base-yellow;
+        font-size: 10px;
+        line-height: 10px;
+      }
     }
   }
 }

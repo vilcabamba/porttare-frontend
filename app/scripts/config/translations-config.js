@@ -186,7 +186,6 @@
           sun: 'Domingo'
         },
         accept:'Aceptar',
-        notifications:'Notificaciones',
         geolocation: 'Geolocalizando...'
       },
       item: {
@@ -488,6 +487,9 @@
         geocoded: 'Las direcciones fueron llenadas con el resultado más acertado posible. Asegúrate de revisarlas',
         wontGeocode: 'No ha sido posible encontrar direcciones para esa ubicación',
         overGeocodeLimit: 'El número de búsquedas de direcciones excedió el límite, por favor prueba de nuevo en unos segundos'
+      },
+      shippingRequest: {
+        noMoreItems: 'No hay más pedidos que mostrar'
       }
     });
 

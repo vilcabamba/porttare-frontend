@@ -7,9 +7,9 @@ ion-view(
   ion-nav-buttons(side="right")
     provider-notifications
 
-  ion-content.order-show-page
+  ion-content.provider-orders-index-page
     .list.list-inset.page-title
-      h2 {{::("globals.notifications"|translate)}}
+      h2 {{::("provider.orders" | translate)}}
       p {{::("orders.titleFormOrders"|translate)}}
 
     .tab-container
@@ -30,18 +30,25 @@ ion-view(
         | {{poVm.customerOrders.length}}
         | {{::("orders.ordersPendings"|translate)}}
 
-      .order-container(
+      .order-container.resource-rounded-container(
         ng-repeat="order in poVm.customerOrders"
         ui-sref="provider.orders.show({customerOrder: order, id: order.id})"
       )
         .row
           .col
-            h4 {{::("orders.collectionTitle"| translate)}}{{:: order.id}}
+            .container-title
+              | {{ ::("orders.collectionTitle"| translate)}}{{:: order.id }}
           .col.text-right
             i.icon.ion-ios-clock-outline
               span {{ order.submitted_at | toDate | formatDate: 'HH:mm' }}
         .row
-          .col {{ order.customer_billing_address.razon_social }}
+          .col
+            span(
+              ng-if="order.anon_billing_address"
+            ) {{ ::("cart.anonBillingAddress" | translate) }}
+            span(
+              ng-if="!order.anon_billing_address"
+            ) {{ order.customer_billing_address.razon_social }}
         .row
           .col {{ order.submitted_at | toDate |formatDate: 'DD/MM/YYYY' }}
           .col.text-right Asignado a: -
