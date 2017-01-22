@@ -37,6 +37,9 @@
         $ionicPopup = {
           alert: sinon.stub()
         };
+        $ionicScrollDelegate = {
+          scrollTop: sinon.stub()
+        };
         CourierService = {
           createNewCourier: sinon.stub().returns(deferCreateCourier.promise)
         };
@@ -57,6 +60,7 @@
           $ionicLoading: $ionicLoading,
           $ionicPopup: $ionicPopup,
           $state: $state,
+          $ionicScrollDelegate: $ionicScrollDelegate,
           ErrorHandlerService: ErrorHandlerService,
           CourierService: CourierService
         };
@@ -88,6 +92,7 @@
           $auth: $auth,
           $ionicLoading: $ionicLoading,
           $ionicPopup: $ionicPopup,
+          $ionicScrollDelegate: $ionicScrollDelegate,
           $state: $state,
           CourierService: CourierService
         };
