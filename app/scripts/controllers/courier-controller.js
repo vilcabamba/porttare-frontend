@@ -9,9 +9,13 @@
                             $ionicPopup,
                             $state,
                             $auth,
-                            $ionicLoading) {
+                            $ionicLoading,
+                            $ionicScrollDelegate) {
     var courierVm = this;
     var stateRedirect = 'courier.orders';
+
+    courierVm.submit = submit;
+    courierVm.step = 1;
     courierVm.createCourier = createCourier;
     courierVm.messages = {};
     initCourier();
@@ -74,6 +78,14 @@
           }
           $ionicLoading.hide();
         });
+    }
+
+    function submit() {
+      if(courierVm.step === 2){
+        createCourier();
+      }
+      courierVm.step += 1;
+      $ionicScrollDelegate.scrollTop();
     }
   }
 })();

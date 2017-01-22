@@ -123,7 +123,8 @@
         welcomeTitle: 'Conviértete en mensajero',
         welcomeDescription: 'Con moviggo puedes enviar productos y convertirte en mensajero',
         newCourierTitle: 'Nuevo Mensajero',
-        formLegend: 'Datos nuevo mensajero',
+        firstFormLegend: 'Mensajero nuevo - Paso 1',
+        secondFormLegend: 'Mensajero nuevo - Paso 2',
         names: 'Nombre completos',
         ruc: 'Cedula/RUC/Pasaporte',
         phone: 'Número de teléfono',
@@ -145,7 +146,9 @@
           closeToYou: 'pedidos cerca de ti',
           currentLocation: 'de tu ubicación actual',
           forDelivery: 'para la entrega'
-        }
+        },
+        nextStep: 'Siguiente Paso',
+        createCourier: 'Crear Mensajero',
       },
       globals: {
         new: 'Nuevo',

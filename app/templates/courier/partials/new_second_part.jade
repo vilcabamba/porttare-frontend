@@ -1,0 +1,37 @@
+.list.list-inset
+  legend {{::("courier.secondFormLegend"|translate)}}
+
+  label.item.item-input.item-select(
+    ng-class="{'item-error': courierVm.messages.ubicacion}"
+  )
+    span.input-label {{::("courier.location"|translate)}}
+    select(
+      ng-model='courierVm.courier.ubicacion'
+      ng-options="location as location for location in courierVm.locations"
+    )
+  .errors-wrapper
+    show-error(array-messages="courierVm.messages.ubicacion")
+
+
+  label.item.item-input.item-select(
+    ng-class="{'item-error': courierVm.messages.tipo_licencia}"
+  )
+    span.input-label {{::("courier.license"|translate)}}
+    select(
+      ng-model='courierVm.courier.tipo_licencia'
+      ng-options="license as license for license in courierVm.licenses"
+    )
+  .errors-wrapper
+    show-error(array-messages="courierVm.messages.tipo_licencia")
+
+
+  label.item.item-input.item-select(
+    ng-class="{'item-error': courierVm.messages.tipo_medio_movilizacion}"
+  )
+    span.input-label {{::("courier.mobilization"|translate)}}
+    select(
+      ng-model='courierVm.courier.tipo_medio_movilizacion'
+      ng-options="mobil as mobil for mobil in courierVm.mobilization"
+    )
+  .errors-wrapper
+    show-error(array-messages="courierVm.messages.tipo_medio_movilizacion")
