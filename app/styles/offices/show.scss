@@ -1,6 +1,10 @@
 .office-show-page {
   font-family: Montserrat-Light;
 
+  &.content-office-disabled{
+    opacity:0.4;
+  }
+
   .item-toggle {
     border-bottom: 0;
   }
