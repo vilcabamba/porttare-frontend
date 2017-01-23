@@ -414,7 +414,6 @@
       },
       order: {
         submittedAt: 'Enviada',
-        shippingCosts: 'Costos de Envio',
         observations: 'Observaciones',
         customerInfo: 'Información de Cliente',
         providerProfile: {
@@ -428,7 +427,7 @@
         },
         summary: {
           subtotal: 'Subtotal',
-          shippingCosts: 'Costos de Envío',
+          shippingCosts: 'Costos de envío',
           VAT: '%',
           total: 'Total de Compra',
         },
@@ -489,7 +488,21 @@
       },
       shippingRequest: {
         noMoreItems: 'No hay más pedidos que mostrar',
-        takeRequest: 'Tomar pedido'
+        takeRequest: 'Tomar pedido',
+        pickingUp: 'En la tienda',
+        clientDetails: 'Datos del cliente',
+        deliverToAddress: 'Dirección para la entrega',
+        providerName: 'Proveedor',
+        delivered: 'Entregado',
+        customerOrderItem: {
+          cantidad: 'Cantidad'
+        },
+        status: {
+          new: 'Nuevo',
+          assigned: 'Camino a la tienda',
+          in_progress: 'Camino a la entrega', // jshint ignore:line
+          delivered: 'Entregada'
+        }
       }
     });
 

@@ -572,7 +572,7 @@ function routes($stateProvider, $urlRouterProvider) {
         controllerAs: 'orVm',
         resolve: {
           shippingRequests: function (ShippingRequestService) {
-            return ShippingRequestService.getShippingRequests();
+            return ShippingRequestService.getShippingRequestsWithStatus('new');
           }
         }
       }
