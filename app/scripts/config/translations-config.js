@@ -501,7 +501,7 @@
           new: 'Nuevo',
           assigned: 'Camino a la tienda',
           in_progress: 'Camino a la entrega', // jshint ignore:line
-          delivered: 'Entregada'
+          delivered: 'Entregado'
         }
       }
     });

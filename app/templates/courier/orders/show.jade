@@ -74,7 +74,7 @@ ion-view(
         .col.col-50.value
           | {{ ::coVm.billingAddress.telefono }}}
 
-      .row-wrapper(
+      .narrow-row-wrapper(
         ng-repeat="orderItem in coVm.order.customer_order.customer_order_items"
       )
         .row
@@ -90,7 +90,9 @@ ion-view(
           .col.col-50.label {{ ::("cart.observations" | translate) }}
           .col.col-50.value {{ orderItem.observaciones }}
 
-  ion-footer-bar.bar-stable.text-center
+  ion-footer-bar.bar-stable.text-center(
+    ng-if="coVm.order.status !== 'delivered'"
+  )
     button.button.button-outline.button-energized.button-small(
       ng-if="coVm.order.status === 'new'"
       ng-click="coVm.showTakeRequestModal()"
