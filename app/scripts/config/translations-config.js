@@ -136,6 +136,10 @@
         deliveryAddresses: 'Lugar de entrega',
         ready: 'Listo',
         customerOrderDeliveryUpdate: 'Datos de entrega actualizado éxitosamente',
+        order: 'Pedido #',
+        ordersNumber: 'Pedido número',
+        dateDispatcher: 'Hora del despacho',
+        nameDispatcher: 'Nombre despachador',
         labels: {
           found: 'Encontramos',
           closeToYou: 'pedidos cerca de ti',
@@ -181,7 +185,6 @@
           sun: 'Domingo'
         },
         accept:'Aceptar',
-        notifications:'Notificaciones',
         geolocation: 'Geolocalizando...'
       },
       item: {
@@ -411,7 +414,6 @@
       },
       order: {
         submittedAt: 'Enviada',
-        shippingCosts: 'Costos de Envio',
         observations: 'Observaciones',
         customerInfo: 'Información de Cliente',
         providerProfile: {
@@ -425,7 +427,7 @@
         },
         summary: {
           subtotal: 'Subtotal',
-          shippingCosts: 'Costos de Envío',
+          shippingCosts: 'Costos de envío',
           VAT: '%',
           total: 'Total de Compra',
         },
@@ -483,6 +485,24 @@
         geocoded: 'Las direcciones fueron llenadas con el resultado más acertado posible. Asegúrate de revisarlas',
         wontGeocode: 'No ha sido posible encontrar direcciones para esa ubicación',
         overGeocodeLimit: 'El número de búsquedas de direcciones excedió el límite, por favor prueba de nuevo en unos segundos'
+      },
+      shippingRequest: {
+        noMoreItems: 'No hay más pedidos que mostrar',
+        takeRequest: 'Tomar pedido',
+        pickingUp: 'En la tienda',
+        clientDetails: 'Datos del cliente',
+        deliverToAddress: 'Dirección para la entrega',
+        providerName: 'Proveedor',
+        delivered: 'Entregado',
+        customerOrderItem: {
+          cantidad: 'Cantidad'
+        },
+        status: {
+          new: 'Nuevo',
+          assigned: 'Camino a la tienda',
+          in_progress: 'Camino a la entrega', // jshint ignore:line
+          delivered: 'Entregado'
+        }
       }
     });
 

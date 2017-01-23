@@ -571,10 +571,31 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'OrdersController',
         controllerAs: 'orVm',
         resolve: {
-          orders: function (CourierService) {
-            return CourierService.shippingRequests().then(function (res) {
-              return res;
-            });
+          shippingRequests: function (ShippingRequestService) {
+            return ShippingRequestService.getShippingRequestsWithStatus('new');
+          }
+        }
+      }
+    }
+  })
+  .state('courier.order', {
+    url: '/orders/:id',
+    cache: false,
+    params: {
+      order: null
+    },
+    views: {
+      'menuContent@courier': {
+        templateUrl: 'templates/courier/orders/show.html',
+        controller: 'CourierOrderController',
+        controllerAs: 'coVm',
+        resolve: {
+          courierOrder: function ($stateParams, ShippingRequestService) {
+            if ($stateParams.order) {
+              return $stateParams.order;
+            } else {
+              return ShippingRequestService.getShippingRequest($stateParams.id);
+            }
           }
         }
       }
