@@ -52,9 +52,9 @@
       delete $window.gMapsCallback;
     }
 
-    function renderMap(domId) {
+    function renderMap(domElement) {
       return new google.maps.Map(
-        document.getElementById(domId),
+        domElement,
         mapOptionsDefault()
       );
     }

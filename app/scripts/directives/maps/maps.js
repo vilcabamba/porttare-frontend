@@ -5,7 +5,7 @@
     .module('porttare.directives')
     .directive('maps', maps);
 
-  function maps() {
+  function maps(MapsService) {
     var directive = {
       restrict: 'E',
       templateUrl: 'templates/directives/maps/maps.html',
@@ -26,10 +26,23 @@
                     'GeolocationService',
                     mapsController],
       controllerAs: 'mapVm',
+      link: linkFunction,
       bindToController: true
     };
 
     return directive;
+
+    function linkFunction($scope, $element, $attributes, $controller){
+
+      MapsService.loadGMaps().then(function () {
+        $scope.mapVm.geolocationMessageKey = null;
+        var mapContainer = $element[0].children[0].children[0];
+        $scope.mapVm.map = MapsService.renderMap(mapContainer);
+        $controller.listenForChange();
+        $controller.setCurrentPosition();
+      });
+    }
+
   }
 
   function mapsController($scope,
@@ -39,6 +52,9 @@
     var mapVm = this, // jshint ignore:line
         shouldGeocodeMarkerPosition;
 
+    mapVm.listenForChange = listenForChange;
+    mapVm.setCurrentPosition = setCurrentPosition;
+
     init();
 
     function init(){
@@ -47,35 +63,28 @@
       );
 
       mapVm.geolocationMessageKey = 'maps.loading';
-
-      MapsService.loadGMaps().then(function () {
-        mapVm.geolocationMessageKey = null;
-        drawMap();
-        listenForChange();
-        if (mapVm.onRender) {
-          mapVm.onRender({map: mapVm.map});
-        }
-        if (mapVm.defaultInCurrentGeolocation) {
-          GeolocationService
-            .getCurrentPosition()
-            .then(function (position){
-              drawMakerFromGeoPosition(position);
-              assignLatAndLon();
-              geocodeCurrentPosition();
-            }).catch(couldntGetPosition);
-        } else {
-          drawMakerFromGeoPosition({
-            coords: {
-              latitude: mapVm.lat,
-              longitude: mapVm.lon
-            }
-          });
-        }
-      });
     }
 
-    function drawMap(){
-      mapVm.map = MapsService.renderMap('map-directive');
+    function setCurrentPosition(){
+      if (mapVm.onRender) {
+        mapVm.onRender({map: mapVm.map});
+      }
+      if (mapVm.defaultInCurrentGeolocation) {
+        GeolocationService
+          .getCurrentPosition()
+          .then(function (position){
+            drawMakerFromGeoPosition(position);
+            assignLatAndLon();
+            geocodeCurrentPosition();
+          }).catch(couldntGetPosition);
+      } else {
+        drawMakerFromGeoPosition({
+          coords: {
+            latitude: mapVm.lat,
+            longitude: mapVm.lon
+          }
+        });
+      }
     }
 
     function assignLatAndLon(){
