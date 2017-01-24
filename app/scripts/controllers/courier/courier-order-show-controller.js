@@ -43,12 +43,11 @@
       coVm.address = coVm.order.address_attributes; // jshint ignore:line
       coVm.provider = coVm.order.provider_profile; // jshint ignore:line
       coVm.shouldDisplayClientDetails = getShouldDisplayClientDetails();
-      coVm.orderItemsTotal = getOrderItemsTotal();
       // jshint ignore:start
       if (coVm.order.customer_order) {
         coVm.fareCurrency = coVm.order.customer_order.subtotal_items_currency;
         coVm.billingAddress = coVm.order.customer_order.customer_billing_address;
-
+        coVm.orderItemsTotal = getOrderItemsTotal();
       }
       if (coVm.order.customer_order_delivery) {
         coVm.fareCurrencyCents = coVm.order.customer_order_delivery.shipping_fare_price_cents;
