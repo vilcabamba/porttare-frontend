@@ -182,6 +182,16 @@ function appRoutes($stateProvider) {
     url: '/provider',
     abstract: true,
     resolve: {
+      provider: function($auth,$state,APP,$ionicLoading){
+        $auth.validateUser().then(function userAuthorized(user) {
+          if (!user.provider_profile && !user.courier_profile){ //jshint ignore:line
+            return;
+          }
+          if(!user.provider_profile){ //jshint ignore:line
+            $state.go(APP.successState).then($ionicLoading.hide);
+          }
+        });
+      },
       auth: function(AuthorizationService){
         return AuthorizationService.choosePlaceIfNotPresent();
       }
@@ -197,7 +207,7 @@ function appRoutes($stateProvider) {
     },
     resolve: {
       auth: function(AuthorizationService){
-        return AuthorizationService.notShowWelcomeProvider();
+        return AuthorizationService.notShowWelcome('provider.items.index');
       }
     }
   })
@@ -211,7 +221,7 @@ function appRoutes($stateProvider) {
         controllerAs: 'providerVm',
         resolve: {
           auth: function(AuthorizationService){
-            return AuthorizationService.notShowWelcomeProvider();
+            return AuthorizationService.notShowWelcome('provider.items.index');
           },
           providerCategories: function (CategoriesService,
                                         ErrorHandlerService){
@@ -242,13 +252,30 @@ function appRoutes($stateProvider) {
   })
   .state('app.courier', {
     url: '/courier',
-    abstract: true
+    abstract: true,
+    resolve:{
+      auth: function($auth,$state,APP,$ionicLoading){
+        $auth.validateUser().then(function userAuthorized(user) {
+          if (!user.provider_profile && !user.courier_profile){ //jshint ignore:line
+            return;
+          }
+          if(!user.courier_profile){ //jshint ignore:line
+            $state.go(APP.successState).then($ionicLoading.hide);
+          }
+        });
+      }
+    }
   })
   .state('app.courier.welcome', {
     url: '/welcome',
     views: {
       'menuContent@app': {
         templateUrl: 'templates/courier/welcome.html',
+        resolve: {
+          auth: function(AuthorizationService){
+            return AuthorizationService.notShowWelcome('courier.orders');
+          }
+        },
         controller: 'CourierController',
         controllerAs: 'courierWelVm'
       }
@@ -259,6 +286,11 @@ function appRoutes($stateProvider) {
     views: {
       'menuContent@app': {
         templateUrl: 'templates/courier/new.html',
+        resolve: {
+          auth: function(AuthorizationService){
+            return AuthorizationService.notShowWelcome('courier.orders');
+          }
+        },
         controller: 'CourierController',
         controllerAs: 'courierVm'
       }
