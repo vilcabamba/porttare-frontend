@@ -9,7 +9,8 @@
     var service = {
       accessIfUserNotAuth: accessIfUserNotAuth,
       notShowWelcomeProvider: notShowWelcomeProvider,
-      choosePlaceIfNotPresent: choosePlaceIfNotPresent
+      choosePlaceIfNotPresent: choosePlaceIfNotPresent,
+      accessIfUserAuth: accessIfUserAuth
     };
 
     return service;
@@ -48,5 +49,21 @@
           return;
         });
     }
+  }
+
+  function accessIfUserAuth($auth, $state, APP, UserAuthService, CartService) {
+    return $auth.validateUser()
+      .then(function userAuthorized(user) {
+          if (user.agreed_tos) { //jshint ignore:line
+            return CartService.getCart().then(function(response){
+              user.customer_order = response.customer_order; //jshint ignore:line
+              return user;
+            });
+          } else {
+            $state.go('termsAndCond');
+          }
+      }, function userNotAuthorized() {
+        $state.go(APP.preloginState);
+      });
   }
 })();

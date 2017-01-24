@@ -27,7 +27,8 @@
         loadMaps(),
         getCurrentPosition()
       ]).then(function(){
-        var map = MapsService.renderMap('order-map');
+        var mapContainer = angular.element('#order-map')[0];
+        var map = MapsService.renderMap(mapContainer);
         MapsService.renderRoute({
           map: map,
           origin: getOrigin(),
@@ -42,12 +43,11 @@
       coVm.address = coVm.order.address_attributes; // jshint ignore:line
       coVm.provider = coVm.order.provider_profile; // jshint ignore:line
       coVm.shouldDisplayClientDetails = getShouldDisplayClientDetails();
-      coVm.orderItemsTotal = getOrderItemsTotal();
       // jshint ignore:start
       if (coVm.order.customer_order) {
         coVm.fareCurrency = coVm.order.customer_order.subtotal_items_currency;
         coVm.billingAddress = coVm.order.customer_order.customer_billing_address;
-
+        coVm.orderItemsTotal = getOrderItemsTotal();
       }
       if (coVm.order.customer_order_delivery) {
         coVm.fareCurrencyCents = coVm.order.customer_order_delivery.shipping_fare_price_cents;
@@ -55,15 +55,16 @@
       // jshint ignore:end
     }
 
+    // jshint ignore:start
     function getOrderItemsTotal() {
-      // jshint ignore:start
       var customerOrderItems = coVm.order.customer_order.customer_order_items;
       return customerOrderItems.reduce(function(memo, orderItem){
         var subtotalOrderItem = orderItem.cantidad * orderItem.provider_item_precio_cents;
         return memo + subtotalOrderItem;
       }, 0);
-      // jshint ignore:end
     }
+    // jshint ignore:end
+
 
     function getShouldDisplayClientDetails(){
       return coVm.order.customer_order_delivery && coVm.order.status !== 'new'; // jshint ignore:line
