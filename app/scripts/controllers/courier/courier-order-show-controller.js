@@ -55,15 +55,16 @@
       // jshint ignore:end
     }
 
+    // jshint ignore:start
     function getOrderItemsTotal() {
-      // jshint ignore:start
       var customerOrderItems = coVm.order.customer_order.customer_order_items;
       return customerOrderItems.reduce(function(memo, orderItem){
         var subtotalOrderItem = orderItem.cantidad * orderItem.provider_item_precio_cents;
         return memo + subtotalOrderItem;
       }, 0);
-      // jshint ignore:end
     }
+    // jshint ignore:end
+
 
     function getShouldDisplayClientDetails(){
       return coVm.order.customer_order_delivery && coVm.order.status !== 'new'; // jshint ignore:line
