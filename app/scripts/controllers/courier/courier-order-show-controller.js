@@ -27,7 +27,8 @@
         loadMaps(),
         getCurrentPosition()
       ]).then(function(){
-        var map = MapsService.renderMap('order-map');
+        var mapContainer = angular.element('#order-map')[0];
+        var map = MapsService.renderMap(mapContainer);
         MapsService.renderRoute({
           map: map,
           origin: getOrigin(),
