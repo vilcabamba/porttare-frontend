@@ -50,17 +50,17 @@
 
     function getSumaryProvider(){
       angular.forEach(customerOrderVm.customerOrder.provider_profiles, function (provider) {// jshint ignore:line
-        provider.subtotal = getTotalCentsProviderItems(provider);
-        provider.total = provider.subtotal+ provider.customer_order_delivery.shipping_fare_price_cents;// jshint ignore:line
+        provider.subTotalCentsOrderProvider = getSubTotalCentsProviderItems(provider);
+        provider.totalCentsOrderProvider = provider.subTotalCentsOrderProvider+ provider.customer_order_delivery.shipping_fare_price_cents;// jshint ignore:line
       });
     }
 
-    function getTotalCentsProviderItems(provider) {
-      var total = 0;
-      angular.forEach(provider.customer_order_items, function (item) {// jshint ignore:line
-        total += (item.provider_item_precio_cents * item.cantidad);// jshint ignore:line
-      });
-      return total;
+    function getSubTotalCentsProviderItems(provider) {
+      var subTotalCentsOrderProvider = provider.customer_order_items.reduce(function (total, item) { // jshint ignore:line
+        total += (item.provider_item_precio_cents * item.cantidad); // jshint ignore:line
+        return total;
+      }, 0);
+      return subTotalCentsOrderProvider;
     }
 
   }

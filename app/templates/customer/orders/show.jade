@@ -61,7 +61,7 @@ ion-view(
           .col.col-75.strong
             | {{ ::("order.summary.total" |translate) }}
           .col.col-25.strong
-            price(amount="{{ ::providerProfile.total }}"
+            price(amount="{{ ::providerProfile.totalCentsOrderProvider }}"
                   currency="{{customerOrderVm.customerOrder.subtotal_items_currency}}")
 
     //- not implemented yet
