@@ -14,7 +14,8 @@
       $state,
       $auth,
       $ionicPopup,
-      stateRedirect;
+      stateRedirect,
+      $ionicScrollDelegate;
 
     beforeEach(module('porttare.controllers'));
 
