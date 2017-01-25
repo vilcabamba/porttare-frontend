@@ -66,6 +66,11 @@
   .narrow-row-wrapper {
     margin-top: -5px;
   }
+
+  .row--top-border {
+    padding-top: 0;
+    border-top: 1px solid $base-yellow;
+  }
 }
 
 .details-table-header {

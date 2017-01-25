@@ -260,7 +260,8 @@
         ciudad: 'Ciudad',
         email: 'E-mail',
         noClients: 'No tienes ningún cliente todavía.',
-        addImage: 'Agregar fotografía'
+        addImage: 'Agregar fotografía',
+        razonSocial: 'Razón social'
       },
       wishlist: {
         wishlists: 'Listas de deseos',
