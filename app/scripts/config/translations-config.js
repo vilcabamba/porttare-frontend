@@ -147,8 +147,8 @@
           currentLocation: 'de tu ubicación actual',
           forDelivery: 'para la entrega'
         },
-        nextStep: 'Siguiente Paso',
-        createCourier: 'Crear Mensajero',
+        nextStep: 'Siguiente paso',
+        createCourier: 'Crear mensajero',
       },
       globals: {
         new: 'Nuevo',
