@@ -3,7 +3,7 @@ ion-view(
 )
   ion-nav-title
     .alt-logo
-  ion-content.shipping-request-show-page.courier-shipping-request-common
+  ion-content.shipping-request-show-page.courier-shipping-request-common.has-footer
     .map-view(ng-hide="coVm.mapIsHidden")
       #order-map(data-tap-disabled="true")
 
@@ -56,7 +56,7 @@ ion-view(
         .col.col-50.value
           span(
             ng-if="coVm.order.customer_order.anon_billing_address"
-          ) {{::("cart.anonBillingAddress"|translate)}}
+          ) {{ ::coVm.clientName }}
           span(
             ng-if="!coVm.order.customer_order.anon_billing_address"
           ) {{ ::coVm.billingAddress.razon_social }}
