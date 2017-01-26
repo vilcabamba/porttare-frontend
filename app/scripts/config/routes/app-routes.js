@@ -14,9 +14,7 @@ function appRoutes($stateProvider) {
     controllerAs: 'menuVm',
     //only logged users will allow to go to /app/*
     resolve: {
-      currentUser: function(AuthorizationService){
-        return AuthorizationService.accessIfUserAuth;
-      },
+      currentUser: accessIfUserAuth,
       categories: function (CategoriesService, $ionicLoading, ErrorHandlerService) {
         $ionicLoading.show({
           template: '{{::("globals.loading"|translate)}}'
@@ -424,4 +422,20 @@ function appRoutes($stateProvider) {
       }
     }
   });
+
+  function accessIfUserAuth($auth, $state, APP, UserAuthService, CartService) {
+    return $auth.validateUser()
+      .then(function userAuthorized(user) {
+          if (user.agreed_tos) { //jshint ignore:line
+            return CartService.getCart().then(function(response){
+              user.customer_order = response.customer_order; //jshint ignore:line
+              return user;
+            });
+          } else {
+            $state.go('termsAndCond');
+          }
+      }, function userNotAuthorized() {
+        $state.go(APP.preloginState);
+      });
+  }
 }

@@ -34,9 +34,7 @@ function coreRoutes($stateProvider, $urlRouterProvider) {
     controllerAs: 'resetVm',
     templateUrl: 'templates/reset/reset.html',
     resolve: {
-      auth: function(AuthorizationService){
-        return AuthorizationService.accessIfUserAuth();
-      }
+      auth: accessIfUserAuth
     }
   })
   .state('send', {
@@ -106,6 +104,17 @@ function coreRoutes($stateProvider, $urlRouterProvider) {
   function isResetPassword(href) {
     var param = href.match(/reset_password=([^&]+)/);
     return (param && param[1] === 'true') ? true : false;
+  }
+
+  function accessIfUserAuth($auth, $state, APP, $ionicLoading) {
+    return $auth.validateUser()
+      .then(function userAuthorized() {
+        return $state.go(APP.successState).then(function(){
+          $ionicLoading.hide();
+        });
+      }, function userNotAuthorized() {
+        return;
+    });
   }
 
 }
