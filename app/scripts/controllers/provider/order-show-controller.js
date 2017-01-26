@@ -18,10 +18,19 @@
     function init(){
       providerOrderShowVM.errors = {};
       providerOrderShowVM.providerProfile = getProviderProfile();
+      providerOrderShowVM.customerProfileName = getCustomerProfileName();
       providerOrderShowVM.customerOrderDelivery = getCustomerOrderDelivery();
       providerOrderShowVM.customerBillingAddress = getCustomerBillingAddress();
       providerOrderShowVM.dateDelivery = getDateDelivery();
       providerOrderShowVM.shouldDisplayProviderAnswerForm = getShouldDisplayProviderAnswerForm();
+    }
+
+    function getCustomerProfileName() {
+      var customerProfile = providerOrderShowVM.customerOrder.customer_profile; // jshint ignore:line
+      if (isBlank(customerProfile.name)) {
+        return customerProfile.nickname;
+      }
+      return customerProfile.name;
     }
 
     function getCustomerBillingAddress(){
@@ -65,9 +74,7 @@
     }
 
     function reasonIsBlank(){
-      return angular.element.isEmptyObject(
-        angular.element.trim(providerOrderShowVM.customerOrderDelivery.reason)
-      );
+      return isBlank(providerOrderShowVM.customerOrderDelivery.reason);
     }
 
     function cantPerformAction(reason){
@@ -80,6 +87,12 @@
     function respondedCustomerOrder (customerOrder) {
       providerOrderShowVM.customerOrder = customerOrder;
       init();
+    }
+
+    function isBlank(string){
+      return angular.element.isEmptyObject(
+        angular.element.trim(string)
+      );
     }
   }
 })();

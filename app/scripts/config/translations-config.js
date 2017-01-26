@@ -260,7 +260,8 @@
         ciudad: 'Ciudad',
         email: 'E-mail',
         noClients: 'No tienes ningún cliente todavía.',
-        addImage: 'Agregar fotografía'
+        addImage: 'Agregar fotografía',
+        razonSocial: 'Razón social'
       },
       wishlist: {
         wishlists: 'Listas de deseos',
@@ -502,6 +503,12 @@
           assigned: 'Camino a la tienda',
           in_progress: 'Camino a la entrega', // jshint ignore:line
           delivered: 'Entregado'
+        },
+        routeLegs: {
+          customer_order_delivery: { // jshint ignore:line
+            'leg0': 'A la tienda',
+            'leg1': 'A la entrega'
+          }
         }
       }
     });

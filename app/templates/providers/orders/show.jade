@@ -13,29 +13,41 @@ ion-view
     .list.list-inset.resource-details-table
       .row
         .col.col.label {{ ::("client.clientName" | translate ) }}
-        .col.value
-          | {{ ::providerOrderShowVM.customerBillingAddress.razon_social }}
-      .row
-        .col.col.label {{ ::("client.ruc" | translate ) }}
-        .col.value
-          | {{ ::providerOrderShowVM.customerBillingAddress.ruc }}
-      .row
-        .col.col.label {{ ::("client.email" | translate ) }}
-        .col.value
-          | {{ ::providerOrderShowVM.customerBillingAddress.email }}
-      .row
-        .col.col.label {{ ::("client.telefono" | translate ) }}
-        .col.value
-          | {{ ::providerOrderShowVM.customerBillingAddress.telefono }}
-      .row
-        .col.col.label {{ ::("client.direccion" | translate ) }}
-        .col.value
-          | {{ ::providerOrderShowVM.customerBillingAddress.direccion }}
-      .row
-        .col.col.label {{ ::("client.ciudad" | translate ) }}
-        .col.value
-          | {{ ::providerOrderShowVM.customerBillingAddress.ciudad }}
-      .row
+        .col.value {{ ::providerOrderShowVM.customerProfileName }}
+      .narrow-row-wrapper(
+        ng-if="::providerOrderShowVM.customerOrder.anon_billing_address"
+      )
+        .row
+          .col.col.label {{ ::("client.razonSocial" | translate ) }}
+          .col.value {{ ::("cart.anonBillingAddress" | translate) }}
+      .narrow-row-wrapper(
+        ng-if="::!providerOrderShowVM.customerOrder.anon_billing_address"
+      )
+        .row
+          .col.col.label {{ ::("client.razonSocial" | translate ) }}
+          .col.value
+            | {{ ::providerOrderShowVM.customerBillingAddress.razon_social }}
+        .row
+          .col.col.label {{ ::("client.ruc" | translate ) }}
+          .col.value
+            | {{ ::providerOrderShowVM.customerBillingAddress.ruc }}
+        .row
+          .col.col.label {{ ::("client.email" | translate ) }}
+          .col.value
+            | {{ ::providerOrderShowVM.customerBillingAddress.email }}
+        .row
+          .col.col.label {{ ::("client.telefono" | translate ) }}
+          .col.value
+            | {{ ::providerOrderShowVM.customerBillingAddress.telefono }}
+        .row
+          .col.col.label {{ ::("client.direccion" | translate ) }}
+          .col.value
+            | {{ ::providerOrderShowVM.customerBillingAddress.direccion }}
+        .row
+          .col.col.label {{ ::("client.ciudad" | translate ) }}
+          .col.value
+            | {{ ::providerOrderShowVM.customerBillingAddress.ciudad }}
+      .row.narrow-row-wrapper.row--top-border
         .col.col.label {{ ::("order.submittedAt" | translate) }}
         .col.value
           | {{ ::providerOrderShowVM.customerOrder.submitted_at | formatDate }}

@@ -3,7 +3,7 @@ ion-view(
 )
   ion-nav-title
     .alt-logo
-  ion-content.shipping-request-show-page.courier-shipping-request-common
+  ion-content.shipping-request-show-page.courier-shipping-request-common.has-footer
     .map-view(ng-hide="coVm.mapIsHidden")
       #order-map(data-tap-disabled="true")
 
@@ -21,13 +21,23 @@ ion-view(
       .row
         .col.col-50.label {{ ::("shippingRequest.providerName" | translate) }}
         .col.col-50.value {{ coVm.provider.nombre_establecimiento }}
-      .row
+      .row.row--without-border
         .col.col-50.label {{ ::("order.summary.shippingCosts" | translate) }}
         .col.col-50.value
           span
             | {{ ::("item.currency." + coVm.fareCurrency | translate) }}
           span
             | {{ ::(coVm.fareCurrencyCents | priceCurrency | currency:'') }}
+      .row-wrapper.narrow-row-wrapper(
+        ng-repeat="routeLeg in coVm.routeLegs"
+      )
+        .row.row--top-border
+          .col.col-50.label
+            | {{ ::("shippingRequest.routeLegs." + coVm.order.kind + ".leg" + $index | translate) }}
+          .col.col-50.value
+            strong {{ routeLeg.duration.text }}
+            span  -
+            span  {{ routeLeg.distance.text }}
       //- TODO
         .row
           .col.col-50.label {{::("courier.dateDispatcher"|translate)}}
@@ -56,7 +66,7 @@ ion-view(
         .col.col-50.value
           span(
             ng-if="coVm.order.customer_order.anon_billing_address"
-          ) {{::("cart.anonBillingAddress"|translate)}}
+          ) {{ ::coVm.clientName }}
           span(
             ng-if="!coVm.order.customer_order.anon_billing_address"
           ) {{ ::coVm.billingAddress.razon_social }}

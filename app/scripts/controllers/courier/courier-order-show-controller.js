@@ -11,6 +11,7 @@
                                   $ionicPopup,
                                   MapsService,
                                   GeolocationService,
+                                  MapDirectionsService,
                                   ShippingRequestService) {
     var coVm = this,
         currentLocation;
@@ -18,6 +19,7 @@
     coVm.showTakeRequestModal = showTakeRequestModal;
     coVm.courierIsInStore = courierIsInStore;
     coVm.courierHasDelivered = courierHasDelivered;
+    coVm.routeLegs = [];
     init();
 
     function init() {
@@ -29,11 +31,34 @@
       ]).then(function(){
         var mapContainer = angular.element('#order-map')[0];
         var map = MapsService.renderMap(mapContainer);
-        MapsService.renderRoute({
+        MapDirectionsService.renderRoute({
           map: map,
           origin: getOrigin(),
           target: getTarget(),
           waypoints: getWaypoints(),
+        }).then(function(routes){
+          var route = routes[0]; // only showing first one atm
+          coVm.routeLegs = route.legs;
+          angular.forEach(route.legs, function(leg){
+            var halfLength = parseInt(leg.steps.length/2, 10),
+                midPoint = leg.steps[halfLength];
+
+            var marker = new google.maps.Marker({
+              position: midPoint.end_location, //jshint ignore:line
+              map: map,
+              visible: false
+            });
+            var infoWindow = new google.maps.InfoWindow();
+            infoWindow.setContent(
+              '<strong>' + leg.duration.text + '</strong><br>' + leg.distance.text
+            );
+            infoWindow.open(map,marker);
+          });
+        }).catch(function(status){
+          $ionicPopup.alert({
+            title: 'Error',
+            template: 'No se ha podido cargar la ruta' + status
+          });
         });
         finishedPerforming();
       });
@@ -43,28 +68,40 @@
       coVm.address = coVm.order.address_attributes; // jshint ignore:line
       coVm.provider = coVm.order.provider_profile; // jshint ignore:line
       coVm.shouldDisplayClientDetails = getShouldDisplayClientDetails();
+      preloadCustomerOrderData();
       // jshint ignore:start
-      if (coVm.order.customer_order) {
-        coVm.fareCurrency = coVm.order.customer_order.subtotal_items_currency;
-        coVm.billingAddress = coVm.order.customer_order.customer_billing_address;
-        coVm.orderItemsTotal = getOrderItemsTotal();
-      }
       if (coVm.order.customer_order_delivery) {
         coVm.fareCurrencyCents = coVm.order.customer_order_delivery.shipping_fare_price_cents;
       }
       // jshint ignore:end
     }
 
-    // jshint ignore:start
+    function preloadCustomerOrderData(){
+      // jshint ignore:start
+      if (!coVm.order.customer_order) { return }
+      coVm.fareCurrency = coVm.order.customer_order.subtotal_items_currency;
+      coVm.billingAddress = coVm.order.customer_order.customer_billing_address;
+      // jshint ignore:end
+      coVm.orderItemsTotal = getOrderItemsTotal();
+      coVm.clientName = getClientName();
+    }
+
+    function getClientName() {
+      // jshint ignore:start
+      var customerProfile = coVm.order.customer_order.customer_profile;
+      return customerProfile.name || customerProfile.nickname;
+      // jshint ignore:end
+    }
+
     function getOrderItemsTotal() {
+      // jshint ignore:start
       var customerOrderItems = coVm.order.customer_order.customer_order_items;
       return customerOrderItems.reduce(function(memo, orderItem){
         var subtotalOrderItem = orderItem.cantidad * orderItem.provider_item_precio_cents;
         return memo + subtotalOrderItem;
       }, 0);
+      // jshint ignore:end
     }
-    // jshint ignore:end
-
 
     function getShouldDisplayClientDetails(){
       return coVm.order.customer_order_delivery && coVm.order.status !== 'new'; // jshint ignore:line
