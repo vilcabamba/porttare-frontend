@@ -25,9 +25,8 @@ ion-view(
         .col.col-50.label {{ ::("order.summary.shippingCosts" | translate) }}
         .col.col-50.value
           span
-            | {{ ::("item.currency." + coVm.fareCurrency | translate) }}
-          span
-            | {{ ::(coVm.fareCurrencyCents | priceCurrency | currency:'') }}
+            price(amount="{{coVm.fareCurrencyCents}}"
+                  currency="{{coVm.fareCurrency}}")
       .row-wrapper.narrow-row-wrapper(
         ng-repeat="routeLeg in coVm.routeLegs"
       )
@@ -55,9 +54,8 @@ ion-view(
         .col.col-50.label {{ ::("order.summary.total" | translate) }}
         .col.col-50.value
           span
-            | {{ ::("item.currency." + coVm.fareCurrency | translate) }}
-          span
-            | {{ ::(coVm.orderItemsTotal | priceCurrency | currency:'') }}
+            price(amount="{{coVm.orderItemsTotal}}"
+                  currency="{{coVm.fareCurrency}}")
       .row
         .col.col-50.label {{ ::("cart.paymentMethod" | translate) }}
         .col.col-50.value {{ ::coVm.order.customer_order.forma_de_pago }}

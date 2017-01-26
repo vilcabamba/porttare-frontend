@@ -217,15 +217,14 @@
     }
 
     function calculateTotal() {
-      var totalCents = 0,
-        centValue = 0.01;
+      var totalCents = 0;
 
       if (cartVm.cart && cartVm.cart.provider_profiles) {
         angular.forEach(cartVm.cart.provider_profiles, function (provider) {
           totalCents = totalCents + getTotalValueItems(provider);
         });
       }
-      return totalCents * centValue;
+      return totalCents;
     }
 
     function getTotalValueItems(provider) {

@@ -1,1 +1,3 @@
-| {{ orderItemsTotalVM.totalCents | priceCurrency | currency:'' }}
+span
+  price(amount="{{orderItemsTotalVM.totalCents}}"
+        currency="{{orderItemsTotalVM.currency}}")
