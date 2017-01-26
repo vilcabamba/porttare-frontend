@@ -3,7 +3,9 @@ ion-view(
 )
   ion-nav-title
     .alt-logo
-  ion-content.shipping-request-show-page.courier-shipping-request-common.has-footer
+  ion-content.shipping-request-show-page.courier-shipping-request-common(
+    ng-class="{'has-footer':coVm.order.status !== 'delivered'}"
+  )
     .map-view(ng-hide="coVm.mapIsHidden")
       #order-map(data-tap-disabled="true")
 
@@ -15,18 +17,19 @@ ion-view(
     .list.list-inset.list--no-borders.resource-details-table
       p.resource-detail-title
         | {{::("dispatchers.dispatchersData"|translate)}}
+      .row(
+        ng-if="::coVm.shouldDisplayShippingPrice"
+      )
+        .col.col-50.label {{ ::("order.summary.shippingCosts" | translate) }}
+        .col.col-50.value
+          price(amount="{{coVm.fareCurrencyCents}}"
+                currency="{{coVm.fareCurrency}}")
       .row
         .col.col-50.label {{::("courier.ordersNumber"|translate)}}
         .col.col-50.value {{coVm.order.id}}
-      .row
+      .row.row--without-border
         .col.col-50.label {{ ::("shippingRequest.providerName" | translate) }}
         .col.col-50.value {{ coVm.provider.nombre_establecimiento }}
-      .row.row--without-border
-        .col.col-50.label {{ ::("order.summary.shippingCosts" | translate) }}
-        .col.col-50.value
-          span
-            price(amount="{{coVm.fareCurrencyCents}}"
-                  currency="{{coVm.fareCurrency}}")
       .row-wrapper.narrow-row-wrapper(
         ng-repeat="routeLeg in coVm.routeLegs"
       )
