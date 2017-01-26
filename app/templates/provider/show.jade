@@ -42,9 +42,8 @@ ion-view(
             .provider-item--title {{ ::providerItem.titulo }}
             .provider-item--subtitle
               span
-                | {{ ::("item.currency."+providerItem.precio_currency | translate) }}
-              span
-                | {{ ::(providerItem.precio_cents | priceCurrency | currency:'') }}
+                price(amount="{{providerItem.precio_cents}}"
+                      currency="{{providerItem.precio_currency}}")
 
     .provider-category--no-more-items
       | {{ ::("provider.noMoreItems" | translate)}}

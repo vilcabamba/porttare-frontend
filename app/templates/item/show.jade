@@ -31,10 +31,8 @@ ion-view(
       .row
         .col.col-50.label {{"item.price"|translate}}
         .col.col-50.value
-          span
-            | {{::("item.currency."+providerItemVm.providerItem.precio_currency|translate)}}
-          span
-            | {{providerItemVm.providerItem.precio}}
+          price(amount="{{providerItemVm.providerItem.precio_cents}}"
+                currency="{{providerItemVm.providerItem.precio_currency}}")
       .row
         .col.col-50.label {{::("item.unidadMedida"|translate)}}
         .col.col-50.value {{providerItemVm.providerItem.unidad_medida}}

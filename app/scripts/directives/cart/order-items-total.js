@@ -14,7 +14,8 @@
       link: orderItemsTotalLink,
       templateUrl: 'templates/directives/cart/order-items-total.html',
       scope: {
-        orderItems: '='
+        orderItems: '=',
+        currency: '@'
       }
     };
     return directive;

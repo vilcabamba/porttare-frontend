@@ -51,25 +51,22 @@ ion-view(
             | {{ ::("order.summary.subtotal" |translate) }}
           .col.col-25.strong
             span
-              | {{ ::("item.currency."+customerOrderVm.customerOrder.subtotal_items_currency | translate) }}
-            span
-              | {{ ::( customerOrderVm.customerOrder.subtotal_items_cents | priceCurrency | currency:'' ) }}
+              price(amount="{{customerOrderVm.customerOrder.subtotal_items_cents}}"
+                    currency="{{customerOrderVm.customerOrder.subtotal_items_currency}}")
         .row.item
           .col.col-75
             | {{ ::("order.summary.shippingCosts" |translate) }}
           .col.col-25.strong
             span
-              | {{ ::("item.currency."+customerOrderVm.customerOrder.subtotal_items_currency | translate) }}
-            span
-              | {{ ::( '0' | priceCurrency | currency:'' ) }}
+              price(amount="0"
+                    currency="{{customerOrderVm.customerOrder.subtotal_items_currency}}")
         .row.item
           .col.col-75
             | {{ ::( (customerOrderVm.VAT*100) + ("order.summary.VAT" |translate) ) }}
           .col.col-25.strong
             span
-              | {{ ::("item.currency."+customerOrderVm.customerOrder.subtotal_items_currency | translate) }}
-            span
-              | {{ ::( customerOrderVm.customerOrder.subtotalVATCents | priceCurrency | currency:'' ) }}
+              price(amount="{{customerOrderVm.customerOrder.subtotalVATCents}}"
+                    currency="{{customerOrderVm.customerOrder.subtotal_items_currency}}")
         .row.table-headers
           .col.col-100
         .row.item
@@ -77,9 +74,8 @@ ion-view(
             | {{ ::("order.summary.total" |translate) }}
           .col.col-25.strong
             span
-              | {{ ::("item.currency."+customerOrderVm.customerOrder.subtotal_items_currency | translate) }}
-            span
-              | {{ ::( customerOrderVm.customerOrder.totalCents | priceCurrency | currency:'' ) }}
+              price(amount="{{customerOrderVm.customerOrder.totalCents}}"
+                    currency="{{customerOrderVm.customerOrder.subtotal_items_currency}}")
 
     //- not implemented yet
       .resource-collection

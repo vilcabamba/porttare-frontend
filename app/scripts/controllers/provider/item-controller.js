@@ -7,7 +7,6 @@
 
   function ProviderItemController($scope,
                                   $state,
-                                  $filter,
                                   $translate,
                                   $ionicPopup,
                                   $ionicLoading,
@@ -35,9 +34,6 @@
 
     function init() {
       providerItemVm.imagesLoaded = true;
-      providerItemVm.providerItem.precio = $filter('priceCurrency')(
-        providerItemVm.providerItem.precio_cents // jshint ignore:line
-      );
     }
 
     function getProviderItemCategories(){
