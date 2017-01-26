@@ -71,6 +71,12 @@
     padding-top: 0;
     border-top: 1px solid $base-yellow;
   }
+
+  .row--without-border {
+    .col {
+      border: 0;
+    }
+  }
 }
 
 .details-table-header {

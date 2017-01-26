@@ -503,6 +503,12 @@
           assigned: 'Camino a la tienda',
           in_progress: 'Camino a la entrega', // jshint ignore:line
           delivered: 'Entregado'
+        },
+        routeLegs: {
+          customer_order_delivery: { // jshint ignore:line
+            'leg0': 'A la tienda',
+            'leg1': 'A la entrega'
+          }
         }
       }
     });
