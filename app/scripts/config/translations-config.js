@@ -508,6 +508,9 @@
           customer_order_delivery: { // jshint ignore:line
             'leg0': 'A la tienda',
             'leg1': 'A la entrega'
+          },
+          ask_to_validate: { // jshint ignore:line
+            'leg0': 'A la tienda'
           }
         }
       }
