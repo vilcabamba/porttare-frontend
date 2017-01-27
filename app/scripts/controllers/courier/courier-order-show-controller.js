@@ -174,7 +174,7 @@
     function showTakeRequestModal(){
       // TODO translate me?
       var subTitle;
-      if (coVm.order.customer_order) {
+      if (coVm.order.customer_order) { //jshint ignore:line
         // if it's a customer order delivery
         subTitle = 'incluye el tiempo que tomará recoger el pedido';
       }
