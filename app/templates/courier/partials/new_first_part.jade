@@ -1,4 +1,9 @@
 .list.list-inset
+  .message-error(
+    ng-if="courierVm.courierForm.submissionErrorCode"
+  )
+    p.bottom-spaced {{ ::("courier.form.error." + courierVm.courierForm.submissionErrorCode | translate) }}
+
   legend {{::("courier.firstFormLegend"|translate)}}
 
   label.item.item-input.item-stacked-label(
@@ -16,7 +21,6 @@
       span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
     show-error(array-messages="courierVm.messages.nombres")
 
-
   label.item.item-input.item-stacked-label(
     ng-class="{'item-error': courierVm.courierForm.ruc.$touched && courierVm.courierForm.ruc.$invalid}"
   )
@@ -31,7 +35,6 @@
     span.show-errors(ng-messages="courierVm.courierForm.ruc.$error" ng-if="courierVm.courierForm.ruc.$touched")
       span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
     show-error(array-messages="courierVm.messages.ruc")
-
 
   label.item.item-input.item-stacked-label(
     ng-class="{'item-error': courierVm.courierForm.telefono.$touched && courierVm.courierForm.telefono.$invalid}"
@@ -48,7 +51,6 @@
       span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
     show-error(array-messages="courierVm.messages.telefono")
 
-
   label.item.item-input.item-stacked-label(
     ng-class="{'item-error': courierVm.courierForm.email.$touched && courierVm.courierForm.email.$invalid}"
   )
@@ -64,7 +66,6 @@
     span.show-errors(ng-messages="courierVm.courierForm.email.$error" ng-if="courierVm.courierForm.email.$touched")
       span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
     show-error(array-messages="courierVm.messages.email")
-
 
   label.item.item-input.item-stacked-label(
     ng-class="{'item-error': courierVm.messages.fecha_nacimiento}"

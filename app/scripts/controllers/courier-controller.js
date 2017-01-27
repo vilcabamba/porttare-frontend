@@ -56,6 +56,7 @@
     }
 
     function createCourier() {
+      courierVm.courierForm.submissionErrorCode = null;
       $ionicLoading.show({
         template: '{{::("globals.sending"|translate)}}'
       });
@@ -74,6 +75,7 @@
         },
         function error(resp) {
           courierVm.step = 1;
+          courierVm.courierForm.submissionErrorCode = 'wrongSubmission';
           if (resp && resp.errors) {
             courierVm.messages = resp.errors;
           }

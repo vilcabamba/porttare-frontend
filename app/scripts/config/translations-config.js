@@ -141,14 +141,19 @@
         ordersNumber: 'Pedido número',
         dateDispatcher: 'Hora del despacho',
         nameDispatcher: 'Nombre despachador',
+        nextStep: 'Siguiente paso',
+        createCourier: 'Crear mensajero',
         labels: {
           found: 'Encontramos',
           closeToYou: 'pedidos cerca de ti',
           currentLocation: 'de tu ubicación actual',
           forDelivery: 'para la entrega'
         },
-        nextStep: 'Siguiente paso',
-        createCourier: 'Crear mensajero',
+        form: {
+          error: {
+            wrongSubmission: 'No pudimos registrarte, por favor revisa los errores en el formulario'
+          }
+        }
       },
       globals: {
         new: 'Nuevo',
