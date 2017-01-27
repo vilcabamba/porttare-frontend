@@ -11,15 +11,12 @@
                                    BillingAddressesService,
                                    PusherService) {
     var customerOrderVm = this;
-    customerOrderVm.VAT = 0.12;
-
     customerOrderVm.customerOrder = customerOrder;
-
     init();
 
     function init() {
       customerOrderVm.customerBillingAddress = getBillingAddress();
-      getSummary();
+      getSumaryProvider();
 
       $scope.$on('$ionicView.enter', wsSubscribe);
       $scope.$on('$ionicView.leave', wsUnsubscribe);
@@ -51,9 +48,20 @@
       return customerOrderVm.customerOrder.customer_billing_address; // jshint ignore:line
     }
 
-    function getSummary(){
-      customerOrderVm.customerOrder.subtotalVATCents = Math.round( customerOrderVm.customerOrder.subtotal_items_cents*customerOrderVm.VAT ); // jshint ignore:line
-      customerOrderVm.customerOrder.totalCents = customerOrderVm.customerOrder.subtotal_items_cents + customerOrderVm.customerOrder.subtotalVATCents; // jshint ignore:line
+    function getSumaryProvider(){
+      angular.forEach(customerOrderVm.customerOrder.provider_profiles, function (provider) {// jshint ignore:line
+        provider.subTotalCentsOrderProvider = getSubTotalCentsProviderItems(provider);
+        provider.totalCentsOrderProvider = provider.subTotalCentsOrderProvider+ provider.customer_order_delivery.shipping_fare_price_cents;// jshint ignore:line
+      });
     }
+
+    function getSubTotalCentsProviderItems(provider) {
+      var subTotalCentsOrderProvider = provider.customer_order_items.reduce(function (total, item) { // jshint ignore:line
+        total += (item.provider_item_precio_cents * item.cantidad); // jshint ignore:line
+        return total;
+      }, 0);
+      return subTotalCentsOrderProvider;
+    }
+
   }
 })();
