@@ -73,6 +73,7 @@
           });
         },
         function error(resp) {
+          courierVm.step = 1;
           if (resp && resp.errors) {
             courierVm.messages = resp.errors;
           }
