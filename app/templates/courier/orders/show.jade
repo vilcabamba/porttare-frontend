@@ -120,7 +120,7 @@ ion-view(
   )
     button.button.button-outline.button-energized.button-small(
       ng-if="coVm.order.status === 'new'"
-      ng-click="coVm.showTakeRequestModal()"
+      ng-click="coVm.takeRequest()"
     )
       | {{ ::("shippingRequest.takeRequest" | translate) }}
     button.button.button-outline.button-energized.button-small(

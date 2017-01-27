@@ -16,10 +16,11 @@
     var coVm = this,
         currentLocation;
     coVm.order = courierOrder;
-    coVm.showTakeRequestModal = showTakeRequestModal;
+    coVm.takeRequest = takeRequest;
     coVm.courierIsInStore = courierIsInStore;
     coVm.courierHasDelivered = courierHasDelivered;
     coVm.routeLegs = [];
+
     init();
 
     function init() {
@@ -171,37 +172,8 @@
       $ionicLoading.hide();
     }
 
-    function showTakeRequestModal(){
-      // TODO translate me?
-      var subTitle;
-      if (coVm.order.customer_order) { //jshint ignore:line
-        // if it's a customer order delivery
-        subTitle = 'incluye el tiempo que tomará recoger el pedido';
-      }
-      $ionicPopup.show({
-        scope: $scope,
-        template: '<input type="number" ng-model="coVm.takeRequestTime" min="0" placeholder="Tiempo en minutos">',
-        title: 'Tiempo estimado para la entrega',
-        subTitle: subTitle,
-        buttons: [
-          { text: 'Cancelar',
-            onTap: function(){
-              coVm.takeRequestTime = null;
-            }
-          },
-          {
-            text: 'Confirmar',
-            type: 'button-positive',
-            onTap: function(e) {
-              if (!coVm.takeRequestTime) {
-                e.preventDefault();
-              } else {
-                performTakeRequest();
-              }
-            }
-          }
-        ]
-      });
+    function takeRequest(){
+      performTakeRequest();
     }
 
     function performTakeRequest(){
