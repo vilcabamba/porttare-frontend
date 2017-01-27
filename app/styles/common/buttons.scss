@@ -61,7 +61,8 @@
   letter-spacing: -0.5px;
 }
 
-.button--narrow-padded {
+.button--narrow-padded,
+.bar .button.button-small.button--narrow-padded {
   padding-left: 12px;
   padding-right: 12px;
 }
