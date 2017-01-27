@@ -56,11 +56,10 @@
     }
 
     function getSubTotalCentsProviderItems(provider) {
-      var subTotalCentsOrderProvider = provider.customer_order_items.reduce(function (total, item) { // jshint ignore:line
+      return provider.customer_order_items.reduce(function (total, item) { // jshint ignore:line
         total += (item.provider_item_precio_cents * item.cantidad); // jshint ignore:line
         return total;
       }, 0);
-      return subTotalCentsOrderProvider;
     }
 
   }
