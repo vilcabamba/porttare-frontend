@@ -24,8 +24,8 @@ ion-view(
             | {{ ::(customerOrder.submitted_at | formatDate:'DD MMMYYYY hh:mmA') }}
         .col.col-30.text-right.col--wrap
           price(amount="{{customerOrder.subtotal_items_cents}}"
-                currency="")
+                currency="{{customerOrder.subtotal_items_currency}}")
         .col.col-15.text-right
           a.button.button-clear.button-positive.button-small(
             ui-sref='app.customerorders.show({ id: customerOrder.id , customerOrder: customerOrder })'
-          ) {{::("globals.seeMore"|translate)}}
+          ) {{::("globals.see"|translate)}}

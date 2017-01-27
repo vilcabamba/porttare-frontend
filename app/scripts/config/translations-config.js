@@ -153,6 +153,7 @@
         edit: 'Editar',
         delete: 'Eliminar',
         seeMore: 'Ver más',
+        see: 'Ver',
         save: 'Guardar',
         success: 'Éxito',
         cancel: 'Cancelar',
@@ -233,7 +234,6 @@
       actions: {
         showCategory: 'Lista de Categorías',
         newProvider: 'Nuevo Proveedor',
-        seeMore: 'Ver más',
         edit: 'Editar',
         delete: 'Eliminar'
       },
