@@ -18,6 +18,7 @@
     courierVm.step = 1;
     courierVm.createCourier = createCourier;
     courierVm.messages = {};
+    courierVm.courierForm = {};
     initCourier();
 
     courierVm.locations = [
