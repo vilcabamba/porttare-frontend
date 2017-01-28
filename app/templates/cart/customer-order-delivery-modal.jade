@@ -1,7 +1,7 @@
 ion-modal-view.slim-modal
   form(
     name='cartVm.formDeliveryAddresses'
-    ng-submit='cartVm.submitCustomerOrderDelivery()'
+    ng-submit='cartVm.submitCustomerOrderDelivery(cartVm.providerProfile)'
     novalidate
   )
     ion-content.resource-form.checkout-form

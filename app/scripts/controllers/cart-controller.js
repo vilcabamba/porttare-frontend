@@ -110,8 +110,12 @@
           var newCustomerAddress = response.customer_address; //jshint ignore:line
           cartVm.addresses.push(newCustomerAddress);
           assignAddress(newCustomerAddress);
+          if (cartVm.providerProfile) {
+            // AKA if editing order delivery
+            submitCustomerOrderDelivery(cartVm.providerProfile)
+              .then(clearCurrentOrderDelivery);
+          }
           setAddressInEmptyDeliveries(newCustomerAddress);
-          submitCustomerOrderDelivery().then(clearCurrentOrderDelivery);
           closeModal().then(function (){
             performingPost = false;
           });
@@ -133,6 +137,7 @@
               newCustomerAddress,
               providerProfile
             );
+            submitCustomerOrderDelivery(providerProfile)
           }
         }
       );
@@ -364,12 +369,12 @@
       });
     }
 
-    function submitCustomerOrderDelivery() {
+    function submitCustomerOrderDelivery(providerProfile) {
       $ionicLoading.show({
         template: '{{::("globals.updating"|translate)}}'
       });
       return CustomerOrderDeliveryService.updateCustomerOrderDelivery(
-        cartVm.providerProfile.customer_order_delivery //jshint ignore:line
+        providerProfile.customer_order_delivery //jshint ignore:line
       ).then(function success(resp){
         $ionicLoading.hide().then(function(){
           $auth.user.customer_order = resp.customer_order; //jshint ignore:line
