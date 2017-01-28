@@ -123,9 +123,10 @@
         welcomeTitle: 'Conviértete en mensajero',
         welcomeDescription: 'Con moviggo puedes enviar productos y convertirte en mensajero',
         newCourierTitle: 'Nuevo Mensajero',
-        formLegend: 'Datos nuevo mensajero',
-        names: 'Nombre completos',
-        ruc: 'Cedula/RUC/Pasaporte',
+        firstFormLegend: 'Mensajero nuevo - Paso 1',
+        secondFormLegend: 'Mensajero nuevo - Paso 2',
+        names: 'Nombres completos',
+        ruc: 'Cédula / RUC / Pasaporte',
         phone: 'Número de teléfono',
         email: 'Correo electrónico',
         location: 'Ubicación',
@@ -140,11 +141,18 @@
         ordersNumber: 'Pedido número',
         dateDispatcher: 'Hora del despacho',
         nameDispatcher: 'Nombre despachador',
+        nextStep: 'Siguiente paso',
+        createCourier: 'Crear mensajero',
         labels: {
           found: 'Encontramos',
           closeToYou: 'pedidos cerca de ti',
           currentLocation: 'de tu ubicación actual',
           forDelivery: 'para la entrega'
+        },
+        form: {
+          error: {
+            wrongSubmission: 'No pudimos registrarte, por favor revisa los errores en el formulario'
+          }
         }
       },
       globals: {

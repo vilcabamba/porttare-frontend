@@ -9,11 +9,16 @@
                             $ionicPopup,
                             $state,
                             $auth,
-                            $ionicLoading) {
+                            $ionicLoading,
+                            $ionicScrollDelegate) {
     var courierVm = this;
     var stateRedirect = 'courier.orders';
+
+    courierVm.submit = submit;
+    courierVm.step = 1;
     courierVm.createCourier = createCourier;
     courierVm.messages = {};
+    courierVm.courierForm = {};
     initCourier();
 
     courierVm.locations = [
@@ -52,6 +57,7 @@
     }
 
     function createCourier() {
+      courierVm.courierForm.submissionErrorCode = null;
       $ionicLoading.show({
         template: '{{::("globals.sending"|translate)}}'
       });
@@ -69,11 +75,21 @@
           });
         },
         function error(resp) {
+          courierVm.step = 1;
+          courierVm.courierForm.submissionErrorCode = 'wrongSubmission';
           if (resp && resp.errors) {
             courierVm.messages = resp.errors;
           }
           $ionicLoading.hide();
         });
+    }
+
+    function submit() {
+      if(courierVm.step === 2){
+        createCourier();
+      }
+      courierVm.step += 1;
+      $ionicScrollDelegate.scrollTop();
     }
   }
 })();
