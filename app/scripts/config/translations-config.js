@@ -30,10 +30,9 @@
         history: 'Historial',
         locations: 'Localidades',
         user:{
-          courier: 'Mensajero',
-          buyer: 'Comprador',
-          provider: 'Proveedor',
-          dispatcher: 'Despachador'
+          courier: 'Entregar',
+          buyer: 'Comprar',
+          provider: 'Vender'
         },
         client: {
           category: 'Categorías',
@@ -66,6 +65,7 @@
         }
       },
       provider: {
+        profileName: 'Proveedor',
         successUpdateProfileProvider: 'Perfil actualizado éxitosamente',
         itemsProvider: 'Productos de Proveedor',
         formLegendFirst: 'Proveedor nuevo - Paso 1',
@@ -119,7 +119,7 @@
         }
       },
       courier: {
-        successCourierSave: 'Mensajero guardado éxitosamente',
+        successCourierSave: 'Te hemos registrado!',
         welcomeTitle: 'Conviértete en mensajero',
         welcomeDescription: 'Con moviggo puedes enviar productos y convertirte en mensajero',
         newCourierTitle: 'Nuevo Mensajero',
