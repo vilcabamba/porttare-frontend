@@ -159,8 +159,10 @@
 .checkout-modal-form {
   .addresses-wrapper {
     font-family: Montserrat-Light;
-    top: 44px;
-    overflow: auto;
+
+    // we programatically add content inside
+    // the form and don't recalculate height
+    margin-bottom: 44px;
   }
 }
 

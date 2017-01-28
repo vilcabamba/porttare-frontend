@@ -110,7 +110,12 @@
           var newCustomerAddress = response.customer_address; //jshint ignore:line
           cartVm.addresses.push(newCustomerAddress);
           assignAddress(newCustomerAddress);
-          submitCustomerOrderDelivery().then(clearCurrentOrderDelivery);
+          if (cartVm.providerProfile) {
+            // AKA if editing order delivery
+            submitCustomerOrderDelivery(cartVm.providerProfile)
+              .then(clearCurrentOrderDelivery);
+          }
+          setAddressInEmptyDeliveries(newCustomerAddress);
           closeModal().then(function (){
             performingPost = false;
           });
@@ -118,6 +123,24 @@
           $scope.pfaVm.messages = error.errors;
         });
       }
+    }
+
+    function setAddressInEmptyDeliveries(newCustomerAddress){
+      angular.forEach(
+        cartVm.cart.provider_profiles,
+        function (providerProfile){
+          var delivery = providerProfile.customer_order_delivery,
+              isShipping = delivery.delivery_method === 'shipping',
+              withoutAddress = delivery.customer_address_id === null;
+          if (isShipping && withoutAddress) {
+            setAddressInProviderProfile(
+              newCustomerAddress,
+              providerProfile
+            );
+            submitCustomerOrderDelivery(providerProfile);
+          }
+        }
+      );
     }
 
     function updateAddress(){
@@ -202,9 +225,20 @@
     }
 
     function assignAddress(address) {
-      cartVm.providerProfile.customer_order_delivery.delivery_method = 'shipping'; // jshint ignore:line
-      cartVm.providerProfile.customer_order_delivery.customer_address_id = address.id;
       selectItem(cartVm.addresses, address);
+      if (cartVm.providerProfile) {
+        // AKA when editing
+        setAddressInProviderProfile(
+          address,
+          cartVm.providerProfile
+        );
+      }
+    }
+
+    function setAddressInProviderProfile(address,
+                                         providerProfile){
+      providerProfile.customer_order_delivery.delivery_method = 'shipping'; // jshint ignore:line
+      providerProfile.customer_order_delivery.customer_address_id = address.id;
     }
 
     function selectItem(items, item) {
@@ -334,12 +368,12 @@
       });
     }
 
-    function submitCustomerOrderDelivery() {
+    function submitCustomerOrderDelivery(providerProfile) {
       $ionicLoading.show({
         template: '{{::("globals.updating"|translate)}}'
       });
       return CustomerOrderDeliveryService.updateCustomerOrderDelivery(
-        cartVm.providerProfile.customer_order_delivery //jshint ignore:line
+        providerProfile.customer_order_delivery //jshint ignore:line
       ).then(function success(resp){
         $ionicLoading.hide().then(function(){
           $auth.user.customer_order = resp.customer_order; //jshint ignore:line
