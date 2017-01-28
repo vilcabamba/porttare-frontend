@@ -137,7 +137,7 @@
               newCustomerAddress,
               providerProfile
             );
-            submitCustomerOrderDelivery(providerProfile)
+            submitCustomerOrderDelivery(providerProfile);
           }
         }
       );
