@@ -110,6 +110,7 @@
           var newCustomerAddress = response.customer_address; //jshint ignore:line
           cartVm.addresses.push(newCustomerAddress);
           assignAddress(newCustomerAddress);
+          setAddressInEmptyDeliveries(newCustomerAddress);
           submitCustomerOrderDelivery().then(clearCurrentOrderDelivery);
           closeModal().then(function (){
             performingPost = false;
@@ -118,6 +119,23 @@
           $scope.pfaVm.messages = error.errors;
         });
       }
+    }
+
+    function setAddressInEmptyDeliveries(newCustomerAddress){
+      angular.forEach(
+        cartVm.cart.provider_profiles,
+        function (providerProfile){
+          var delivery = providerProfile.customer_order_delivery,
+              isShipping = delivery.delivery_method === 'shipping',
+              withoutAddress = delivery.customer_address_id === null;
+          if (isShipping && withoutAddress) {
+            setAddressInProviderProfile(
+              newCustomerAddress,
+              providerProfile
+            );
+          }
+        }
+      );
     }
 
     function updateAddress(){
@@ -202,9 +220,20 @@
     }
 
     function assignAddress(address) {
-      cartVm.providerProfile.customer_order_delivery.delivery_method = 'shipping'; // jshint ignore:line
-      cartVm.providerProfile.customer_order_delivery.customer_address_id = address.id;
       selectItem(cartVm.addresses, address);
+      if (cartVm.providerProfile) {
+        // AKA when editing
+        setAddressInProviderProfile(
+          address,
+          cartVm.providerProfile
+        );
+      }
+    }
+
+    function setAddressInProviderProfile(address,
+                                         providerProfile){
+      providerProfile.customer_order_delivery.delivery_method = 'shipping'; // jshint ignore:line
+      providerProfile.customer_order_delivery.customer_address_id = address.id;
     }
 
     function selectItem(items, item) {
