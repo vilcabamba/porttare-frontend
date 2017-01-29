@@ -27,25 +27,8 @@
 
     initializeOffice();
 
-    officesVm.active = null;
-    officesVm.arrayActive=[{
-      enabled:true,
-      label:'Establecimiento Activo'
-    },{
-      enabled:false,
-      label:'Establecimiento Inactivo'
-    }];
-
-
     function initializeOffice(){
       officesVm.officeDetail.place = getCurrentPlace();
-      officesVm.active = getActive();
-    }
-
-    function getActive(){
-      return officesVm.arrayActive.find(function(array){
-        return array.enabled === officesVm.officeDetail.enabled;
-      });
     }
 
     function getCurrentPlace(){
@@ -127,7 +110,6 @@
         enabled: officesVm.officeDetail.enabled
       }).then(function (response) {
         officesVm.officeDetail = response.provider_office; // jshint ignore:line
-        officesVm.active = getActive();
         initializeOffice();
       });
     }

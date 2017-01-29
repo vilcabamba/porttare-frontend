@@ -316,6 +316,7 @@
         yes: 'Si',
         not: 'No',
         officeEnabled: 'Establecimiento activo',
+        officeDisabled: 'Establecimiento inactivo',
         weekdays: {
           cerrado: 'Cerrado',
           selectHourPlaceholder: 'HH:MM',

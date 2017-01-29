@@ -14,7 +14,7 @@ ion-view(
       ng-change="officesVm.updateOfficeState()"
       ng-model="officesVm.officeDetail.enabled"
       toggle-class="toggle-energized"
-    ) {{officesVm.active.label}}
+    ) {{(officesVm.officeDetail.enabled) ? ("office.officeEnabled"|translate) : ("office.officeDisabled"|translate) }}
     .office-map
       img#office-map(
         ng-src="{{ officesVm.officeDetail.static_map_image }}"
