@@ -10,7 +10,8 @@
                             $state,
                             $auth,
                             $ionicLoading,
-                            $ionicScrollDelegate) {
+                            $ionicScrollDelegate,
+                            places) {
     var courierVm = this;
     var stateRedirect = 'courier.orders';
 
@@ -19,6 +20,7 @@
     courierVm.createCourier = createCourier;
     courierVm.messages = {};
     courierVm.courierForm = {};
+    courierVm.places = places;
     initCourier();
 
     courierVm.locations = [

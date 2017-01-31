@@ -82,5 +82,14 @@
     span(
       ng-if="!courierVm.courier.fecha_nacimiento"
     ) {{ "user.selectDatePlaceholder"|translate }}
-.errors-wrapper
-  show-error(array-messages="courierVm.messages.fecha_nacimiento")
+  .errors-wrapper
+    show-error(array-messages="courierVm.messages.fecha_nacimiento")
+
+  label.item.item-input.item-stacked-label
+    span.input-label {{ ::("office.place"|translate) }}
+  select(
+    ng-model='courierVm.courier.place_id'
+    ng-options="place.id as place.full_str for place in courierVm.places"
+  )
+  .errors-wrapper
+    show-error(array-messages="officesVm.messages.place_id")
