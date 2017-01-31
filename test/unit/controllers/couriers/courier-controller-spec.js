@@ -15,7 +15,8 @@
       $auth,
       $ionicPopup,
       stateRedirect,
-      $ionicScrollDelegate;
+      $ionicScrollDelegate,
+      places;
 
     beforeEach(module('porttare.controllers'));
 
@@ -51,6 +52,7 @@
           handleCommonErrorGET: sinon.stub()
         };
         stateRedirect = 'courier.orders';
+        places = [];
       })
     );
 
@@ -63,7 +65,8 @@
           $state: $state,
           $ionicScrollDelegate: $ionicScrollDelegate,
           ErrorHandlerService: ErrorHandlerService,
-          CourierService: CourierService
+          CourierService: CourierService,
+          places: places
         };
 
         ctrl = $controller('CourierController', dependencies);
@@ -95,7 +98,8 @@
           $ionicPopup: $ionicPopup,
           $ionicScrollDelegate: $ionicScrollDelegate,
           $state: $state,
-          CourierService: CourierService
+          CourierService: CourierService,
+          places: places
         };
 
         ctrl = $controller('CourierController', dependencies);
