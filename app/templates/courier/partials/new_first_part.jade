@@ -71,10 +71,16 @@
     ng-class="{'item-error': courierVm.messages.fecha_nacimiento}"
   )
     span.input-label {{::("courier.birthdate"|translate)}}
-    input(
-      type='date'
-      name='fecha_nacimiento'
-      ng-model='courierVm.courier.fecha_nacimiento'
-    )
-  .errors-wrapper
-    show-error(array-messages="courierVm.messages.fecha_nacimiento")
+  ion-datetime-picker.item.item-icon-left.datetime-picker(
+    date
+    ng-model='courierVm.courier.fecha_nacimiento'
+  )
+    i.icon.ion-ios-calendar-outline
+    span(
+      ng-if="courierVm.courier.fecha_nacimiento"
+    ) {{ courierVm.courier.fecha_nacimiento| date: "yyyy-MM-dd" }}
+    span(
+      ng-if="!courierVm.courier.fecha_nacimiento"
+    ) {{ "user.selectDatePlaceholder"|translate }}
+.errors-wrapper
+  show-error(array-messages="courierVm.messages.fecha_nacimiento")
