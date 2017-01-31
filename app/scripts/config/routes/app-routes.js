@@ -263,6 +263,9 @@ function appRoutes($stateProvider) {
             $state.go(APP.successState).then($ionicLoading.hide);
           }
         });
+      },
+      places: function (PlacesService){
+        return PlacesService.getPlaces();
       }
     }
   })
