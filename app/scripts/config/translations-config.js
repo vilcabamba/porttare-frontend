@@ -143,6 +143,7 @@
         nameDispatcher: 'Nombre despachador',
         nextStep: 'Siguiente paso',
         createCourier: 'Crear mensajero',
+        deliveryETA: 'Tiempo estimado para la entrega',
         labels: {
           found: 'Encontramos',
           closeToYou: 'pedidos cerca de ti',
@@ -448,6 +449,8 @@
           submitted: 'Enviada'
         },
         delivery: {
+          deliveryETA: 'Hora de entrega estimada',
+          deliveryETAUnknown: 'calculando..',
           status: {
             pending: 'Esperando confirmación del proveedor',
             accepted: 'Aceptada por el proveedor',
