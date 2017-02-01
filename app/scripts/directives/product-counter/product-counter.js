@@ -30,14 +30,13 @@
 
     pcVm.handleClickMinus = handleClickMinus;
     pcVm.handleClickPlus = handleClickPlus;
-
+    pcVm.disabledMinus = disabledMinus;
     init();
 
     pcVm.itemsCount = options.cantidad;
     pcVm.currencyCode = options.currencyCode;
     pcVm.canIncrement = getCanIncrement();
     pcVm.priceTotalCents = getTotal();
-    pcVm.disabledButtonMinus = disabledMinus();
 
     function processData(option) {
       if (isInRange(pcVm.itemsCount)) {
@@ -59,7 +58,6 @@
       }
       pcVm.priceTotalCents = getTotal();
       pcVm.canIncrement = getCanIncrement();
-      pcVm.disabledButtonMinus = disabledMinus();
       if (options.onChangeValue && angular.isFunction(options.onChangeValue)) {
         var data = {
           itemsCount: pcVm.itemsCount,

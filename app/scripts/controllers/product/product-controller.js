@@ -146,8 +146,11 @@
         });
     }
 
-    function onError() {
-      
+    function onError(response) {
+
+      if(response.errors.cantidad[0]){
+        productVm.messages = response.errors.cantidad[0];
+      }
       $ionicPopup.alert({
         title: 'Error',
         template: '{{::("globals.pleaseTryAgain"|translate)}}'
