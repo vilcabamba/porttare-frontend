@@ -66,30 +66,3 @@
     span.show-errors(ng-messages="courierVm.courierForm.email.$error" ng-if="courierVm.courierForm.email.$touched")
       span.message-error(ng-message="required") {{::("form.requiredField"|translate)}}
     show-error(array-messages="courierVm.messages.email")
-
-  label.item.item-input.item-stacked-label(
-    ng-class="{'item-error': courierVm.messages.fecha_nacimiento}"
-  )
-    span.input-label {{::("courier.birthdate"|translate)}}
-  ion-datetime-picker.item.item-icon-left.datetime-picker(
-    date
-    ng-model='courierVm.courier.fecha_nacimiento'
-  )
-    i.icon.ion-ios-calendar-outline
-    span(
-      ng-if="courierVm.courier.fecha_nacimiento"
-    ) {{ courierVm.courier.fecha_nacimiento| date: "yyyy-MM-dd" }}
-    span(
-      ng-if="!courierVm.courier.fecha_nacimiento"
-    ) {{ "user.selectDatePlaceholder"|translate }}
-  .errors-wrapper
-    show-error(array-messages="courierVm.messages.fecha_nacimiento")
-
-  label.item.item-input.item-stacked-label
-    span.input-label {{ ::("office.place"|translate) }}
-  select(
-    ng-model='courierVm.courier.place_id'
-    ng-options="place.id as place.full_str for place in courierVm.places"
-  )
-  .errors-wrapper
-    show-error(array-messages="officesVm.messages.place_id")
