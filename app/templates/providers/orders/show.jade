@@ -84,6 +84,20 @@ ion-view
     .list.list-inset(
       ng-if="providerOrderShowVM.shouldDisplayProviderAnswerForm"
     )
+      h2 {{ ::("provider.respondToCustomerRequestLegend" | translate) }}
+
+      .resource-form.inline-selectize-wrapper
+        label.item.item-input.item-input--no-borders.item-stacked-label.label--downcase
+          .selectize-wrapper
+            input(
+              provider-estimated-time-for-dispatch-selectize
+              bind-to="providerOrderShowVM.customerOrder.estimatedTimeForPreparation"
+              placeholder="- min"
+            )
+
+          .input-label
+            | {{ ::("provider.estimatedTimeForPreparation" | translate) }}
+
       button.button.button-block.button-outline.button-energized(
         ng-click="providerOrderShowVM.acceptOrder()"
       ) {{ ::("provider.acceptOrder" | translate) }}

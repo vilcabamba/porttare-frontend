@@ -84,6 +84,8 @@
         instagram:'Instagram',
         methodPayment: 'Forma de pago',
         category: 'Categoría',
+        respondToCustomerRequestLegend: 'Responder petición',
+        estimatedTimeForPreparation: 'Tiempo de preparación estimado',
         methods: {
           cash: 'Efectivo',
           creditCard: 'Tarjeta de crédito'

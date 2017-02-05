@@ -14,5 +14,58 @@
     .button-block {
       margin-top: 0;
     }
+
+    label.item-input.item-stacked-label.label--downcase .input-label {
+      text-transform: initial;
+    }
+  }
+
+  .inline-selectize-wrapper {
+    label {
+      overflow: visible;
+      z-index: 3;
+    }
+
+    .input-label {
+      display: inline;
+      white-space: normal;
+    }
+
+    .selectize-wrapper {
+      float: right;
+
+      .selectize-input {
+        border: 0;
+        box-shadow: none;
+        padding-top: 0;
+        padding-right: 15px;
+
+        .item {
+          border: 0;
+          text-transform: uppercase;
+          line-height: 28px;
+          padding-top: 0;
+          padding-bottom: 0;
+          padding-right: 5px;
+          padding-left: 10px;
+          vertical-align: top;
+        }
+
+        input {
+          text-transform: uppercase;
+          display: block;
+        }
+
+        &::after {
+          right: 0;
+          top: 14px;
+        }
+      }
+    }
+
+    .selectize-dropdown {
+      border: 0;
+      text-transform: uppercase;
+    }
   }
 }
