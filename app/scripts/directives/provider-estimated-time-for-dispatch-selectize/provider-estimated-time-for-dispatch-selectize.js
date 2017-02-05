@@ -26,6 +26,11 @@
       currentOptions = configs.options;
 
       selectize.on('item_add', chooseEstimate);
+      selectize.on('item_remove', removeEstimate);
+
+      function removeEstimate(){
+        chooseEstimate(null);
+      }
 
       function chooseEstimate(value){
         scope.$apply(function(){
