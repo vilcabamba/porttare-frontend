@@ -87,7 +87,9 @@ ion-view
       h2 {{ ::("provider.respondToCustomerRequestLegend" | translate) }}
 
       .resource-form.inline-selectize-wrapper
-        label.item.item-input.item-input--no-borders.item-stacked-label.label--downcase
+        label.item.item-input.item-input--no-borders.item-stacked-label.label--downcase(
+          ng-class="{'item-error': providerOrderShowVM.errors.dispatchTimeError}"
+        )
           .selectize-wrapper
             input(
               provider-estimated-time-for-dispatch-selectize
@@ -98,9 +100,9 @@ ion-view
           .input-label
             | {{ ::("provider.estimatedTimeForPreparation" | translate) }}
 
-      button.button.button-block.button-outline.button-energized(
-        ng-click="providerOrderShowVM.acceptOrder()"
-      ) {{ ::("provider.acceptOrder" | translate) }}
+        button.button.button-block.button-outline.button-energized(
+          ng-click="providerOrderShowVM.acceptOrder()"
+        ) {{ ::("provider.acceptOrder" | translate) }}
 
       .resource-form
         label.item.item-input.item-stacked-label

@@ -21,14 +21,24 @@
   }
 
   .inline-selectize-wrapper {
+    margin-bottom: 25px;
+
     label {
       overflow: visible;
       z-index: 3;
+
+      &.item-input--no-borders {
+        margin-bottom: 10px;
+      }
     }
 
     .input-label {
       display: inline;
       white-space: normal;
+    }
+
+    .item-input.item-stacked-label .input-label {
+      font-size: 16px;
     }
 
     .selectize-wrapper {
@@ -39,6 +49,7 @@
         box-shadow: none;
         padding-top: 0;
         padding-right: 15px;
+        padding-left: 0;
 
         .item {
           border: 0;

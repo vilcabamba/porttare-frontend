@@ -41,6 +41,7 @@
       function getSelectizeConfigs(){
         return {
           maxItems: 1,
+          selectOnTab: true,
           valueField: 'minutes',
           labelField: 'label',
           searchField: 'label',
