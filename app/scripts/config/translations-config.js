@@ -149,7 +149,7 @@
         labels: {
           found: 'Encontramos',
           closeToYou: 'pedidos cerca de ti',
-          currentLocation: 'de tu ubicación actual',
+          currentLocation: 'de tu ubicación actual (apróx)',
           forDelivery: 'para la entrega'
         },
         form: {
