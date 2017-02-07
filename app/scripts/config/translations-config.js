@@ -315,7 +315,10 @@
         taskInProgress: 'Tarea en progreso',
         yes: 'Si',
         not: 'No',
-        officeEnabled: 'Establecimiento activo',
+        officeEnabled: {
+          true: 'Establecimiento activo',
+          false: 'Establecimiento inactivo'
+        },
         officeDisabled: 'Establecimiento inactivo',
         weekdays: {
           cerrado: 'Cerrado',
