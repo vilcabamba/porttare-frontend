@@ -20,6 +20,7 @@
     coVm.courierIsInStore = courierIsInStore;
     coVm.courierHasDelivered = courierHasDelivered;
     coVm.routeLegs = [];
+    coVm.takeRequestTime = null;
 
     init();
 
