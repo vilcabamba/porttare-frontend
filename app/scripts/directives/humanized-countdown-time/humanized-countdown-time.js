@@ -17,7 +17,8 @@
       ],
       scope: {
         time: '=',
-        showPast: '=?'
+        showPast: '=?',
+        hidePrefix: '=?'
       },
       templateUrl: 'templates/directives/humanized-countdown-time/humanized-countdown-time.html'
     };
@@ -51,7 +52,9 @@
     }
 
     function setTimeStr(deliveryTime){
-      countdownTimeVM.timeStr = deliveryTime.fromNow();
+      countdownTimeVM.timeStr = deliveryTime.fromNow(
+        countdownTimeVM.hidePrefix
+      );
     }
   }
 

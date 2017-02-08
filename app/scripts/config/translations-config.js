@@ -150,7 +150,8 @@
           found: 'Encontramos',
           closeToYou: 'pedidos cerca de ti',
           currentLocation: 'de tu ubicación actual (apróx)',
-          forDelivery: 'para la entrega'
+          dispatchReady: 'despacho listo ',
+          timeForDispatchSuffix: ' para el despacho'
         },
         form: {
           error: {

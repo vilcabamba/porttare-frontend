@@ -55,6 +55,10 @@
             infoWindow.open(map,marker);
           });
         }).catch(function(status){
+          // TODO translate me?
+          if (status === google.maps.DirectionsStatus.ZERO_RESULTS) {
+            status = 'No existen rutas';
+          }
           $ionicPopup.alert({
             title: 'Error',
             template: 'No se ha podido cargar la ruta. Error: ' + status

@@ -50,7 +50,9 @@ ion-view(
               | km {{::("courier.labels.currentLocation"| translate)}}
           .row
             .col.time
-              | 1 hora {{::("courier.labels.forDelivery"| translate)}}
+              shipping-request-dispatch-at(
+                dispatch-at="order.estimated_dispatch_at"
+              )
               
     .list.list-inset.list--top-narrow
       p.text-center
