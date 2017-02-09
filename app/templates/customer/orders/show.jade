@@ -43,6 +43,17 @@ ion-view(
           ng-if="providerProfile.customer_order_delivery.reason"
         )
           .col {{ providerProfile.customer_order_delivery.reason }}
+        .item.row(
+          ng-if="providerProfile.customer_order_delivery.preparation_time_mins"
+        )
+          .col
+            span
+              | {{ ::("provider.estimatedTimeForPreparation" | translate) }}
+            span :
+            span.strong
+              |  {{ ::(providerProfile.customer_order_delivery.preparation_time_mins) }}
+            span.strong
+              |  {{ ::("provider.estimatedTimeForPreparationUnit" | translate) }}
 
         span
         //- some spacing
