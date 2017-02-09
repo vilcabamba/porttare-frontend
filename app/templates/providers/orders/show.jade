@@ -10,6 +10,28 @@ ion-view
       h3 {{ ("order.delivery.status." + providerOrderShowVM.customerOrderDelivery.status | translate) }}
       h4 {{ ::("orders.orderDetails" | translate) }}
 
+    .list.list-inset.resource-details-table(
+      ng-if="providerOrderShowVM.customerOrderDelivery.dispatch_at"
+    )
+      .row
+        .col.col.label {{ ::("provider.estimatedTimeForPreparation" | translate ) }}
+        .col.value
+          | {{ ::providerOrderShowVM.customerOrderDelivery.preparation_time_mins }}
+          | {{ ::("provider.estimatedTimeForPreparationUnit" | translate) }}
+      .row(
+        ng-if="providerOrderShowVM.customerOrderDelivery.status === 'accepted'"
+      )
+        .col.col.label {{ ::("order.timeForDispatch" | translate ) }}
+        .col.value
+          humanized-countdown-time(
+            show-past="true"
+            time="providerOrderShowVM.customerOrderDelivery.dispatch_at"
+          )
+      .row
+        .col.col.label {{ ::("order.dispatchAt" | translate ) }}
+        .col.value
+          | {{ ::providerOrderShowVM.customerOrderDelivery.dispatch_at | toDate | formatDate }}
+
     .list.list-inset.resource-details-table
       .row
         .col.col.label {{ ::("client.clientName" | translate ) }}

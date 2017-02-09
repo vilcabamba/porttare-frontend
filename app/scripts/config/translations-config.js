@@ -86,6 +86,7 @@
         category: 'Categoría',
         respondToCustomerRequestLegend: 'Responder petición',
         estimatedTimeForPreparation: 'Tiempo de preparación estimado',
+        estimatedTimeForPreparationUnit: 'minutos',
         methods: {
           cash: 'Efectivo',
           creditCard: 'Tarjeta de crédito'
@@ -429,6 +430,8 @@
         submittedAt: 'Enviada',
         observations: 'Observaciones',
         customerInfo: 'Información de Cliente',
+        dispatchAt: 'Hora de despacho',
+        timeForDispatch: 'Tiempo para el despacho',
         providerProfile: {
           quantity: 'Can',
           price: 'Precio',
