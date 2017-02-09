@@ -9,6 +9,7 @@
                                   $scope,
                                   $ionicLoading,
                                   $ionicPopup,
+                                  $translate,
                                   MapsService,
                                   GeolocationService,
                                   MapDirectionsService,
@@ -19,6 +20,7 @@
     coVm.showTakeRequestModal = showTakeRequestModal;
     coVm.courierIsInStore = courierIsInStore;
     coVm.courierHasDelivered = courierHasDelivered;
+    coVm.routesStatus = 'noRoutes';
     coVm.routeLegs = [];
     init();
 
@@ -31,6 +33,7 @@
       ]).then(function(){
         var mapContainer = angular.element('#order-map')[0];
         var map = MapsService.renderMap(mapContainer);
+        coVm.routesStatus = 'searching';
         MapDirectionsService.renderRoute({
           map: map,
           origin: getOrigin(),
@@ -39,7 +42,7 @@
         }).then(function(routes){
           var route = routes[0]; // only showing first one atm
           coVm.routeLegs = route.legs;
-          angular.forEach(route.legs, function(leg){
+          angular.forEach(route.legs, function(leg, index){
             var halfLength = parseInt(leg.steps.length/2, 10),
                 midPoint = leg.steps[halfLength];
 
@@ -48,23 +51,24 @@
               map: map,
               visible: false
             });
-            var infoWindow = new google.maps.InfoWindow();
-            infoWindow.setContent(
-              '<strong>' + leg.duration.text + '</strong><br>' + leg.distance.text
-            );
-            infoWindow.open(map,marker);
+            openRouteLegInfoWindow(leg, map, marker, index);
           });
         }).catch(function(status){
-          // TODO translate me?
-          if (status === google.maps.DirectionsStatus.ZERO_RESULTS) {
-            status = 'No existen rutas';
-          }
-          $ionicPopup.alert({
-            title: 'Error',
-            template: 'No se ha podido cargar la ruta. Error: ' + status
-          });
+          coVm.routesStatus = 'noRoutes';
         });
         finishedPerforming();
+      });
+    }
+
+    function openRouteLegInfoWindow(routeLeg, map, marker, legIndex){
+      var infoWindow = new google.maps.InfoWindow();
+      $translate(
+        'shippingRequest.routeLegs.' + coVm.order.kind + '.leg' + legIndex
+      ).then(function(routeName){
+        infoWindow.setContent(
+          routeName + '<br><strong>' + routeLeg.duration.text + '</strong><br>' + routeLeg.distance.text
+        );
+        infoWindow.open(map,marker);
       });
     }
 

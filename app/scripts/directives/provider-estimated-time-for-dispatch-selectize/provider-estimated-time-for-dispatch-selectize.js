@@ -42,6 +42,7 @@
         return {
           maxItems: 1,
           selectOnTab: true,
+          createOnBlur: true,
           valueField: 'minutes',
           labelField: 'label',
           searchField: 'label',

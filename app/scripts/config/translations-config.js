@@ -512,6 +512,11 @@
         deliverToAddress: 'Dirección para la entrega',
         providerName: 'Proveedor',
         delivered: 'Entregado',
+        availableRoutes: 'Rutas',
+        routesStatus: {
+          searching: 'Buscando rutas..',
+          noRoutes: 'No hay rutas disponibles'
+        },
         customerOrderItem: {
           cantidad: 'Cantidad'
         },
