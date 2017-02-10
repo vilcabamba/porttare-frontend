@@ -431,6 +431,7 @@
         orderDetails: 'Detalles de la orden'
       },
       order: {
+        order:'Orden',
         submittedAt: 'Enviada',
         observations: 'Observaciones',
         customerInfo: 'Información de Cliente',
@@ -466,6 +467,10 @@
             accepted: 'Aceptada por el proveedor',
             rejected: 'Rechazada'
           }
+        },
+        cancel : {
+          success: 'Orden cancelado',
+          error:'No es posible cancelar orden'
         }
       },
       form: {

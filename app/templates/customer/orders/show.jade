@@ -143,3 +143,11 @@ ion-view(
           .col
             strong {{ ::("provider.methodPayment" | translate) }}:
             span  {{ ::( customerOrderVm.customerOrder.forma_de_pago ) }}
+
+    span
+      //- some spacing
+
+    .list.list--centered.text-center
+      button.button.button-outline.button-assertive(
+        ng-click="customerOrderVm.cancelOrder()"
+      ) {{::("globals.cancel"|translate)}} {{::("order.order"|translate)}}
