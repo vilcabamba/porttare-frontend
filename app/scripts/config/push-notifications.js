@@ -17,7 +17,8 @@
     function registerPushNotifications(){
       notificationsHandler = PushNotification.init({
         "android": {
-          "senderID": "1057338916791" // TODO use ENV
+          "senderID": "1057338916791", // TODO use ENV
+          "forceShow": true
         },
         "ios": {
           "sound": true,
