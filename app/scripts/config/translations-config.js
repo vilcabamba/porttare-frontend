@@ -431,12 +431,12 @@
         orderDetails: 'Detalles de la orden'
       },
       order: {
-        order:'Orden',
         submittedAt: 'Enviada',
         observations: 'Observaciones',
         customerInfo: 'Información de Cliente',
         dispatchAt: 'Hora de despacho',
         timeForDispatch: 'Tiempo para el despacho',
+        cancelCustomerOrder : 'Cancelar orden',
         providerProfile: {
           quantity: 'Can',
           price: 'Precio',
@@ -469,8 +469,7 @@
           }
         },
         cancel : {
-          success: 'Orden cancelado',
-          error:'No es posible cancelar orden'
+          success: 'Orden cancelada'
         }
       },
       form: {

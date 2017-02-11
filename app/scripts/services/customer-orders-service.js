@@ -5,10 +5,11 @@
     .module('porttare.services')
     .factory('CustomerOrdersService', CustomerOrdersService);
 
-  function CustomerOrdersService($http, ENV, ErrorHandlerService) {
+  function CustomerOrdersService($http, ENV, $q, ErrorHandlerService) {
     var service = {
       getCustomerOrders: getCustomerOrders,
-      getCustomerOrder: getCustomerOrder
+      getCustomerOrder: getCustomerOrder,
+      cancelCustomerOrder: cancelCustomerOrder
     };
 
     return service;
@@ -31,6 +32,18 @@
       }).catch(
         ErrorHandlerService.handleCommonErrorGET
       );
+    }
+
+    function cancelCustomerOrder(customerOrderId,CustomerOrderDeliveryId){
+      return $http({
+        method: 'POST',
+        url: ENV.apiHost + '/api/customer/orders/' + customerOrderId + '/deliveries/'+ CustomerOrderDeliveryId +'/cancel',
+      })
+        .then(function (response) {
+          return response.data; // jshint ignore:line
+        }).catch(
+          ErrorHandlerService.handleCommonErrorGET
+        );
     }
 
   }

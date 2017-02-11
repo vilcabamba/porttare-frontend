@@ -10,7 +10,9 @@
                                    ProfileAddressesService,
                                    BillingAddressesService,
                                    PusherService,
-                                   $ionicPopup) {
+                                   CustomerOrdersService,
+                                   $ionicPopup,
+                                   $ionicLoading) {
     var customerOrderVm = this;
     customerOrderVm.customerOrder = customerOrder;
     customerOrderVm.cancelOrder = cancelOrder;
@@ -66,20 +68,24 @@
     }
 
     function cancelOrder(){
-      var submitted=new Date(customerOrderVm.customerOrder.submitted_at); // jshint ignore:line
-      var now=new Date();
-      if((now-submitted)/60000>5){
-        $ionicPopup.alert({
-          title: 'Error',
-          template: '{{::("order.cancel.error"|translate)}}'
+      var customerOrderId=customerOrderVm.customerOrder.id;
+      var customerOrderProviderProfiles=customerOrderVm.customerOrder.provider_profiles; // jshint ignore:line
+      var cont=0;
+      $ionicLoading.show({
+        template: '{{::("globals.updating"|translate)}}'
+      });
+      angular.forEach(customerOrderProviderProfiles,function(provider){
+        CustomerOrdersService.cancelCustomerOrder(customerOrderId,provider.customer_order_delivery.id).then(function (resp){ // jshint ignore:line
+          cont++;
+          if (cont === customerOrderProviderProfiles.length){
+            $ionicLoading.hide();
+            $ionicPopup.alert({
+              title: 'Éxito',
+              template: '{{::("order.cancel.success"|translate)}}'
+            });
+          }
         });
-      }
-      else {
-        $ionicPopup.alert({
-          title: 'Éxito',
-          template: '{{::("order.cancel.success"|translate)}}'
-        });
-      }
+      });
     }
 
   }
