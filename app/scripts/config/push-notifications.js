@@ -5,8 +5,10 @@
     .module('porttare')
     .run(pushNotificationsConfig);
 
-  function pushNotificationsConfig(){
-    var notificationsHandler;
+  function pushNotificationsConfig($rootScope,
+                                   UserDevicesService){
+    var notificationHandler,
+        deviceRegistrationId;
 
     document.addEventListener(
       'deviceready',
@@ -15,32 +17,40 @@
     );
 
     function registerPushNotifications(){
-      notificationsHandler = PushNotification.init({
-        "android": {
-          "senderID": "1057338916791", // TODO use ENV
-          "forceShow": true
+      notificationHandler = PushNotification.init({
+        'android': {
+          'senderID': '1057338916791', // TODO use ENV
+          'forceShow': true
         },
-        "ios": {
-          "sound": true,
-          "vibration": true,
-          "badge": true
+        'ios': {
+          'sound': true,
+          'vibration': true,
+          'badge': true
         },
-        "windows": {}
+        'windows': {}
      });
 
-     notificationsHandler.on('registration', function(data) {
-         console.log("registration event: " + data.registrationId);
+     notificationHandler.on('registration', function(data){
+       deviceRegistrationId = data.registrationId;
+       $rootScope.$on('auth:login-success', registerDevice);
+       $rootScope.$on('auth:validation-success', registerDevice);
      });
 
-     notificationsHandler.on('error', function(e) {
-         console.log("push error = " + e.message);
+     notificationHandler.on('error', function(e) {
+       console.log('push error = ' + e.message);
      });
 
-     notificationsHandler.on('notification', function(data) {
+     notificationHandler.on('notification', function(data) {
         console.log('notification event');
          console.log(data);
-        return notificationsHandler.finish();
-     });
+        return notificationHandler.finish();
+      });
+    }
+
+    function registerDevice(){
+      UserDevicesService.registerDevice(
+        deviceRegistrationId
+      );
     }
   }
 })();
