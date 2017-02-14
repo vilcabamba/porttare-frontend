@@ -19,8 +19,8 @@
     function registerPushNotifications(){
       notificationHandler = PushNotification.init({
         'android': {
-          'senderID': '1057338916791', // TODO use ENV
-          'forceShow': true
+          'forceShow': true,
+          'senderID': '1057338916791'  // TODO use ENV
         },
         'ios': {
           'sound': true,
@@ -28,21 +28,20 @@
           'badge': true
         },
         'windows': {}
-     });
+      });
 
-     notificationHandler.on('registration', function(data){
-       deviceRegistrationId = data.registrationId;
-       $rootScope.$on('auth:login-success', registerDevice);
-       $rootScope.$on('auth:validation-success', registerDevice);
-     });
+      notificationHandler.on('registration', function(data){
+        deviceRegistrationId = data.registrationId;
+        $rootScope.$on('auth:login-success', registerDevice);
+        $rootScope.$on('auth:validation-success', registerDevice);
+      });
 
-     notificationHandler.on('error', function(e) {
-       console.log('push error = ' + e.message);
-     });
+      notificationHandler.on('error', function(e){
+        console.log('push error = ' + e.message);
+      });
 
-     notificationHandler.on('notification', function(data) {
-        console.log('notification event');
-         console.log(data);
+      notificationHandler.on('notification', function(data){
+        $rootScope.$emit('porttare:notification', data);
         return notificationHandler.finish();
       });
     }
