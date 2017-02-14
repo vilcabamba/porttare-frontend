@@ -12,7 +12,7 @@
     return service;
 
     function registerDevice(uid){
-      var url = 'api/users/devices',
+      var url = '/api/users/devices',
           platform = device().platform.toLowerCase(),
           data = {
             uuid: uid,
