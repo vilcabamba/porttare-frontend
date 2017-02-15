@@ -8,6 +8,7 @@ ion-view(
       disable-edit="true"
       on-render="orVm.mapRendered(map)"
       default-in-current-geolocation="true"
+      current-location="orVm.currentLocation"
     )
 
     .list.list-inset.list--bottom-narrow
@@ -24,7 +25,12 @@ ion-view(
         .distance-circle
           .fake-vertical-line.top
           .range
-            span 1.2
+            span(
+              distance-between
+              to-lat="order.ref_lat"
+              to-lon="order.ref_lon"
+              from-coordinates="orVm.currentLocation"
+            )
           .fake-vertical-line.bottom
         .shipping-request.resource-rounded-container
           .row
@@ -35,10 +41,18 @@ ion-view(
                 | {{ order.provider_profile.nombre_establecimiento }}
           .row
             .col.location
-              | 1.2 km {{::("courier.labels.currentLocation"| translate)}}
+              span(
+                distance-between
+                to-lat="order.ref_lat"
+                to-lon="order.ref_lon"
+                from-coordinates="orVm.currentLocation"
+              )
+              | km {{::("courier.labels.currentLocation"| translate)}}
           .row
             .col.time
-              | 1 hora {{::("courier.labels.forDelivery"| translate)}}
+              shipping-request-dispatch-at(
+                dispatch-at="order.estimated_dispatch_at"
+              )
               
     .list.list-inset.list--top-narrow
       p.text-center

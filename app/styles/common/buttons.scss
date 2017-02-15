@@ -98,3 +98,13 @@
     background-color: $button-stable-active-bg;
   }
 }
+
+.button--xsmall {
+  font-size: 12px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: 22px;
+  min-height: initial;
+}

@@ -41,6 +41,7 @@
     function customerOrderUpdated(response) {
       $scope.$apply(function(){
         customerOrderVm.customerOrder = response.customer_order; // jshint ignore:line
+        getSumaryProvider();
       });
     }
 

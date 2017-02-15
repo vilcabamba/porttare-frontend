@@ -17,6 +17,7 @@
         referencia: '=?',
         disableEdit: '=?',
         direccionDos: '=?',
+        currentLocation: '=?',
         geolocationMessageKey: '=?',
         defaultInCurrentGeolocation: '='
       },
@@ -33,7 +34,6 @@
     return directive;
 
     function linkFunction($scope, $element, $attributes, $controller){
-
       MapsService.loadGMaps().then(function () {
         $scope.mapVm.geolocationMessageKey = null;
         var mapContainer = $element[0].children[0].children[0];
@@ -73,6 +73,7 @@
         GeolocationService
           .getCurrentPosition()
           .then(function (position){
+            mapVm.currentLocation = position;
             drawMakerFromGeoPosition(position);
             assignLatAndLon();
             geocodeCurrentPosition();

@@ -54,10 +54,19 @@
     }
 
     function acceptOrder(){
-      ProviderCustomerOrdersService
-        .acceptOrder(providerOrderShowVM.customerOrder)
-        .then(respondedCustomerOrder)
+      var timeIsBlank = isBlank(
+        providerOrderShowVM.customerOrder.estimatedTimeForPreparation
+      );
+      if (timeIsBlank) {
+        providerOrderShowVM.errors.dispatchTimeError = true;
+      } else {
+        providerOrderShowVM.errors.dispatchTimeError = false;
+        ProviderCustomerOrdersService.acceptOrder(
+          providerOrderShowVM.customerOrder,
+          providerOrderShowVM.customerOrder.estimatedTimeForPreparation
+        ).then(respondedCustomerOrder)
         .catch(cantPerformAction);
+      }
     }
 
     function rejectOrder(){

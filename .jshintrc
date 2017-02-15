@@ -27,6 +27,7 @@
     "moment": false,
     "File": false,
     "Pusher": false,
-    "geolib": false
+    "geolib": false,
+    "PushNotification": false
   }
 }

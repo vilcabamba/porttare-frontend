@@ -13,10 +13,19 @@
 
     beforeEach(module('porttare.controllers'));
 
+    beforeEach(module('porttare.controllers', function ($provide) {
+      $provide.factory('$state', function(){
+        return {
+          go: sinon.stub()
+        };
+      });
+    }));
+
     beforeEach(inject(
       function ($q,
                 _$controller_,
-                _$rootScope_) {
+                _$rootScope_,
+                _$state_) {
         deferCreateProvider = $q.defer();
         deferStateGo = $q.defer();
         deferTranslate = $q.defer();
@@ -24,6 +33,7 @@
         $rootScope = _$rootScope_;
         $scope = $rootScope.$new();
         dependencies = {
+          $state: _$state_,
           shippingRequests: []
         };
         ctrl = $controller('OrdersController', dependencies);

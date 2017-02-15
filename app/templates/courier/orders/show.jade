@@ -31,6 +31,24 @@ ion-view(
     .list.list-inset.list--no-borders.resource-details-table
       p.resource-detail-title
         | {{::("dispatchers.dispatchersData"|translate)}}
+      .row-wrapper.narrow-row-wrapper(
+        ng-repeat="routeLeg in coVm.routeLegs track by $index"
+      )
+        .row.row--bottom-border
+          .col.col-50.label
+            | {{ ::("shippingRequest.routeLegs." + coVm.order.kind + ".leg" + $index | translate) }}
+          .col.col-50.value
+            strong {{ routeLeg.duration.text }}
+            span  -
+            span  {{ routeLeg.distance.text }}
+      .row-wrapper.narrow-row-wrapper(
+        ng-if="coVm.routeLegs.length === 0"
+      )
+        .row.row--bottom-border
+          .col.col-50.label
+            | {{ ::("shippingRequest.availableRoutes" | translate) }}
+          .col.col-50.value
+            | {{ ::("shippingRequest.routesStatus." + coVm.routesStatus | translate) }}
       .row(
         ng-if="::coVm.shouldDisplayShippingPrice"
       )
@@ -44,16 +62,6 @@ ion-view(
       .row
         .col.col-50.label {{ ::("shippingRequest.providerName" | translate) }}
         .col.col-50.value {{ coVm.provider.nombre_establecimiento }}
-      .row-wrapper.narrow-row-wrapper(
-        ng-repeat="routeLeg in coVm.routeLegs"
-      )
-        .row
-          .col.col-50.label
-            | {{ ::("shippingRequest.routeLegs." + coVm.order.kind + ".leg" + $index | translate) }}
-          .col.col-50.value
-            strong {{ routeLeg.duration.text }}
-            span  -
-            span  {{ routeLeg.distance.text }}
       //- TODO
         .row
           .col.col-50.label {{::("courier.dateDispatcher"|translate)}}

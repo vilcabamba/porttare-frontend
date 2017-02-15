@@ -23,10 +23,6 @@
     courierVm.places = places;
     initCourier();
 
-    courierVm.locations = [
-      'Loja',
-      'Quito'
-    ];
     courierVm.licenses = [
       'A',
       'A1',
@@ -56,6 +52,7 @@
       courierVm.courier = {};
       courierVm.courier.nombres = $auth.user.name;
       courierVm.courier.email = $auth.user.email;
+      courierVm.courier.place_id = $auth.user.current_place_id; // jshint ignore:line
     }
 
     function createCourier() {

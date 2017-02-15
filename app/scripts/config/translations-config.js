@@ -84,6 +84,9 @@
         instagram:'Instagram',
         methodPayment: 'Forma de pago',
         category: 'Categoría',
+        respondToCustomerRequestLegend: 'Responder petición',
+        estimatedTimeForPreparation: 'Tiempo de preparación estimado',
+        estimatedTimeForPreparationUnit: 'minutos',
         methods: {
           cash: 'Efectivo',
           creditCard: 'Tarjeta de crédito'
@@ -147,8 +150,9 @@
         labels: {
           found: 'Encontramos',
           closeToYou: 'pedidos cerca de ti',
-          currentLocation: 'de tu ubicación actual',
-          forDelivery: 'para la entrega'
+          currentLocation: 'de tu ubicación actual (apróx)',
+          dispatchReady: 'despacho listo ',
+          timeForDispatchSuffix: ' para el despacho'
         },
         form: {
           error: {
@@ -426,6 +430,8 @@
         submittedAt: 'Enviada',
         observations: 'Observaciones',
         customerInfo: 'Información de Cliente',
+        dispatchAt: 'Hora de despacho',
+        timeForDispatch: 'Tiempo para el despacho',
         providerProfile: {
           quantity: 'Can',
           price: 'Precio',
@@ -506,6 +512,11 @@
         deliverToAddress: 'Dirección para la entrega',
         providerName: 'Proveedor',
         delivered: 'Entregado',
+        availableRoutes: 'Rutas',
+        routesStatus: {
+          searching: 'Buscando rutas..',
+          noRoutes: 'No hay rutas disponibles'
+        },
         customerOrderItem: {
           cantidad: 'Cantidad'
         },
