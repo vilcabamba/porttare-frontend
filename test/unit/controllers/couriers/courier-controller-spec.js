@@ -52,7 +52,7 @@
           handleCommonErrorGET: sinon.stub()
         };
         stateRedirect = 'courier.orders';
-        places = [];
+        places = [ 0 ];
       })
     );
 
@@ -73,7 +73,7 @@
       });
 
       it('should load array with options', function () {
-        expect(ctrl.locations).to.not.empty; //jshint ignore:line
+        expect(ctrl.places).to.not.empty; //jshint ignore:line
         expect(ctrl.licenses).to.not.empty; //jshint ignore:line
         expect(ctrl.mobilization).to.not.empty; //jshint ignore:line
       });

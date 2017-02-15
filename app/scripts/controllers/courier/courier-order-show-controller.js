@@ -53,7 +53,7 @@
             });
             openRouteLegInfoWindow(leg, map, marker, index);
           });
-        }).catch(function(status){
+        }).catch(function(){
           coVm.routesStatus = 'noRoutes';
         });
         finishedPerforming();
