@@ -15,7 +15,8 @@
           name: 'development',
           apiHost: 'http://localhost:3785',
           pusherKey: '287c19315060ae3bd2ec',
-          gMapsKey: 'AIzaSyDbY9wkWTMUHeT_J2Uehq0-i0S1PCaybFE'
+          gMapsKey: 'AIzaSyDbY9wkWTMUHeT_J2Uehq0-i0S1PCaybFE',
+          gcmSenderID: '1057338916791'
         }
       }
     },
@@ -28,7 +29,8 @@
           airbrakeProjectId: process.env.AIRBRAKE_PROJECT_ID,
           airbrakeProjectKey: process.env.AIRBRAKE_PROJECT_KEY,
           gMapsKey: process.env.GOOGLE_MAPS_API_KEY,
-          pusherKey: process.env.PUSHER_KEY
+          pusherKey: process.env.PUSHER_KEY,
+          gcmSenderID: process.env.GCM_SENDER_ID
         }
       }
     },
@@ -41,7 +43,8 @@
           gMapsKey: process.env.GOOGLE_MAPS_API_KEY,
           airbrakeProjectId: process.env.AIRBRAKE_PROJECT_ID,
           airbrakeProjectKey: process.env.AIRBRAKE_PROJECT_KEY,
-          pusherKey: process.env.PUSHER_KEY
+          pusherKey: process.env.PUSHER_KEY,
+          gcmSenderID: process.env.GCM_SENDER_ID
         }
       }
     },
