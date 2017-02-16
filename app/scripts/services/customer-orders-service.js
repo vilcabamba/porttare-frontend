@@ -38,7 +38,7 @@
       return $http({
         method: 'POST',
         url: ENV.apiHost + '/api/customer/orders/' + customerOrderId + '/deliveries/'+ CustomerOrderDeliveryId +'/cancel',
-      })
+        })
         .then(function (response) {
           return response.data; // jshint ignore:line
         }).catch(
