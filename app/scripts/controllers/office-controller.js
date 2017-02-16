@@ -24,6 +24,7 @@
     officesVm.updateOfficeState = updateOfficeState;
     officesVm.officeDetail = office;
     officesVm.mapDefaultInCurrentGeolocation = false;
+
     initializeOffice();
 
     function initializeOffice(){

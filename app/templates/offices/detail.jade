@@ -8,14 +8,14 @@ ion-view(
     provider-notifications
 
   ion-content.office-show-page(
-    ng-class="{'content-office-disabled': officesVm.officeDetail.enabled==false}"
+    ng-class="{'content-office-disabled': !officesVm.officeDetail.enabled}"
   )
     ion-toggle(
       ng-change="officesVm.updateOfficeState()"
       ng-model="officesVm.officeDetail.enabled"
       toggle-class="toggle-energized"
-    ) {{::("office.officeEnabled"|translate)}}
 
+    ) {{('office.officeEnabled.'+ officesVm.officeDetail.enabled |translate )}}
     .office-map
       img#office-map(
         ng-src="{{ officesVm.officeDetail.static_map_image }}"
@@ -30,9 +30,9 @@ ion-view(
         .button.button-clear.button-positive.button-xsmall(
           ng-click="officesVm.showEditOffice()"
         ) {{::("globals.edit"|translate)}}
-        .button.button-clear.button-assertive.button-xsmall(
+        //.button.button-clear.button-assertive.button-xsmall(
           ng-click="officesVm.showDeleteOffice()"
-        ) {{::("globals.delete"|translate)}}
+       //) {{::("globals.delete"|translate)}}
 
 
     .list.list-inset.list--no-borders.resource-details-table
@@ -79,4 +79,4 @@ ion-view(
             span(
               ng-if="!weekday.hora_de_cierre"
             )
-              | {{ ::("office.weekdays.selectHourPlaceholder" | translate) }}            
+              | {{ ::("office.weekdays.selectHourPlaceholder" | translate) }}
