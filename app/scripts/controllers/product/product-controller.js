@@ -147,11 +147,9 @@
     }
 
     function onError(response) {
-
-      if(response.errors.cantidad[0]){
-        productVm.messages = response.errors.cantidad.join();
+      if(response.errors.cantidad){
+        productVm.messages = response.errors.cantidad.join(', ');
       }
-
       $ionicPopup.alert({
         title: 'Error',
         template: '{{::("globals.pleaseTryAgain"|translate)}}'
