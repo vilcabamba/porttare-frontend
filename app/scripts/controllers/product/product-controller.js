@@ -146,7 +146,10 @@
         });
     }
 
-    function onError() {
+    function onError(response) {
+      if(response.errors.cantidad){
+        productVm.messages = response.errors.cantidad.join(', ');
+      }
       $ionicPopup.alert({
         title: 'Error',
         template: '{{::("globals.pleaseTryAgain"|translate)}}'
@@ -204,6 +207,5 @@
     function getCanAdd(){
       return CartService.canAddItem(productVm.cartItem, productVm.item.cantidad , productVm.product);
     }
-
   }
 })();

@@ -30,13 +30,12 @@
 
     pcVm.handleClickMinus = handleClickMinus;
     pcVm.handleClickPlus = handleClickPlus;
-
+    pcVm.disabledMinus = disabledMinus;
     init();
 
     pcVm.itemsCount = options.cantidad;
     pcVm.currencyCode = options.currencyCode;
     pcVm.canIncrement = getCanIncrement();
-    pcVm.disableButtons = getDisableButtons();
     pcVm.priceTotalCents = getTotal();
 
     function processData(option) {
@@ -85,13 +84,14 @@
     }
 
     function init() {
+
       var defaultOptions = {
         priceCents: 0,
         onClickMinus: null,
         onClickPlus: null,
         onChangeValue: null,
         cantidad: 0,
-        limit: 0,
+        limit: 1,
         currencyCode: 'USD'
       };
 
@@ -114,14 +114,16 @@
       return pcVm.itemsCount * (options.priceCents);
     }
 
-    function getDisableButtons(){
-      return !CartService.canAddItem(options.cartItem, 1, options.providerItem);
-    }
-
-
     function getCanIncrement() {
-      return CartService.canAddItem(options.cartItem, pcVm.itemsCount + 1, options.providerItem);
+      return CartService.canAddItem(
+        pcVm.options.cartItem,
+        pcVm.itemsCount,
+        pcVm.options.providerItem
+      );
     }
 
+    function disabledMinus(){
+      return pcVm.itemsCount === options.limit;
+    }
   }
 })();
