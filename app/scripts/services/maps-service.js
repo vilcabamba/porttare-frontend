@@ -14,8 +14,7 @@
     var service = {
       loadGMaps: loadGMaps,
       renderMap: renderMap,
-      displayMarker: displayMarker,
-      renderAddressMarker: renderAddressMarker
+      displayMarker: displayMarker
     };
     var loadDefered,
         gmapsLoaded;
@@ -52,27 +51,11 @@
       delete $window.gMapsCallback;
     }
 
-    function renderMap(domId) {
+    function renderMap(domElement) {
       return new google.maps.Map(
-        document.getElementById(domId),
+        domElement,
         mapOptionsDefault()
       );
-    }
-
-    function renderAddressMarker(map, options) {
-      GeocodingService
-        .geocode(options)
-        .then(function (results) {
-          map.setCenter(results[0].geometry.location);
-          displayMarker(map, results[0].geometry.location);
-        }).catch(function () {
-          var positionDefault = mapPositionDefault();
-          map.setCenter(positionDefault);
-          $ionicPopup.alert({
-            title: 'Error',
-            template: '{{::("office.locationNotFound"|translate)}}' + options.address
-          });
-        });
     }
 
     function displayMarker(map, marker){

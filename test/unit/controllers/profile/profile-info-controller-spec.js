@@ -61,7 +61,10 @@
         };
         $auth             = {
           updateAccount: sinon.stub()
-                            .returns(deferredUpdate.promise)
+                            .returns(deferredUpdate.promise),
+          user: {
+            provider: 'email'
+          }
         };
         $ionicPopup = {
           alert: sinon.stub().returns(deferIonic.promise)

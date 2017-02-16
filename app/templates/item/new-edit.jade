@@ -60,22 +60,11 @@ ion-modal-view.item-form
             | {{::("item.unidadMedida"|translate)}}
             abbr *
           select(ng-model='modalVm.item.unidad_medida' name='unidad_medida' required)
-            option(value='volumen') Volumen
             option(value='unidades') Unidades
-            option(value='longitud') Longitud
         .errors-wrapper
           span.show-errors(ng-messages="modalVm.itemForm.unidad_medida.$error" ng-if="modalVm.itemForm.unidad_medida.$touched")
             span(ng-message="required" class="message-error") {{::("globals.isRequired"|translate)}}
           show-error(array-messages='modalVm.messages.unidad_medida')
-
-        label.item.item-input.item-stacked-label
-          span.input-label {{::("item.volumen"|translate)}}
-          input(
-            type='text'
-            ng-model='modalVm.item.volumen'
-          )
-        .errors-wrapper
-          show-error(array-messages='modalVm.messages.volumen')
 
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': modalVm.itemForm.precio.$touched && modalVm.itemForm.precio.$invalid}"
@@ -83,28 +72,29 @@ ion-modal-view.item-form
           span.input-label
             | {{::("item.precio"|translate)}}
             abbr *
-          input(
-            min='0'
-            name='precio'
-            step='any'
-            type='number'
-            ng-model='modalVm.item.precio'
-            required
-          )
+          .price-wrapper
+            .item-select
+              select(
+                ng-model='modalVm.item.precio_currency'
+                ng-options="'item.currency.'+currency|translate for currency in modalVm.availableCurrencies"
+                name='precio_currency'
+                required
+              )
+            .input-wrapper
+              input(
+                min='0'
+                name='precio'
+                step='any'
+                type='number'
+                ng-model='modalVm.item.precio'
+                required
+              )
         .errors-wrapper
           span.show-errors(ng-messages="modalVm.itemForm.precio.$error" ng-if="modalVm.itemForm.precio.$touched")
             span.message-error(ng-message="required")
               | {{::("globals.isRequired"|translate)}}
           show-error(array-messages='modalVm.messages.precio')
-
-        label.item.item-input.item-stacked-label
-          span.input-label {{::("item.peso"|translate)}}
-          input(
-            type='text'
-            ng-model='modalVm.item.peso'
-          )
-        .errors-wrapper
-          show-error(array-messages='modalVm.messages.peso')
+          show-error(array-messages='modalVm.messages.precio_currency')
 
         label.item.item-input.item-stacked-label
           span.input-label {{::("item.cantidad"|translate)}}

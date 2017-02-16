@@ -16,7 +16,8 @@
     'ngFileUpload',
     'ngMessages',
     'ion-datetime-picker',
-    'monospaced.elastic'
+    'monospaced.elastic',
+    'validation.match'
   ])
 
   .run(function($ionicPlatform) {

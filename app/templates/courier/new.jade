@@ -4,114 +4,14 @@ ion-view(
   ion-nav-title
     .alt-logo
 
-  ion-content.resource-form(locking="false")
-    .row
-      form(
-        name="courierVm.courierForm"
-        ng-submit='courierVm.createCourier()'
-        novalidate
+  form(name="courierVm.courierForm" ng-submit='courierVm.submit()' novalidate)
+    ion-content.resource-form(locking="false")
+      .row
+        .fields-wrapper--spaced(ng-if="courierVm.step === 1" ng-include="'templates/courier/partials/new_first_part.html'")
+        .fields-wrapper--spaced(ng-if="courierVm.step === 2" ng-include="'templates/courier/partials/new_second_part.html'")
+    ion-footer-bar.bar.bar-footer.bar-stable
+      button.button.button-outline.button-energized.button-small(
+        type='submit'
+        ng-disabled="courierVm.courierForm.$invalid"
       )
-        .list.list-inset
-          legend {{::("courier.formLegend"|translate)}}
-
-          label.item.item-input.item-stacked-label(
-            ng-class="{'item-error': courierVm.courierForm.nombres.$touched && courierVm.courierForm.nombres.$invalid}"
-          )
-            span.input-label {{::("courier.names"|translate)}}
-            input(
-              type='text'
-              name='nombres'
-              ng-model='courierVm.courier.nombres'
-              required
-            )
-            .show-errors(ng-messages="courierVm.courierForm.nombres.$error" ng-if="courierVm.courierForm.nombres.$touched")
-              span(ng-message="required" class="message-error") Campo requerido
-          show-error(array-messages='courierVm.messages.nombres')
-
-          label.item.item-input.item-stacked-label(
-            ng-class="{'item-error': courierVm.courierForm.ruc.$touched && courierVm.courierForm.ruc.$invalid}"
-          )
-            span.input-label {{::("courier.ruc"|translate)}}
-            input(
-              type='text'
-              name='ruc'
-              ng-model='courierVm.courier.ruc'
-              required
-            )
-            .show-errors(ng-messages="courierVm.courierForm.ruc.$error" ng-if="courierVm.courierForm.ruc.$touched")
-              span(ng-message="required" class="message-error") Campo requerido
-          show-error(array-messages='courierVm.messages.ruc')
-
-          label.item.item-input.item-stacked-label(
-            ng-class="{'item-error': courierVm.courierForm.telefono.$touched && courierVm.courierForm.telefono.$invalid}"
-          )
-            span.input-label {{::("courier.phone"|translate)}}
-            input(
-              type='text'
-              name='telefono'
-              ng-model='courierVm.courier.telefono'
-              required
-            )
-            .show-errors(ng-messages="courierVm.courierForm.telefono.$error" ng-if="courierVm.courierForm.telefono.$touched")
-              span(ng-message="required" class="message-error") Campo requerido
-          show-error(array-messages='courierVm.messages.telefono')
-
-          label.item.item-input.item-stacked-label(
-            ng-class="{'item-error': courierVm.courierForm.email.$touched && courierVm.courierForm.email.$invalid}"
-          )
-            span.input-label {{::("courier.email"|translate)}}
-            input(
-              type='email'
-              placeholder='user@mydomain.com'
-              name='email'
-              ng-model='courierVm.courier.email'
-              required
-            )
-            .show-errors(ng-messages="courierVm.courierForm.email.$error" ng-if="courierVm.courierForm.email.$touched")
-              span(ng-message="required" class="message-error") Campo requerido
-              span(ng-message="email" class="message-error") E-mail no válido
-          show-error(array-messages='courierVm.messages.email')
-
-          label.item.item-input.item-stacked-label(
-            ng-class="{'item-error': courierVm.messages.fecha_nacimiento}"
-          )
-            span.input-label {{::("courier.birthdate"|translate)}}
-            input(
-              type='date'
-              name='fecha_nacimiento'
-              ng-model='courierVm.courier.fecha_nacimiento'
-            )
-          show-error(array-messages='courierVm.messages.fecha_nacimiento')
-
-          label.item.item-input.item-select(
-            ng-class="{'item-error': courierVm.messages.ubicacion}"
-          )
-            span.input-label {{::("courier.location"|translate)}}
-            select(
-              ng-model='courierVm.courier.ubicacion'
-              ng-options="location as location for location in courierVm.locations")
-          show-error(array-messages='courierVm.messages.ubicacion')
-
-          label.item.item-input.item-select(
-            ng-class="{'item-error': courierVm.messages.tipo_licencia}"
-          )
-            span.input-label {{::("courier.license"|translate)}}
-            select(
-              ng-model='courierVm.courier.tipo_licencia'
-              ng-options="license as license for license in courierVm.licenses")
-          show-error(array-messages='courierVm.messages.tipo_licencia')
-
-          label.item.item-input.item-select(
-            ng-class="{'item-error': courierVm.messages.tipo_medio_movilizacion}"
-          )
-            span.input-label {{::("courier.mobilization"|translate)}}
-            select(
-              ng-model='courierVm.courier.tipo_medio_movilizacion'
-              ng-options="mobil as mobil for mobil in courierVm.mobilization")
-          show-error(array-messages='courierVm.messages.tipo_medio_movilizacion')
-
-          input.button.button-primary(
-            type='submit'
-            value='{{::("globals.sendRequest"|translate)}}'
-            ng-class='{disabled: courierVm.courierForm.$invalid}'
-          )
+        | {{courierVm.step === 1 ? ("courier.nextStep"|translate) : ("courier.createCourier"|translate)}}

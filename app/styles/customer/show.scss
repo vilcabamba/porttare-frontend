@@ -38,17 +38,9 @@
       font-size: 18px;
       margin-bottom: 5px;
     }
-  }
-}
 
-.addresses-wrapper--parent {
-  overflow: initial;
-
-  form {
-    position: relative;
-
-    .addresses-wrapper {
-      position: relative;
+    .static-map-preview {
+      max-width: 100%;
     }
   }
 }

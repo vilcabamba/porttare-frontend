@@ -31,13 +31,14 @@
       });
     }
 
-    function acceptOrder(customerOrder) {
+    function acceptOrder(customerOrder, estimatedPreparationTime) {
       var url = '/api/provider/customer_orders/',
           id = customerOrder.id,
           method = '/accept';
       return $http({
         method: 'POST',
-        url: ENV.apiHost + url + id + method
+        url: ENV.apiHost + url + id + method,
+        data: { preparation_time_mins: estimatedPreparationTime } // jshint ignore:line
       }).then(function success(response){
         return response.data.customer_order; // jshint ignore:line
       });

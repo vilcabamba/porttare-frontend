@@ -10,7 +10,8 @@
                                       ErrorHandlerService,
                                       $scope,
                                       $ionicPopup,
-                                      $ionicLoading) {
+                                      $ionicLoading,
+                                      $auth) {
     var billingAddressesVm= this;
     var billingAddressesIndex;
     billingAddressesVm.showNewModal = showNewModal;
@@ -27,6 +28,13 @@
 
     function showNewModal() {
       billingAddressesVm.billingAddress = {};
+      billingAddressesVm.billingAddress.email = $auth.user.email;
+      billingAddressesVm.billingAddress.ciudad = $auth.user.ciudad;
+      if ($auth.user.provider_profile){ // jshint ignore:line
+        billingAddressesVm.billingAddress.ruc = $auth.user.provider_profile.ruc;// jshint ignore:line
+        billingAddressesVm.billingAddress.razon_social = $auth.user.provider_profile.razon_social;// jshint ignore:line
+        billingAddressesVm.billingAddress.telefono = $auth.user.provider_profile.telefono;// jshint ignore:line
+      }
       showNewEditModal();
     }
 

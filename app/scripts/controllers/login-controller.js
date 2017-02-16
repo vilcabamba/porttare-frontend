@@ -6,7 +6,6 @@
     .controller('LoginController', LoginController);
 
   function LoginController( $rootScope,
-                            $scope,
                             $state,
                             $ionicLoading,
                             $ionicPopup,
@@ -19,29 +18,42 @@
     loginVm.logout = logout;
     loginVm.loginWithFB = SessionService.loginWithFB;
     loginVm.loginForm = {};
-    var successState = APP.successState;
-    var preloginState = APP.preloginState;
+    var successState = APP.successState,
+        preloginState = APP.preloginState,
+        placesState = APP.placesState;
+
+    $rootScope.$on('auth:login-error', cantLogin);
 
     function login() {
       $ionicLoading.show({
         template: 'cargando...'
       });
       $auth.submitLogin(loginVm.loginForm)
-        .then(function () {
-          loginVm.loginForm = {};
-          $state.go(successState);
-        })
-        .catch(function (resp) {
-          loginVm.loginForm.password = null;
+        .then(loggedIn)
+        .finally($ionicLoading.hide);
+    }
 
-          $ionicPopup.alert({
-            title: 'Error',
-            template: resp.errors[0]
-          });
-        })
-        .finally(function(){
-          $ionicLoading.hide();
-        });
+    function loggedIn() {
+      loginVm.loginForm = {};
+      if ($auth.user.current_place) { //jshint ignore:line
+        $state.go(successState);
+      } else {
+        $state.go(placesState);
+      }
+    }
+
+    function cantLogin(ev, resp) {
+      loginVm.loginForm.password = null;
+
+      var errMessage;
+      if (resp) {
+        errMessage = resp.errors[0];
+      }
+
+      $ionicPopup.alert({
+        title: 'Error',
+        template: (errMessage || 'Ups, algo salió mal')
+      });
     }
 
     function logout() {

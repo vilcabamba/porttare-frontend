@@ -28,11 +28,11 @@
         account: 'Cuenta',
         invite: 'Invitar',
         history: 'Historial',
+        locations: 'Localidades',
         user:{
-          courier: 'Mensajero',
-          buyer: 'Comprador',
-          provider: 'Proveedor',
-          dispatcher: 'Despachador'
+          courier: 'Entregar',
+          buyer: 'Comprar',
+          provider: 'Vender'
         },
         client: {
           category: 'Categorías',
@@ -42,11 +42,9 @@
           payments: 'Pagos',
           provider: 'Proveedor',
           cart: 'Mi carro',
-          wishlist: 'Wishlist',
-          billingAddresses : 'Direcciones de facturación'
+          billingAddresses: 'Facturación'
         },
         provider: {
-          profile:'Perfil de Proveedor',
           orders: 'Pedidos',
           products: 'Productos',
           clients: 'Clientes',
@@ -67,6 +65,7 @@
         }
       },
       provider: {
+        profileName: 'Proveedor',
         successUpdateProfileProvider: 'Perfil actualizado éxitosamente',
         itemsProvider: 'Productos de Proveedor',
         formLegendFirst: 'Proveedor nuevo - Paso 1',
@@ -84,6 +83,10 @@
         twitter:'Twitter',
         instagram:'Instagram',
         methodPayment: 'Forma de pago',
+        category: 'Categoría',
+        respondToCustomerRequestLegend: 'Responder petición',
+        estimatedTimeForPreparation: 'Tiempo de preparación estimado',
+        estimatedTimeForPreparationUnit: 'minutos',
         methods: {
           cash: 'Efectivo',
           creditCard: 'Tarjeta de crédito'
@@ -111,16 +114,22 @@
         acceptOrder: 'Aceptar orden',
         rejectOrder: 'Rechazar orden',
         reasonToReject: 'Razón',
-        reasonToRejectPlaceholder: 'Especifica una razón'
+        reasonToRejectPlaceholder: 'Especifica una razón',
+        ruc: 'RUC',
+        schedule: {
+          closed: 'Cerrado',
+          open: 'Abierto'
+        }
       },
       courier: {
-        successCourierSave: 'Mensajero guardado éxitosamente',
+        successCourierSave: 'Te hemos registrado!',
         welcomeTitle: 'Conviértete en mensajero',
         welcomeDescription: 'Con moviggo puedes enviar productos y convertirte en mensajero',
         newCourierTitle: 'Nuevo Mensajero',
-        formLegend: 'Datos nuevo mensajero',
-        names: 'Nombre completos',
-        ruc: 'Cedula/RUC/Pasaporte',
+        firstFormLegend: 'Mensajero nuevo - Paso 1',
+        secondFormLegend: 'Mensajero nuevo - Paso 2',
+        names: 'Nombres completos',
+        ruc: 'Cédula / RUC / Pasaporte',
         phone: 'Número de teléfono',
         email: 'Correo electrónico',
         location: 'Ubicación',
@@ -131,11 +140,24 @@
         deliveryAddresses: 'Lugar de entrega',
         ready: 'Listo',
         customerOrderDeliveryUpdate: 'Datos de entrega actualizado éxitosamente',
+        order: 'Pedido #',
+        ordersNumber: 'Pedido número',
+        dateDispatcher: 'Hora del despacho',
+        nameDispatcher: 'Nombre despachador',
+        nextStep: 'Siguiente paso',
+        createCourier: 'Crear mensajero',
+        deliveryETA: 'Tiempo estimado para la entrega',
         labels: {
           found: 'Encontramos',
           closeToYou: 'pedidos cerca de ti',
-          currentLocation: 'de tu ubicación actual',
-          forDelivery: 'para la entrega'
+          currentLocation: 'de tu ubicación actual (apróx)',
+          dispatchReady: 'despacho listo ',
+          timeForDispatchSuffix: ' para el despacho'
+        },
+        form: {
+          error: {
+            wrongSubmission: 'No pudimos registrarte, por favor revisa los errores en el formulario'
+          }
         }
       },
       globals: {
@@ -144,6 +166,7 @@
         edit: 'Editar',
         delete: 'Eliminar',
         seeMore: 'Ver más',
+        see: 'Ver',
         save: 'Guardar',
         success: 'Éxito',
         cancel: 'Cancelar',
@@ -175,17 +198,8 @@
           sat: 'Sábado',
           sun: 'Domingo'
         },
-        shortDayNames: {
-          mon: 'Lun',
-          tue: 'Mar',
-          wed: 'Mié',
-          thu: 'Jue',
-          fri: 'Vie',
-          sat: 'Sáb',
-          sun: 'Dom'
-        },
         accept:'Aceptar',
-        notifications:'Notificaciones'
+        geolocation: 'Geolocalizando...'
       },
       item: {
         item: 'Producto',
@@ -217,15 +231,22 @@
         productDetails:'Detalles del producto',
         cantidad: 'Cantidad máxima',
         cantidadPrefix: 'x',
-        currency: '$ ',
         seeAsCustomer: 'Ver como cliente',
         unregisterItem: 'Dar de baja',
-        confirmUnregisterItem: '¿Estás seguro de querer dar de baja este producto?'
+        confirmUnregisterItem: '¿Estás seguro de querer dar de baja este producto?',
+        sortBy: {
+          createdAt: 'Antigüedad',
+          precio: 'Precio',
+          titulo: 'Nombre'
+        },
+        currency: {
+          USD: '$',
+          PEN: 'S/.'
+        }
       },
       actions: {
         showCategory: 'Lista de Categorías',
         newProvider: 'Nuevo Proveedor',
-        seeMore: 'Ver más',
         edit: 'Editar',
         delete: 'Eliminar'
       },
@@ -252,7 +273,8 @@
         ciudad: 'Ciudad',
         email: 'E-mail',
         noClients: 'No tienes ningún cliente todavía.',
-        addImage: 'Agregar fotografía'
+        addImage: 'Agregar fotografía',
+        razonSocial: 'Razón social'
       },
       wishlist: {
         wishlists: 'Listas de deseos',
@@ -280,15 +302,10 @@
         officeSuccessSave: 'Establecimiento guardado éxitosamente',
         officeSuccessUpdate: 'Establecimiento actualizado éxitosamente',
         officeLegend: 'Datos del Establecimiento',
-        ciudad: 'Ciudad',
+        place: 'Localidad',
         direccion: 'Dirección',
         telefono: 'Teléfono',
-        horaApertura: 'Hora de apertura',
-        horaCierre: 'Hora de cierre',
         officeNumber: 'Sucursal número',
-        officeAttention:'Horario de atención',
-        officeStart:'Inicio de labores',
-        officeFinish: 'Final de Labores',
         officeDelete: '¿Seguro quieres eliminar este establecimiento?',
         officeDeleteReasons: 'Cuéntanos las razones',
         officeDeleteMotive: 'Motivo del cierre',
@@ -300,10 +317,20 @@
         officesAny: 'No dispone de ningún Establecimiento o Sucursal',
         locationNotFound: 'No he encontrado la dirección: ',
         taskInProgress: 'Tarea en progreso',
-        selectHourPlaceholder: 'Seleccionar hora',
         yes: 'Si',
         not: 'No',
-        officeEnabled: 'Establecimiento activo'
+        officeEnabled: {
+          true: 'Establecimiento activo',
+          false: 'Establecimiento inactivo'
+        },
+        officeDisabled: 'Establecimiento inactivo',
+        weekdays: {
+          cerrado: 'Cerrado',
+          selectHourPlaceholder: 'HH:MM',
+          collectionTitle: 'Días laborables',
+          openFromPlaceholder: 'de',
+          openUntilPlaceholder: 'a'
+        }
       },
       password: {
         updatePassword: 'Actualizar contraseña',
@@ -322,7 +349,9 @@
         changeImagen: 'Cambiar Imagen',
         successUpdateProfile: 'Perfil actualizado éxitosamente',
         password: 'Contraseña',
-        birthdate:  'Fecha de Nacimiento'
+        repeatPassword: 'Repita contraseña',
+        birthdate:  'Fecha de Nacimiento',
+        selectDatePlaceholder: 'Seleccionar fecha'
       },
       product: {
         more: 'mostrar más',
@@ -377,11 +406,14 @@
         cantidadSingular: 'unidad',
         title: 'Carrito',
         deliverNow: 'Entregar inmediatamente',
-        pickupNow: 'Inmediatamente.',
+        pickupNow: 'Inmediatamente',
         shippingCosts: '(costos de envío)',
         deliveryPlaceholder: 'Entrega:',
-        pickupPlaceholder: 'Recoger:',
+        pickupPlaceholder: 'Recoger',
         withoutDeliveryAddress: 'Definir dirección de envío',
+        anonBillingAddress: 'Consumidor final',
+        titleWithoutItems: 'Tu carrito de compras está vacío',
+        subtitleWithoutItems: 'Agrega ítems a tu carrito para comprarlos',
         deliveryMethods: {
           pickup: 'Recoger en local',
           shipping: 'Enviar a domicilio',
@@ -400,9 +432,10 @@
       },
       order: {
         submittedAt: 'Enviada',
-        shippingCosts: 'Costos de Envio',
         observations: 'Observaciones',
-        customerInfo: 'Información de Cliente y envío',
+        customerInfo: 'Información de Cliente',
+        dispatchAt: 'Hora de despacho',
+        timeForDispatch: 'Tiempo para el despacho',
         providerProfile: {
           quantity: 'Can',
           price: 'Precio',
@@ -414,7 +447,7 @@
         },
         summary: {
           subtotal: 'Subtotal',
-          shippingCosts: 'Costos de Envío',
+          shippingCosts: 'Costos de envío',
           VAT: '%',
           total: 'Total de Compra',
         },
@@ -426,23 +459,28 @@
           submitted: 'Enviada'
         },
         delivery: {
+          deliveryETA: 'Hora de entrega estimada',
+          deliveryETAUnknown: 'calculando..',
           status: {
             pending: 'Esperando confirmación del proveedor',
-            accepted: 'Aceptada',
+            accepted: 'Aceptada por el proveedor',
             rejected: 'Rechazada'
           }
         }
       },
       form: {
         requiredField: 'Campo requerido. ',
-        wrongEmail: 'Email incorrecto. '
+        wrongEmail: 'Email incorrecto. ',
+        dontMatch: 'Contraseñas no coinciden. ',
+        leaveBlank: 'Dejar en blanco si no desea cambiar'
       },
       billingAddress: {
         legendForm: 'Dirección de facturación',
         newBillingAddress: 'Nueva dirección de facturación',
         anyBillingAddress: 'No dispone de ninguna dirección de facturación.',
         successSave: 'La dirección de facturación ha sido guardado éxitosamente',
-        successUpdate: 'La dirección de facturación ha sido actualizado éxitosamente'
+        successUpdate: 'La dirección de facturación ha sido actualizado éxitosamente',
+        noAddressesSaved: 'No has registrado ninguna dirección de facturación'
       },
       dispatchers:{
         dispatchers: 'Despachadores',
@@ -458,8 +496,49 @@
         notAccepted: 'Esta invitación no ha sido aceptada todavía.'
       },
       termsAndConditions: {
-        termsAndConditions: 'Términos y Condiciones',
-        description: '¿Usted acepta los términos y condiciones?'
+        agreeTOS: 'Aceptar términos y condiciones'
+      },
+      places:{
+        places: 'Localidades'
+      },
+      maps: {
+        loading: 'Cargando mapa...',
+        geocoding: 'Buscando direcciones...',
+        geocoded: 'Las direcciones fueron llenadas con el resultado más acertado posible. Asegúrate de revisarlas',
+        wontGeocode: 'No ha sido posible encontrar direcciones para esa ubicación',
+        overGeocodeLimit: 'El número de búsquedas de direcciones excedió el límite, por favor prueba de nuevo en unos segundos'
+      },
+      shippingRequest: {
+        noMoreItems: 'No hay más pedidos que mostrar',
+        takeRequest: 'Tomar pedido',
+        pickingUp: 'En la tienda',
+        clientDetails: 'Datos del cliente',
+        deliverToAddress: 'Dirección para la entrega',
+        providerName: 'Proveedor',
+        delivered: 'Entregado',
+        availableRoutes: 'Rutas',
+        routesStatus: {
+          searching: 'Buscando rutas..',
+          noRoutes: 'No hay rutas disponibles'
+        },
+        customerOrderItem: {
+          cantidad: 'Cantidad'
+        },
+        status: {
+          new: 'Nuevo',
+          assigned: 'Camino a la tienda',
+          in_progress: 'Camino a la entrega', // jshint ignore:line
+          delivered: 'Entregado'
+        },
+        routeLegs: {
+          customer_order_delivery: { // jshint ignore:line
+            'leg0': 'A la tienda',
+            'leg1': 'A la entrega'
+          },
+          ask_to_validate: { // jshint ignore:line
+            'leg0': 'A la tienda'
+          }
+        }
       }
     });
 

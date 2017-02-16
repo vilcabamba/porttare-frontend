@@ -9,17 +9,20 @@
                             $ionicPopup,
                             $state,
                             $auth,
-                            $ionicLoading) {
+                            $ionicLoading,
+                            $ionicScrollDelegate,
+                            places) {
     var courierVm = this;
     var stateRedirect = 'courier.orders';
+
+    courierVm.submit = submit;
+    courierVm.step = 1;
     courierVm.createCourier = createCourier;
     courierVm.messages = {};
+    courierVm.courierForm = {};
+    courierVm.places = places;
     initCourier();
 
-    courierVm.locations = [
-      'Loja',
-      'Quito'
-    ];
     courierVm.licenses = [
       'A',
       'A1',
@@ -49,9 +52,11 @@
       courierVm.courier = {};
       courierVm.courier.nombres = $auth.user.name;
       courierVm.courier.email = $auth.user.email;
+      courierVm.courier.place_id = $auth.user.current_place_id; // jshint ignore:line
     }
 
     function createCourier() {
+      courierVm.courierForm.submissionErrorCode = null;
       $ionicLoading.show({
         template: '{{::("globals.sending"|translate)}}'
       });
@@ -69,11 +74,21 @@
           });
         },
         function error(resp) {
+          courierVm.step = 1;
+          courierVm.courierForm.submissionErrorCode = 'wrongSubmission';
           if (resp && resp.errors) {
             courierVm.messages = resp.errors;
           }
           $ionicLoading.hide();
         });
+    }
+
+    function submit() {
+      if(courierVm.step === 2){
+        createCourier();
+      }
+      courierVm.step += 1;
+      $ionicScrollDelegate.scrollTop();
     }
   }
 })();

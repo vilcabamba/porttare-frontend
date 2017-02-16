@@ -12,6 +12,7 @@
                                  $ionicPopup,
                                  $scope) {
     var piVm = this;
+    piVm.tab = 'info';
     piVm.showNewModal = showNewModal;
     piVm.closeModal = closeModal;
     piVm.submitProcess = submitProcess;
@@ -22,6 +23,7 @@
 
     function init(){
       piVm.user = $auth.user;
+      piVm.canChangePassword = piVm.user.provider === 'email';
     }
 
     function showNewModal() {

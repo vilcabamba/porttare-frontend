@@ -20,6 +20,7 @@
 .resource-details-table {
   font-size: 16px;
   margin-top: 0;
+  font-family: Montserrat-Light;
 
   .label {
     color: $base-grey;
@@ -60,6 +61,24 @@
         border-bottom: 0;
       }
     }
+  }
+
+  .narrow-row-wrapper {
+    margin-top: -5px;
+    margin-bottom: -5px;
+
+    .row:last-child .col {
+      border-bottom: 1px solid $base-yellow;
+    }
+  }
+
+  .row--top-border {
+    padding-top: 0;
+    border-top: 1px solid $base-yellow;
+  }
+
+  .row--bottom-border {
+    border-bottom: 1px solid $base-yellow;
   }
 }
 

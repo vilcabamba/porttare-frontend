@@ -31,14 +31,11 @@ ion-view(
       .row
         .col.col-50.label {{"item.price"|translate}}
         .col.col-50.value
-          | {{::("item.currency"|translate)}}
-          | {{providerItemVm.providerItem.precio}}
+          price(amount="{{providerItemVm.providerItem.precio_cents}}"
+                currency="{{providerItemVm.providerItem.precio_currency}}")
       .row
         .col.col-50.label {{::("item.unidadMedida"|translate)}}
         .col.col-50.value {{providerItemVm.providerItem.unidad_medida}}
-      .row
-        .col.col-50.label {{::("item.valorMedida"|translate)}}
-        .col.col-50.value {{providerItemVm.providerItem.volumen}}
       .row
         .col.col-50.label {{::("item.cantidad"|translate)}}
         .col.col-50.value

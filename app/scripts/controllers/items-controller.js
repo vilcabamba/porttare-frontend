@@ -6,7 +6,8 @@
     .controller('ItemsController', ItemsController);
 
 
-  function ItemsController($ionicLoading,
+  function ItemsController($auth,
+                           $ionicLoading,
                            $ionicPopup,
                            $scope,
                            apiResources,
@@ -17,6 +18,11 @@
     var itemsVm = this,
         modalScope;
     itemsVm.newItemModal = launchModal;
+    itemsVm.sortingOptions = [
+      { tkey: 'item.sortBy.titulo', filterField: 'titulo' },
+      { tkey: 'item.sortBy.createdAt', filterField: 'created_at' },
+      { tkey: 'item.sortBy.precio', filterField: 'precio_cents' }
+    ];
     itemsVm.submitProcess = newItem; // NB currently here only to honour specs. wipe me?
     itemsVm.query = '';
     init();
@@ -63,7 +69,15 @@
       modalScope = $scope.$new(true); // isolated
       modalScope.modalVm = itemsVm;
       // unfortunately item is the providerItem we'll edit
-      modalScope.modalVm.item = { imagenes: [] };
+      modalScope.modalVm.availableCurrencies = getProviderCurrencies();
+      // jshint ignore:start
+      modalScope.modalVm.item = {
+        imagenes: [],
+        en_stock: true,
+        unidad_medida: 'unidades',
+        precio_currency: getProviderCurrencies()[0]
+      };
+      // jshint ignore:end
       modalScope.modalVm.closeModal = closeModal;
       modalScope.modalVm.submitProcess = newItem;
       modalScope.modalVm.concatImages = concatImages;
@@ -78,6 +92,14 @@
       ModalService.closeModal();
       modalScope.modalVm.messages = {};
       modalScope.modalVm.item = null;
+    }
+
+    function getProviderCurrencies(){
+      var providerAllowedCodes = $auth.user.provider_profile.allowed_currency_iso_codes; // jshint ignore:line
+      if (providerAllowedCodes.length === 0) {
+        providerAllowedCodes = [$auth.user.current_place.currency_iso_code]; // jshint ignore:line
+      }
+      return providerAllowedCodes;
     }
   }
 })();

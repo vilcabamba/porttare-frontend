@@ -45,7 +45,7 @@
 }
 
 .button-energized,
-.button-positive:not(.button-small) {
+.button-positive:not(.button-small):not(.button-xsmall) {
   padding: 3px 18px;
   line-height: 30px;
   font-family: Montserrat-Regular;
@@ -61,6 +61,11 @@
   letter-spacing: -0.5px;
 }
 
+.button--narrow-padded,
+.bar .button.button-small.button--narrow-padded {
+  padding-left: 12px;
+  padding-right: 12px;
+}
 
 .facebook-login
  {
@@ -92,4 +97,14 @@
     border-color: $button-stable-active-border;
     background-color: $button-stable-active-bg;
   }
+}
+
+.button--xsmall {
+  font-size: 12px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: 22px;
+  min-height: initial;
 }

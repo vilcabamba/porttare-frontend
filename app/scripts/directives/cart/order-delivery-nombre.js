@@ -26,6 +26,12 @@
   function orderDeliveryNombreLink(scope){
     var orderDeliveryNombreVM = scope.orderDeliveryNombreVM;
 
+    scope.$watch('orderDeliveryNombreVM.addresses', function (newAddresses){
+      if (newAddresses) {
+        updateDeliveryAddressName();
+      }
+    }, true);
+
     scope.$watch('orderDeliveryNombreVM.delivery', function(newDelivery) {
       if (newDelivery) {
         updateDeliveryAddressName();

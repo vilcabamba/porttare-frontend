@@ -17,19 +17,27 @@
     productVm.item.provider_item_id = productVm.product.id; //jshint ignore:line
     productVm.item.cantidad = 1;
     productVm.wishlists = [];
+    productVm.cartItem = CartService.findCartItem($auth.user.customer_order, productVm.product); //jshint ignore:line
+    productVm.canAdd = getCanAdd();
     productVm.onWishlistSelect = onWishlistSelect;
     productVm.createNewWishlist = createNewWishlist;
     productVm.showNewWishlistInput = false;
     productVm.showNewWishlist = showNewWishlist;
     productVm.wishlistName = '';
     productVm.clearData = clearData;
-    productVm.options = {
+    // jshint ignore:start
+    productVm.counterOptions = {
       cantidad: productVm.item.cantidad,
-      priceCents: providerItem.precio_cents, // jshint ignore:line
+      cartItem: productVm.cartItem,
+      providerItem: productVm.product,
+      priceCents: providerItem.precio_cents,
+      currencyCode: providerItem.precio_currency,
       onChangeValue: function (data) {
         productVm.item.cantidad = data.itemsCount;
+        productVm.canAdd = getCanAdd();
       }
     };
+    // jshint ignore:end
 
     productVm.slickConfig = {
       arrows: false,
@@ -138,7 +146,10 @@
         });
     }
 
-    function onError() {
+    function onError(response) {
+      if(response.errors.cantidad){
+        productVm.messages = response.errors.cantidad.join(', ');
+      }
       $ionicPopup.alert({
         title: 'Error',
         template: '{{::("globals.pleaseTryAgain"|translate)}}'
@@ -174,9 +185,10 @@
 
     function validateOrderCreated(order) {
       if (!$auth.user.customer_order) { //jshint ignore:line
-        $scope.$emit('order-created', order);
+        $auth.user.customer_order = order//jshint ignore:line
       } else {
         $auth.user.customer_order = order//jshint ignore:line
+        $scope.$emit('update-number');
       }
     }
 
@@ -191,5 +203,9 @@
       return ids;
     }
     //jshint ignore:end
+
+    function getCanAdd(){
+      return CartService.canAddItem(productVm.cartItem, productVm.item.cantidad , productVm.product);
+    }
   }
 })();

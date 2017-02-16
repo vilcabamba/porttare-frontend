@@ -1,17 +1,20 @@
-ion-view(
-  view-title='{{::("termsAndConditions.termsAndConditions"|translate)}}'
-)
+ion-view
   .bar.bar-stable.bar-header
-    .alt-logo
-  ion-content.pre-application-form.has-header
-    .row
-      .moviggo-logo-2.branding-logo
+    .title
+      .alt-logo
+  ion-content.pre-application-form.has-header.tos-show-page(
+    locking="false"
+  )
+    //- without top logo
+      .row
+        .moviggo-logo-2.branding-logo
     .row
       .list.list-inset.common-text
-        h1.title {{::("termsAndConditions.termsAndConditions"|translate)}}
-        p {{::("termsAndConditions.description"|translate)}}
+        .tos-contents.text-left(
+          ng-bind-html="terCondVm.tosHTML"
+        )
     .row
       .list.list-inset.list--centered
-        button.button.button-outline.button-energized(
+        button.button.button-outline.button-energized.primary-button(
           ng-click="terCondVm.agreeTermsOfService()"
-        ) {{::("globals.accept"|translate)}}
+        ) {{::("termsAndConditions.agreeTOS"|translate)}}

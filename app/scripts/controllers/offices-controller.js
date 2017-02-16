@@ -5,17 +5,22 @@
     .module('porttare.controllers')
     .controller('OfficesController', OfficesController);
 
-  function OfficesController(OfficesService,
-                              ModalService,
-                              ErrorHandlerService,
-                              $ionicLoading,
-                              $ionicPopup,
-                              $scope) {
+  function OfficesController(places,
+                             $auth,
+                             $scope,
+                             $ionicPopup,
+                             $ionicLoading,
+                             APP,
+                             OfficesService,
+                             ModalService,
+                             ErrorHandlerService) {
 
     var officesVm = this;
+    officesVm.places = places;
     officesVm.showNewOffice = showNewOffice;
     officesVm.closeModal = closeModal;
     officesVm.submitOffice = submitOffice;
+    officesVm.mapDefaultInCurrentGeolocation = true;
     getOffices();
 
     function getOffices() {
@@ -25,12 +30,29 @@
     }
 
     function showNewOffice() {
-      officesVm.office = {};
-      officesVm.office.enabled = false;
+      officesVm.office = buildNewOffice();
       ModalService.showModal({
         parentScope: $scope,
         fromTemplateUrl: 'templates/offices/new-edit.html'
       });
+    }
+
+    function buildNewOffice(){
+      var newOffice = {
+        place_id: getDefaultPlaceId(), // jshint ignore:line
+        weekdays_attributes: buildWeekdays() // jshint ignore:line
+      };
+      return newOffice;
+    }
+
+    function buildWeekdays(){
+      return APP.weekdays.map(function (wday){
+        return { day: wday };
+      });
+    }
+
+    function getDefaultPlaceId(){
+      return $auth.user.current_place_id; // jshint ignore:line
     }
 
     function closeModal() {
@@ -43,7 +65,9 @@
         $ionicLoading.show({
           template: '{{::("globals.saving"|translate)}}'
         });
-        OfficesService.createOffice(officesVm.office).then(function success(resp){
+        OfficesService.createOffice(
+          officesVm.office
+        ).then(function success(resp){
           $ionicLoading.hide().then(function(){
             officesVm.offices.push(resp.provider_office); //jshint ignore:line
             $ionicPopup.alert({

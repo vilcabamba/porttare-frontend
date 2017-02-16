@@ -2,71 +2,10 @@
 
 angular
   .module('porttare.config')
-  .config(routes);
+  .config(appRoutes);
 
-function routes($stateProvider, $urlRouterProvider) {
+function appRoutes($stateProvider) {
   $stateProvider
-
-  .state('login', {
-    url: '/login',
-    controller: 'LoginController',
-    controllerAs: 'loginVm',
-    templateUrl: 'templates/login/login.html',
-    resolve: {
-      auth: accessIfUserNotAuth
-    }
-  })
-  .state('register', {
-    url: '/register',
-    controller: 'RegisterController',
-    controllerAs: 'registerVm',
-    templateUrl: 'templates/register/register.html',
-    resolve: {
-      auth: accessIfUserNotAuth
-    }
-  })
-  .state('reset', {
-    url: '/reset',
-    controller: 'ResetController',
-    controllerAs: 'resetVm',
-    templateUrl: 'templates/reset/reset.html',
-    resolve: {
-      auth: accessIfUserAuth
-    }
-  })
-  .state('send', {
-    url: '/send',
-    controller: 'ResetController',
-    controllerAs: 'resetVm',
-    templateUrl: 'templates/reset/send.html',
-    resolve: {
-      auth: accessIfUserNotAuth
-    }
-  })
-  .state('intro', {
-    url: '/intro',
-    templateUrl: 'templates/intro/intro.html',
-    controller: 'IntroController',
-    controllerAs: 'introVm',
-    resolve: {
-      auth: accessIfUserNotAuth
-    }
-  })
-  .state('prelogin', {
-    url: '/prelogin',
-    templateUrl: 'templates/prelogin/prelogin.html',
-    controller: 'PreController',
-    controllerAs: 'preVm',
-    resolve: {
-      auth: accessIfUserNotAuth
-    }
-  })
-  .state('error', {
-    url: '/error',
-    templateUrl: 'templates/error/error.html',
-    controller: 'ErrorController',
-    controllerAs: 'errVm'
-  })
   .state('app', {
     url: '/app',
     abstract: true,
@@ -88,15 +27,34 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   })
-  .state('termsAndCond', {
-    url: '/terms-and-conditions',
-    templateUrl: 'templates/terms-and-cond/terms-and-cond.html',
-    controller: 'TermsAndCondController',
-    controllerAs: 'terCondVm'
+  .state('app.places', {
+    url: '/places',
+    abstract: true
+  })
+  .state('app.places.index', {
+    url: '/',
+    cache: false,
+    views: {
+      'menuContent@app': {
+        controllerAs: 'placesVm',
+        controller: 'PlacesController',
+        templateUrl: 'templates/places/index.html',
+        resolve: {
+          places: function (PlacesService){
+            return PlacesService.getPlaces();
+          }
+        }
+      }
+    }
   })
   .state('app.cart', {
     url: '/cart',
-    abstract: true
+    abstract: true,
+    resolve: {
+      auth: function (AuthorizationService) {
+        return AuthorizationService.choosePlaceIfNotPresent();
+      }
+    }
   })
   .state('app.cart.index', {
     url: '/',
@@ -127,7 +85,12 @@ function routes($stateProvider, $urlRouterProvider) {
   })
   .state('app.categories', {
     url: '/categories',
-    abstract: true
+    abstract: true,
+    resolve: {
+      auth: function(AuthorizationService){
+        return AuthorizationService.choosePlaceIfNotPresent();
+      }
+    }
   })
   .state('app.categories.index', {
     url: '/',
@@ -142,6 +105,7 @@ function routes($stateProvider, $urlRouterProvider) {
   })
   .state('app.categories.show', {
     url: '/:id',
+    cache: false,
     views: {
       'menuContent@app': {
         templateUrl: 'templates/category/show.html',
@@ -216,15 +180,34 @@ function routes($stateProvider, $urlRouterProvider) {
   })
   .state('app.provider', {
     url: '/provider',
-    abstract: true
+    abstract: true,
+    resolve: {
+      provider: function($auth,$state,APP,$ionicLoading){
+        $auth.validateUser().then(function userAuthorized(user) {
+          if (!user.provider_profile && !user.courier_profile){ //jshint ignore:line
+            return;
+          }
+          if(!user.provider_profile){ //jshint ignore:line
+            $state.go(APP.successState).then($ionicLoading.hide);
+          }
+        });
+      },
+      auth: function(AuthorizationService){
+        return AuthorizationService.choosePlaceIfNotPresent();
+      }
+    }
   })
   .state('app.provider.welcome', {
     url: '/welcome',
     views: {
       'menuContent@app': {
-        templateUrl: 'templates/provider/welcome.html',
-        controller: 'ProviderController',
-        controllerAs: 'providerVm1'
+        cache: false,
+        templateUrl: 'templates/provider/welcome.html'
+      }
+    },
+    resolve: {
+      auth: function(AuthorizationService){
+        return AuthorizationService.notShowWelcome('provider.items.index');
       }
     }
   })
@@ -232,9 +215,24 @@ function routes($stateProvider, $urlRouterProvider) {
     url: '/new',
     views: {
       'menuContent@app': {
+        cache: false,
         templateUrl: 'templates/provider/new.html',
         controller: 'ProviderController',
-        controllerAs: 'providerVm'
+        controllerAs: 'providerVm',
+        resolve: {
+          auth: function(AuthorizationService){
+            return AuthorizationService.notShowWelcome('provider.items.index');
+          },
+          providerCategories: function (CategoriesService,
+                                        ErrorHandlerService){
+            return CategoriesService
+                     .getCategories()
+                     .then(function (response){
+                       return response.data.provider_categories; // jshint ignore:line
+                     })
+                     .catch(ErrorHandlerService.handleCommonErrorGET);
+          }
+        }
       }
     }
   })
@@ -252,193 +250,35 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   })
-  .state('provider', {
-    url: '/provider',
-    abstract: true,
-    templateUrl: 'templates/menu/menu-provider.html',
-    resolve: {
-      auth: function ( UserAuthService) {
-              return UserAuthService.checkIfEnabledProvider();
-            }
-    }
-  })
-  .state('provider.profile-provider', {
-    url: '/profile',
-    abstract: true,
-    views: {
-      'menuContent': {
-        templateUrl:'templates/profile-provider/profileProvider.html'
-      }
-    }
-  })
-  .state('provider.profile-provider.info', {
-    url: '/info',
-    views: {
-      'menuContent@profileProviderInfo': {
-        templateUrl: 'templates/profile-provider/info.html',
-        controller: 'ProfileProviderUpdateController',
-        controllerAs: 'providerProfileVm'
-      }
-    }
-  })
-  .state('provider.profile-provider.metrics', {
-    url: '/metrics',
-    views: {
-      'menuContent@profileProviderMetrics': {
-        templateUrl: 'templates/profile-provider/metrics.html'
-      }
-    }
-  })
-  .state('provider.profile-provider.managements', {
-    url: '/managements',
-    views: {
-      'menuContent@profileProviderManagements': {
-        templateUrl: 'templates/profile-provider/managements.html'
-      }
-    }
-  })
-  .state('provider.items', {
-    url: '/items',
-    abstract: true
-  })
-  .state('provider.items.index', {
-    url: '/',
-    cache: false,
-    views: {
-      'menuContent@provider': {
-        templateUrl: 'templates/item/items.html',
-        controller: 'ItemsController',
-        controllerAs: 'itemsVm',
-        resolve: {
-          apiResources: function (ItemsService) {
-            return ItemsService.getItems();
-          }
-        }
-      }
-    }
-  })
-  .state('provider.items.show', {
-    url: '/:id',
-    views: {
-      'menuContent@provider': {
-        templateUrl: 'templates/item/show.html',
-        controller: 'ProviderItemController',
-        controllerAs: 'providerItemVm',
-        resolve: {
-          apiResources: function ($ionicLoading, $stateParams, ItemsService, ErrorHandlerService) {
-            $ionicLoading.show({
-              template: '{{::("globals.loading"|translate)}}'
-            });
-
-            return ItemsService.getItem($stateParams)
-              .then(function success(response) {
-                $ionicLoading.hide();
-                return response;
-              }, ErrorHandlerService.handleCommonErrorGET);
-          }
-        }
-      }
-    }
-  })
-  .state('provider.clients', {
-    url: '/clients',
-    abstract: true
-  })
-  .state('provider.clients.index', {
-    url: '/',
-    cache: false,
-    views: {
-      'menuContent@provider': {
-        templateUrl: 'templates/client/clients.html',
-        controller: 'ClientsController',
-        controllerAs: 'clientsVm',
-        resolve: {
-          providerClients: function (ClientsService, ErrorHandlerService) {
-            return ClientsService
-                    .getClients()
-                    .catch(ErrorHandlerService.handleCommonErrorGET);
-          }
-        }
-      }
-    }
-  })
-  .state('provider.offices', {
-    cache: false,
-    url: '/offices',
-    views: {
-      'menuContent@provider': {
-        templateUrl: 'templates/offices/offices.html',
-        controller: 'OfficesController',
-        controllerAs: 'officesVm'
-      }
-    }
-  })
-  .state('provider.office', {
-    url: '/office/:id',
-    views: {
-      'menuContent@provider': {
-        templateUrl: 'templates/offices/detail.html',
-        controller: 'OfficeController',
-        controllerAs: 'officesVm'
-      }
-    }
-  })
-  .state('provider.orders', {
-    url: '/customer-orders',
-    abstract: true
-  })
-  .state('provider.orders.index', {
-    url: '/:status',
-    cache: false,
-    params: {
-      status: 'submitted'
-    },
-    views: {
-      'menuContent@provider': {
-        templateUrl: 'templates/providers/orders/index.html',
-        controller: 'ProviderOrdersController',
-        controllerAs: 'poVm',
-        resolve: {
-          status: function ($stateParams){
-            return $stateParams.status;
-          }
-        }
-      }
-    }
-  })
-  .state('provider.orders.show', {
-    url: '/:id',
-    params: {
-      customerOrder: null
-    },
-    views: {
-      'menuContent@provider': {
-        templateUrl: 'templates/providers/orders/show.html',
-        controller: 'ProviderOrderShowController',
-        controllerAs: 'providerOrderShowVM',
-        resolve: {
-          customerOrder: function ($stateParams, ProviderCustomerOrdersService) {
-            if ($stateParams.customerOrder) {
-              return $stateParams.customerOrder;
-            } else {
-              var customerOrderId = $stateParams.id;
-              return ProviderCustomerOrdersService
-                       .getCustomerOrder(customerOrderId);
-            }
-          }
-        }
-      }
-    }
-  })
   .state('app.courier', {
     url: '/courier',
-    abstract: true
+    abstract: true,
+    resolve:{
+      auth: function($auth,$state,APP,$ionicLoading){
+        $auth.validateUser().then(function userAuthorized(user) {
+          if (!user.provider_profile && !user.courier_profile){ //jshint ignore:line
+            return;
+          }
+          if(!user.courier_profile){ //jshint ignore:line
+            $state.go(APP.successState).then($ionicLoading.hide);
+          }
+        });
+      },
+      places: function (PlacesService){
+        return PlacesService.getPlaces();
+      }
+    }
   })
   .state('app.courier.welcome', {
     url: '/welcome',
     views: {
       'menuContent@app': {
         templateUrl: 'templates/courier/welcome.html',
+        resolve: {
+          auth: function(AuthorizationService){
+            return AuthorizationService.notShowWelcome('courier.orders');
+          }
+        },
         controller: 'CourierController',
         controllerAs: 'courierWelVm'
       }
@@ -449,46 +289,29 @@ function routes($stateProvider, $urlRouterProvider) {
     views: {
       'menuContent@app': {
         templateUrl: 'templates/courier/new.html',
+        resolve: {
+          auth: function(AuthorizationService){
+            return AuthorizationService.notShowWelcome('courier.orders');
+          }
+        },
         controller: 'CourierController',
         controllerAs: 'courierVm'
-      }
-    }
-  })
-  .state('courier', {
-    url: '/courier',
-    abstract: true,
-    templateUrl: 'templates/menu/menu-courier.html'
-  })
-  .state('courier.orders', {
-    url: '/orders',
-    views: {
-      'menuContent@courier': {
-        templateUrl: 'templates/courier/orders.html',
-        controller: 'OrdersController',
-        controllerAs: 'orVm',
-        resolve: {
-          orders: function (CourierService) {
-            return CourierService.shippingRequests().then(function (res) {
-              return res;
-            });
-          }
-        }
       }
     }
   })
   .state('app.profile', {
     url: '/profile',
     abstract: true,
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/profile/profile.html',
+    resolve: {
+      auth: function (AuthorizationService) {
+        return AuthorizationService.choosePlaceIfNotPresent();
       }
     }
   })
   .state('app.profile.info', {
     url: '/info',
     views: {
-      'menuContent@profileInfo': {
+      'menuContent@app': {
         templateUrl: 'templates/profile/info/info.html',
         controller: 'ProfileInfoController',
         controllerAs: 'piVm'
@@ -503,7 +326,7 @@ function routes($stateProvider, $urlRouterProvider) {
     url: '/',
     cache: false,
     views: {
-      'menuContent@addressesIndex': {
+      'menuContent@app': {
         templateUrl: 'templates/profile/addresses/index.html',
         controller: 'ProfileAddressesController',
         controllerAs: 'pfaVm',
@@ -520,7 +343,7 @@ function routes($stateProvider, $urlRouterProvider) {
   .state('app.profile.addresses.new', {
     url: '/new',
     views: {
-      'menuContent@addressesIndex': {
+      'menuContent@app': {
         templateUrl: 'templates/profile/addresses/actions.html',
         controller: 'ProfileCreateAddressesController',
         controllerAs: 'pfaVm'
@@ -530,7 +353,7 @@ function routes($stateProvider, $urlRouterProvider) {
   .state('app.profile.addresses.update', {
     url: '/update/:id',
     views: {
-      'menuContent@addressesIndex': {
+      'menuContent@app': {
         templateUrl: 'templates/profile/addresses/actions.html',
         controller: 'ProfileUpdateAddressesController',
         controllerAs: 'pfaVm',
@@ -538,11 +361,10 @@ function routes($stateProvider, $urlRouterProvider) {
           id: null
         },
         resolve: {
-          data: function ($ionicLoading, $stateParams, ProfileAddressesService, ErrorHandlerService) {
+          data: function ($stateParams, ProfileAddressesService, ErrorHandlerService) {
             if ($stateParams.id) {
               return ProfileAddressesService.getAddress($stateParams.id)
               .then(function success(res) {
-                $ionicLoading.hide();
                 return res;
               }, ErrorHandlerService.handleCommonErrorGET);
             }
@@ -550,10 +372,6 @@ function routes($stateProvider, $urlRouterProvider) {
         }
       }
     }
-  })
-  .state('disabledUserError', {
-    url: '/disabled-user',
-    templateUrl: 'templates/error/disabled-user-error.html'
   })
   .state('app.wishlist', {
     url: '/wishlist',
@@ -590,31 +408,6 @@ function routes($stateProvider, $urlRouterProvider) {
         templateUrl: 'templates/billing-addresses/index.html',
         controller: 'BillingAddressesController',
         controllerAs: 'billingAddressesVm'
-      }
-    }
-  })
-  .state('provider.dispatchers', {
-    url: '/dispatchers',
-    abstract: true
-  })
-  .state('provider.dispatchers.index', {
-    cache: false,
-    url: '/',
-    views: {
-      'menuContent@provider': {
-        templateUrl: 'templates/dispatchers/dispatchers.html',
-        controller: 'DispatchersController',
-        controllerAs: 'dispatchersVm'
-      }
-    }
-  })
-  .state('provider.dispatchers.show', {
-    url: '/:id',
-    views: {
-      'menuContent@provider': {
-        templateUrl: 'templates/dispatchers/detail.html',
-        controller: 'DispatcherController',
-        controllerAs: 'dispatchersVm'
       }
     }
   })
@@ -664,31 +457,6 @@ function routes($stateProvider, $urlRouterProvider) {
       }
     }
   });
-
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise(function ($injector, $location) {
-    if (isResetPassword($location.absUrl())) {
-      return '/reset';
-    } else {
-      return '/prelogin';
-    }
-  });
-
-  function isResetPassword(href) {
-    var param = href.match(/reset_password=([^&]+)/);
-    return (param && param[1] === 'true') ? true : false;
-  }
-
-  function accessIfUserNotAuth($auth, $state, $ionicLoading, APP) {
-    return $auth.validateUser()
-      .then(function userAuthorized() {
-        $state.go(APP.successState).then(function () {
-          $ionicLoading.hide();
-        });
-      }, function userNotAuthorized() {
-        return;
-      });
-  }
 
   function accessIfUserAuth($auth, $state, APP, UserAuthService, CartService) {
     return $auth.validateUser()

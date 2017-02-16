@@ -11,20 +11,12 @@
                                    BillingAddressesService,
                                    PusherService) {
     var customerOrderVm = this;
-    customerOrderVm.VAT = 0.12;
-
     customerOrderVm.customerOrder = customerOrder;
-    customerOrderVm.customerAddress = null;
-    customerOrderVm.customerBillingAdress = null;
-    customerOrderVm.addressLine1 = null;
-    customerOrderVm.addressLine2 = null;
-
     init();
 
     function init() {
-      getAddress();
-      getBillingAddress();
-      getSummary();
+      customerOrderVm.customerBillingAddress = getBillingAddress();
+      getSumaryProvider();
 
       $scope.$on('$ionicView.enter', wsSubscribe);
       $scope.$on('$ionicView.leave', wsUnsubscribe);
@@ -49,71 +41,27 @@
     function customerOrderUpdated(response) {
       $scope.$apply(function(){
         customerOrderVm.customerOrder = response.customer_order; // jshint ignore:line
+        getSumaryProvider();
       });
     }
 
-    function getAddress(){
-      var customerAddressId = customerOrderVm.customerOrder.customer_address_id; // jshint ignore:line
-
-      if(customerAddressId){
-        ProfileAddressesService
-          .getAddress(customerAddressId)
-            .then(
-              function(res){
-                customerOrderVm.customerAddress = res;
-
-                customerOrderVm.addressLine1 = getAddressLine1();
-                customerOrderVm.addressLine2 = getAddressLine2();
-              }
-            );
-      }
-    }
-
     function getBillingAddress(){
-      var customerBillingAddressId = customerOrderVm.customerOrder.customer_billing_address_id; // jshint ignore:line
-
-      if(customerBillingAddressId){
-        BillingAddressesService
-          .getBillingAddress(customerBillingAddressId)
-            .then(
-              function(res){
-                customerOrderVm.customerBillingAddress = res;
-              }
-            );
-      }
+      return customerOrderVm.customerOrder.customer_billing_address; // jshint ignore:line
     }
 
-    function getSummary(){
-      if(customerOrderVm.customerOrder){
-        customerOrderVm.customerOrder.subtotalVATCents = Math.round( customerOrderVm.customerOrder.subtotal_items_cents*customerOrderVm.VAT ); // jshint ignore:line
-        customerOrderVm.customerOrder.totalCents = customerOrderVm.customerOrder.subtotal_items_cents + customerOrderVm.customerOrder.subtotalVATCents; // jshint ignore:line
-      }
+    function getSumaryProvider(){
+      angular.forEach(customerOrderVm.customerOrder.provider_profiles, function (provider) {// jshint ignore:line
+        provider.subTotalCentsOrderProvider = getSubTotalCentsProviderItems(provider);
+        provider.totalCentsOrderProvider = provider.subTotalCentsOrderProvider+ provider.customer_order_delivery.shipping_fare_price_cents;// jshint ignore:line
+      });
     }
 
-    function getAddressLine1(){
-      var line1 = '';
-      if(
-          customerOrderVm.customerAddress &&
-          ( customerOrderVm.customerAddress.parroquia || customerOrderVm.customerAddress.barrio )
-        ){
-        line1 += customerOrderVm.customerAddress.parroquia ? ( customerOrderVm.customerAddress.parroquia + ', ' ) :'';
-        line1 += customerOrderVm.customerAddress.barrio ? customerOrderVm.customerAddress.barrio : '';
-      }
-
-      return line1;
+    function getSubTotalCentsProviderItems(provider) {
+      return provider.customer_order_items.reduce(function (total, item) { // jshint ignore:line
+        total += (item.provider_item_precio_cents * item.cantidad); // jshint ignore:line
+        return total;
+      }, 0);
     }
 
-    function getAddressLine2(){
-      var line2 = '';
-      if(
-          customerOrderVm.customerAddress &&
-          ( customerOrderVm.customerAddress.ciudad || customerOrderVm.customerAddress.codigo_postal ) // jshint ignore:line
-        ){
-        line2 += customerOrderVm.customerAddress.ciudad ? ( customerOrderVm.customerAddress.ciudad + ', ' ) :'';
-        line2 += customerOrderVm.customerAddress.codigo_postal ? customerOrderVm.customerAddress.codigo_postal : ''; // jshint ignore:line
-      }
-
-      return line2;
-    }
   }
 })();

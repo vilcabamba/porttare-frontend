@@ -2,8 +2,11 @@
   // overriding popup for ion datetime picker
   .popup-head {
     h3 {
-      font-family: Montserrat-SemiBold;
+      font-family: Montserrat-Regular;
     }
+  }
+  .popup-sub-title {
+    font-family: Montserrat-Light;
   }
   select, .year-input input {
     font-family: Montserrat-Regular;

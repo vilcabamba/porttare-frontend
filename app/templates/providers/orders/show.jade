@@ -10,32 +10,66 @@ ion-view
       h3 {{ ("order.delivery.status." + providerOrderShowVM.customerOrderDelivery.status | translate) }}
       h4 {{ ::("orders.orderDetails" | translate) }}
 
+    .list.list-inset.resource-details-table(
+      ng-if="providerOrderShowVM.customerOrderDelivery.dispatch_at"
+    )
+      .row
+        .col.col.label {{ ::("provider.estimatedTimeForPreparation" | translate ) }}
+        .col.value
+          | {{ ::providerOrderShowVM.customerOrderDelivery.preparation_time_mins }}
+          | {{ ::("provider.estimatedTimeForPreparationUnit" | translate) }}
+      .row(
+        ng-if="providerOrderShowVM.customerOrderDelivery.status === 'accepted'"
+      )
+        .col.col.label {{ ::("order.timeForDispatch" | translate ) }}
+        .col.value
+          humanized-countdown-time(
+            show-past="true"
+            time="providerOrderShowVM.customerOrderDelivery.dispatch_at"
+          )
+      .row
+        .col.col.label {{ ::("order.dispatchAt" | translate ) }}
+        .col.value
+          | {{ ::providerOrderShowVM.customerOrderDelivery.dispatch_at | toDate | formatDate }}
+
     .list.list-inset.resource-details-table
       .row
         .col.col.label {{ ::("client.clientName" | translate ) }}
-        .col.value
-          | {{ ::providerOrderShowVM.customerBillingAddress.razon_social }}
-      .row
-        .col.col.label {{ ::("client.ruc" | translate ) }}
-        .col.value
-          | {{ ::providerOrderShowVM.customerBillingAddress.ruc }}
-      .row
-        .col.col.label {{ ::("client.email" | translate ) }}
-        .col.value
-          | {{ ::providerOrderShowVM.customerBillingAddress.email }}
-      .row
-        .col.col.label {{ ::("client.telefono" | translate ) }}
-        .col.value
-          | {{ ::providerOrderShowVM.customerBillingAddress.telefono }}
-      .row
-        .col.col.label {{ ::("client.direccion" | translate ) }}
-        .col.value
-          | {{ ::providerOrderShowVM.customerBillingAddress.direccion }}
-      .row
-        .col.col.label {{ ::("client.ciudad" | translate ) }}
-        .col.value
-          | {{ ::providerOrderShowVM.customerBillingAddress.ciudad }}
-      .row
+        .col.value {{ ::providerOrderShowVM.customerProfileName }}
+      .narrow-row-wrapper(
+        ng-if="::providerOrderShowVM.customerOrder.anon_billing_address"
+      )
+        .row
+          .col.col.label {{ ::("client.razonSocial" | translate ) }}
+          .col.value {{ ::("cart.anonBillingAddress" | translate) }}
+      .narrow-row-wrapper(
+        ng-if="::!providerOrderShowVM.customerOrder.anon_billing_address"
+      )
+        .row
+          .col.col.label {{ ::("client.razonSocial" | translate ) }}
+          .col.value
+            | {{ ::providerOrderShowVM.customerBillingAddress.razon_social }}
+        .row
+          .col.col.label {{ ::("client.ruc" | translate ) }}
+          .col.value
+            | {{ ::providerOrderShowVM.customerBillingAddress.ruc }}
+        .row
+          .col.col.label {{ ::("client.email" | translate ) }}
+          .col.value
+            | {{ ::providerOrderShowVM.customerBillingAddress.email }}
+        .row
+          .col.col.label {{ ::("client.telefono" | translate ) }}
+          .col.value
+            | {{ ::providerOrderShowVM.customerBillingAddress.telefono }}
+        .row
+          .col.col.label {{ ::("client.direccion" | translate ) }}
+          .col.value
+            | {{ ::providerOrderShowVM.customerBillingAddress.direccion }}
+        .row
+          .col.col.label {{ ::("client.ciudad" | translate ) }}
+          .col.value
+            | {{ ::providerOrderShowVM.customerBillingAddress.ciudad }}
+      .row.narrow-row-wrapper.row--top-border
         .col.col.label {{ ::("order.submittedAt" | translate) }}
         .col.value
           | {{ ::providerOrderShowVM.customerOrder.submitted_at | formatDate }}
@@ -72,9 +106,25 @@ ion-view
     .list.list-inset(
       ng-if="providerOrderShowVM.shouldDisplayProviderAnswerForm"
     )
-      button.button.button-block.button-outline.button-energized(
-        ng-click="providerOrderShowVM.acceptOrder()"
-      ) {{ ::("provider.acceptOrder" | translate) }}
+      h2 {{ ::("provider.respondToCustomerRequestLegend" | translate) }}
+
+      .resource-form.inline-selectize-wrapper
+        label.item.item-input.item-input--no-borders.item-stacked-label.label--downcase(
+          ng-class="{'item-error': providerOrderShowVM.errors.dispatchTimeError}"
+        )
+          .selectize-wrapper
+            input(
+              provider-estimated-time-for-dispatch-selectize
+              bind-to="providerOrderShowVM.customerOrder.estimatedTimeForPreparation"
+              placeholder="- min"
+            )
+
+          .input-label
+            | {{ ::("provider.estimatedTimeForPreparation" | translate) }}
+
+        button.button.button-block.button-outline.button-energized(
+          ng-click="providerOrderShowVM.acceptOrder()"
+        ) {{ ::("provider.acceptOrder" | translate) }}
 
       .resource-form
         label.item.item-input.item-stacked-label

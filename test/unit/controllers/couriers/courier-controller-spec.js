@@ -14,7 +14,9 @@
       $state,
       $auth,
       $ionicPopup,
-      stateRedirect;
+      stateRedirect,
+      $ionicScrollDelegate,
+      places;
 
     beforeEach(module('porttare.controllers'));
 
@@ -37,6 +39,9 @@
         $ionicPopup = {
           alert: sinon.stub()
         };
+        $ionicScrollDelegate = {
+          scrollTop: sinon.stub()
+        };
         CourierService = {
           createNewCourier: sinon.stub().returns(deferCreateCourier.promise)
         };
@@ -47,6 +52,7 @@
           handleCommonErrorGET: sinon.stub()
         };
         stateRedirect = 'courier.orders';
+        places = [ 0 ];
       })
     );
 
@@ -57,15 +63,17 @@
           $ionicLoading: $ionicLoading,
           $ionicPopup: $ionicPopup,
           $state: $state,
+          $ionicScrollDelegate: $ionicScrollDelegate,
           ErrorHandlerService: ErrorHandlerService,
-          CourierService: CourierService
+          CourierService: CourierService,
+          places: places
         };
 
         ctrl = $controller('CourierController', dependencies);
       });
 
       it('should load array with options', function () {
-        expect(ctrl.locations).to.not.empty; //jshint ignore:line
+        expect(ctrl.places).to.not.empty; //jshint ignore:line
         expect(ctrl.licenses).to.not.empty; //jshint ignore:line
         expect(ctrl.mobilization).to.not.empty; //jshint ignore:line
       });
@@ -88,8 +96,10 @@
           $auth: $auth,
           $ionicLoading: $ionicLoading,
           $ionicPopup: $ionicPopup,
+          $ionicScrollDelegate: $ionicScrollDelegate,
           $state: $state,
-          CourierService: CourierService
+          CourierService: CourierService,
+          places: places
         };
 
         ctrl = $controller('CourierController', dependencies);

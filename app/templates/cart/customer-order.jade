@@ -6,9 +6,16 @@
       span
         order-items-total(
           order-items="providerProfile.customer_order_items"
+          currency="{{cartVm.cart.subtotal_items_currency}}"
         )
-      span + $1.50
-      span {{ ::('cart.shippingCosts' | translate) }}
+      span(
+        ng-if="providerProfile.customer_order_delivery.delivery_method === 'shipping'"
+      )
+        span
+          | +
+        price(amount="{{providerProfile.customer_order_delivery.shipping_fare_price_cents}}"
+              currency="{{cartVm.cart.subtotal_items_currency}}")
+        span {{ ::('cart.shippingCosts' | translate) }}
 
     .provider-profile--title
       | {{ ::providerProfile.nombre_establecimiento }}

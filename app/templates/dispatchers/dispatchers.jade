@@ -3,6 +3,10 @@ ion-view(
 )
   ion-nav-title
     .alt-logo
+
+  ion-nav-buttons(side="right")
+    provider-notifications
+
   ion-content.resource-collection
     .row
       label.search-input
@@ -23,7 +27,7 @@ ion-view(
       .row.table-headers
         .col.col-60 {{::("dispatchers.dispatcher"|translate)}}
         .col
-      
+
       .col.without-items(ng-if="dispatchersVm.dispatchers.length === 0")
         p {{::("dispatchers.dispatcherAny"|translate)}}
         p {{::("dispatchers.dispacherClick"|translate)}}

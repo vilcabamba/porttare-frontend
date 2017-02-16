@@ -17,13 +17,17 @@
 
     return service;
 
-    function getObjects(url) {
+    function getObjects(url, modelName) {
       return $http({
         method: 'GET',
         url: ENV.apiHost + url
       })
         .then(function success(resp) {
-          return resp.data;
+          var collection = resp.data;
+          if (modelName) {
+            collection = collection[modelName];
+          }
+          return collection;
         });
     }
 
@@ -40,7 +44,7 @@
 
     function editObject(data, url) {
       return $http({
-        method: 'PUT',
+        method: 'PATCH',
         url: ENV.apiHost + url + data.id,
         data: data
       })
@@ -49,8 +53,14 @@
         });
     }
 
-    function getObject(url, objectId) {
-      return getObjects(url + objectId);
+    function getObject(url, objectId, modelName) {
+      return getObjects(url + objectId).then(function(resp){
+        var resource = resp;
+        if (modelName) {
+          resource = resource[modelName];
+        }
+        return resource;
+      });
     }
 
     function deleteObject(objectId, url){

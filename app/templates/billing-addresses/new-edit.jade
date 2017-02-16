@@ -20,7 +20,7 @@ ion-modal-view
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': billingAddressesVm.form.ruc.$touched && billingAddressesVm.form.ruc.$invalid}"
           )
-          span.input-label {{::("client.ruc"|translate|uppercase)}}
+          span.input-label {{::("client.ruc"|translate|uppercase)}} *
           input(
             type="text"
             name="ruc"
@@ -36,7 +36,7 @@ ion-modal-view
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': billingAddressesVm.form.razon_social.$touched && billingAddressesVm.form.razon_social.$invalid}"
         )
-          span.input-label {{::("provider.businessName"|translate|uppercase)}}
+          span.input-label {{::("provider.businessName"|translate|uppercase)}} *
           input(
             type='text'
             name="razon_social"
@@ -52,7 +52,7 @@ ion-modal-view
         label.item.item-input.item-stacked-label(
           ng-class="{'item-error': billingAddressesVm.form.direccion.$touched && billingAddressesVm.form.direccion.$invalid}"
         )
-          span.input-label {{::("client.direccion"|translate|uppercase)}}
+          span.input-label {{::("client.direccion"|translate|uppercase)}} *
           input(
             type='text'
             name="direccion"

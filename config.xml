@@ -15,10 +15,6 @@
     <plugin name="cordova-plugin-statusbar" spec="~2.2.0" />
     <plugin name="cordova-plugin-geolocation" spec="~2.4.0" />
     <plugin name="cordova-plugin-whitelist" spec="~1.3.0" />
-    <plugin name="phonegap-facebook-plugin" spec="https://github.com/Wizcorp/phonegap-facebook-plugin.git">
-        <variable name="APP_ID" value="1088631447858526" />
-        <variable name="APP_NAME" value="porttare-dev" />
-    </plugin>
     <platform name="android">
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
@@ -45,4 +41,12 @@
         <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value=" " />
     </plugin>
+    <plugin name="cordova-plugin-facebook4" spec="https://github.com/jeduan/cordova-plugin-facebook4.git#6911f2d1b43a82254c78706bf03e314f3275a94f">
+        <variable name="APP_ID" value="1088631447858526" />
+        <variable name="APP_NAME" value="porttare-dev" />
+    </plugin>
+    <plugin name="phonegap-plugin-push" spec="1.8.0">
+        <param name="SENDER_ID" value="1057338916791" />
+    </plugin>
+    <engine name="android" spec="~4.1.1" />
 </widget>

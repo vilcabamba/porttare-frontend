@@ -7,7 +7,6 @@
 
   function ProviderItemController($scope,
                                   $state,
-                                  $filter,
                                   $translate,
                                   $ionicPopup,
                                   $ionicLoading,
@@ -35,9 +34,6 @@
 
     function init() {
       providerItemVm.imagesLoaded = true;
-      providerItemVm.providerItem.precio = $filter('priceCurrency')(
-        providerItemVm.providerItem.precio_cents // jshint ignore:line
-      );
     }
 
     function getProviderItemCategories(){
@@ -82,6 +78,7 @@
       modalScope.modalVm.submitProcess = editItem;
       modalScope.modalVm.concatImages = concatImages;
       modalScope.modalVm.imagesUrls = loadImagesUrls();
+      modalScope.modalVm.availableCurrencies = getAvailableCurrencies();
       ModalService.showModal({
         parentScope: modalScope,
         fromTemplateUrl: 'templates/item/new-edit.html'
@@ -133,6 +130,10 @@
         focusFirstInput: false,
         fromTemplateUrl: 'templates/item/as-customer.html'
       });
+    }
+
+    function getAvailableCurrencies(){
+      return [providerItemVm.providerItem.precio_currency]; // jshint ignore:line
     }
 
     function getProviderItemCategoryName() {

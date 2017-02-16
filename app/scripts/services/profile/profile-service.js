@@ -80,7 +80,7 @@
     }
 
     function hasImageFile(user){
-      return user.custom_image && !user.custom_image.url;
+      return user.custom_image && user.custom_image instanceof File; //jshint ignore: line
     }
   }
 })();

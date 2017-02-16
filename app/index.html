@@ -48,6 +48,10 @@
     <script src="bower_components/array-find/index.js"></script>
     <script src="bower_components/mdn-array.prototype.includes/index.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/array-polyfill/array-polyfill.js"></script>
+    <script src="bower_components/angular-input-match/dist/angular-input-match.min.js"></script>
+    <script src="bower_components/number-is-integer/is-integer.js"></script>
+    <script src="bower_components/Geolib/dist/geolib.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -63,10 +67,16 @@
     <script src="scripts/config/translations-config.js"></script>
     <script src="scripts/config/app-constants.js"></script>
     <script src="scripts/config/http-provider.js"></script>
-    <script src="scripts/config/routes.js"></script>
+    <script src="scripts/config/routes/core-routes.js"></script>
+    <script src="scripts/config/routes/app-routes.js"></script>
+    <script src="scripts/config/routes/provider-routes.js"></script>
+    <script src="scripts/config/routes/courier-routes.js"></script>
     <script src="scripts/config/ionic-config.js"></script>
     <script src="scripts/config/moment-config.js"></script>
     <script src="scripts/config/touch-provider.js"></script>
+    <script src="scripts/config/status-bar.js"></script>
+    <script src="scripts/config/push-notifications.js"></script>
+    <script src="scripts/config/notification-handlers.js"></script>
     <!-- controllers -->
     <script src="scripts/controllers/site-controller.js"></script>
     <script src="scripts/controllers/login-controller.js"></script>
@@ -105,6 +115,9 @@
     <script src="scripts/controllers/customer/orders/customer-order-controller.js"></script>
     <script src="scripts/controllers/provider/orders-controller.js"></script>
     <script src="scripts/controllers/provider/order-show-controller.js"></script>
+    <script src="scripts/controllers/places-controller.js"></script>
+    <script src="scripts/controllers/provider/provider-main-controller.js"></script>
+    <script src="scripts/controllers/courier/courier-order-show-controller.js"></script>
     <!-- services -->
     <script src="scripts/services/geolocation-service.js"></script>
     <script src="scripts/services/interceptors-service.js"></script>
@@ -124,6 +137,7 @@
     <script src="scripts/services/profile/profile-addresses-service.js"></script>
     <script src="scripts/services/error-handler-service.js"></script>
     <script src="scripts/services/maps-service.js"></script>
+    <script src="scripts/services/map-directions-service.js"></script>
     <script src="scripts/services/cart-service.js"></script>
     <script src="scripts/services/user-auth-service.js"></script>
     <script src="scripts/services/wishlists-service.js"></script>
@@ -136,6 +150,12 @@
     <script src="scripts/services/pusher-service.js"></script>
     <script src="scripts/services/geocoding-service.js"></script>
     <script src="scripts/services/provider-customer-orders-service.js"></script>
+    <script src="scripts/services/authorization-service.js"></script>
+    <script src="scripts/services/places-service.js"></script>
+    <script src="scripts/services/user-accounts.js"></script>
+    <script src="scripts/services/tos-service.js"></script>
+    <script src="scripts/services/shipping-request-service.js"></script>
+    <script src="scripts/services/user-devices-service.js"></script>
     <!-- directives -->
     <script src="scripts/directives/back-button/back-button.js"></script>
     <script src="scripts/directives/autosize-input/autosize-input.js"></script>
@@ -154,14 +174,24 @@
     <script src="scripts/directives/user-image/user-image.js"></script>
     <script src="scripts/directives/selectize/selectize-provider-item-category.js"></script>
     <script src="scripts/directives/cart/order-delivery-nombre.js"></script>
+    <script src="scripts/directives/cart/order-delivery-method.js"></script>
+    <script src="scripts/directives/cart/order-delivery-schedule-date.js"></script>
     <script src="scripts/directives/maps/maps.js"></script>
     <script src="scripts/directives/places-search-box/places-search-box.js"></script>
+    <script src="scripts/directives/cart-button/cart-button.js"></script>
+    <script src="scripts/directives/sidebar-header-current-user/sidebar-header-current-user.js"></script>
+    <script src="scripts/directives/provider-notifications/provider-notifications.js"></script>
+    <script src="scripts/directives/sidebar-only-on-categories/sidebar-only-on-categories.js"></script>
+    <script src="scripts/directives/price/price.js"></script>
+    <script src="scripts/directives/humanized-countdown-time/humanized-countdown-time.js"></script>
+    <script src="scripts/directives/provider-estimated-time-for-dispatch-selectize/provider-estimated-time-for-dispatch-selectize.js"></script>
+    <script src="scripts/directives/distance-between/distance-between.js"></script>
+    <script src="scripts/directives/shipping-request-dispatch-at/shipping-request-dispatch-at.js"></script>
     <!-- filters -->
     <script src="scripts/filters/default-image.js"></script>
     <script src="scripts/filters/age.js"></script>
+    <script src="scripts/filters/to-date.js"></script>
     <script src="scripts/filters/format-date.js"></script>
-    <script src="scripts/filters/time-schedule.js"></script>
-    <script src="scripts/filters/price-currency.js"></script>
     <!-- endbuild -->
   </head>
 

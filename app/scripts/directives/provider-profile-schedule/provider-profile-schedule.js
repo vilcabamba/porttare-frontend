@@ -8,7 +8,7 @@
   function providerProfileSchedule() {
     var directive = {
       restrict: 'EA',
-      controller: ['$translate', providerProfileScheduleController],
+      controller: ['$filter', providerProfileScheduleController],
       controllerAs: 'ppSVm',
       bindToController: true,
       scope: {
@@ -19,29 +19,64 @@
 
     return directive;
 
-    function providerProfileScheduleController($translate) {
+    function providerProfileScheduleController($filter) {
       // jshint validthis:true
       var ppSVm = this,
-          providerOffices = ppSVm.providerProfile.provider_offices; // jshint ignore:line
+          providerOffices = ppSVm.providerProfile.provider_offices, // jshint ignore:line
+          mainOffice = providerOffices[0];
 
-      if (providerOffices.length > 0) {
-        var mainOffice = providerOffices[0];
+      ppSVm.isOpen = false;
 
-        // jshint ignore:start
-        ppSVm.openingTime = mainOffice.hora_de_apertura;
-        ppSVm.closingTime = mainOffice.hora_de_cierre;
-        // jshint ignore:end
+      if (mainOffice) {
+        showScheduleFor(mainOffice);
+      }
 
-        $translate(
-          'globals.shortDayNames.' + mainOffice.inicio_de_labores // jshint ignore:line
-        ).then(function (dayName) {
-          ppSVm.fromDay = dayName;
+      function showScheduleFor(office){
+        var dia = getTodayStr();
+
+        var officeWeekday = office.weekdays.find(function(wday){
+          return wday.day === dia;
         });
-        $translate(
-          'globals.shortDayNames.' + mainOffice.final_de_labores // jshint ignore:line
-        ).then(function (dayName) {
-          ppSVm.toDay = dayName;
-        });
+
+        if (officeWeekday) {
+          ppSVm.openingTime = convertToDate(
+            officeWeekday.hora_de_apertura // jshint ignore:line
+          );
+          ppSVm.closingTime = convertToDate(
+            officeWeekday.hora_de_cierre // jshint ignore:line
+          );
+          ppSVm.isOpen = getIsOpen(officeWeekday);
+        }
+      }
+
+      function getIsOpen(officeWeekday) {
+        if (angular.element.isEmptyObject(ppSVm.openingTime)) {
+          return;
+        }
+        if (angular.element.isEmptyObject(ppSVm.closingTime)) {
+          return;
+        }
+
+        var horaActual = moment(),
+            isInRange = horaActual.isBetween(
+          ppSVm.openingTime,
+          ppSVm.closingTime
+        );
+
+        if (officeWeekday.abierto && isInRange) {
+          return true;
+        }
+        return false;
+      }
+
+      function getTodayStr(){
+        return moment().locale('en').format('ddd').toLowerCase();
+      }
+
+      function convertToDate(horaStr){
+        if (!angular.element.isEmptyObject(horaStr)) {
+          return $filter('toDate')(horaStr, 'timeSchedule');
+        }
       }
     }
   }

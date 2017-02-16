@@ -1,4 +1,6 @@
 .resource-form {
+  font-family: Montserrat-Light;
+
   .fields-wrapper {
     padding-bottom: 25px;
 
@@ -179,6 +181,10 @@
       border-left: 0;
       border-right: 0;
       margin-bottom: 30px;
+    }
+
+    &--with-button {
+      padding-right: 40px;
     }
   }
 

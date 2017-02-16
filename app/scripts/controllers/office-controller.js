@@ -5,72 +5,57 @@
     .module('porttare.controllers')
     .controller('OfficeController', OfficeController);
 
-  function OfficeController(OfficesService,
+  function OfficeController(places,
+                            office,
+                            OfficesService,
                             ModalService,
-                            ErrorHandlerService,
                             $ionicLoading,
                             $ionicPopup,
                             $scope,
-                            $stateParams,
-                            $filter,
-                            MapsService) {
+                            $filter) {
 
     var officesVm = this;
+    officesVm.places = places;
     officesVm.showEditOffice = showEditOffice;
     officesVm.showDeleteOffice = showDeleteOffice;
     officesVm.closeModal = closeModal;
     officesVm.submitOffice = submitOffice;
     officesVm.submitOfficeDelete = submitOfficeDelete;
     officesVm.updateOfficeState = updateOfficeState;
-    getOffice();
+    officesVm.officeDetail = office;
+    officesVm.mapDefaultInCurrentGeolocation = false;
 
-    function getOffice(){
-      loading('globals.loading');
-      OfficesService.getOffice($stateParams.id).then(function success(resp){
-        officesVm.officeDetail = resp.provider_office; //jshint ignore:line
-        loadOffice();
-      }, ErrorHandlerService.handleCommonErrorGET);
+    initializeOffice();
+
+    function initializeOffice(){
+      officesVm.officeDetail.place = getCurrentPlace();
     }
 
-    function loadOffice(){
-      convertStringToDate();
-      MapsService.loadGMaps().then(function(){
-        $ionicLoading.hide();
-        var map = MapsService.renderMap('office-map');
-        MapsService.renderAddressMarker(map, {
-          address: officesVm.officeDetail.direccion,
-          componentRestrictions: {
-            country: 'EC',
-            locality: officesVm.officeDetail.ciudad
-          }
-        });
+    function getCurrentPlace(){
+      return places.find(function(place){
+        return place.id === officesVm.officeDetail.place_id; // jshint ignore:line
       });
-    }
-
-    function convertStringToDate(){
-      var officeDetail = officesVm.officeDetail;
-      officeDetail.hora_de_apertura = scheduleToDate( // jshint ignore:line
-        officeDetail.hora_de_apertura // jshint ignore:line
-      );
-      officeDetail.hora_de_cierre = scheduleToDate( // jshint ignore:line
-        officeDetail.hora_de_cierre // jshint ignore:line
-      );
-    }
-
-    function scheduleToDate(schedule) {
-      var toTime    = $filter('timeSchedule')(schedule),
-          toDateStr = $filter('formatDate')(
-            toTime,
-            'YYYY/MM/DD HH:mm Z'
-          );
-      return new Date(toDateStr);
     }
 
     function showEditOffice() {
       officesVm.office = angular.copy(officesVm.officeDetail);
+      officesVm.office.weekdays_attributes = weekdaysAttributesForEdit();  // jshint ignore:line
       ModalService.showModal({
         parentScope: $scope,
         fromTemplateUrl: 'templates/offices/new-edit.html'
+      });
+    }
+
+    function weekdaysAttributesForEdit() {
+      return officesVm.office.weekdays.map(function (weekday){
+        var newWeekday = angular.copy(weekday);
+        if (weekday.hora_de_apertura) { // jshint ignore:line
+          newWeekday.hora_de_apertura = toTimeSchedule(weekday.hora_de_apertura); // jshint ignore:line
+        }
+        if (weekday.hora_de_cierre) { // jshint ignore:line
+          newWeekday.hora_de_cierre = toTimeSchedule(weekday.hora_de_cierre); // jshint ignore:line
+        }
+        return newWeekday;
       });
     }
 
@@ -90,16 +75,12 @@
     function submitOffice(){
       if(officesVm.form.$valid){
         loading('globals.updating');
-        OfficesService.updateOffice(officesVm.office).then(function success(resp){
+        OfficesService.updateOffice(
+          officesVm.office
+        ).then(function success(resp){
           $ionicLoading.hide().then(function(){
             officesVm.officeDetail = resp.provider_office; //jshint ignore:line
-            loadOffice();
-            closeModal().then(function () {
-              $ionicPopup.alert({
-                title: 'Éxito',
-                template: '{{::("office.officeSuccessUpdate"|translate)}}'
-              });
-            });
+            closeModal().then(initializeOffice);
           });
         }, function(rpta){
           officesVm.messages = rpta.status===422 ? rpta.data.errors:undefined;
@@ -124,7 +105,17 @@
     }
 
     function updateOfficeState() {
-      console.log('updateOfficeState!' + officesVm.officeDetail.enabled);
+      OfficesService.updateOffice({
+        id: officesVm.officeDetail.id,
+        enabled: officesVm.officeDetail.enabled
+      }).then(function (response) {
+        officesVm.officeDetail = response.provider_office; // jshint ignore:line
+        initializeOffice();
+      });
+    }
+
+    function toTimeSchedule(timeStr){
+      $filter('toDate')(timeStr, 'timeSchedule').toDate();
     }
   }
 })();

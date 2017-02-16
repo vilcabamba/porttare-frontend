@@ -6,15 +6,13 @@ ion-side-menus(enable-menu-with-back-views='false')
         button.button.button-icon.button-clear.ion-navicon(menu-toggle='left')
     ion-nav-view(name='menuContent')
   ion-side-menu(side='left')
-    ion-header-bar.bar-stable
-    ion-content
+    ion-content.main-sidebar
+      ion-item.sidebar-header-current-user--wrapper(
+        menu-close=''
+      )
+        sidebar-header-current-user
+
       ion-list
-        ion-item(
-          menu-close
-          nav-clear
-          ui-sref='provider.profile-provider.info'
-        )
-          | {{::("menu.provider.profile"|translate)}}
         ion-item(
           menu-close
           nav-clear
@@ -30,11 +28,15 @@ ion-side-menus(enable-menu-with-back-views='false')
         ion-item(
           menu-close
           nav-clear
+          ui-sref='provider.profile-provider.info'
+        )
+          | {{::("menu.provider.account"|translate)}}
+        ion-item(
+          menu-close
+          nav-clear
           ui-sref='provider.clients.index'
         )
           | {{::("menu.provider.clients"|translate)}}
-        ion-item
-          | {{::("menu.provider.account"|translate)}}
         ion-item(
           menu-close
           nav-clear

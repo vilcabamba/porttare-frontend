@@ -47,7 +47,8 @@
       $provide.factory('$auth', function () {
         return {
           user: {
-            customer_order: []
+            customer_order: [],
+            current_place: { currency_iso_code: 'USD' }
           }
         };
       });
@@ -150,15 +151,6 @@
         $scope.$digest();
         expect($auth.user.customer_order).to.be.equal(null);
         sinon.assert.calledOnce($ionicPopup.alert);
-      });
-      it('Should emit a broadcast', function () {
-        sinon.spy($scope, '$emit');
-        ctrl.runCheckout();
-        deferCheckout.resolve({customer_order: {id: null}});
-        $scope.$digest();
-        deferStateGo.resolve();
-        $scope.$digest();
-        sinon.assert.calledWith($scope.$emit, 'order-finished');
       });
     });
   });

@@ -13,6 +13,10 @@
 
   .item.narrow {
     padding-top: 0;
+
+    .col {
+      padding-top: 0;
+    }
   }
 
   .strong {
@@ -28,6 +32,23 @@
 
     span {
       margin-right: 4px;
+    }
+  }
+
+  .customer-order-delivery {
+    span {
+      margin-right: 4px;
+    }
+
+    .future-delivery-time {
+      white-space: normal;
+      font-family: Montserrat-Regular;
+    }
+  }
+
+  .delivery-at-wrapper {
+    span {
+      margin-right: 5px;
     }
   }
 }

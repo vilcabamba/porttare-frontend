@@ -3,6 +3,10 @@ ion-view(
 )
   ion-nav-title
     .alt-logo
+
+  ion-nav-buttons(side="right")
+    provider-notifications
+
   ion-content.item-index-page.resource-collection
     .row
       label.item.search-input
@@ -21,21 +25,28 @@ ion-view(
 
     .list.list-inset.list--no-borders.resource-collection-table
       .row.table-headers
-        .col.col-60 {{::("item.productName"|translate)}}
-        .col.col-15 {{::("item.quantity"|translate)}}
-        .col.col-25 {{::("item.price"|translate)}}
+        .col.col-50 {{::("item.productName"|translate)}}
+        .col.col-25.text-right
+          | {{::("item.price"|translate)}}
+        .col.col-25
+          .item.item-input.item-select.filter-select
+            select(
+              ng-model="sortingOption"
+              ng-options="option.tkey|translate for option in itemsVm.sortingOptions"
+            )
+              option(value="") Ordenar por
 
       .col.without-items(ng-if="!itemsVm.items.length")
         p {{::("item.titleWithoutItems"|translate)}}
         p {{::("item.subtitleWithoutItems"|translate)}}
 
       .item.row(
-        ng-repeat="item in itemsVm.items | filter:itemsVm.query track by $index"
-      )  
-        .col.col-60
-          a.provider-item-title(
+        ng-repeat="item in itemsVm.items | filter:itemsVm.query | orderBy:sortingOption.filterField"
+      )
+        .col.col-50.provider-item-title {{ ::item.titulo }}
+        .col.col-25.text-right
+          price(amount="{{item.precio_cents}}" currency="{{item.precio_currency}}")
+        .col.col-25.text-right
+          a.button.button-clear.button-positive.button-small(
             ui-sref="provider.items.show({id: item.id})"
-          ) {{ ::item.titulo }}
-        .col.col-15
-          span(ng-if="item.unidad_medida=='unidades'") X {{ ::item.volumen }}
-        .col.col-25 {{ ::(item.precio_cents | priceCurrency | currency) }}
+          ) {{ ::("globals.seeMore" | translate) }}

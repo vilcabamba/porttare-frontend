@@ -1,16 +1,11 @@
 ion-view(
-  view-title='{{::("menu.user.provider"|translate)}}'
+  view-title='{{::("provider.profileName"|translate)}}'
 )
   ion-nav-title
     .alt-logo
 
-  //- cart
   ion-nav-buttons(side="right")
-    button.cart-main-button(
-      ui-sref='app.cart.index'
-      ng-if='menuVm.existCartActive'
-    )
-      i.ion-ios-cart-outline
+    cart-button
 
   ion-content.provider-show-page
     .provider-header(
@@ -26,7 +21,6 @@ ion-view(
         .wrapper(
           ng-if="::providerDetVm.provider.provider_offices.length"
         )
-          span.i.icon.ion-clock
           provider-profile-schedule(
             provider-profile='providerDetVm.provider'
           )
@@ -41,11 +35,15 @@ ion-view(
           ui-sref='app.categories.provider.product({id:providerItem.id, product:providerItem})'
         )
           .img-wrapper
-            img(ng-src='{{ ::(providerItem.imagenes[0].imagen_url | defaultImage)}}')
+            img.img-circle(
+              ng-src='{{ ::(providerItem.imagenes[0].imagen_url | defaultImage)}}'
+            )
           .info-wrapper
             .provider-item--title {{ ::providerItem.titulo }}
             .provider-item--subtitle
-              | {{ ::(providerItem.precio_cents | priceCurrency | currency)}}
+              span
+                price(amount="{{providerItem.precio_cents}}"
+                      currency="{{providerItem.precio_currency}}")
 
     .provider-category--no-more-items
       | {{ ::("provider.noMoreItems" | translate)}}

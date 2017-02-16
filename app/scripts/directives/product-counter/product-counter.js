@@ -20,7 +20,7 @@
     return directive;
   }
 
-  function productCounterController() {
+  function productCounterController(CartService) {
     var pcVm = this,
       options = {},
       actions = {
@@ -30,10 +30,12 @@
 
     pcVm.handleClickMinus = handleClickMinus;
     pcVm.handleClickPlus = handleClickPlus;
-
+    pcVm.disabledMinus = disabledMinus;
     init();
 
     pcVm.itemsCount = options.cantidad;
+    pcVm.currencyCode = options.currencyCode;
+    pcVm.canIncrement = getCanIncrement();
     pcVm.priceTotalCents = getTotal();
 
     function processData(option) {
@@ -55,6 +57,7 @@
         pcVm.itemsCount--;
       }
       pcVm.priceTotalCents = getTotal();
+      pcVm.canIncrement = getCanIncrement();
       if (options.onChangeValue && angular.isFunction(options.onChangeValue)) {
         var data = {
           itemsCount: pcVm.itemsCount,
@@ -81,13 +84,15 @@
     }
 
     function init() {
+
       var defaultOptions = {
         priceCents: 0,
         onClickMinus: null,
         onClickPlus: null,
         onChangeValue: null,
         cantidad: 0,
-        limit: 0
+        limit: 1,
+        currencyCode: 'USD'
       };
 
       if (!isValidNumber(pcVm.options.priceCents)) {
@@ -107,6 +112,18 @@
 
     function getTotal() {
       return pcVm.itemsCount * (options.priceCents);
+    }
+
+    function getCanIncrement() {
+      return CartService.canAddItem(
+        pcVm.options.cartItem,
+        pcVm.itemsCount,
+        pcVm.options.providerItem
+      );
+    }
+
+    function disabledMinus(){
+      return pcVm.itemsCount === options.limit;
     }
   }
 })();

@@ -6,7 +6,10 @@
       markers="mapVm.markers"
       data-tap-disabled="true"
     )
-  div(
-    id="map-directive"
+  div.map-directive(
     data-tap-disabled="true"
   )
+
+.message-error(
+  ng-if="mapVm.mapError"
+) {{ mapVm.mapError }}

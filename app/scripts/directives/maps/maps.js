@@ -5,38 +5,55 @@
     .module('porttare.directives')
     .directive('maps', maps);
 
-  function maps() {
+  function maps(MapsService) {
     var directive = {
       restrict: 'E',
       templateUrl: 'templates/directives/maps/maps.html',
       scope: {
-        lat: '=',
-        lon: '=',
-        defaultInCurrentGeolocation: '=',
-        direccion:'=',
-        direccionDos: '=',
-        ciudad: '='
+        lat: '=?',
+        lon: '=?',
+        onRender: '&',
+        direccion:'=?',
+        referencia: '=?',
+        disableEdit: '=?',
+        direccionDos: '=?',
+        currentLocation: '=?',
+        geolocationMessageKey: '=?',
+        defaultInCurrentGeolocation: '='
       },
       controller: [ '$scope',
-                    '$ionicPopup',
                     'MapsService',
                     'GeocodingService',
                     'GeolocationService',
                     mapsController],
       controllerAs: 'mapVm',
+      link: linkFunction,
       bindToController: true
     };
 
     return directive;
+
+    function linkFunction($scope, $element, $attributes, $controller){
+      MapsService.loadGMaps().then(function () {
+        $scope.mapVm.geolocationMessageKey = null;
+        var mapContainer = $element[0].children[0].children[0];
+        $scope.mapVm.map = MapsService.renderMap(mapContainer);
+        $controller.listenForChange();
+        $controller.setCurrentPosition();
+      });
+    }
+
   }
 
   function mapsController($scope,
-                          $ionicPopup,
                           MapsService,
                           GeocodingService,
                           GeolocationService) {
     var mapVm = this, // jshint ignore:line
         shouldGeocodeMarkerPosition;
+
+    mapVm.listenForChange = listenForChange;
+    mapVm.setCurrentPosition = setCurrentPosition;
 
     init();
 
@@ -45,29 +62,39 @@
         angular.element.trim(mapVm.direccion)
       );
 
-      MapsService.loadGMaps().then(function () {
-        drawMap();
-        listenForChange();
-        if (mapVm.defaultInCurrentGeolocation) {
-          GeolocationService.getCurrentPosition()
-                            .then(drawMakerFromGeoPosition)
-                            .catch(couldntGetPosition);
-        } else {
-          drawMakerFromGeoPosition({
-            coords: {
-              latitude: mapVm.lat,
-              longitude: mapVm.lon
-            }
-          });
-        }
-      });
+      mapVm.geolocationMessageKey = 'maps.loading';
     }
 
-    function drawMap(){
-      mapVm.map = MapsService.renderMap('map-directive');
+    function setCurrentPosition(){
+      if (mapVm.onRender) {
+        mapVm.onRender({map: mapVm.map});
+      }
+      if (mapVm.defaultInCurrentGeolocation) {
+        GeolocationService
+          .getCurrentPosition()
+          .then(function (position){
+            mapVm.currentLocation = position;
+            drawMakerFromGeoPosition(position);
+            assignLatAndLon();
+            geocodeCurrentPosition();
+          }).catch(couldntGetPosition);
+      } else {
+        drawMakerFromGeoPosition({
+          coords: {
+            latitude: mapVm.lat,
+            longitude: mapVm.lon
+          }
+        });
+      }
+    }
+
+    function assignLatAndLon(){
+      mapVm.lat = mapVm.currentMarker.getPosition().lat();
+      mapVm.lon = mapVm.currentMarker.getPosition().lng();
     }
 
     function drawMakerFromGeoPosition(position){
+      if (mapVm.currentMarker) { return; }
       var positionLatLng = new google.maps.LatLng(
         position.coords.latitude,
         position.coords.longitude
@@ -84,32 +111,48 @@
     }
 
     function couldntGetPosition(message) {
-      $ionicPopup.alert({
-        title: 'Error',
-        template: message
-      });
+      mapVm.mapError = message;
     }
 
     function listenForChange(){
+      if (mapVm.disableEdit) { return; }
       mapVm.map.addListener('click', function (changeEvent) {
+        clearErrorMessages();
         clearCurrentMarker();
         drawMarker(changeEvent.latLng);
 
-        $scope.$apply(function(){
-          mapVm.lat = mapVm.currentMarker.getPosition().lat();
-          mapVm.lon = mapVm.currentMarker.getPosition().lng();
-        });
+        $scope.$apply(assignLatAndLon);
 
         if (shouldGeocodeMarkerPosition) {
-          GeocodingService
-            .geocode({'latLng': mapVm.currentMarker.getPosition()})
-            .then(function(results){
-              mapVm.direccion = results[0].formatted_address; // jshint ignore:line
-              mapVm.direccionDos = results[1].formatted_address; // jshint ignore:line
-              mapVm.ciudad = getCiudad(results[0]);
-            });
+          geocodeCurrentPosition();
         }
       });
+    }
+
+    function geocodeCurrentPosition(){
+      mapVm.geolocationMessageKey = 'maps.geocoding';
+      GeocodingService
+        .geocode({'latLng': mapVm.currentMarker.getPosition()})
+        .then(function(results){
+          mapVm.geolocationMessageKey = 'maps.geocoded';
+          // jshint ignore:start
+          mapVm.direccion = results[0].formatted_address;
+          mapVm.direccionDos = results[1].formatted_address;
+          // jshint ignore:end
+          mapVm.referencia = getReferencia(results[0]);
+        })
+        .catch(function(error){
+          if (error === 'OVER_QUERY_LIMIT') {
+            mapVm.geolocationMessageKey = 'maps.overGeocodeLimit';
+          } else {
+            mapVm.geolocationMessageKey = 'maps.wontGeocode';
+            console.error(error);
+          }
+        });
+    }
+
+    function clearErrorMessages(){
+      mapVm.mapError = null;
     }
 
     function clearCurrentMarker(){
@@ -119,7 +162,7 @@
       }
     }
 
-    function getCiudad(geolocationResult){
+    function getReferencia(geolocationResult){
       var components = geolocationResult.address_components; //jshint ignore:line
       var cityComponent = components.find(function(component){
         return component.types.includes('political');

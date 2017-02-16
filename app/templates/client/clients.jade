@@ -3,6 +3,10 @@ ion-view(
 )
   ion-nav-title
     .alt-logo
+
+  ion-nav-buttons(side="right")
+    provider-notifications
+
   ion-content.clients-index-page.resource-collection
     .row
       label.item.search-input
@@ -23,13 +27,13 @@ ion-view(
       .row.table-headers
         .col.col-60 {{::("client.clientName"|translate)}}
         .col
-          .item.item-input.item-select
+          .item.item-input.item-select.filter-select
             select(
               ng-model="selectedOption"
               ng-options="option.name for option in clientsVm.listOptions"
             )
               option(value="") Ordenar por
-    
+
       .col.without-items(ng-if="clientsVm.clients.length === 0")
         p {{::("client.noClients"|translate)}}
 

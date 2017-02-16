@@ -4,9 +4,13 @@
   right: 0;
 
   @media (max-width: $grid-responsive-md-break) {
+    min-height: 65%;
+    max-width: 85%;
+  }
+
+  @media (max-width: $grid-responsive-sm-break) {
     min-height: 80%;
     max-height: 95%;
-    max-width: 85%;
   }
 
   ion-content {
@@ -36,5 +40,11 @@
         font-size: 20px
       }
     }
+  }
+
+  .list.list-inset {
+    // let's narrow stuff
+    margin-left: 0;
+    margin-right: 0;
   }
 }

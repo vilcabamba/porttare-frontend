@@ -8,8 +8,7 @@
   function CourierService($http, $q, ENV) {
 
     var service = {
-      createNewCourier: createNewCourier,
-      shippingRequests: shippingRequests
+      createNewCourier: createNewCourier
     };
 
     return service;
@@ -25,17 +24,5 @@
         return $q.reject(res.data);
       });
     }
-
-    function shippingRequests() {
-      return $http({
-        method: 'GET',
-        url: ENV.apiHost + '/api/courier/shipping_requests'
-      }).then(function success(res){
-        return res.data;
-      }, function error(res) {
-        return $q.reject(res.data);
-      });
-    }
-
   }
 })();

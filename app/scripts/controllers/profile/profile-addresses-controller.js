@@ -7,6 +7,7 @@
 
   function ProfileAddressesController(customerAddresses, $state) {
     var pfaVm = this;
+    pfaVm.tab = 'addresses';
     pfaVm.addresses = customerAddresses || [];
     pfaVm.redirectToUpdateAddressView = redirectToUpdateAddressView;
     pfaVm.redirectToNewAddressView = redirectToNewAddressView;

@@ -14,29 +14,6 @@ ion-modal-view.cart-page
   )
     ion-content.resource-form.checkout-form
       .list.list-inset
-        //- not here anymore
-          label.item.item-input.item-input--no-borders.item-stacked-label
-            span.input-label {{::("globals.dateDelivery"|translate)}}
-          .delivery-time-wrapper
-            ion-datetime-picker.item.item-icon-left.datetime-picker(
-              date
-              time
-              am-pm
-              only-valid="{'after': 'today', 'inclusive': true}"
-              ng-model='cartVm.checkoutForm.deliver_at'
-            )
-              i.icon.ion-ios-calendar-outline
-              span.placeholder(ng-if="!cartVm.checkoutForm.deliver_at")
-                | {{ ::('cart.deliverNow' | translate) }}
-              span(ng-if="cartVm.checkoutForm.deliver_at")
-                | {{ cartVm.checkoutForm.deliver_at | formatDate }}
-            .button.button-clear.button-positive.button-small(
-              ng-if="cartVm.checkoutForm.deliver_at"
-              ng-click="cartVm.clearDeliveryTime()"
-            ) {{ ::('cart.deliverNow' | translate) }}
-          .errors-wrapper
-            show-error(array-messages="cartVm.messages.deliver_at")
-
         label.item.item-input.item-stacked-label
           span.input-label {{::("cart.observations"|translate)}}
           textarea(
@@ -47,7 +24,9 @@ ion-modal-view.cart-page
         .errors-wrapper
           show-error(array-messages="cartVm.messages.observaciones")
 
-        label.item.item-input.item-select
+        label.item.item-input.item-select(
+          ng-class="{'item-error': cartVm.messages.forma_de_pago}"
+        )
           span.input-label {{::("cart.paymentMethod"|translate)}}
           select(
             ng-model='cartVm.checkoutForm.forma_de_pago'
@@ -87,13 +66,31 @@ ion-modal-view.cart-page
           span.input-label {{::("billingAddress.legendForm"|translate)}}
         ion-list
           ion-item.select-list-item(
-              ng-repeat="billingAddress in cartVm.billingAddresses track by $index"
-              ng-click="cartVm.assignBillingAddress(billingAddress)"
-              ng-class="{'selected': billingAddress.selected}"
+            ng-click="cartVm.chooseAnonBillingAddress()"
+            ng-class="{'selected': cartVm.checkoutForm.anon_billing_address}"
+          )
+            i.ion-android-checkmark-circle
+            span {{ ::("cart.anonBillingAddress" | translate) }}
+        ion-list
+          ion-item.select-list-item(
+            ng-repeat="billingAddress in cartVm.billingAddresses track by $index"
+            ng-click="cartVm.assignBillingAddress(billingAddress)"
+            ng-class="{'selected': billingAddress.selected}"
           )
             i.ion-android-checkmark-circle
             span {{billingAddress.razon_social}} ({{billingAddress.direccion}})
         show-error(array-messages='cartVm.messages.customer_billing_address_id')
+
+      .text-center.fields-wrapper(
+        ng-if="!cartVm.billingAddresses.length > 0"
+      )
+        .item.item-input.item-input--no-borders
+          p {{ ::("billingAddress.noAddressesSaved" | translate) }}
+        .item.item-input.item-input--no-borders
+          .button.button-outline.button-small.button-energized(
+            type="button"
+            ng-click="cartVm.checkoutFormAddBillingAddress()"
+          ) {{ ::("billingAddress.newBillingAddress" | translate) }}
 
     ion-footer-bar.bar-stable.bar-footer--tall
       button.button.button-outline.button-energized(

@@ -18,10 +18,19 @@
     function init(){
       providerOrderShowVM.errors = {};
       providerOrderShowVM.providerProfile = getProviderProfile();
+      providerOrderShowVM.customerProfileName = getCustomerProfileName();
       providerOrderShowVM.customerOrderDelivery = getCustomerOrderDelivery();
       providerOrderShowVM.customerBillingAddress = getCustomerBillingAddress();
       providerOrderShowVM.dateDelivery = getDateDelivery();
       providerOrderShowVM.shouldDisplayProviderAnswerForm = getShouldDisplayProviderAnswerForm();
+    }
+
+    function getCustomerProfileName() {
+      var customerProfile = providerOrderShowVM.customerOrder.customer_profile; // jshint ignore:line
+      if (isBlank(customerProfile.name)) {
+        return customerProfile.nickname;
+      }
+      return customerProfile.name;
     }
 
     function getCustomerBillingAddress(){
@@ -45,10 +54,19 @@
     }
 
     function acceptOrder(){
-      ProviderCustomerOrdersService
-        .acceptOrder(providerOrderShowVM.customerOrder)
-        .then(respondedCustomerOrder)
+      var timeIsBlank = isBlank(
+        providerOrderShowVM.customerOrder.estimatedTimeForPreparation
+      );
+      if (timeIsBlank) {
+        providerOrderShowVM.errors.dispatchTimeError = true;
+      } else {
+        providerOrderShowVM.errors.dispatchTimeError = false;
+        ProviderCustomerOrdersService.acceptOrder(
+          providerOrderShowVM.customerOrder,
+          providerOrderShowVM.customerOrder.estimatedTimeForPreparation
+        ).then(respondedCustomerOrder)
         .catch(cantPerformAction);
+      }
     }
 
     function rejectOrder(){
@@ -65,9 +83,7 @@
     }
 
     function reasonIsBlank(){
-      return angular.element.isEmptyObject(
-        angular.element.trim(providerOrderShowVM.customerOrderDelivery.reason)
-      );
+      return isBlank(providerOrderShowVM.customerOrderDelivery.reason);
     }
 
     function cantPerformAction(reason){
@@ -80,6 +96,12 @@
     function respondedCustomerOrder (customerOrder) {
       providerOrderShowVM.customerOrder = customerOrder;
       init();
+    }
+
+    function isBlank(string){
+      return angular.element.isEmptyObject(
+        angular.element.trim(string)
+      );
     }
   }
 })();

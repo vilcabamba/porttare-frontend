@@ -6,50 +6,84 @@ ion-side-menus(enable-menu-with-back-views='false')
         button.button.button-icon.button-clear.ion-navicon(menu-toggle='left')
     ion-nav-view(name='menuContent')
   ion-side-menu(side='left')
-    ion-header-bar.bar-stable
-    ion-content
+    ion-content.main-sidebar
       ion-list
-        ion-item(menu-close='' class='menu-header')
-          | {{ siteVm.userName }}
-        ion-item(menu-close='' ui-sref='app.profile.info')
-          | {{::("menu.profile"|translate)}}
-        ion-item(menu-close='' ui-sref='app.cart.index' ng-if='menuVm.existCartActive')
-          | {{::("menu.client.cart"|translate)}}
-        ion-item(menu-close='' ui-sref='app.categories.index')
-          | {{::("menu.client.category"|translate)}}
-        ion-item.gray-item(ng-repeat='categorie in menuVm.categories'
-                           ui-sref='app.categories.show({id: categorie.id})'
-                           menu-close='')
-          li {{::categorie.titulo}}
-        ion-item
-          | {{::("menu.account"|translate)}}
-        ion-item.gray-item(menu-close='' ui-sref='app.customerorders.index')
-          li {{::("menu.client.myOrders"|translate)}}
-        ion-item.gray-item
-          li {{::("menu.client.myLists"|translate)}}
-        ion-item.gray-item
-          li {{::("menu.client.coupon"|translate)}}
-        ion-item.gray-item
-          li {{::("menu.client.payments"|translate)}}
-        ion-item.gray-item(menu-close='' ui-sref='app.wishlist.index')
-          li {{::("menu.client.wishlist"|translate)}}
-        ion-item.gray-item(menu-close='' ui-sref='app.billing.addresses')
-          li {{::("menu.client.billingAddresses"|translate)}}
-        ion-item
-          | {{::("menu.invite"|translate)}}
+        ion-item.sidebar-header-current-user--wrapper(
+          menu-close=''
+        )
+          sidebar-header-current-user(
+            show-profile-link="true"
+          )
+
         ion-item(
+          menu-close=''
+          ui-sref='app.categories.index'
+        ) {{::("menu.client.category"|translate)}}
+        sidebar-only-on-categories
+          ion-item.gray-item(
+            ng-repeat='categorie in menuVm.categories'
+            ui-sref='app.categories.show({id: categorie.id})'
+            menu-close=''
+          )
+            li
+              .inner-content {{::categorie.titulo}}
+
+        ion-item(menu-close='' ui-sref='app.cart.index')
+          | {{::("menu.client.cart"|translate)}}
+
+        ion-item.item-complex
+          .item-content {{::("menu.account"|translate)}}
+        ion-item.gray-item(
+          menu-close=''
+          ui-sref='app.customerorders.index'
+        )
+          li
+            .inner-content
+              | {{ ::("menu.client.myOrders" | translate) }}
+        ion-item.gray-item(
+          menu-close=''
+          ui-sref='app.wishlist.index'
+        )
+          li
+            .inner-content
+              | {{::("menu.client.myLists"|translate)}}
+        ion-item.gray-item(
+          menu-close=''
+          ui-sref='app.billing.addresses'
+        )
+          li
+            .inner-content
+              | {{::("menu.client.billingAddresses"|translate)}}
+        //- not built yet
+          ion-item.gray-item
+            li
+              .inner-content
+                | {{::("menu.client.coupon"|translate)}}
+          ion-item.gray-item
+            li
+              .inner-content
+                | {{::("menu.client.payments"|translate)}}
+
+        ion-item(menu-close='' ui-sref='app.places.index')
+          | {{::("menu.locations"|translate)}}
+
+        //- not built yet
+          ion-item
+            | {{::("menu.invite"|translate)}}
+        ion-item.item-complex(
           menu-close
           ng-controller='LoginController as loginVm'
           ng-click='loginVm.logout()'
         )
-          | {{::("menu.logout"|translate)}}
-        ion-item.gray-item
-          | {{::("menu.changeTo"|translate)}}
-        ion-item.user-type(menu-close=''  ui-sref='app.provider.welcome', ng-if='!user.provider_profile')
+          .item-content {{::("menu.logout"|translate)}}
+
+        ion-item.item-complex.switch-user-role
+          .item-content {{::("menu.changeTo"|translate)}}
+        ion-item.user-type(menu-close=''  ui-sref='app.provider.welcome',ng-if='!user.provider_profile && !user.courier_profile')
           | {{::("menu.user.provider"|translate)}}
         ion-item.user-type(menu-close='' ui-sref='provider.items.index', ng-if='user.provider_profile')
           | {{::("menu.user.provider"|translate)}}
-        ion-item.user-type(menu-close='' ui-sref='app.courier.welcome', ng-if='!user.courier_profile')
+        ion-item.user-type(menu-close='' ui-sref='app.courier.welcome', ng-if='!user.provider_profile && !user.courier_profile')
           | {{::("menu.user.courier"|translate)}}
         ion-item.user-type(menu-close='' ui-sref='courier.orders', ng-if='user.courier_profile')
           | {{::("menu.user.courier"|translate)}}
