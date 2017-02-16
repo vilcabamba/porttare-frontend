@@ -2,7 +2,7 @@ module.exports = {
   deploy : {
     demo : {
       user : "macool",
-      host : "demo.moviggo.noggalito.com",
+      host : "demo.moviggo.com",
       ref  : "origin/production",
       repo : "git@github.com:noggalito/porttare-frontend.git",
       path : "~/demo-porttare-frontend",
