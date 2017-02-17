@@ -34,7 +34,7 @@
     function appendGMapsScript() {
       $window.gMapsCallback = function() { gMapsCallback(); };
       var libraries = 'places';
-      var gMapsUrl = '//maps.google.com/maps/api/js?libraries=' + libraries + '&callback=gMapsCallback&key=';
+      var gMapsUrl = 'https://maps.google.com/maps/api/js?libraries=' + libraries + '&callback=gMapsCallback&key=';
       var script = document.createElement('script');
       script.src = gMapsUrl + ENV.gMapsKey;
       script.type = 'text/javascript';
