@@ -28,7 +28,8 @@
           airbrakeProjectId: process.env.AIRBRAKE_PROJECT_ID,
           airbrakeProjectKey: process.env.AIRBRAKE_PROJECT_KEY,
           gMapsKey: process.env.GOOGLE_MAPS_API_KEY,
-          pusherKey: process.env.PUSHER_KEY
+          pusherKey: process.env.PUSHER_KEY,
+          gcmSenderID: process.env.GCM_SENDER_ID
         }
       }
     },
@@ -41,7 +42,8 @@
           gMapsKey: process.env.GOOGLE_MAPS_API_KEY,
           airbrakeProjectId: process.env.AIRBRAKE_PROJECT_ID,
           airbrakeProjectKey: process.env.AIRBRAKE_PROJECT_KEY,
-          pusherKey: process.env.PUSHER_KEY
+          pusherKey: process.env.PUSHER_KEY,
+          gcmSenderID: process.env.GCM_SENDER_ID
         }
       }
     },

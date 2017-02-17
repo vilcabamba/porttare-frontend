@@ -67,8 +67,12 @@
     margin-top: -5px;
     margin-bottom: -5px;
 
-    .row:last-child .col {
-      border-bottom: 1px solid $base-yellow;
+    .row {
+      padding-bottom: 0;
+
+      //  &:last-child .col {
+      //   border-bottom: 1px solid $base-yellow;
+      // }
     }
   }
 
