@@ -5,7 +5,8 @@
     .module('porttare')
     .run(pushNotificationsConfig);
 
-  function pushNotificationsConfig($rootScope,
+  function pushNotificationsConfig(ENV,
+                                   $rootScope,
                                    UserDevicesService){
     var notificationHandler,
         deviceRegistrationId;
@@ -20,7 +21,7 @@
       notificationHandler = PushNotification.init({
         'android': {
           'forceShow': true,
-          'senderID': '1057338916791'  // TODO use ENV
+          'senderID': ENV.gcmSenderID // TODO use ENV
         },
         'ios': {
           'sound': true,
