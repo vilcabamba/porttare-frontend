@@ -21,7 +21,8 @@
       notificationHandler = PushNotification.init({
         'android': {
           'forceShow': true,
-          'senderID': ENV.gcmSenderID // TODO use ENV
+          'senderID': ENV.gcmSenderID, // TODO use ENV
+          'clearNotifications': false
         },
         'ios': {
           'sound': true,
