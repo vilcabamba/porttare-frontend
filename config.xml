@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.noggalito.porttare" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.mandanggo.moviggo" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Porttare</name>
     <description>
         Marketplace capaz de ofrecer y gestionar la logística necesaria
@@ -37,13 +37,15 @@
     </platform>
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
+    <!-- Ionic supports Android Jellybean and up -->
+    <preference name="android-minSdkVersion" value="16" />
     <plugin name="cordova-plugin-camera" spec="~2.3.0">
         <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value=" " />
     </plugin>
     <plugin name="cordova-plugin-facebook4" spec="https://github.com/jeduan/cordova-plugin-facebook4.git#6911f2d1b43a82254c78706bf03e314f3275a94f">
-        <variable name="APP_ID" value="1088631447858526" />
-        <variable name="APP_NAME" value="porttare-dev" />
+        <variable name="APP_ID" value="422650018122547" />
+        <variable name="APP_NAME" value="demo-moviggo" />
     </plugin>
     <plugin name="phonegap-plugin-push" spec="1.8.0">
         <param name="SENDER_ID" value="1057338916791" />
