@@ -94,7 +94,7 @@ ion-view(
 
       .list.list--centered.text-center(ng-if="providerProfile.customer_order_delivery.status !== 'canceled'")
         button.button.button-outline.button-assertive(
-        ng-click="customerOrderVm.cancelOrder({{ ::providerProfile.customer_order_delivery.id}},$index)"
+        ng-click="customerOrderVm.cancelOrder({{ ::providerProfile.customer_order_delivery.id}})"
         ) {{::("order.cancelCustomerOrder"|translate)}}
 
     //- not implemented yet

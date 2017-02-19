@@ -5,11 +5,11 @@
     .module('porttare.services')
     .factory('CustomerOrdersService', CustomerOrdersService);
 
-  function CustomerOrdersService($http, ENV, $q, ErrorHandlerService) {
+  function CustomerOrdersService($http, ENV, ErrorHandlerService) {
     var service = {
       getCustomerOrders: getCustomerOrders,
       getCustomerOrder: getCustomerOrder,
-      cancelCustomerOrder: cancelCustomerOrder
+      cancelCustomerOrderDelivery: cancelCustomerOrderDelivery
     };
 
     return service;
@@ -34,7 +34,7 @@
       );
     }
 
-    function cancelCustomerOrder(customerOrderId,CustomerOrderDeliveryId){
+    function cancelCustomerOrderDelivery(customerOrderId,CustomerOrderDeliveryId){
       return $http({
         method: 'POST',
         url: ENV.apiHost + '/api/customer/orders/' + customerOrderId + '/deliveries/'+ CustomerOrderDeliveryId +'/cancel',
