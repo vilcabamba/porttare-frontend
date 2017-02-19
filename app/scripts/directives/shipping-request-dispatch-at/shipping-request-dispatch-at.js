@@ -14,7 +14,6 @@
       bindToController: true,
       controllerAs: 'dispatchAtVM',
       controller: [
-        '$timeout',
         shippingRequestDispatchAtController
       ],
       scope: {
