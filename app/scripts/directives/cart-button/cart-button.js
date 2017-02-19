@@ -10,13 +10,17 @@
       restrict: 'E',
       bindToController: true,
       controllerAs: 'cartButtonVM',
-      controller: cartButtonController,
+      controller: [
+        '$auth',
+        '$scope',
+        cartButtonController
+      ],
       templateUrl: 'templates/directives/cart-button/cart-button.html'
     };
     return directive;
   }
 
-  function cartButtonController($auth,$scope) {
+  function cartButtonController($auth, $scope) {
     // jshint validthis:true
     var cartButtonVM = this;
 

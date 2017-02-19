@@ -12,7 +12,10 @@
       scope: {
         options: '='
       },
-      controller: productCounterController,
+      controller: [
+        'CartService',
+        productCounterController
+      ],
       controllerAs: 'pcVm',
       bindToController: true
     };

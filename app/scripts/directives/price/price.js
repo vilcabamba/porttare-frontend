@@ -13,7 +13,13 @@
         amount: '@',
         currency: '@'
       },
-      controller: ['$translate', '$filter', '$scope', 'APP', priceController],
+      controller: [
+        '$translate',
+        '$filter',
+        '$scope',
+        'APP',
+        priceController
+      ],
       controllerAs: 'priceVm',
       bindToController: true
     };

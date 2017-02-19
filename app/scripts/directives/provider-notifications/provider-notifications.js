@@ -9,7 +9,10 @@ function providerNotifications() {
   var directive = {
     restrict: 'EA',
     templateUrl: 'templates/directives/provider-notifications/provider-notifications.html',
-    controller: providerNotificationsController,
+    controller: [
+      '$scope',
+      providerNotificationsController
+    ],
     scope: false,
     controllerAs: 'pnVm',
     bindToController: true
