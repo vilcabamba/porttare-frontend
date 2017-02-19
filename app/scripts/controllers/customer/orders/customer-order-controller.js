@@ -11,7 +11,6 @@
                                    BillingAddressesService,
                                    PusherService,
                                    CustomerOrdersService,
-                                   $ionicPopup,
                                    $ionicLoading) {
     var customerOrderVm = this;
     customerOrderVm.customerOrder = customerOrder;
@@ -67,24 +66,14 @@
       }, 0);
     }
 
-    function cancelOrder(){
-      var customerOrderId=customerOrderVm.customerOrder.id;
-      var customerOrderProviderProfiles=customerOrderVm.customerOrder.provider_profiles; // jshint ignore:line
-      var cont=0;
+    function cancelOrder(providerCustomerOrderDeliveryId,index){
       $ionicLoading.show({
-        template: '{{::("globals.updating"|translate)}}'
+        template: '{{::("order.canceling"|translate)}}'
       });
-      angular.forEach(customerOrderProviderProfiles,function(provider){
-        CustomerOrdersService.cancelCustomerOrder(customerOrderId,provider.customer_order_delivery.id).then(function (resp){ // jshint ignore:line
-          cont++;
-          if (cont === customerOrderProviderProfiles.length){
-            $ionicLoading.hide();
-            $ionicPopup.alert({
-              title: 'Éxito',
-              template: '{{::("order.cancel.success"|translate)}}'
-            });
-          }
-        });
+      CustomerOrdersService.cancelCustomerOrder(customerOrderVm.customerOrder.id,providerCustomerOrderDeliveryId).then(function (resp){
+        customerOrderVm.customerOrder.provider_profiles[index]=resp; // jshint ignore:line
+      }).finally(function () {
+        $ionicLoading.hide();
       });
     }
 

@@ -437,6 +437,7 @@
         dispatchAt: 'Hora de despacho',
         timeForDispatch: 'Tiempo para el despacho',
         cancelCustomerOrder : 'Cancelar orden',
+        canceling:'Cancelando...',
         providerProfile: {
           quantity: 'Can',
           price: 'Precio',
@@ -465,11 +466,9 @@
           status: {
             pending: 'Esperando confirmación del proveedor',
             accepted: 'Aceptada por el proveedor',
-            rejected: 'Rechazada'
+            rejected: 'Rechazada',
+            canceled: 'Cancelada'
           }
-        },
-        cancel : {
-          success: 'Orden cancelada'
         }
       },
       form: {
