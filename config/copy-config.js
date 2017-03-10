@@ -13,7 +13,7 @@
           '*.html',
           'templates/**/*.html',
           'fonts/*',
-          '.well-known'
+          '.well-known/**'
         ]
       }, {
         expand: true,
