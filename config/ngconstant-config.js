@@ -37,7 +37,7 @@
       constants: {
         ENV: {
           name: 'demo',
-          apiHost: 'https://demo-backend.moviggo.com',
+          apiHost: 'https://demo-porttare-api.cuxibamba.com',
           airbrakeHost: 'https://pangi.shiriculapo.com',
           gMapsKey: process.env.GOOGLE_MAPS_API_KEY,
           airbrakeProjectId: process.env.AIRBRAKE_PROJECT_ID,
