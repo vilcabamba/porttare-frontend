@@ -11,6 +11,7 @@
     'porttare.directives',
     'porttare.translations',
     'porttare.filters',
+    'porttare.templates',
     'ngCordova',
     'slickCarousel',
     'ngFileUpload',
@@ -43,4 +44,5 @@
   angular.module('porttare.services', []);
   angular.module('porttare.filters', []);
   angular.module('porttare.fake-storage', []);
+  angular.module('porttare.templates', []);
 })();

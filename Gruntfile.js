@@ -15,6 +15,8 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  grunt.loadNpmTasks('grunt-jade-ng-template-cache');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -39,7 +41,7 @@ module.exports = function (grunt) {
       },
       jade: {
         files: ['<%= yeoman.app %>/**/*.jade'],
-        tasks: ['jade:compile']
+        tasks: ['jadengtemplatecache', 'newer:copy:app']
       },
       js: {
         files: ['<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js'],
@@ -126,6 +128,22 @@ module.exports = function (grunt) {
           cwd: '.temp/<%= yeoman.styles %>/',
           src: '{,*/}*.css',
           dest: '.temp/<%= yeoman.styles %>/'
+        }]
+      }
+    },
+
+    jadengtemplatecache: {
+      options: {
+        module: 'porttare.templates',
+        dest: 'app/templates.js',
+        jade: {}
+      },
+      app: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>',
+          src: ['templates/**/*.jade'],
+          ext: '.html'
         }]
       }
     },
@@ -436,7 +454,8 @@ module.exports = function (grunt) {
     'concurrent:server',
     'autoprefixer',
     'newer:copy:app',
-    'newer:copy:tmp'
+    'newer:copy:tmp',
+    'jadengtemplatecache'
   ]);
 
   var compressEnv = process.env.NODE_ENV;
