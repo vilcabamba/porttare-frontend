@@ -79,7 +79,7 @@
         email: 'Correo electrónico',
         webSite: 'Sitio web',
         youtube:'Youtube',
-        facebook:'Faceebook',
+        facebook:'Facebook',
         twitter:'Twitter',
         instagram:'Instagram',
         methodPayment: 'Forma de pago',
