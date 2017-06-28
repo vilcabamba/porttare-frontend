@@ -23,7 +23,7 @@
       var myOptions = {
         focusFirstInput: true,
         animation: 'slide-in-up',
-        backdropClickToClose: false,
+        backdropClickToClose: true,
         hardwareBackButtonClose: true
       };
 
