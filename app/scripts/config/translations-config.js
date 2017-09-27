@@ -124,7 +124,7 @@
       courier: {
         successCourierSave: 'Te hemos registrado!',
         welcomeTitle: 'Conviértete en mensajero',
-        welcomeDescription: 'Con moviggo puedes enviar productos y convertirte en mensajero',
+        welcomeDescription: 'puedes enviar productos y convertirte en mensajero',
         newCourierTitle: 'Nuevo Mensajero',
         firstFormLegend: 'Mensajero nuevo - Paso 1',
         secondFormLegend: 'Mensajero nuevo - Paso 2',
