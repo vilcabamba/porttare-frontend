@@ -39,6 +39,7 @@
       }).then(function(modal){
         modalInstance.scope.modal = modal;
         modalInstance.scope.modal.show();
+        return modal;
       });
     }
 

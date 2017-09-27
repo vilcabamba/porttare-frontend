@@ -35,6 +35,8 @@
           provider: 'Vender'
         },
         client: {
+          services: 'Servicios',
+          shippings: 'Encomiendas',
           category: 'Categorías',
           myOrders: 'Mis Pedidos',
           myLists: 'Mis Listas',
@@ -476,8 +478,8 @@
       },
       billingAddress: {
         legendForm: 'Dirección de facturación',
-        newBillingAddress: 'Nueva dirección de facturación',
-        anyBillingAddress: 'No dispone de ninguna dirección de facturación.',
+        newBillingAddress: 'agregar datos de facturación',
+        anyBillingAddress: 'no has registrado tus datos para facturación',
         successSave: 'La dirección de facturación ha sido guardado éxitosamente',
         successUpdate: 'La dirección de facturación ha sido actualizado éxitosamente',
         noAddressesSaved: 'No has registrado ninguna dirección de facturación'

@@ -14,22 +14,33 @@ ion-side-menus(enable-menu-with-back-views='false')
           sidebar-header-current-user(
             show-profile-link="true"
           )
-
-        ion-item(
-          menu-close=''
-          ui-sref='app.categories.index'
-        ) {{::("menu.client.category"|translate)}}
-        sidebar-only-on-categories
+        
+        ion-item.item-complex
+          .item-content {{ ::( "menu.client.services" | translate ) }}
           ion-item.gray-item(
-            ng-repeat='categorie in menuVm.categories'
-            ui-sref='app.categories.show({id: categorie.id})'
             menu-close=''
+            ui-sref='app.services.shippings'
           )
             li
-              .inner-content {{::categorie.titulo}}
+              .inner-content {{ ::('menu.client.shippings' | translate) }}
 
-        ion-item(menu-close='' ui-sref='app.cart.index')
-          | {{::("menu.client.cart"|translate)}}
+        //- hide categories for now
+          ion-item(
+            menu-close=''
+            ui-sref='app.categories.index'
+          ) {{::("menu.client.category"|translate)}}
+          sidebar-only-on-categories
+            ion-item.gray-item(
+              ng-repeat='categorie in menuVm.categories'
+              ui-sref='app.categories.show({id: categorie.id})'
+              menu-close=''
+            )
+              li
+                .inner-content {{::categorie.titulo}}
+
+        //- hide cart for now
+          ion-item(menu-close='' ui-sref='app.cart.index')
+            | {{::("menu.client.cart"|translate)}}
 
         ion-item.item-complex
           .item-content {{::("menu.account"|translate)}}
@@ -40,13 +51,16 @@ ion-side-menus(enable-menu-with-back-views='false')
           li
             .inner-content
               | {{ ::("menu.client.myOrders" | translate) }}
-        ion-item.gray-item(
-          menu-close=''
-          ui-sref='app.wishlist.index'
-        )
-          li
-            .inner-content
-              | {{::("menu.client.myLists"|translate)}}
+        
+        //- wishlists hidden for now
+          ion-item.gray-item(
+            menu-close=''
+            ui-sref='app.wishlist.index'
+          )
+            li
+              .inner-content
+                | {{::("menu.client.myLists"|translate)}}
+
         ion-item.gray-item(
           menu-close=''
           ui-sref='app.billing.addresses'

@@ -24,11 +24,11 @@
 }
 
 .button-default-action.button-outline {
-  border-color: $base-orange;
-  color: $base-orange;
+  border-color: $base-yellow;
+  color: $base-yellow;
 
   &.activated {
-    background-color: $base-orange;
+    background-color: $base-yellow;
   }
 }
 
