@@ -23,6 +23,15 @@
   font-family: Montserrat-Light;
 }
 
+.button-default-action.button-outline {
+  border-color: $base-orange;
+  color: $base-orange;
+
+  &.activated {
+    background-color: $base-orange;
+  }
+}
+
 .button-primary,
 .button-primary.button-full,
 .button-primary.activated {

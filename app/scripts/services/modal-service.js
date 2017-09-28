@@ -21,9 +21,9 @@
     function showModal(options){
 
       var myOptions = {
-        focusFirstInput: true,
+        focusFirstInput: false,
         animation: 'slide-in-up',
-        backdropClickToClose: false,
+        backdropClickToClose: true,
         hardwareBackButtonClose: true
       };
 
@@ -39,6 +39,7 @@
       }).then(function(modal){
         modalInstance.scope.modal = modal;
         modalInstance.scope.modal.show();
+        return modal;
       });
     }
 

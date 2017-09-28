@@ -83,6 +83,25 @@ function appRoutes($stateProvider) {
       }
     }
   })
+  .state('app.services', {
+    url: '/services',
+    abstract: true,
+    resolve: {
+      auth: function(AuthorizationService){
+        return AuthorizationService.choosePlaceIfNotPresent();
+      }
+    }
+  })
+  .state('app.services.providers', {
+    url: '/providers',
+    views: {
+      'menuContent@app': {
+        templateUrl: 'templates/services/providers/index.html',
+        controller: 'ServicesProvidersController',
+        controllerAs: 'servicesProvidersVM'
+      }
+    }
+  })
   .state('app.categories', {
     url: '/categories',
     abstract: true,
@@ -461,14 +480,15 @@ function appRoutes($stateProvider) {
   function accessIfUserAuth($auth, $state, APP, UserAuthService, CartService) {
     return $auth.validateUser()
       .then(function userAuthorized(user) {
-          if (user.agreed_tos) { //jshint ignore:line
+          /* ignore ToS for now */
+          // if (user.agreed_tos) { //jshint ignore:line
             return CartService.getCart().then(function(response){
               user.customer_order = response.customer_order; //jshint ignore:line
               return user;
             });
-          } else {
-            $state.go('termsAndCond');
-          }
+          // } else {
+          //   $state.go('termsAndCond');
+          // }
       }, function userNotAuthorized() {
         $state.go(APP.preloginState);
       });
