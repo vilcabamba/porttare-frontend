@@ -42,7 +42,8 @@
           payments: 'Pagos',
           provider: 'Proveedor',
           cart: 'Mi carro',
-          billingAddresses: 'Facturación'
+          billingAddresses: 'Facturación',
+          providers: 'Proveedores',
         },
         provider: {
           orders: 'Pedidos',
@@ -124,7 +125,7 @@
       courier: {
         successCourierSave: 'Te hemos registrado!',
         welcomeTitle: 'Conviértete en mensajero',
-        welcomeDescription: 'Con moviggo puedes enviar productos y convertirte en mensajero',
+        welcomeDescription: 'puedes enviar productos y convertirte en mensajero',
         newCourierTitle: 'Nuevo Mensajero',
         firstFormLegend: 'Mensajero nuevo - Paso 1',
         secondFormLegend: 'Mensajero nuevo - Paso 2',
@@ -476,8 +477,8 @@
       },
       billingAddress: {
         legendForm: 'Dirección de facturación',
-        newBillingAddress: 'Nueva dirección de facturación',
-        anyBillingAddress: 'No dispone de ninguna dirección de facturación.',
+        newBillingAddress: 'agregar datos de facturación',
+        anyBillingAddress: 'no has registrado tus datos para facturación',
         successSave: 'La dirección de facturación ha sido guardado éxitosamente',
         successUpdate: 'La dirección de facturación ha sido actualizado éxitosamente',
         noAddressesSaved: 'No has registrado ninguna dirección de facturación'
