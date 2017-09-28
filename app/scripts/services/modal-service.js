@@ -21,7 +21,7 @@
     function showModal(options){
 
       var myOptions = {
-        focusFirstInput: true,
+        focusFirstInput: false,
         animation: 'slide-in-up',
         backdropClickToClose: true,
         hardwareBackButtonClose: true

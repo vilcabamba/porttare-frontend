@@ -35,8 +35,6 @@
           provider: 'Vender'
         },
         client: {
-          services: 'Servicios',
-          shippings: 'Encomiendas',
           category: 'Categorías',
           myOrders: 'Mis Pedidos',
           myLists: 'Mis Listas',
@@ -44,7 +42,8 @@
           payments: 'Pagos',
           provider: 'Proveedor',
           cart: 'Mi carro',
-          billingAddresses: 'Facturación'
+          billingAddresses: 'Facturación',
+          providers: 'Proveedores',
         },
         provider: {
           orders: 'Pedidos',
