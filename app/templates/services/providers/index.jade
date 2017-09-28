@@ -17,11 +17,12 @@ ion-view
         ng-repeat="provider in servicesProvidersVM.providers"
         ui-sref="app.categories.provider({ categoryId: provider.provider_category_id, providerId: provider.id })"
       )
-        .provider-logo-wrapper
-          .provider-logo-img(
-            style="background-image: url('{{ ::provider.logotipo_url }}')"
-          )
         .provider-info-wrapper
+          .provider-logo-wrapper
+            .provider-logo-img(
+              style="background-image: url('{{ ::provider.logotipo_url }}')"
+            )
+
           .provider-title {{ ::provider.nombre_establecimiento }}
           .provider-activity {{ ::provider.actividad_economica }}
           .provider-schedule
