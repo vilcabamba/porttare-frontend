@@ -200,7 +200,8 @@
           sun: 'Domingo'
         },
         accept:'Aceptar',
-        geolocation: 'Geolocalizando...'
+        geolocation: 'Geolocalizando...',
+        somethingWentWrong: 'Algo salió mal'
       },
       item: {
         item: 'Producto',

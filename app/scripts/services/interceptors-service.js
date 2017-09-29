@@ -32,9 +32,16 @@ function InterceptorsService($injector, $q) {
   }
 
   function createAlert(data) {
+    var errorsStr;
+    if (data.errors) {
+      errorsStr = data.errors.join(', ');
+    }
+
+    $injector.get('$ionicHistory').clearHistory();
+
     currentAlert = $injector.get('$ionicPopup').alert({
       title: 'Ups!',
-      template: data.errors.join(', ')
+      template: errorsStr || '{{ ::("globals.somethingWentWrong" | translate)}}'
     });
     currentAlert.then(dismissedAlert);
   }

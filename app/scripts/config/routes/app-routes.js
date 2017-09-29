@@ -328,7 +328,7 @@ function appRoutes($stateProvider) {
     }
   })
   .state('app.profile.info', {
-    url: '/info',
+    url: '/',
     views: {
       'menuContent@app': {
         templateUrl: 'templates/profile/info/info.html',
