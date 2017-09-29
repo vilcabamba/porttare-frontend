@@ -122,3 +122,10 @@
   line-height: 22px;
   min-height: initial;
 }
+
+// for bar-header
+.bar-stable .button.activated,
+.bar-stable .button.active {
+  border-color: transparent;
+  background-color: initial;
+}
