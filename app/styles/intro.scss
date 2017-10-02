@@ -93,6 +93,12 @@
     &:hover {
       color: white;
     }
+
+    &.button.activated {
+      color: $base-yellow;
+      border-color: transparent;
+      background-color: $base-orange;
+    }
   }
 }
 
