@@ -35,7 +35,7 @@ module.exports = function (grunt) {
       },
       jadengtemplatecache: {
         files: ['<%= yeoman.app %>/**/*.jade'],
-        tasks: ['jadengtemplatecache']
+        tasks: ['jadengtemplatecache','newer:copy:templates']
       },
       js: {
         files: ['<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js',
