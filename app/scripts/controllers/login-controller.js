@@ -11,6 +11,7 @@
                             $ionicPopup,
                             $auth,
                             $ionicHistory,
+                            $localStorage,
                             APP,
                             SessionService) {
     var loginVm = this;
@@ -62,6 +63,7 @@
       });
       SessionService.logOut()
         .then(function () {
+          $localStorage.removeItem('hasViewedTutorial');
           $ionicHistory.clearHistory();
           $state.go(preloginState, {}, { location: 'replace' });
         })

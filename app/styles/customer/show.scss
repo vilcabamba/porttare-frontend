@@ -1,10 +1,11 @@
 .show-profile-page {
-  font-family: Montserrat-Light;
+  color: $base-darkteal;
 
   .profile-header {
     .img-profile {
       display: block;
       margin: auto;
+      margin-top: 15px;
       max-width: 140px;
       max-height: 140px;
       border-radius: 50%;
@@ -14,8 +15,8 @@
       text-align: center;
       font-size: 26px;
       line-height: 30px;
-      margin: 15px 0;
-      color: $dark;
+      margin: 0 0 15px 0;
+      font-family: GochiHand-Regular;
     }
   }
 
@@ -37,10 +38,19 @@
     .resource-detail-title {
       font-size: 18px;
       margin-bottom: 5px;
+      color: $base-darkteal;
     }
 
     .static-map-preview {
       max-width: 100%;
     }
+  }
+
+  .edit-address-btn {
+    float: right;
+    min-height: initial;
+    line-height: 18px;
+    margin-bottom: 5px;
+    margin-left: 5px;
   }
 }

@@ -7,7 +7,7 @@
     background-color: $light-grey;
     text-transform: uppercase;
     cursor: pointer;
-    font-family: Montserrat-Regular;
+    font-family: Galano-Grotesque-Medium;
 
     &.item-complex:not(.gray-item) {
       padding-top: 5px;
@@ -50,10 +50,10 @@
   }
 
   .user-type{
-    background: $base-orange;
+    background: $base-darkteal;
     color: white;
     a {
-      background: $base-orange;
+      background: $base-darkteal;
     }
   }
 

@@ -20,14 +20,15 @@
 .resource-details-table {
   font-size: 16px;
   margin-top: 0;
-  font-family: Montserrat-Light;
+  font-family: Galano-Grotesque-Medium;
 
   .label {
-    color: $base-grey;
+    color: $base-darkteal;
+    opacity: 0.7;
   }
   .value {
     text-align: center;
-    color: $dark;
+    color: $base-darkteal;
   }
 
   .row, .col {
@@ -39,7 +40,7 @@
     .col {
       padding-top: 10px;
       padding-bottom: 10px;
-      border-bottom: 1px solid $base-orange;
+      border-bottom: 1px solid $base-teal;
 
       &.label {
         padding-right: 5px;
@@ -48,7 +49,7 @@
 
       &.value {
         padding-left: 5px;
-        border-left: 1px solid $base-orange;
+        border-left: 1px solid $base-teal;
       }
     }
 
@@ -78,11 +79,11 @@
 
   .row--top-border {
     padding-top: 0;
-    border-top: 1px solid $base-orange;
+    border-top: 1px solid $base-teal;
   }
 
   .row--bottom-border {
-    border-bottom: 1px solid $base-orange;
+    border-bottom: 1px solid $base-teal;
   }
 }
 
