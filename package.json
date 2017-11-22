@@ -11,7 +11,7 @@
         "cordova-android": "~4.1.1",
         "cordova-ios": "^4.4.0",
         "cordova-plugin-camera": "~2.3.0",
-        "cordova-plugin-facebook4": "https://github.com/jeduan/cordova-plugin-facebook4.git#6911f2d1b43a82254c78706bf03e314f3275a94f",
+        "cordova-plugin-facebook4": "https://github.com/jeduan/cordova-plugin-facebook4.git#0f2b695b3b8e7692c749a11cc85b09be5d14ffab",
         "cordova-plugin-geolocation": "~2.4.0",
         "cordova-plugin-statusbar": "~2.2.0",
         "cordova-plugin-whitelist": "~1.3.0",
