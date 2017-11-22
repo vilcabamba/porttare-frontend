@@ -87,8 +87,7 @@
         "cordova-plugin-whitelist@~1.3.0",
         "cordova-plugin-camera@~2.3.0",
         "phonegap-plugin-push@1.8.0",
-        "https://github.com/jeduan/cordova-plugin-facebook4.git#d7deb658085c1f8e0f002992ec6ace581729ad58",
-        "cordova-plugin-facebook4@https://github.com/jeduan/cordova-plugin-facebook4.git#6911f2d1b43a82254c78706bf03e314f3275a94f"
+        "cordova-plugin-facebook4@https://github.com/jeduan/cordova-plugin-facebook4.git#0f2b695b3b8e7692c749a11cc85b09be5d14ffab"
     ],
     "cordovaPlatforms": [
         "android",
