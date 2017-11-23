@@ -12,6 +12,7 @@
         $ionicHistory,
         $window,
         $ionicLoading,
+        $localStorage,
         deferredLogout,
         SessionService,
         deferLoginWithFB,
@@ -54,6 +55,10 @@
         successState: 'app.categories.index',
         preloginState: 'prelogin'
       };
+      $localStorage = {
+        setItem:sinon.stub(),
+        removeItem: sinon.stub()
+      };
     }));
 
     describe('#login', function() {
@@ -68,7 +73,8 @@
           '$window': $window,
           '$scope': $scope,
           'SessionService': SessionService,
-          'APP': APP
+          'APP': APP,
+          '$localStorage': $localStorage
         });
         $rootScope = _$rootScope_;
         $window.localStorage.setItem('hasViewedTutorial','true');
@@ -115,7 +121,8 @@
           '$ionicHistory': $ionicHistory,
           '$scope': $scope,
           'SessionService': SessionService,
-          'APP': APP
+          'APP': APP,
+          '$localStorage': $localStorage
         });
         $rootScope = _$rootScope_;
         controller.logout();
