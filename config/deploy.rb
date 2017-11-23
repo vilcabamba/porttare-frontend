@@ -6,6 +6,7 @@ set :application, "porttare-frontend"
 set :repo_url, 'git@github.com:vilcabamba/porttare-frontend.git'
 
 set :npm_flags, '--silent --no-progress'
+set :npm_env_variables, path: "#{fetch(:rbenv_path)}/shims:$PATH"
 
 set :slackistrano, {
   channel: '#porttare',
