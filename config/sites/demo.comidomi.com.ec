@@ -13,8 +13,8 @@ server {
   server_name demo.comidomi.com.ec
               www.demo.comidomi.com.ec;
 
-  ssl_certificate /etc/letsencrypt/live/porttare.shiriculapo.com/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/porttare.shiriculapo.com/privkey.pem;
+  ssl_certificate /etc/letsencrypt/live/demo.comidomi.com.ec/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/demo.comidomi.com.ec/privkey.pem;
 
   # secure ssl
   # from https://cipherli.st/
