@@ -10,9 +10,8 @@
         dest: '<%= yeoman.dist %>',
         src: [
           '<%= yeoman.images %>/**/*.{png,jpg,jpeg,gif,webp,svg}',
-          '*.html',
-          'templates/**/*.html',
           'fonts/*',
+          '*.html',
           '.well-known/**'
         ]
       }, {
@@ -47,7 +46,17 @@
       src: [
         '**/*',
         '!**/*.jade',
-        '!**/*.(scss,sass,css)'
+        '!**/*.html',
+        '!**/*.(scss,sass,css)',
+        'index.html'
+      ]
+    },
+    templates: {
+      expand: true,
+      cwd: '<%= yeoman.app %>',
+      dest: '<%= yeoman.dist %>/',
+      src: [
+        'scripts/templates.js'
       ]
     },
     tmp: {

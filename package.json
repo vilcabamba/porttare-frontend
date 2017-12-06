@@ -27,7 +27,8 @@
         "grunt-ng-constant": "^1.0.0",
         "ionic-plugin-keyboard": "~2.2.1",
         "phonegap-plugin-push": "1.8.0",
-        "time-grunt": "~1.0.0"
+        "time-grunt": "~1.0.0",
+        "grunt-jade-ng-template-cache": "0.0.5"
     },
     "devDependencies": {
         "chai": "^3.4.1",
@@ -63,7 +64,7 @@
         "karma-phantomjs-launcher": "^1.0.2",
         "karma-sinon": "^1.0.4",
         "load-grunt-tasks": "~3.1.0",
-        "lodash": "~3.1.0",
+        "lodash": "~4.1.0",
         "mkdirp": "~0.5.0",
         "mocha": "^2.3.4",
         "ncp": "~1.0.1",
