@@ -13,5 +13,8 @@ input {
   &--no-borders {
     border-bottom: none;
   }
-}
 
+  .icon, input {
+    color: $base-darkteal;
+  }
+}

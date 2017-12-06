@@ -43,6 +43,8 @@
 
     .selectize-wrapper {
       float: right;
+      min-width: 100px;
+      text-align: right;
 
       .selectize-input {
         border: 0;

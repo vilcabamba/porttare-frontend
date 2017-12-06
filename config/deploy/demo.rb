@@ -3,13 +3,13 @@
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-server "porttare.shiriculapo.com", user: "porttare", roles: %w{app}
+server "demo.comidomi.com.ec", user: "porttare", roles: %w{app}
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
-set :deploy_to, '~/demo-porttare-frontend'
+set :deploy_to, '~/demo-porttare-frontend-comidomi'
 set :rbenv_path, '/home/porttare/.rbenv'
 set :nvm_type, :user
-set :nvm_node, 'v0.12.14'
+set :nvm_node, 'v4.8.6'
 
 # role-based syntax
 # ==================

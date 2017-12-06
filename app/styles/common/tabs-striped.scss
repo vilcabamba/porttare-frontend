@@ -4,14 +4,14 @@
     position: relative;
     background: none;
     border-top: none;
-    border-color: $base-yellow;
+    border-color: $base-orange;
   }
   .tab-item {
     font-family: Montserrat-Regular;
     font-size: 16px;
     text-transform: uppercase;
     &.tab-item-active {
-      border-color: $base-yellow;
+      border-color: $base-orange;
       border-width: 0 0 4px 0 !important;
     }
   }
