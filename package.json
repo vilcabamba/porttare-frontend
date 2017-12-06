@@ -24,7 +24,6 @@
         "grunt-contrib-compass": "~1.0.1",
         "grunt-contrib-copy": "~0.7.0",
         "grunt-contrib-jade": "^0.15.0",
-        "grunt-jade-ng-template-cache": "0.0.5",
         "grunt-ng-constant": "^1.0.0",
         "ionic-plugin-keyboard": "~2.2.1",
         "phonegap-plugin-push": "1.8.0",
