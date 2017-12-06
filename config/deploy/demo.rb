@@ -9,7 +9,7 @@ server "demo.comidomi.com.ec", user: "porttare", roles: %w{app}
 set :deploy_to, '~/demo-porttare-frontend-comidomi'
 set :rbenv_path, '/home/porttare/.rbenv'
 set :nvm_type, :user
-set :nvm_node, 'v6.9.0'
+set :nvm_node, 'v4.8.6'
 
 # role-based syntax
 # ==================
