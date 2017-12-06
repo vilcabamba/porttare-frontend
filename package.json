@@ -64,7 +64,7 @@
         "karma-phantomjs-launcher": "^1.0.2",
         "karma-sinon": "^1.0.4",
         "load-grunt-tasks": "~3.1.0",
-        "lodash": "~3.1.0",
+        "lodash": "~4.1.0",
         "mkdirp": "~0.5.0",
         "mocha": "^2.3.4",
         "ncp": "~1.0.1",
