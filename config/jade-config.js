@@ -3,7 +3,7 @@
 
   var jadeConfig = {
     options: {
-      module: 'moi.templates',
+      module: 'porttare.templates',
       dest: '<%= yeoman.app %>/scripts/templates.js',
       jade: {
       }
