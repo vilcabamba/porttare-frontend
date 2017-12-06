@@ -14,7 +14,7 @@ ion-side-menus(enable-menu-with-back-views='false')
           sidebar-header-current-user(
             show-profile-link="true"
           )
-        
+
         ion-item.item-complex
           .item-content
             i.icon.ion-home
@@ -61,7 +61,7 @@ ion-side-menus(enable-menu-with-back-views='false')
           li
             .inner-content
               | {{ ::("menu.client.myOrders" | translate) }}
-        
+
         //- wishlists hidden for now
           ion-item.gray-item(
             menu-close=''
@@ -104,35 +104,37 @@ ion-side-menus(enable-menu-with-back-views='false')
             i.icon.ion-power
             | {{::("menu.logout"|translate)}}
 
-        ion-item.item-complex.switch-user-role
-          .item-content
-            i.icon.ion-arrow-swap
-            | {{::("menu.changeTo"|translate)}}
-        ion-item.user-type(
-          menu-close=''
-          ui-sref='app.provider.welcome'
-          ng-if='!user.provider_profile'
-        )
-          i.icon.ion-pricetags
-          | {{::("menu.user.provider"|translate)}}
-        ion-item.user-type(
-          menu-close=''
-          ui-sref='provider.items.index'
-          ng-if='user.provider_profile'
-        )
-          i.icon.ion-pricetags
-          | {{::("menu.user.provider"|translate)}}
-        ion-item.user-type(
-          menu-close=''
-          ui-sref='app.courier.welcome'
-          ng-if='!user.courier_profile'
-        )
-          i.icon.ion-model-s
-          | {{::("menu.user.courier"|translate)}}
-        ion-item.user-type(
-          menu-close=''
-          ui-sref='courier.orders'
-          ng-if='user.courier_profile'
-        )
-          i.icon.ion-model-s
-          | {{::("menu.user.courier"|translate)}}
+        //- HIDDEN FOR THE MVP
+
+        //- ion-item.item-complex.switch-user-role
+        //-   .item-content
+        //-     i.icon.ion-arrow-swap
+        //-     | {{::("menu.changeTo"|translate)}}
+        //- ion-item.user-type(
+        //-   menu-close=''
+        //-   ui-sref='app.provider.welcome'
+        //-   ng-if='!user.provider_profile'
+        //- )
+        //-   i.icon.ion-pricetags
+        //-   | {{::("menu.user.provider"|translate)}}
+        //- ion-item.user-type(
+        //-   menu-close=''
+        //-   ui-sref='provider.items.index'
+        //-   ng-if='user.provider_profile'
+        //- )
+        //-   i.icon.ion-pricetags
+        //-   | {{::("menu.user.provider"|translate)}}
+        //- ion-item.user-type(
+        //-   menu-close=''
+        //-   ui-sref='app.courier.welcome'
+        //-   ng-if='!user.courier_profile'
+        //- )
+        //-   i.icon.ion-model-s
+        //-   | {{::("menu.user.courier"|translate)}}
+        //- ion-item.user-type(
+        //-   menu-close=''
+        //-   ui-sref='courier.orders'
+        //-   ng-if='user.courier_profile'
+        //- )
+        //-   i.icon.ion-model-s
+        //-   | {{::("menu.user.courier"|translate)}}
