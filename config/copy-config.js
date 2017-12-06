@@ -11,6 +11,7 @@
         src: [
           '<%= yeoman.images %>/**/*.{png,jpg,jpeg,gif,webp,svg}',
           'fonts/*',
+          '*.html',
           '.well-known/**'
         ]
       }, {

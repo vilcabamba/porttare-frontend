@@ -33,6 +33,10 @@ module.exports = function (grunt) {
         files: ['bower.json'],
         tasks: ['wiredep', 'newer:copy:app']
       },
+      html: {
+        files: ['<%= yeoman.app %>/*.html'],
+        tasks: ['newer:copy:app']
+      },
       jadengtemplatecache: {
         files: ['<%= yeoman.app %>/**/*.jade'],
         tasks: ['jadengtemplatecache','newer:copy:templates']
@@ -452,7 +456,8 @@ module.exports = function (grunt) {
     'copy:dist',
     'cssmin',
     'uglify',
-    'usemin'
+    'usemin',
+    'htmlmin'
   ]);
 
   grunt.registerTask('coverage',
