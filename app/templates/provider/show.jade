@@ -8,9 +8,10 @@ ion-view(
     cart-button
 
   ion-content.provider-show-page
-    .provider-header(
+    .provider-header--background(
       style="background-image:url('{{ ::providerDetVm.provider.cover_url }}')"
     )
+    .provider-header
       .provider-logo
         img(
           ng-src='{{ ::providerDetVm.provider.logotipo_url | defaultImage }}'
