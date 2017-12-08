@@ -39,7 +39,7 @@
         map: currentMap,
         animation: google.maps.Animation.DROP,
         icon: {
-          url: '../images/supermarket.icon.png',
+          url: 'images/supermarket.icon.png',
           scaledSize: {
             width: 22,
             height: 26

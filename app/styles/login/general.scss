@@ -51,6 +51,10 @@
     background: none;
     background-color: $white;
   }
+
+  &.bar.bar-light .title {
+    color: $base-darkteal;
+  }
 }
 
 ion-view[hide-nav-bar="true"] {

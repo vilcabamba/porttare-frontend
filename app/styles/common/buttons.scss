@@ -3,14 +3,18 @@
   min-height: 40px;
 
   &.button-link {
-    color: $base-grey;
+    color: $base-darkteal;
     text-decoration: underline;
   }
 }
 
+.button-clear.button-secondary {
+  color: $base-orange;
+}
+
 .common-button {
   border-radius: 8px;
-  font-family: Montserrat-Light;
+  font-family: Montserrat-Regular;
   color: $white;
   width: 100%;
   background-color: $base-orange;
@@ -20,7 +24,7 @@
 }
 
 .button {
-  font-family: Montserrat-Light;
+  font-family: Montserrat-Regular;
 }
 
 .button-default-action.button-outline {
