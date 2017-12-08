@@ -1,11 +1,26 @@
 $gridBgColor: #F2F2F2;
+$providerCoverBlur: 4px;
 $providerShowPageCoverHeight: 160px;
 
 .provider-show-page {
+  .provider-header--background {
+    background-size: cover;
+    position: fixed;
+    height: $providerShowPageCoverHeight;
+    z-index: -1;
+    width: 100%;
+    background-position: 50%;
+
+    -webkit-filter: blur($providerCoverBlur);
+    -moz-filter: blur($providerCoverBlur);
+    -o-filter: blur($providerCoverBlur);
+    -ms-filter: blur($providerCoverBlur);
+    filter: blur($providerCoverBlur);
+  }
+
   .provider-header {
     max-height: $providerShowPageCoverHeight;
     position: relative;
-    background-size: cover;
 
     .provider-logo {
       height: 100%;
@@ -15,10 +30,20 @@ $providerShowPageCoverHeight: 160px;
       display: block;
       align-items: center;
 
+      // vertically align
+      position: relative;
+
       img {
         max-width: 100%;
         max-height: $providerShowPageCoverHeight;
-        vertical-align: bottom;
+
+        // vertically align
+        position: absolute;
+        margin: auto;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
       }
     }
 
