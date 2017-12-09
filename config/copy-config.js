@@ -44,7 +44,7 @@
       cwd: '<%= yeoman.app %>',
       dest: '<%= yeoman.dist %>/',
       src: [
-        '**/*',
+        '**/**/*',
         '!**/*.jade',
         '!**/*.html',
         '!**/*.(scss,sass,css)',

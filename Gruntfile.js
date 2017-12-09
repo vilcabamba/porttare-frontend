@@ -443,22 +443,37 @@ module.exports = function (grunt) {
     'newer:copy:tmp'
   ]);
 
-  var compressEnv = process.env.NODE_ENV;
-  grunt.registerTask('compress', [
-    'clean',
-    'ngconstant:' + compressEnv,
-    'wiredep',
-    'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
-    'concat',
-    'ngAnnotate',
-    'copy:dist',
-    'cssmin',
-    'uglify',
-    'usemin',
-    'htmlmin'
-  ]);
+  grunt.registerTask('compress', function(){
+    var doNotCompress = process.env.DO_NOT_COMPRESS_JS;
+    var compressEnv = process.env.NODE_ENV;
+    if (doNotCompress) {
+      grunt.task.run([
+        'clean',
+        'ngconstant:' + compressEnv,
+        'wiredep',
+        'concurrent:server',
+        'autoprefixer',
+        'copy:app',
+        'copy:tmp'
+      ]);
+    } else {
+      grunt.task.run([
+        'clean',
+        'ngconstant:' + compressEnv,
+        'wiredep',
+        'useminPrepare',
+        'concurrent:dist',
+        'autoprefixer',
+        'concat',
+        'ngAnnotate',
+        'copy:dist',
+        'cssmin',
+        'uglify',
+        'usemin',
+        'htmlmin'
+      ]);
+    }
+  });
 
   grunt.registerTask('coverage',
     ['karma:continuous',
