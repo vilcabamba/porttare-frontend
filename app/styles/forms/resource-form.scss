@@ -21,15 +21,16 @@
 
   legend {
     border: 0;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 30px;
     text-transform: uppercase;
-    font-family: Montserrat-SemiBold;
+    font-family: Galano-Grotesque-Heavy;
+    color: $base-darkteal;
   }
 
   p {
     margin: auto;
-    font-family: Montserrat-Regular;
+    font-family: Galano-Grotesque-Medium;
   }
 
   .input-label {
@@ -58,9 +59,10 @@
     padding-left: 0;
 
     .input-label {
-      font-size: 14px;
+      font-size: 16px;
       text-transform: uppercase;
-      font-family: Montserrat-Regular;
+      font-family: Galano-Grotesque-Medium;
+      color: $base-darkteal;
     }
 
     input {
@@ -167,7 +169,12 @@
   }
 
   .datetime-picker {
+    color: $base-darkteal;
     font-family: Montserrat-Light;
+
+    .icon::before {
+      color: $base-darkteal;
+    }
 
     .input-label {
       padding-bottom: 7px;

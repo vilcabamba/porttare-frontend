@@ -37,12 +37,13 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/*.html'],
         tasks: ['newer:copy:app']
       },
-      jade: {
+      jadengtemplatecache: {
         files: ['<%= yeoman.app %>/**/*.jade'],
-        tasks: ['jade:compile']
+        tasks: ['jadengtemplatecache','newer:copy:templates']
       },
       js: {
-        files: ['<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js'],
+        files: ['<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js',
+                '!<%= yeoman.app %>/<%= yeoman.scripts %>/templates.js'],
         tasks: ['newer:copy:app', 'newer:jshint:all']
       },
       compass: {
@@ -58,6 +59,8 @@ module.exports = function (grunt) {
         tasks: ['newer:copy:images']
       }
     },
+
+    jadengtemplatecache: require('./config/jade-config'),
 
     // The actual grunt server settings
     connect: {
@@ -88,7 +91,8 @@ module.exports = function (grunt) {
       },
       all: [
         'Gruntfile.js',
-        '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js'
+        '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js',
+        '!<%= yeoman.app %>/<%= yeoman.scripts %>/templates.js',
       ],
       test: {
         options: {
@@ -175,13 +179,13 @@ module.exports = function (grunt) {
     },
 
     // The following *-min tasks produce minified files in the dist folder
-    jade: require('./config/jade-config'),
     cssmin: {
       options: {
         //root: '<%= yeoman.app %>',
         noRebase: true
       }
     },
+
     htmlmin: {
       dist: {
         options: {
@@ -193,7 +197,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.dist %>',
-          src: ['*.html', 'templates/**/*.html'],
+          src: ['*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -439,22 +443,37 @@ module.exports = function (grunt) {
     'newer:copy:tmp'
   ]);
 
-  var compressEnv = process.env.NODE_ENV;
-  grunt.registerTask('compress', [
-    'clean',
-    'ngconstant:' + compressEnv,
-    'wiredep',
-    'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
-    'concat',
-    'ngAnnotate',
-    'copy:dist',
-    'cssmin',
-    'uglify',
-    'usemin',
-    'htmlmin'
-  ]);
+  grunt.registerTask('compress', function(){
+    var doNotCompress = process.env.DO_NOT_COMPRESS_JS;
+    var compressEnv = process.env.NODE_ENV;
+    if (doNotCompress) {
+      grunt.task.run([
+        'clean',
+        'ngconstant:' + compressEnv,
+        'wiredep',
+        'concurrent:server',
+        'autoprefixer',
+        'copy:app',
+        'copy:tmp'
+      ]);
+    } else {
+      grunt.task.run([
+        'clean',
+        'ngconstant:' + compressEnv,
+        'wiredep',
+        'useminPrepare',
+        'concurrent:dist',
+        'autoprefixer',
+        'concat',
+        'ngAnnotate',
+        'copy:dist',
+        'cssmin',
+        'uglify',
+        'usemin',
+        'htmlmin'
+      ]);
+    }
+  });
 
   grunt.registerTask('coverage',
     ['karma:continuous',

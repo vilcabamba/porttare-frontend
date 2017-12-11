@@ -3,7 +3,7 @@ ion-modal-view
     .title.alt-logo
 
     .ion-nav-buttons.buttons(side="primary")
-      button.button.button-clear.button-positive(
+      button.button.button-clear(
         ng-click="piVm.closeModal()"
       ) {{::('globals.cancel'|translate)}}
 
@@ -36,7 +36,7 @@ ion-modal-view
         )
           .img-placeholder
           .text-center
-            .button.button-clear.button-positive.button-small
+            .button.button-clear.button-secondary.button-small
               | {{::("user.changeImagen"|translate)}}
 
         show-error(array-messages='piVm.messages.custom_image')

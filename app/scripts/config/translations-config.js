@@ -253,7 +253,7 @@
         delete: 'Eliminar'
       },
       client: {
-        formLegend: 'Datos cliente',
+        formLegend: 'Información personal',
         client: 'Cliente',
         clients: 'Clientes',
         listOfClients: 'Lista de clientes',

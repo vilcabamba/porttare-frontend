@@ -5,7 +5,7 @@
     )
   .username-wrapper {{ sidebarHeaderCurrentUserVM.userName }}
   .current-user-actions
-    a.button.button-clear.button-positive.button-small(
+    a.button.button-clear.button-secondary.button-small(
       ui-sref='app.profile.info'
       ng-if='sidebarHeaderCurrentUserVM.showProfileLink'
     ) {{ ::("menu.profile" | translate) }}
