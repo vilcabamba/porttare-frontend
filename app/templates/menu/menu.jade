@@ -10,10 +10,19 @@ ion-side-menus(enable-menu-with-back-views='false')
       ion-list
         ion-item.sidebar-header-current-user--wrapper(
           menu-close=''
+          ng-if="vmMenu.currentUser"
         )
           sidebar-header-current-user(
             show-profile-link="true"
           )
+
+        ion-item(
+          menu-close=''
+          ui-sref='prelogin'
+          ng-if="!vmMenu.currentUser"
+        )
+          li
+            .inner-content Inicia sesión
 
         ion-item.item-complex
           .item-content

@@ -8,8 +8,10 @@
   function MenuController($scope,
                           categories,
                           CategoriesService,
+                          currentUser,
                           ErrorHandlerService) {
     var vmMenu = this;
+    vmMenu.currentUser = currentUser;
     vmMenu.categories = categories.provider_categories;
 
     $scope.$on('update-categories', function() {
