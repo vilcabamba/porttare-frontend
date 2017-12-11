@@ -59,13 +59,14 @@ ion-side-menus(enable-menu-with-back-views='false')
           ion-item(menu-close='' ui-sref='app.cart.index')
             | {{::("menu.client.cart"|translate)}}
 
-        ion-item.item-complex
+        ion-item.item-complex(ng-if="vmMenu.currentUser")
           .item-content
             i.icon.ion-person
             | {{::("menu.account"|translate)}}
         ion-item.gray-item(
           menu-close=''
           ui-sref='app.customerorders.index'
+          ng-if="vmMenu.currentUser"
         )
           li
             .inner-content
@@ -83,6 +84,7 @@ ion-side-menus(enable-menu-with-back-views='false')
         ion-item.gray-item(
           menu-close=''
           ui-sref='app.billing.addresses'
+          ng-if="vmMenu.currentUser"
         )
           li
             .inner-content
@@ -108,6 +110,7 @@ ion-side-menus(enable-menu-with-back-views='false')
           menu-close
           ng-controller='LoginController as loginVm'
           ng-click='loginVm.logout()'
+          ng-if="vmMenu.currentUser"
         )
           .item-content
             i.icon.ion-power
