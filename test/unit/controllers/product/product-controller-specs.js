@@ -15,6 +15,7 @@
       deferGetWishlist,
       deferUpdateWishlist,
       VirtualCartService,
+      currentUser,
       deferCreateWishlist;
 
     beforeEach(module('porttare.controllers'));
@@ -56,6 +57,10 @@
         id: 1,
         precio_cents: 100
       });
+      $provide.value('currentUser', {
+        id: 1,
+        name: 'Juan Perez'
+      });
       $provide.factory('$ionicPopup', function () {
         return {};
       });
@@ -94,6 +99,7 @@
                                 _$ionicLoading_,
                                 _$auth_,
                                 _$ionicScrollDelegate_,
+                                _currentUser_,
                                 _VirtualCartService_) {
 
       $scope = _$rootScope_.$new();
@@ -105,6 +111,7 @@
       ModalService = _ModalService_;
       ErrorHandlerService = _ErrorHandlerService_;
       VirtualCartService = _VirtualCartService_;
+      currentUser = _currentUser_;
 
       dependencies = {
         WishlistsService: WishlistsService,
@@ -118,7 +125,8 @@
         $ionicLoading: _$ionicLoading_,
         $auth: _$auth_,
         $ionicScrollDelegate: _$ionicScrollDelegate_,
-        VirtualCartService: VirtualCartService
+        VirtualCartService: VirtualCartService,
+        currentUser: currentUser
       };
 
       ctrl = $controller('ProductController', dependencies);

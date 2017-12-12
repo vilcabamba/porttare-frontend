@@ -15,6 +15,7 @@
                              ErrorHandlerService,
                              $ionicLoading,
                              VirtualCartService,
+                             currentUser,
                              $auth) {
     var productVm = this;
     productVm.more = false;
@@ -187,8 +188,12 @@
     }
 
     function buyNow() {
-      CartService.addItem(productVm.item)
+      if(currentUser){
+        CartService.addItem(productVm.item)
         .then(onBuyNowSuccess, onError);
+      }else{
+        $state.go('prelogin');
+      }
     }
 
     function onBuyNowSuccess(res) {
