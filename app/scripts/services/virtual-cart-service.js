@@ -8,7 +8,9 @@
   function VirtualCartService($localStorage) {
       var service = {
           addItem: addItem,
-          getCount: getCount
+          getCount: getCount,
+          getCart: getCart,
+          emptyCart: emptyCart
       };
 
       return service;
@@ -32,6 +34,15 @@
         }else{
           return 0;
         }
+      }
+
+      function getCart(){
+        var cart = $localStorage.getItem('cart');
+        return JSON.parse(cart);
+      }
+
+      function emptyCart(){
+        $localStorage.removeItem('cart');
       }
 
       // function removeItem(item){

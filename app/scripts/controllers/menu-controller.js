@@ -10,14 +10,14 @@
                           CategoriesService,
                           currentUser,
                           ErrorHandlerService) {
-    var vmMenu = this;
-    vmMenu.currentUser = currentUser;
-    vmMenu.categories = categories.provider_categories;
+    var menuVm = this;
+    menuVm.currentUser = currentUser;
+    menuVm.categories = categories.provider_categories;
 
     $scope.$on('update-categories', function() {
       CategoriesService.getCategories()
         .then(function success(res) {
-          vmMenu.categories = res.data.provider_categories;
+          menuVm.categories = res.data.provider_categories;
         }, ErrorHandlerService.handleCommonErrorGET);
     });
   }

@@ -8,7 +8,10 @@
   function SiteController($rootScope,
                           $ionicLoading,
                           $auth,
-                          ProfileService) {
+                          ProfileService,
+                          VirtualCartService,
+                          CartService,
+                          $q) {
     var siteVm = this,
         currentUser = null;
 
@@ -46,6 +49,20 @@
       currentUser = $auth.user;
       updateProperties();
       updatePropertiesProfileProvider();
+      setCart();
+    }
+
+    function setCart(){
+      var cart = VirtualCartService.getCart();
+      var promisesArray = [];
+      if(cart){
+        angular.forEach(cart, function(cartItem) {
+          promisesArray.push(CartService.addItem(cartItem));
+        });
+      }
+      $q.all(promisesArray).then(function(){
+        VirtualCartService.emptyCart();
+      });
     }
 
     function userName () {

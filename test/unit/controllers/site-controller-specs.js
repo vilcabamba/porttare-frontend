@@ -23,6 +23,16 @@
           }
         };
       });
+      $provide.factory('VirtualCartService', function(){
+        return {
+          getCart: function(){
+            return true;
+          },
+          emptyCart: function(){
+            return true;
+          }
+        };
+      });
       $provide.factory('ProfileService', function(){
         return {
           getUserImageURL: function(){

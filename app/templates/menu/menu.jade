@@ -10,7 +10,7 @@ ion-side-menus(enable-menu-with-back-views='false')
       ion-list
         ion-item.sidebar-header-current-user--wrapper(
           menu-close=''
-          ng-if="vmMenu.currentUser"
+          ng-if="menuVm.currentUser"
         )
           sidebar-header-current-user(
             show-profile-link="true"
@@ -19,7 +19,7 @@ ion-side-menus(enable-menu-with-back-views='false')
         ion-item(
           menu-close=''
           ui-sref='prelogin'
-          ng-if="!vmMenu.currentUser"
+          ng-if="!menuVm.currentUser"
         )
           li
             .inner-content Inicia sesión
@@ -59,14 +59,14 @@ ion-side-menus(enable-menu-with-back-views='false')
           ion-item(menu-close='' ui-sref='app.cart.index')
             | {{::("menu.client.cart"|translate)}}
 
-        ion-item.item-complex(ng-if="vmMenu.currentUser")
+        ion-item.item-complex(ng-if="menuVm.currentUser")
           .item-content
             i.icon.ion-person
             | {{::("menu.account"|translate)}}
         ion-item.gray-item(
           menu-close=''
           ui-sref='app.customerorders.index'
-          ng-if="vmMenu.currentUser"
+          ng-if="menuVm.currentUser"
         )
           li
             .inner-content
@@ -84,7 +84,7 @@ ion-side-menus(enable-menu-with-back-views='false')
         ion-item.gray-item(
           menu-close=''
           ui-sref='app.billing.addresses'
-          ng-if="vmMenu.currentUser"
+          ng-if="menuVm.currentUser"
         )
           li
             .inner-content
@@ -110,7 +110,7 @@ ion-side-menus(enable-menu-with-back-views='false')
           menu-close
           ng-controller='LoginController as loginVm'
           ng-click='loginVm.logout()'
-          ng-if="vmMenu.currentUser"
+          ng-if="menuVm.currentUser"
         )
           .item-content
             i.icon.ion-power
