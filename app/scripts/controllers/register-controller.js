@@ -10,7 +10,8 @@
                               $ionicPopup,
                               $state,
                               $scope,
-                              SessionService) {
+                              SessionService,
+                              APP) {
     var registerVm = this;
     registerVm.register = register;
     registerVm.loginWithFB = SessionService.loginWithFB;
@@ -18,19 +19,17 @@
     function register() {
       if (!registerVm.registerForm.$invalid) {
         $ionicLoading.show({
-          template: 'cargando...'
+          template: '{{::("globals.loading"|translate)}}'
         });
         $auth.submitRegistration(registerVm.user)
           .then(function() {
-            registerVm.user = {};
-            $state.go('login').then(function(){
-              $ionicPopup.alert({
-                title: 'Alerta',
-                template: 'Usuario creado satisfactoriamente'
-              });
+            $state.go(APP.placesState).then(function(){
+              registerVm.user = {};
+              registerVm.registerForm.$setPristine();
+              registerVm.registerForm.$setUntouched();
+              $ionicLoading.hide();
             });
-          })
-          .finally(function(){
+          }, function () {
             $ionicLoading.hide();
           });
       }else{

@@ -36,7 +36,7 @@
         clearHistory: sinon.stub()
       };
       $ionicLoading     = { show: sinon.stub(), hide: sinon.stub()};
-      $state            = { go: sinon.stub() };
+      $state            = { go: sinon.stub().returns($q.defer().promise) };
       $auth             = {
         user: {current_place: {}}, //jshint ignore:line
         submitLogin: sinon.stub()
