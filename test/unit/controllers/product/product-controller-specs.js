@@ -14,6 +14,7 @@
       ModalService,
       deferGetWishlist,
       deferUpdateWishlist,
+      VirtualCartService,
       deferCreateWishlist;
 
     beforeEach(module('porttare.controllers'));
@@ -22,6 +23,11 @@
         return {
           findCartItem: sinon.stub(),
           canAddItem: sinon.stub()
+        };
+      });
+      $provide.factory('VirtualCartService', function(){
+        return {
+          addItem: sinon.stub().returns(true)
         };
       });
       $provide.factory('WishlistsService', function ($q) {
@@ -75,9 +81,20 @@
       });
     }));
 
-    beforeEach(inject(function (_$q_, _$rootScope_, _$controller_,
-      _WishlistsService_, _providerItem_, _CartService_, _$ionicPopup_,
-      _$state_, _ModalService_, _ErrorHandlerService_, _$ionicLoading_, _$auth_, _$ionicScrollDelegate_) {
+    beforeEach(inject(function (_$q_,
+                                _$rootScope_,
+                                _$controller_,
+                                _WishlistsService_,
+                                _providerItem_,
+                                _CartService_,
+                                _$ionicPopup_,
+                                _$state_,
+                                _ModalService_,
+                                _ErrorHandlerService_,
+                                _$ionicLoading_,
+                                _$auth_,
+                                _$ionicScrollDelegate_,
+                                _VirtualCartService_) {
 
       $scope = _$rootScope_.$new();
       $q = _$q_;
@@ -87,6 +104,7 @@
       WishlistsService = _WishlistsService_;
       ModalService = _ModalService_;
       ErrorHandlerService = _ErrorHandlerService_;
+      VirtualCartService = _VirtualCartService_;
 
       dependencies = {
         WishlistsService: WishlistsService,
@@ -99,7 +117,8 @@
         $state: $state,
         $ionicLoading: _$ionicLoading_,
         $auth: _$auth_,
-        $ionicScrollDelegate: _$ionicScrollDelegate_
+        $ionicScrollDelegate: _$ionicScrollDelegate_,
+        VirtualCartService: VirtualCartService
       };
 
       ctrl = $controller('ProductController', dependencies);
