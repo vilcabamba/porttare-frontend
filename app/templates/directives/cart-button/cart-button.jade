@@ -1,5 +1,10 @@
 .button.cart-main-button(
   ui-sref='app.cart.index'
+  ng-if="$auth.user"
+)
+.button.cart-main-button(
+  ui-sref='prelogin'
+  ng-if="!$auth.user"
 )
   span.badge.badge-light.number-of-items(
     ng-if="cartButtonVM.numberItems > 0"
