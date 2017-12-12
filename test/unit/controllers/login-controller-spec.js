@@ -133,7 +133,7 @@
       });
 
       describe('when the logout is executed,', function () {
-        var preloginState = 'prelogin';
+        var preloginState = 'app.categories.index';
 
         it('should show loading', function () {
           sinon.assert.calledOnce($ionicLoading.show);
