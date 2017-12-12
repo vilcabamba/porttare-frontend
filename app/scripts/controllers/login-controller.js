@@ -20,7 +20,6 @@
     loginVm.loginWithFB = SessionService.loginWithFB;
     loginVm.loginForm = {};
     var successState = APP.successState,
-        preloginState = APP.preloginState,
         placesState = APP.placesState;
 
     $rootScope.$on('auth:login-error', cantLogin);
@@ -65,7 +64,8 @@
         .then(function () {
           $localStorage.removeItem('hasViewedTutorial');
           $ionicHistory.clearHistory();
-          $state.go(preloginState, {}, { location: 'replace' });
+          $rootScope.$broadcast('update-number');
+          $state.go('app.categories.index', {}, { location: 'replace' });
         })
         .catch(function () {
           $ionicPopup.alert({

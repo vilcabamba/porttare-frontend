@@ -9,6 +9,7 @@ function appRoutes($stateProvider) {
   .state('app', {
     url: '/app',
     abstract: true,
+    cache: false,
     templateUrl: 'templates/menu/menu.html',
     controller: 'MenuController',
     controllerAs: 'menuVm',

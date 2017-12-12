@@ -53,13 +53,11 @@
     }
 
     function setCart(){
-      var cart = VirtualCartService.getCart();
+      var cart = VirtualCartService.getCart() || [];
       var promisesArray = [];
-      if(cart){
-        angular.forEach(cart, function(cartItem) {
-          promisesArray.push(CartService.addItem(cartItem));
-        });
-      }
+      angular.forEach(cart, function(cartItem) {
+        promisesArray.push(CartService.addItem(cartItem));
+      });
       $q.all(promisesArray).then(function(){
         VirtualCartService.emptyCart();
       });

@@ -48,7 +48,11 @@
     }
 
     $scope.$on('update-number', function() {
-      getNumberItems();
+      if ($auth.user.customer_order) {//jshint ignore:line
+        getNumberItems();
+      }else{
+        cartButtonVM.numberItems = VirtualCartService.getCount();
+      }
     });
   }
 })();
