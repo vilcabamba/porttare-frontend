@@ -12,7 +12,8 @@
         $scope,
         $ionicLoading,
         SessionService,
-        deferLoginWithFB;
+        deferLoginWithFB,
+        APP;
 
     beforeEach(module('porttare.controllers'));
 
@@ -36,6 +37,9 @@
       };
       $rootScope = _$rootScope_;
       $scope            = $rootScope.$new();
+      APP = {
+        placesState: 'places-state'
+      };
 
       controller = $controller('RegisterController', {
         '$ionicPopup': $ionicPopup,
@@ -43,7 +47,8 @@
         '$state': $state,
         '$auth': $auth,
         '$scope': $scope,
-        'SessionService': SessionService
+        'SessionService': SessionService,
+        'APP': APP
       });
     }));
 
@@ -51,7 +56,13 @@
 
       beforeEach(inject(function() {
         controller.registerForm = {
-          $invalid: false
+          $invalid: false,
+          $setPristine: function() {
+            return true;
+          },
+          $setUntouched: function() {
+            return true;
+          }
         };
         controller.register();
       }));
@@ -61,17 +72,16 @@
       });
 
       describe('when the register is executed,', function() {
-        var successState = 'login';
 
         it('if successful, should change state', function() {
           deferredRegister.resolve();
           $rootScope.$digest();
 
-          sinon.assert.alwaysCalledWithExactly($state.go, successState);
+          sinon.assert.alwaysCalledWithExactly($state.go, APP.placesState);
 
           deferredStateGo.resolve();
           $rootScope.$digest();
-          sinon.assert.calledOnce($ionicPopup.alert);
+          sinon.assert.calledOnce($ionicLoading.hide);
         });
       });
     });

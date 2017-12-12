@@ -35,11 +35,10 @@
     }
 
     function loggedIn() {
-      loginVm.loginForm = {};
       if ($auth.user.current_place) { //jshint ignore:line
-        $state.go(successState);
+        redirectTo(successState);
       } else {
-        $state.go(placesState);
+        redirectTo(placesState);
       }
     }
 
@@ -76,6 +75,12 @@
         .finally(function () {
           $ionicLoading.hide();
         });
+    }
+
+    function redirectTo(stateStr) {
+      $state.go(stateStr).then(function() {
+        loginVm.loginForm = {};
+      });
     }
   }
 })();
