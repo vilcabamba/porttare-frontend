@@ -5,9 +5,17 @@
     .module('porttare.controllers')
     .controller('ProductController', ProductController);
 
-  function ProductController(providerItem, CartService, $ionicPopup, $state,
-                            $scope, WishlistsService, ModalService,
-                            ErrorHandlerService, $ionicLoading, $auth) {
+  function ProductController(providerItem,
+                             CartService,
+                             $ionicPopup,
+                             $state,
+                             $scope,
+                             WishlistsService,
+                             ModalService,
+                             ErrorHandlerService,
+                             $ionicLoading,
+                             VirtualCartService,
+                             $auth) {
     var productVm = this;
     productVm.more = false;
     productVm.product = providerItem;
@@ -63,8 +71,14 @@
     }
 
     function addToCart() {
-      CartService.addItem(productVm.item)
+      if(Object.keys($auth.user).length > 0){
+        CartService.addItem(productVm.item)
         .then(onAddSuccess, onError);
+      }else{
+        VirtualCartService.addItem(productVm.item);
+        onAddSuccess(productVm.item);
+        $scope.$emit('update-number');
+      }
     }
 
     function getWishlists() {

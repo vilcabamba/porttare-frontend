@@ -13,6 +13,7 @@
       controller: [
         '$auth',
         '$scope',
+        'VirtualCartService',
         cartButtonController
       ],
       templateUrl: 'templates/directives/cart-button/cart-button.html'
@@ -20,12 +21,14 @@
     return directive;
   }
 
-  function cartButtonController($auth, $scope) {
+  function cartButtonController($auth, $scope, VirtualCartService) {
     // jshint validthis:true
     var cartButtonVM = this;
 
     if ($auth.user.customer_order) {//jshint ignore:line
       getNumberItems();
+    }else{
+      cartButtonVM.numberItems = VirtualCartService.getCount();
     }
 
     function getNumberItems(){
