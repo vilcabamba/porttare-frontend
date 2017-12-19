@@ -18,6 +18,12 @@
     });
     airbrake.addFilter(function (notice) {
       notice.context.environment = ENV.name;
+      var scripts = ENV.frontendUrl + '/scripts/scripts.js';
+      var vendor = ENV.frontendUrl + '/scripts/vendor.js';
+      notice.context.sourceMaps = {
+        scripts: scripts + '.map',
+        vendor: vendor + '.map'
+      };
       return notice;
     });
 

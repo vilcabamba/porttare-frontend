@@ -38,6 +38,7 @@
         ENV: {
           name: 'demo',
           apiHost: 'https://demo-api.comidomi.com.ec',
+          frontendUrl: 'https://demo.comidomi.com.ec',
           airbrakeHost: 'https://pangi.shiriculapo.com',
           gMapsKey: process.env.GOOGLE_MAPS_API_KEY,
           airbrakeProjectId: process.env.AIRBRAKE_PROJECT_ID,
